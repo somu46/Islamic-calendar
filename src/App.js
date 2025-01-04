@@ -1,12 +1,19 @@
+
 import IslamicCalendar from "./Test/test";
 
 
 
+
 function App() {
+
+ 
+
+  // console.log("valueData", valueData);
+  
   return (
     <div className="App">
 
-  <IslamicCalendar/>
+  <div><IslamicCalendar /></div>
     </div>
   );
 }
