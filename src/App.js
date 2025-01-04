@@ -1,11 +1,12 @@
-import './App.css';
-import IslamicCalendar from './Components/ABC/IslamicCalendar';
+import IslamicCalendar from "./Test/test";
+
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Islamic Calendar</h1>
-      <IslamicCalendar/>
+
+  <IslamicCalendar/>
     </div>
   );
 }
