@@ -9,7 +9,7 @@ const IslamicCalendar = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://api.aladhan.com/v1/gToHCalendar/01-01-2025/31-01-2025`
+          `https://api.aladhan.com/v1/gToHCalendar/03-01-2025/02-29-2025`
         );
         setCalendarData(response.data.data);
         setLoading(false);
@@ -41,6 +41,22 @@ const IslamicCalendar = () => {
             </p>
             <p className="text-sm text-gray-500">
               Day: {day.hijri.weekday.en}
+            </p>
+            <p className="text-sm text-gray-500">
+              Day: {day.hijri.weekday.ar}
+            </p>
+            <p className="text-sm text-gray-500">
+              Holi Days: {day.hijri.holidays[index]}
+            </p>
+            <hr/>
+            <p className="text-sm text-gray-500">
+            Gregorian: {day.gregorian.month.en} - [English]
+            </p>
+            <p className="text-sm text-gray-500">
+            Islamic: {day.hijri.month.en}- [English]
+            </p>
+            <p className="text-sm text-gray-500">
+            Islamic: {day.hijri.month.ar} - [Arbic]
             </p>
           </div>
         ))}
