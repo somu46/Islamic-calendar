@@ -1,15 +1,17 @@
-import Calendar from "./Components/calendar/Calendar";
-
+import Footer from "./Components/Footer/Footer";
+import Home from "./Components/Home/Home";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
-  // console.log("valueData", valueData);
+  
 
   return (
-    <div className=" m-5 p-5">
+    <div className="">
       <div>
-        <Calendar/>
+        <Navbar/>
+        <Home/>
+        <Footer/>
       </div>
-   
     </div>
   );
 }
