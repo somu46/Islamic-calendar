@@ -1,18 +1,13 @@
-import Footer from "./Components/Footer/Footer";
-import Home from "./Components/Home/Home";
-import Navbar from "./Components/Navbar/Navbar";
-import ZakatCalculator from "./Components/ZakatCal/ZakatCal";
 
+import Home from "./Components/Home/Home";
+// 
 function App() {
   
 
   return (
     <div className="">
       <div>
-        <Navbar/>
         <Home/>
-        <ZakatCalculator/>
-        <Footer/>
       </div>
     </div>
   );
