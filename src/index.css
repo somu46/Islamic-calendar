@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 
+
+
+*{
+  scrollbar-width: thin;
+  scrollbar-color: #888 #333;
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar{
+ width: 8px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

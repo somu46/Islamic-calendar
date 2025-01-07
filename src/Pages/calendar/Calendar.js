@@ -9,6 +9,7 @@ const IslamicCalendar = () => {
   const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(null);
 
+  const today = new Date(); // Get today's date
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
@@ -77,8 +78,19 @@ const IslamicCalendar = () => {
     return dayData || {};
   };
 
+  const isToday = (day) => {
+    return (
+      day &&
+      today.getDate() === day &&
+      today.getMonth() === month &&
+      today.getFullYear() === year
+    );
+  };
+
   return (
+    <>
     <div className="container mx-auto p-4">
+      <div className="text-left text-3xl text-orange my-5">Gregorian To  Hijri Calendar</div>
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={handlePreviousMonth}
@@ -89,6 +101,7 @@ const IslamicCalendar = () => {
         <h2 className="text-xl font-bold">
           {monthNames[month]} - {year}
         </h2>
+        <h2 className="text-xl font-bold"></h2>
         <button
           onClick={handleNextMonth}
           className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
@@ -111,36 +124,27 @@ const IslamicCalendar = () => {
         <div className="grid grid-cols-7 gap-2">
           {daysInMonth.map((day, index) => {
             const details = getDayDetails(day);
-
             const isHoliday = details?.hijri?.holidays?.length > 0;
-            const isFirstDay = details?.hijri?.day === "1";
+            const isFirstDay = details?.hijri?.day === '1';
 
             return (
+          
               <div
                 key={index}
                 onClick={() => details && setSelectedDay(details)}
-                className={`h-16 w-16 flex items-center justify-center border rounded-md 
-                  ${day ? "bg-white" : "bg-gray-100"}
-                  ${isHoliday ? "bg-red-100 border-red-400" : ""}
-                  ${isFirstDay ? "bg-green-100 border-green-400" : ""}
+                className={`size-[5rem] flex flex-col  items-center justify-center border rounded-md 
+                  ${day ? 'bg-white' : 'bg-gray-100'}
+                  ${isHoliday ? 'bg-red-100 border-red-400' : ''}
+                  ${isFirstDay ? 'bg-green-100 border-green-400' : ''}
+                  ${isToday(day) ? 'bg-blue-100 border-blue-400 font-bold text-blue-700' : ''}
                   cursor-pointer`}
               >
                 {day ? (
                   <>
                     <span className="text-gray-800 font-medium">{day}</span>
                     <span className="text-sm text-gray-500">
-                      {details?.hijri?.date || ""}
+                      {details?.hijri?.date || ''}
                     </span>
-                    {isHoliday && (
-                      <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded">
-                        Holiday
-                      </span>
-                    )}
-                    {isFirstDay && (
-                      <span className="absolute top-0 left-0 bg-green-500 text-white text-xs px-1 rounded">
-                        1st Day
-                      </span>
-                    )}
                   </>
                 ) : null}
               </div>
@@ -171,6 +175,7 @@ const IslamicCalendar = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
