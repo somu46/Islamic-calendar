@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
-import ZakatCalculator from "./Components/ZakatCal/ZakatCal";
 import './index.css';
 import Root from './Root';
 import App from './App';
-import Error from './Pages/Error/Error';
+import {Error,IslamicCalendar,PrayerTimes,AlQuran,ZakatCalculator,DateConverter} from './Pages';
 
 
 
@@ -18,14 +17,37 @@ const Route =createBrowserRouter([
     path: '/',
     element: <Root />,
     children: [
+
       {
-        path: '/app',
+        path: '/',
         element: <App />,
       },
+     
       {
-        path: '/zakat-calculator',
+        path: '/zakat-calculator', 
         element:<ZakatCalculator/>
       },
+      {
+        path:'/islamic-calendar',
+        element:<IslamicCalendar/>
+      },
+      {
+        path:'/prayer-times',
+        element:<PrayerTimes/>
+      },
+      {
+        path:'/al-quran',
+        element:<AlQuran/>
+      },
+      {
+        path:'/date-converter',
+        element:<DateConverter/>
+      },
+        
+
+
+
+
       {
         path: '*',
         element: <Error />,

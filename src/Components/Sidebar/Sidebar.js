@@ -13,7 +13,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
-console.log(setSidebarExpanded,pathname);
+// console.log(setSidebarExpanded,pathname);
 
   // Close on click outside
   useEffect(() => {
@@ -78,7 +78,7 @@ console.log(setSidebarExpanded,pathname);
             {/* Updated NavLinks */}
             <li>
               <NavLink 
-                to="/app" 
+                to="/islamic-calendar" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
               >

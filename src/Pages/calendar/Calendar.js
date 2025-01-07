@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Calendar = () => {
+const IslamicCalendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [daysInMonth, setDaysInMonth] = useState([]);
@@ -174,4 +174,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default IslamicCalendar;
