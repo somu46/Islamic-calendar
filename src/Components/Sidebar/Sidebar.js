@@ -53,14 +53,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-[15rem] flex-col overflow-y-hidden text-white bg-[#1C2434] duration-300 ease-linear lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-9999 border border-red-500 flex h-screen w-[15rem] flex-col overflow-y-hidden text-white bg-[#1C2434] duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
       {/* Sidebar Header */}
-      <div className="flex items-center justify-between gap-4 px-6 py-5 lg:py-6 mt-5">
+      <div className="flex items-center  justify-between gap-4 px-6 py-3 lg:py-6 mt-5">
         <NavLink to="/">
-          <h1 className="text-white my-3 font-bold text-xl">ISLAMIC Calendar</h1>
+          <h1 className="text-white my-1 font-bold top-1 text-xl">Hijri Calendar</h1>
         </NavLink>
         <button
           ref={trigger}
