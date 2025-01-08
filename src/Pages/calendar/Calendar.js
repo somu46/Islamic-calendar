@@ -136,7 +136,7 @@ const IslamicCalendar = () => {
                   ${day ? 'bg-white' : 'bg-gray-100'}
                   ${isHoliday ? 'bg-red-100 border-red-400' : ''}
                   ${isFirstDay ? 'bg-green-100 border-green-400' : ''}
-                  ${isToday(day) ? 'bg-blue-100 border-blue-400 font-bold text-blue-700' : ''}
+                  ${isToday(day) ? 'bg-green-300 border-blue-900 font-bold text-blue-700' : ''}
                   cursor-pointer`}
               >
                 {day ? (
