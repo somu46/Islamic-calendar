@@ -34,7 +34,7 @@ export const DateConverter = () => {
   };
 
 
-  console.log("convertedDate" , convertedDate);
+  // console.log("convertedDate" , convertedDate);
   
 
 
@@ -55,7 +55,7 @@ export const DateConverter = () => {
             value={selectedDate}
             onChange={(e) => {
               setSelectedDate(e.target.value);
-              console.log('Selected Date:', e.target.value); // Debugging log
+              // console.log('Selected Date:', e.target.value); // Debugging log
             }}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
@@ -77,7 +77,14 @@ export const DateConverter = () => {
        {
         convertedDate&&(
           <div className="mt-4 text-green-600 text-center">
-            <strong>Converted Date:</strong> {convertedDate.hijri.date}
+            <strong>Converted Date:</strong> {convertedDate.hijri.date} <br/>
+            <strong>Day in Hijri</strong> {convertedDate.hijri.weekday.en} <br/>
+            <strong>Day in Hijri</strong> {convertedDate.hijri.weekday.ar} <br/>
+            <strong>Day in Hijri</strong> {convertedDate.hijri.month.en} <br/>
+            <strong>Day in Hijri</strong> {convertedDate.hijri.month.ar} <br/>
+            <strong>Days in month</strong> {convertedDate.hijri.month.days} <br/>
+            <strong>Year in Hijri</strong> {convertedDate.hijri.year} <br/>
+            <strong>Year in Hijri</strong> {convertedDate.hijri.designation.expanded}
             </div>
         )
        }
