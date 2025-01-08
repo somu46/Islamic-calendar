@@ -19,11 +19,11 @@ export const DateConverter = () => {
     }
 
     const formattedDate = formatDateToDDMMYYYY(selectedDate);
-    console.log('Formatted Date for API:', formattedDate); // Debug formatted date
+    // console.log('Formatted Date for API:', formattedDate); // Debug formatted date
 
     try {
       const result = await getDateChanger(formattedDate);
-      console.log('Converted Date Result:', result); // Debug API result
+      // console.log('Converted Date Result:', result); // Debug API result
       setConvertedDate(result);
       setError('');
     } catch (err) {
@@ -32,6 +32,11 @@ export const DateConverter = () => {
       setConvertedDate('');
     }
   };
+
+
+  console.log("convertedDate" , convertedDate);
+  
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -69,6 +74,13 @@ export const DateConverter = () => {
         {error && (
           <p className="mt-4 text-red-600 text-center">{error}</p>
         )}
+       {
+        convertedDate&&(
+          <div className="mt-4 text-green-600 text-center">
+            <strong>Converted Date:</strong> {convertedDate.hijri.date}
+            </div>
+        )
+       }
       </div>
     </div>
   );

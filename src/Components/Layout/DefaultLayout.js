@@ -10,6 +10,7 @@ const DefaultLayout = ({ children }) => {
 
   return (
     <div className="bg-boxdark-2 text-bodydark">
+       <Navbar/>
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen ">
         {/* <!-- ===== Sidebar Start ===== --> */}
@@ -19,7 +20,7 @@ const DefaultLayout = ({ children }) => {
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {/* <!-- ===== Header Start ===== --> */}
-        <Navbar/>
+       
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
