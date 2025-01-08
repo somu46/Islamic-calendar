@@ -4,7 +4,9 @@ import axios from "axios"
 const Calendar_BaseUrl = `http://api.aladhan.com/v1/gToHCalendar/`;
 const PrayerTime_BaseUrl = `http://api.aladhan.com/v1/calendarByCity/`;
 const quran_edition_BaseUrl = `http://api.alquran.cloud/v1/edition`;
-const quran_edition_with_audio_BaseUrl=`http://api.alquran.cloud/v1/quran/`
+const quran_edition_with_audio_BaseUrl=`http://api.alquran.cloud/v1/quran/`;
+const Date_Changer_BaseUrl=`https://api.aladhan.com/v1/gToH/`;
+
 
  const getCalendar = async (year, month) => {
     try {
@@ -14,6 +16,15 @@ const quran_edition_with_audio_BaseUrl=`http://api.alquran.cloud/v1/quran/`
         console.error(error)
     }
 };
+
+const getDateChanger=async(date)=>{
+    try{
+        const response=await axios.get(`${Date_Changer_BaseUrl}${date}`)
+        return response.data.data;
+        }catch(error){
+            console.error(error)
+            }
+}
 
 const getPrayerTime = async (city, country, method, year, month) => {
     try {
@@ -46,4 +57,4 @@ const getQuranEditionOnlyName= async () => {
 };
 
 
-export { getCalendar,getPrayerTime,getQuranEditionOnlyName,getQuranAudio };
+export { getCalendar,getPrayerTime,getQuranEditionOnlyName,getQuranAudio,getDateChanger};

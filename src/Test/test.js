@@ -1,4 +1,4 @@
-import { getCalendar, getPrayerTime, getQuranAudio, getQuranEditionOnlyName } from "../apiServices/apiServices";
+import { getCalendar, getPrayerTime, getQuranAudio, getQuranEditionOnlyName,getDateChanger } from "../apiServices/apiServices";
  
 
 
@@ -6,6 +6,12 @@ const ApiTest = async () => {
 
     console.log("ApiTest");
     
+  (async()=>{
+    const DateChanger = await getDateChanger("01-01-2025");
+    console.log("Date Changer: : ",DateChanger);
+  })();
+
+
     (async () => {
         const data = await getCalendar(2021, 1);
         console.log("data", data);

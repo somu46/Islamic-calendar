@@ -1,12 +1,19 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+//  import { useEffect } from 'react';
+// import ApiTest from '../../Test/test';
+
 
 const Home = () => {
+  
+// useEffect(()=>{
+//   ApiTest();
+// },[])
+
   return (
     <div className="flex h-screen">
       
       <div className="w-1/6 border-r border-gray-300">
-        <Sidebar />
+       Home Page .
       </div>
     </div>
   );
