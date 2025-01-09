@@ -105,6 +105,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <NavLink 
+                to="/prayer-times-table" 
+                className={({ isActive }) =>
+                  `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
+              >
+                Prayer Times Table
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
                 to="/date-converter" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}

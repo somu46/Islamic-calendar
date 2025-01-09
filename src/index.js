@@ -5,6 +5,7 @@ import './index.css';
 import Root from './Root';
 import App from './App';
 import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter} from './Pages';
+import PrayerTimes from './Pages/PrayerTime/PrayerTime';
 
 
 
@@ -33,6 +34,10 @@ const Route =createBrowserRouter([
       },
       {
         path:'/prayer-times',
+        element:<PrayerTimes/>
+      },
+      {
+        path:'/prayer-times-table',
         element:<PrayerTimetable/>
       },
       {
