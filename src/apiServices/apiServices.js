@@ -7,6 +7,9 @@ const quran_edition_BaseUrl = `http://api.alquran.cloud/v1/edition`;
 const quran_edition_with_audio_BaseUrl=`http://api.alquran.cloud/v1/quran/`;
 const Date_Changer_BaseUrl=`https://api.aladhan.com/v1/gToH/`;
 const PrayerTimeByAddress_BaseUrl = `https://api.aladhan.com/v1/timingsByAddress/`;
+const Quran_Juz_url=`http://api.alquran.cloud/v1/juz/1/quran-uthmani?offset=3&limit=10`
+
+
 
  const getCalendar = async (year, month) => {
     try {
@@ -26,6 +29,16 @@ const getDateChanger=async(date)=>{
             }
 }
 
+
+const getQuran_Juz=async()=>{
+    try{
+        const response=await axios.get(Quran_Juz_url);
+        return response.data.data;
+    }catch(error){
+        console.log(error);
+        
+    }
+}
 
 const getPrayerTimeOfDayByAddress = async (date = "09-01-2025", address = "Kolkata,India") => {
   try {
@@ -72,4 +85,12 @@ const getQuranEditionOnlyName= async () => {
 };
 
 
-export { getCalendar,getPrayerTime,getQuranEditionOnlyName,getQuranAudio,getDateChanger,getPrayerTimeOfDayByAddress};
+export {
+     getCalendar,
+     getPrayerTime,
+     getQuranEditionOnlyName,
+     getQuranAudio,
+     getDateChanger,
+     getPrayerTimeOfDayByAddress,
+     getQuran_Juz
+    };
