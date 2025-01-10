@@ -165,7 +165,7 @@ const IslamicCalendar = () => {
         <div className="mt-4 p-4 border rounded-lg bg-gray-50 shadow-md">
           <h3 className="text-lg text-center font-bold">Day Details</h3>
           <p><strong>Gregorian:</strong> {selectedDay.gregorian?.date || 'N/A'}</p>
-          <p><strong>Islamic:</strong> {selectedDay.hijri?.date || 'N/A'}</p>
+          <p><strong>Islamic(Hijri):</strong> {selectedDay.hijri?.date || 'N/A'}</p>
           <p><strong>Day (English):</strong> {selectedDay.hijri?.weekday?.en || 'N/A'}</p>
           <p><strong>Day (Arabi):</strong> {selectedDay.hijri?.weekday?.ar || 'N/A'}</p>
           <p><strong>Holidays:</strong> {selectedDay.hijri?.holidays?.join(', ') || 'None'}</p>
