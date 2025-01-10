@@ -125,8 +125,8 @@ const IslamicCalendar = () => {
               <div
                 key={index}
                 onClick={() => details && setSelectedDay(details)}
-                className={`size-[5rem] flex flex-col items-center justify-center border rounded-md 
-                  ${day ? 'bg-white' : 'bg-gray-100'}
+                className={`size-[5rem] flex flex-col items-center justify-center  rounded-md 
+                  ${day ? 'bg-white border'  : 'bg-gray-100'}
                   ${isHoliday ? 'bg-red-100 border-red-400' : ''}
                   ${isFirstDay ? 'bg-green-100 border-green-400' : ''}
                   ${isToday(day) ? 'bg-green-300 border-blue-900 font-bold text-blue-700' : ''}

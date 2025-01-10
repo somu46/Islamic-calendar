@@ -10,7 +10,7 @@ const Navbar = () => {
       <header className="bg-teal-700 text-white py-4 shadow-md">
         <nav className="container mx-auto flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold tracking-wide mx-3">
+          <Link to="/" className="text-xl font-bold tracking-wide mx-3 text-left">
             Islamic Knowledge
           </Link>
 
