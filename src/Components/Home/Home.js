@@ -1,21 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-teal-50 to-cyan-100">
-      {/* Navbar */}
-      <header className="bg-teal-700 text-white py-4 shadow-md">
-        <nav className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold tracking-wide">Islamic Knowledge</h1>
-          <ul className="flex space-x-6">
-            <li><a href="#calendar" className="hover:underline">Islamic Calendar</a></li>
-            <li><a href="#prayers" className="hover:underline">Prayer Times</a></li>
-            <li><a href="#articles" className="hover:underline">Articles</a></li>
-            <li><a href="#about" className="hover:underline">About</a></li>
-          </ul>
-        </nav>
-      </header>
-
       {/* Main Content */}
       <main className="flex-grow">
         {/* Welcome Section */}
@@ -27,12 +15,12 @@ const Home = () => {
             Discover the beauty of Islamic teachings, explore the rich heritage of Islamic history, 
             and stay informed about key events and dates.
           </p>
-          <a 
-            href="#calendar" 
+          <Link 
+            href="/data/islamic-calendar" 
             className="px-8 py-4 bg-amber-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-amber-600 transition-all duration-300"
           >
             Explore the Islamic Calendar
-          </a>
+          </Link>
         </section>
 
         {/* Featured Content */}
@@ -43,7 +31,7 @@ const Home = () => {
               Keep track of important Islamic dates, events, and holidays throughout the year.
             </p>
             <a 
-              href="/islamic-calendar"
+              href="/data/islamic-calendar"
               className="px-6 py-3 bg-cyan-500 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300"
             >
               Open Calendar
@@ -63,13 +51,7 @@ const Home = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-teal-900 text-white py-6">
-        <div className="container mx-auto text-center">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} Islamic Knowledge. All Rights Reserved.
-          </p>
-        </div>
-      </footer>
+ 
     </div>
   );
 };

@@ -6,6 +6,7 @@ import Root from './Root';
 import App from './App';
 import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter} from './Pages';
 import PrayerTimes from './Pages/PrayerTime/PrayerTime';
+import Home from './Components/Home/Home';
 
 
 
@@ -16,40 +17,40 @@ const Route =createBrowserRouter([
 
   {
     path: '/',
+    element: <App/>,
+  },
+
+  {
+    path: '/data',
     element: <Root />,
     children: [
-
       {
-        path: '',
-        element: <App />,
-      },
-      {
-        path:'/home',
-        element:<App/>
+        path:'/data/home',
+        element:<Home/>
       },
      
       {
-        path: '/zakat-calculator', 
+        path: '/data/zakat-calculator', 
         element:<ZakatCalculator/>
       },
       {
-        path:'/islamic-calendar',
+        path:'/data/islamic-calendar',
         element:<IslamicCalendar/>
       },
       {
-        path:'/prayer-times',
+        path:'/data/prayer-times',
         element:<PrayerTimes/>
       },
       {
-        path:'/prayer-times-table',
+        path:'/data/prayer-times-table',
         element:<PrayerTimetable/>
       },
       {
-        path:'/al-quran',
+        path:'/data/al-quran',
         element:<AlQuran/>
       },
       {
-        path:'/date-converter',
+        path:'/data/date-converter',
         element:<DateConverter/>
       },
         

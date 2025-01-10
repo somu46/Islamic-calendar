@@ -75,7 +75,7 @@ console.log(setSidebarExpanded);
             {/* Updated NavLinks */}
             <li>
               <NavLink 
-                to="/islamic-calendar" 
+                to="/data/islamic-calendar" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
               >
@@ -84,7 +84,7 @@ console.log(setSidebarExpanded);
             </li>
             <li>
               <NavLink 
-                to="/al-quran" 
+                to="/data/al-quran" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
               >
@@ -93,7 +93,7 @@ console.log(setSidebarExpanded);
             </li>
             <li>
               <NavLink 
-                to="/prayer-times" 
+                to="/data/prayer-times" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
               >
@@ -102,7 +102,7 @@ console.log(setSidebarExpanded);
             </li>
             <li>
               <NavLink 
-                to="/prayer-times-table" 
+                to="/data/prayer-times-table" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
               >
@@ -111,7 +111,7 @@ console.log(setSidebarExpanded);
             </li>
             <li>
               <NavLink 
-                to="/date-converter" 
+                to="/data/date-converter" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
               >
@@ -120,7 +120,7 @@ console.log(setSidebarExpanded);
             </li>
             <li>
               <NavLink 
-                to="/zakat-calculator" 
+                to="/data/zakat-calculator" 
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
               >
