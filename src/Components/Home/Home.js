@@ -1,20 +1,57 @@
 import React from 'react';
-//  import { useEffect } from 'react';
-// import ApiTest from '../../Test/test';
-
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  
-// useEffect(()=>{
-//   ApiTest();
-// },[])
-
   return (
-    <div className="flex h-screen">
-      
-      <div className="w-1/6 border-r border-gray-300">
-       Home Page .
-      </div>
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-teal-50 to-cyan-100">
+      {/* Main Content */}
+      <main className="flex-grow">
+        {/* Welcome Section */}
+        <section className="container mx-auto text-center py-20">
+          <h2 className="text-5xl font-extrabold text-teal-900 mb-6">
+            Welcome to Islamic Knowledge
+          </h2>
+          <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
+            Discover the beauty of Islamic teachings, explore the rich heritage of Islamic history, 
+            and stay informed about key events and dates.
+          </p>
+          <Link 
+            href="/data/islamic-calendar" 
+            className="px-8 py-4 bg-amber-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-amber-600 transition-all duration-300"
+          >
+            Explore the Islamic Calendar
+          </Link>
+        </section>
+
+        {/* Featured Content */}
+        <section id="calendar" className="bg-white py-16 shadow-inner">
+          <div className="container mx-auto text-center">
+            <h3 className="text-4xl font-bold text-teal-800 mb-4">Islamic Calendar</h3>
+            <p className="text-gray-600 mb-6">
+              Keep track of important Islamic dates, events, and holidays throughout the year.
+            </p>
+            <a 
+              href="/data/islamic-calendar"
+              className="px-6 py-3 bg-cyan-500 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300"
+            >
+              Open Calendar
+            </a>
+          </div>
+        </section>
+
+        {/* Inspirational Quote */}
+        <section id="prayers" className="bg-gradient-to-r from-teal-100 to-cyan-50 py-20">
+          <div className="container mx-auto text-center">
+            <blockquote className="text-2xl italic text-gray-800 max-w-3xl mx-auto">
+              "Indeed, the reminder benefits the believers."
+              <span className="block mt-4 text-lg font-semibold text-teal-700">— Quran 51:55</span>
+            </blockquote>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+ 
     </div>
   );
 };
