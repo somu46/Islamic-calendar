@@ -1,18 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
-
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-
-
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
-  const [sidebarExpanded, setSidebarExpanded] = useState(
-    storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
-  );
-console.log(setSidebarExpanded);
+  const sidebarExpanded =  storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true';
 
   // Close on click outside
   useEffect(() => {
@@ -28,7 +22,7 @@ console.log(setSidebarExpanded);
     };
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
-  });
+  },);
 
   // Close on pressing the Escape key
   useEffect(() => {
@@ -38,7 +32,7 @@ console.log(setSidebarExpanded);
     };
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
-  });
+  }, );
 
   useEffect(() => {
     localStorage.setItem('sidebar-expanded', sidebarExpanded.toString());
@@ -47,82 +41,102 @@ console.log(setSidebarExpanded);
     } else {
       document.querySelector('body')?.classList.remove('sidebar-expanded');
     }
-  }, [sidebarExpanded]);
+  },);
 
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999  flex h-screen w-[15rem] flex-col overflow-y-hidden text-white bg-[#1C2434] duration-300 ease-linear lg:static lg:translate-x-0 ${
+      className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col overflow-y-hidden bg-[#1C2434] text-white duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
       {/* Sidebar Header */}
-      <div className="flex items-center  justify-between gap-4 px-6 py-3 lg:py-6 mt-5">
-       
+      <div className="flex items-center justify-between px-6 py-4 lg:py-6">
+        <h1 className="text-lg font-bold">Menu</h1>
         <button
           ref={trigger}
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-controls="sidebar"
           aria-expanded={sidebarOpen}
-          className="block lg:hidden"
-        />
+          className="text-white focus:outline-none lg:hidden"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d={sidebarOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+            />
+          </svg>
+        </button>
       </div>
 
       {/* Sidebar Menu */}
-      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
-        <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
-          <ul className="mb-6 flex flex-col gap-4">
-            {/* Updated NavLinks */}
+      <div className="no-scrollbar flex flex-col overflow-y-auto px-4 py-4 lg:py-6">
+        <nav>
+          <ul className="flex flex-col gap-4">
             <li>
-              <NavLink 
-                to="/data/islamic-calendar" 
+              <NavLink
+                to="/data/islamic-calendar"
                 className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
+                  `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
+                }
               >
                 Islamic Calendar
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                to="/data/al-quran" 
+              <NavLink
+                to="/data/al-quran"
                 className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
+                  `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
+                }
               >
                 Al Quran
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                to="/data/prayer-times" 
+              <NavLink
+                to="/data/prayer-times"
                 className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
+                  `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
+                }
               >
                 Prayer Times
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                to="/data/prayer-times-table" 
+              <NavLink
+                to="/data/prayer-times-table"
                 className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
+                  `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
+                }
               >
                 Prayer Times Table
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                to="/data/date-converter" 
+              <NavLink
+                to="/data/date-converter"
                 className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
+                  `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
+                }
               >
                 Date Converter
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                to="/data/zakat-calculator" 
+              <NavLink
+                to="/data/zakat-calculator"
                 className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 cursor-pointer ${isActive ? 'text-blue-500 font-bold' : ''}`}
+                  `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
+                }
               >
                 Zakat Calculator
               </NavLink>
