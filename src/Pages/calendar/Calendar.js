@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { MdOutlineArrowBackIos ,MdOutlineArrowForwardIos} from "react-icons/md";
 
 const IslamicCalendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
@@ -77,6 +78,18 @@ const IslamicCalendar = () => {
     );
     return dayData || {};
   };
+  const getHijriYear = () => {
+    if (calendarData.length > 0) {
+      return calendarData[0]?.hijri?.year || '';
+    }
+    return '';
+  };
+  const getHijriMonth = () => {
+    if (calendarData.length > 0) {
+      return calendarData[0]?.hijri?.month?.en || '';
+    }
+    return '';
+  };
 
   const isToday = (day) => {
     return (
@@ -88,27 +101,29 @@ const IslamicCalendar = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="text-left text-3xl text-orange my-5">Gregorian To Hijri Calendar</div>
+    <div className="container mx-auto p-1">
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={handlePreviousMonth}
           className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
         >
-          Previous
+          <MdOutlineArrowBackIos className='text-[25px]' />
         </button>
-        <h2 className="text-xl font-bold">{monthNames[month]} - {year}</h2>
+        <div className="text-center">
+          <h2 className="text-xl text-green-600 font-bold">{getHijriMonth()},{getHijriYear()}</h2>
+          <h3 className="text-lg font-bold">{monthNames[month]} - {year}</h3>
+        </div>
         <button
           onClick={handleNextMonth}
           className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
         >
-          Next
+          <MdOutlineArrowForwardIos className='text-[25px]'/>
         </button>
       </div>
 
-      <div className="grid grid-cols-7 text-center font-semibold mb-2">
+      <div className="grid grid-cols-7  text-center font-semibold mb-2 ">
         {daysOfWeek.map((day, index) => (
-          <div key={index} className="text-gray-700">{day}</div>
+          <div key={index} className="text-gray-700 ">{day}</div>
         ))}
       </div>
 
@@ -125,19 +140,19 @@ const IslamicCalendar = () => {
               <div
                 key={index}
                 onClick={() => details && setSelectedDay(details)}
-                className={`size-[5rem] flex flex-col items-center justify-center  rounded-md 
-                  ${day ? 'bg-white border'  : 'bg-gray-100'}
-                  ${isHoliday ? 'bg-red-100 border-red-400' : ''}
-                  ${isFirstDay ? 'bg-green-100 border-green-400' : ''}
-                  ${isToday(day) ? 'bg-green-300 border-blue-900 font-bold text-blue-700' : ''}
+                className={`flex flex-col items-center justify-center  rounded-full 
+                  ${day ? 'bg-gray-100 ' : ''}
+                  ${isHoliday ? 'bg-red-100 border border-red-400' : ''}
+                  ${isFirstDay ? 'bg-green-100 border border-green-400' : ''}
+                  ${isToday(day) ? 'bg-green-300 border border-blue-900 font-bold text-blue-700' : ''}
                   cursor-pointer`}
               >
                 {day ? (
                   <>
-                    <span className="text-gray-800 font-medium">{day}</span>
-                    <span className="text-sm text-gray-500">
-                      {details?.hijri?.date || ''}
+                    <span className="text-[20px] text-green-600">
+                      {details?.hijri?.day || ''}
                     </span>
+                    <span className="text-gray-800 text-[12px]">{day}</span>
                   </>
                 ) : null}
               </div>
@@ -148,10 +163,11 @@ const IslamicCalendar = () => {
 
       {selectedDay && (
         <div className="mt-4 p-4 border rounded-lg bg-gray-50 shadow-md">
-          <h3 className="text-lg font-bold">Day Details</h3>
+          <h3 className="text-lg text-center font-bold">Day Details</h3>
           <p><strong>Gregorian:</strong> {selectedDay.gregorian?.date || 'N/A'}</p>
-          <p><strong>Islamic:</strong> {selectedDay.hijri?.date || 'N/A'}</p>
+          <p><strong>Islamic(Hijri):</strong> {selectedDay.hijri?.date || 'N/A'}</p>
           <p><strong>Day (English):</strong> {selectedDay.hijri?.weekday?.en || 'N/A'}</p>
+          <p><strong>Day (Arabi):</strong> {selectedDay.hijri?.weekday?.ar || 'N/A'}</p>
           <p><strong>Holidays:</strong> {selectedDay.hijri?.holidays?.join(', ') || 'None'}</p>
         </div>
       )}
