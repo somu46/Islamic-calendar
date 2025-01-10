@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import SidebarLinkGroup from './SidebarGroup';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const location = useLocation();
-  const { pathname } = location;
+  // const location = useLocation();
+  // const { pathname } = location;
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -13,7 +13,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
-// console.log(setSidebarExpanded,pathname);
+console.log(setSidebarExpanded);
 
   // Close on click outside
   useEffect(() => {

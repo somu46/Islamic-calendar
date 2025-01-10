@@ -9,8 +9,8 @@ const PrayerTimetable = () => {
   const [error, setError] = useState(null); // To store error messages
   const [loading, setLoading] = useState(false); // To manage loading state
   const [dataLoaded, setDataLoaded] = useState(false); // Show data only after clicking "Show"
-  const [city, setcity] = useState("London");
-  const [country, setcountry] = useState("GB");
+  const city  = "London";
+  const country = "GB";
 
 
   const monthNames = [
