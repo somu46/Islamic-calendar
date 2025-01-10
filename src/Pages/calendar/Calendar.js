@@ -37,7 +37,7 @@ const IslamicCalendar = () => {
     try {
       const formattedMonth = String(month + 1).padStart(2, '0');
       const response = await axios.get(
-        `http://api.aladhan.com/v1/gToHCalendar/${formattedMonth}/${year}`
+        `https://api.aladhan.com/v1/gToHCalendar/${formattedMonth}/${year}`
       );
       setCalendarData(response.data.data || []);
     } catch (error) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const quranApiUrl = "http://api.alquran.cloud/v1/quran/ar.alafasy";
+const quranApiUrl = "https://api.alquran.cloud/v1/quran/ar.alafasy";
 
 const Surahs = () => {
   const [surahs, setSurahs] = useState([]);
