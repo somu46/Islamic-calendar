@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import SidebarLinkGroup from './SidebarGroup';
+
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  // const location = useLocation();
-  // const { pathname } = location;
+
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -59,9 +58,7 @@ console.log(setSidebarExpanded);
     >
       {/* Sidebar Header */}
       <div className="flex items-center  justify-between gap-4 px-6 py-3 lg:py-6 mt-5">
-        <NavLink to="/">
-          <h1 className="text-white my-1 font-bold top-1 text-xl">Hijri Calendar</h1>
-        </NavLink>
+       
         <button
           ref={trigger}
           onClick={() => setSidebarOpen(!sidebarOpen)}

@@ -23,6 +23,10 @@ const Route =createBrowserRouter([
         path: '',
         element: <App />,
       },
+      {
+        path:'/home',
+        element:<App/>
+      },
      
       {
         path: '/zakat-calculator', 
@@ -59,6 +63,11 @@ const Route =createBrowserRouter([
       }
     ]
 
+    },
+
+    {
+      path: '*',
+      element:<Error/>,
     }
 ])
 
