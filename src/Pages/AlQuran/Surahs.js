@@ -18,7 +18,7 @@ const Surahs = () => {
         const source = axios.CancelToken.source();
         const timeout = setTimeout(() => {
           source.cancel("Request timed out");
-        }, 5000); // 5 seconds timeout
+        }, 25000); // 10 seconds timeout
 
         const response = await axios.get(quranApiUrl, { cancelToken: source.token });
         clearTimeout(timeout);
@@ -36,6 +36,10 @@ const Surahs = () => {
 
     fetchSurahs();
   }, []);
+
+
+  console.log("surahs : ", surahs);
+  
 
   const handlePageChange = (direction) => {
     if (direction === "next" && currentPage < Math.ceil(surahs.length / itemsPerPage)) {
