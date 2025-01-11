@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { MdOutlineArrowBackIos ,MdOutlineArrowForwardIos} from "react-icons/md";
 
 const quranApiUrl = "https://api.alquran.cloud/v1/quran/ar.alafasy";
 
@@ -18,7 +19,7 @@ const Surahs = () => {
         const source = axios.CancelToken.source();
         const timeout = setTimeout(() => {
           source.cancel("Request timed out");
-        }, 25000); // 10 seconds timeout
+        }, 25000); // 25 seconds timeout
 
         const response = await axios.get(quranApiUrl, { cancelToken: source.token });
         clearTimeout(timeout);
@@ -36,10 +37,6 @@ const Surahs = () => {
 
     fetchSurahs();
   }, []);
-
-
-  console.log("surahs : ", surahs);
-  
 
   const handlePageChange = (direction) => {
     if (direction === "next" && currentPage < Math.ceil(surahs.length / itemsPerPage)) {
@@ -64,7 +61,8 @@ const Surahs = () => {
         </div>
       ) : (
         <div>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          {/* Grid for Surahs */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             {currentSurahs.map((surah) => (
               <div
                 key={surah.number}
@@ -74,7 +72,7 @@ const Surahs = () => {
                   <p className="font-semibold text-lg">
                     {surah.number}. {surah.englishName}
                   </p>
-                  <p className="text-gray-600">{surah.name}</p>
+                  <p className="text-gray-600 text-sm">{surah.name}</p>
                 </div>
                 <p className="text-sm text-gray-500 mb-2">
                   {surah.englishNameTranslation}
@@ -82,9 +80,7 @@ const Surahs = () => {
                 <p className="text-sm text-gray-500 mb-1">
                   {surah.revelationType}
                 </p>
-                <p className="text-sm text-gray-500">
-                  {surah.ayahs.length} Ayat
-                </p>
+                <p className="text-sm text-gray-500">{surah.ayahs.length} Ayat</p>
                 <audio controls className="mt-2 w-full">
                   <source src={surah.ayahs[0].audio} type="audio/mpeg" />
                   Your browser does not support the audio element.
@@ -93,23 +89,24 @@ const Surahs = () => {
             ))}
           </div>
 
-          <div className="flex justify-between items-center">
+          {/* Pagination Controls */}
+          <div className="flex justify-center items-center space-x-4 mt-4">
             <button
-              className="bg-gray-300 px-4 py-2 rounded"
+              className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
               onClick={() => handlePageChange("prev")}
               disabled={currentPage === 1}
             >
-              Previous
+              <MdOutlineArrowBackIos className='text-[25px]' />
             </button>
-            <p>
+            <p className="text-sm">
               Page {currentPage} of {Math.ceil(surahs.length / itemsPerPage)}
             </p>
             <button
-              className="bg-gray-300 px-4 py-2 rounded"
+              className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
               onClick={() => handlePageChange("next")}
               disabled={currentPage === Math.ceil(surahs.length / itemsPerPage)}
             >
-              Next
+             <MdOutlineArrowForwardIos className='text-[25px]'/>
             </button>
           </div>
         </div>

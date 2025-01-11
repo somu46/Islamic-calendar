@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { getPrayerTime } from "../../apiServices/apiServices";
 
 const PrayerTimetable = () => {
-  const [view, setView] = useState("monthly"); // Switch between monthly and yearly view
-  const [month, setMonth] = useState(new Date().getMonth() + 1); // Default to current month
-  const [year, setYear] = useState(new Date().getFullYear()); // Default to current year
-  const [response, setResponse] = useState([]); // To store fetched prayer times
-  const [error, setError] = useState(null); // To store error messages
-  const [loading, setLoading] = useState(false); // To manage loading state
-  const [dataLoaded, setDataLoaded] = useState(false); // Show data only after clicking "Show"
-  const city  = "London";
+  const [view, setView] = useState("monthly");
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [response, setResponse] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const city = "London";
   const country = "GB";
-
 
   const monthNames = [
     "January",
@@ -29,37 +28,39 @@ const PrayerTimetable = () => {
   ];
 
   const fetchPrayerTime = async () => {
-    setLoading(true); // Start loading
-    setError(null); // Reset error state
-    setDataLoaded(false); // Ensure data isn't shown prematurely
+    setLoading(true);
+    setError(null);
+    setDataLoaded(false);
     try {
-      const data = await getPrayerTime(city,country, 1, year, month);
+      const data = await getPrayerTime(city, country, 1, year, month);
       if (data && Array.isArray(data)) {
-        setResponse(data); // Set response if valid data is returned
-        setDataLoaded(true); // Allow data to be shown
+        setResponse(data);
+        setDataLoaded(true);
       } else {
         throw new Error("Invalid data format received from the API.");
       }
     } catch (err) {
-      // Handle API errors
       setError("Failed to fetch prayer times. Please try again later.");
-      setResponse([]); // Ensure response is reset on error
+      setResponse([]);
     } finally {
-      setLoading(false); // End loading
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto p-4 border rounded-lg bg-white shadow-lg">
+    <div className="container mx-auto p-4 border rounded-lg bg-white shadow-lg max-w-md sm:max-w-4xl">
       {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold">Prayer Timetable</h2>
-        
-        <div className="flex space-x-4">
+      <div className="flex flex-wrap justify-between items-center mb-4">
+        <h2 className="text-lg font-bold text-center sm:text-xl">
+          Prayer Timetable
+        </h2>
+        <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0">
           <button
             onClick={() => setView("monthly")}
             className={`px-4 py-2 rounded-md ${
-              view === "monthly" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-700"
+              view === "monthly"
+                ? "bg-gray-800 text-white"
+                : "bg-gray-200 text-gray-700"
             }`}
           >
             Monthly
@@ -67,22 +68,27 @@ const PrayerTimetable = () => {
           <button
             onClick={() => setView("yearly")}
             className={`px-4 py-2 rounded-md ${
-              view === "yearly" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-700"
+              view === "yearly"
+                ? "bg-gray-800 text-white"
+                : "bg-gray-200 text-gray-700"
             }`}
           >
             Yearly
           </button>
         </div>
       </div>
-      <div className="p-3 mb-3 font-semibold text-lg">
-        <h3>Your Location is :{city} </h3>
-        </div>
+
+      {/* Location Info */}
+      <div className="p-3 mb-3 font-semibold text-lg text-center sm:text-left">
+        <h3>Your Location: {city}</h3>
+      </div>
+
       {/* Month and Year Selectors */}
-      <div className="flex items-center space-x-4 mb-4">
+      <div className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
         <select
           value={month}
           onChange={(e) => setMonth(e.target.value)}
-          className="border rounded-md px-4 py-2"
+          className="border rounded-md px-4 py-2 w-full sm:w-auto"
         >
           {monthNames.map((name, index) => (
             <option key={index} value={index + 1}>
@@ -94,17 +100,17 @@ const PrayerTimetable = () => {
           type="number"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          className="border rounded-md px-4 py-2 w-24"
+          className="border rounded-md px-4 py-2 w-full sm:w-auto"
         />
         <button
-          className="bg-green-500 text-white px-4 py-2 rounded-md shadow-md"
-          onClick={fetchPrayerTime} // Fetch data only when "Show" is clicked
+          className="bg-green-500 text-white px-4 py-2 rounded-md shadow-md w-full sm:w-auto"
+          onClick={fetchPrayerTime}
         >
           Show
         </button>
       </div>
 
-      <div>
+      <div className="text-center sm:text-left">
         <p>
           Month: {monthNames[month - 1]}, Year: {year}
         </p>
@@ -126,38 +132,69 @@ const PrayerTimetable = () => {
 
       {/* Prayer Timetable */}
       {!loading && !error && dataLoaded && (
-        <table className="w-full border-collapse border border-gray-300">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">Date</th>
-              <th className="border border-gray-300 px-4 py-2">Hijri</th>
-              <th className="border border-gray-300 px-4 py-2">Fajr</th>
-              <th className="border border-gray-300 px-4 py-2">Sunrise</th>
-              <th className="border border-gray-300 px-4 py-2">Dhuhr</th>
-              <th className="border border-gray-300 px-4 py-2">Asr</th>
-              <th className="border border-gray-300 px-4 py-2">Maghrib</th>
-              <th className="border border-gray-300 px-4 py-2">Isha</th>
-            </tr>
-          </thead>
-          <tbody>
-            {response.map((item, index) => (
-              <tr key={index} className="text-center">
-                <td className="border border-gray-300 px-4 py-2">
-                  {item.date.gregorian.date} ({item.date.gregorian.weekday.en})
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {item.date.hijri.date} ({item.date.hijri.weekday.en})
-                </td>
-                <td className="border border-gray-300 px-4 py-2">{item.timings.Fajr}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.timings.Sunrise}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.timings.Dhuhr}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.timings.Asr}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.timings.Maghrib}</td>
-                <td className="border border-gray-300 px-4 py-2">{item.timings.Isha}</td>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-300">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Date
+                </th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Hijri
+                </th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Fajr
+                </th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Sunrise
+                </th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Dhuhr
+                </th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Asr
+                </th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Maghrib
+                </th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2">
+                  Isha
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {response.map((item, index) => (
+                <tr key={index} className="text-center text-sm sm:text-base">
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.date.gregorian.date} (
+                    {item.date.gregorian.weekday.en})
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.date.hijri.date} ({item.date.hijri.weekday.en})
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.timings.Fajr}
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.timings.Sunrise}
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.timings.Dhuhr}
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.timings.Asr}
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.timings.Maghrib}
+                  </td>
+                  <td className="border border-gray-300 px-2 sm:px-4 py-2">
+                    {item.timings.Isha}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
