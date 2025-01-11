@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { MdOutlineArrowBackIos ,MdOutlineArrowForwardIos} from "react-icons/md";
+import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
 
 const IslamicCalendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
@@ -78,12 +78,14 @@ const IslamicCalendar = () => {
     );
     return dayData || {};
   };
+
   const getHijriYear = () => {
     if (calendarData.length > 0) {
       return calendarData[0]?.hijri?.year || '';
     }
     return '';
   };
+
   const getHijriMonth = () => {
     if (calendarData.length > 0) {
       return calendarData[0]?.hijri?.month?.en || '';
@@ -100,59 +102,89 @@ const IslamicCalendar = () => {
     );
   };
 
+  const isHoliday = (details) => {
+    return details?.hijri?.holidays?.length > 0;
+  };
+
+  const isFirstDay = (details) => {
+    return details?.hijri?.day === '1';
+  };
+
   return (
-    <div className="container mx-auto p-1">
+    <div className="container mx-auto ">
+      {/* Color Indicator Section */}
+      <div className="flex justify-between mb-4">
+        <div className="flex items-center">
+          <span className="w-4 h-4 bg-red-300 rounded-full mr-2"></span>
+          <span className="text-sm">Holiday</span>
+        </div>
+        <div className="flex items-center">
+          <span className="w-4 h-4 bg-green-400 rounded-full mr-2"></span>
+          <span className="text-sm">First Day</span>
+        </div>
+        <div className="flex items-center">
+          <span className="w-4 h-4 bg-blue-300 rounded-full mr-2"></span>
+          <span className="text-sm">Today</span>
+        </div>
+      </div>
+
+      {/* Calendar Section */}
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={handlePreviousMonth}
           className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
         >
-          <MdOutlineArrowBackIos className='text-[25px]' />
+          <MdOutlineArrowBackIos className="text-[25px]" />
         </button>
         <div className="text-center">
-          <h2 className="text-xl text-green-600 font-bold">{getHijriMonth()},{getHijriYear()}</h2>
+          <h2 className="text-xl text-green-600 font-bold">
+            {getHijriMonth()},{getHijriYear()}
+          </h2>
           <h3 className="text-lg font-bold">{monthNames[month]} - {year}</h3>
         </div>
         <button
           onClick={handleNextMonth}
           className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
         >
-          <MdOutlineArrowForwardIos className='text-[25px]'/>
+          <MdOutlineArrowForwardIos className="text-[25px]" />
         </button>
       </div>
 
-      <div className="grid grid-cols-7  text-center font-semibold mb-2 ">
+      {/* Days of the week */}
+      <div className="grid grid-cols-7 text-center font-semibold mb-2">
         {daysOfWeek.map((day, index) => (
-          <div key={index} className="text-gray-700 ">{day}</div>
+          <div key={index} className="text-gray-700">{day}</div>
         ))}
       </div>
 
+      {/* Calendar Days */}
       {loading ? (
         <div className="text-center">Loading...</div>
       ) : (
         <div className="grid grid-cols-7 gap-2">
           {daysInMonth.map((day, index) => {
             const details = getDayDetails(day);
-            const isHoliday = details?.hijri?.holidays?.length > 0;
-            const isFirstDay = details?.hijri?.day === '1';
+            const holiday = isHoliday(details);
+            const firstDay = isFirstDay(details);
 
             return (
               <div
                 key={index}
                 onClick={() => details && setSelectedDay(details)}
-                className={`flex flex-col items-center justify-center  rounded-full 
-                  ${day ? 'bg-gray-100 ' : ''}
-                  ${isHoliday ? 'bg-red-100 border border-red-400' : ''}
-                  ${isFirstDay ? 'bg-green-100 border border-green-400' : ''}
-                  ${isToday(day) ? 'bg-green-300 border border-blue-900 font-bold text-blue-700' : ''}
-                  cursor-pointer`}
+                className={`flex flex-col items-center justify-center 
+                  ${day ? '' : ''} 
+                  ${holiday ? 'bg-red-200 ' : ''} 
+                  ${firstDay ? 'bg-green-300 border-2 border-green-400' : ''} 
+                  ${isToday(day) ? 'bg-blue-300 border-2 border-blue-900 font-bold text-blue-700' : ''} 
+                  ${day && !holiday && !firstDay && !isToday(day) ? 'bg-gray-100' : ''} 
+                  cursor-pointer w-12 h-12 rounded-full`}
               >
                 {day ? (
                   <>
-                    <span className="text-[20px] text-green-600">
-                      {details?.hijri?.day || ''}
+                    <span className="text-[16px] text-green-600">
+                      {details?.hijri?.day || day}
                     </span>
-                    <span className="text-gray-800 text-[12px]">{day}</span>
+                    <span className="text-gray-800 text-[10px]">{day}</span>
                   </>
                 ) : null}
               </div>
@@ -161,13 +193,14 @@ const IslamicCalendar = () => {
         </div>
       )}
 
+      {/* Selected Day Details Section */}
       {selectedDay && (
         <div className="mt-4 p-4 border rounded-lg bg-gray-50 shadow-md">
           <h3 className="text-lg text-center font-bold">Day Details</h3>
           <p><strong>Gregorian:</strong> {selectedDay.gregorian?.date || 'N/A'}</p>
           <p><strong>Islamic(Hijri):</strong> {selectedDay.hijri?.date || 'N/A'}</p>
           <p><strong>Day (English):</strong> {selectedDay.hijri?.weekday?.en || 'N/A'}</p>
-          <p><strong>Day (Arabi):</strong> {selectedDay.hijri?.weekday?.ar || 'N/A'}</p>
+          <p><strong>Day (Arabic):</strong> {selectedDay.hijri?.weekday?.ar || 'N/A'}</p>
           <p><strong>Holidays:</strong> {selectedDay.hijri?.holidays?.join(', ') || 'None'}</p>
         </div>
       )}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaBackward, FaForward } from "react-icons/fa";
+import { MdOutlineArrowBackIos ,MdOutlineArrowForwardIos} from "react-icons/md";
 
 const quranApiUrl = "https://api.alquran.cloud/v1/quran/ar.alafasy";
 
@@ -96,7 +96,7 @@ const Surahs = () => {
               onClick={() => handlePageChange("prev")}
               disabled={currentPage === 1}
             >
-              <FaBackward className="text-lg" />
+              <MdOutlineArrowBackIos className='text-[25px]' />
             </button>
             <p className="text-sm">
               Page {currentPage} of {Math.ceil(surahs.length / itemsPerPage)}
@@ -106,7 +106,7 @@ const Surahs = () => {
               onClick={() => handlePageChange("next")}
               disabled={currentPage === Math.ceil(surahs.length / itemsPerPage)}
             >
-              <FaForward className="text-lg" />
+             <MdOutlineArrowForwardIos className='text-[25px]'/>
             </button>
           </div>
         </div>
