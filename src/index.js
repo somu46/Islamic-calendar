@@ -7,6 +7,7 @@ import App from './App';
 import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter} from './Pages';
 import PrayerTimes from './Pages/PrayerTime/PrayerTime';
 import Home from './Components/Home/Home';
+import FullYearHijriCalendar from './Test/FullYearHijriCalendar';
 
 
 
@@ -19,8 +20,11 @@ const Route =createBrowserRouter([
     path: '/',
     element: <App/>,
   },
-
   {
+    path: '/test-api',
+    element:<FullYearHijriCalendar year={2021}/>
+  },
+ {
     path: '/data',
     element: <Root />,
     children: [
