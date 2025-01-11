@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Calendar_BaseUrl = "https://api.aladhan.com/v1/gToH/";
+const Calendar_BaseUrl = "https://api.aladhan.com/v1/gToHCalendar/";
 
 const getCalendar = async (year, month) => {
   try {
-    const response = await axios.get(`${Calendar_BaseUrl}${year}/${month}`);
+    const response = await axios.get(`${Calendar_BaseUrl}/${month}/${year}`);
     return response.data.data;
   } catch (error) {
     console.error(`Error fetching data for ${year}-${month}:`, error);
