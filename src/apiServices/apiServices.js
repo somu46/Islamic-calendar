@@ -20,6 +20,32 @@ const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/1/quran-uthmani?offset=3
     }
 };
 
+
+const getFullHijriCalendar = async (year) => {
+    const hijriCalendar = [];
+    for (let month = 1; month <= 12; month++) {
+     
+        try {
+            const data = await axios.get(`https://api.aladhan.com/v1/gToHCalendar/2025/09`)
+          
+      
+        data.data.data.forEach((entry) => {
+          hijriCalendar.push({
+            gregorian: entry.gregorian.date,
+            hijri: entry.hijri.date,
+            hijri_month: entry.hijri.month.en,
+            hijri_year: entry.hijri.year,
+          });
+        });
+      } catch (error) {
+        console.error(`Error fetching data for year ${year}, month ${month}:`, error.message);
+      }
+    }
+    return hijriCalendar;
+  };
+  
+
+
 const getDateChanger=async(date)=>{
     try{
         const response=await axios.get(`${Date_Changer_BaseUrl}${date}`)
@@ -92,5 +118,6 @@ export {
      getQuranAudio,
      getDateChanger,
      getPrayerTimeOfDayByAddress,
-     getQuran_Juz
+     getQuran_Juz,
+     getFullHijriCalendar
     };
