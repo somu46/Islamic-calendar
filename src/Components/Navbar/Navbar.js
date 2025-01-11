@@ -39,22 +39,25 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/data/islamic-calendar" className="hover:underline">
+              <NavLink
+                to="/data/islamic-calendar"
+                className=" hover:text-teal-500"
+              >
                 Islamic Calendar
               </NavLink>
             </li>
             <li>
-              <NavLink to="#prayers" className="hover:underline">
+              <NavLink to="#prayers" className=" hover:text-teal-500">
                 Prayer Times
               </NavLink>
             </li>
             <li>
-              <NavLink to="#about" className="hover:underline">
+              <NavLink to="#about" className=" hover:text-teal-500">
                 About
               </NavLink>
             </li>
             <li>
-              <NavLink to="#articles" className="hover:underline">
+              <NavLink to="#articles" className=" hover:text-teal-500">
                 Blogs
               </NavLink>
             </li>
@@ -67,7 +70,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="#prayers"
-                className="block px-4 py-2 hover:bg-teal-500"
+                className="block px-4 py-2 hover: hover:text-teal-500"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Prayer Times
@@ -76,7 +79,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="#about"
-                className="block px-4 py-2 hover:bg-teal-500"
+                className="block px-4 py-2 hover: hover:text-teal-500"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
@@ -85,7 +88,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="#articles"
-                className="block px-4 py-2 hover:bg-teal-500"
+                className="block px-4 py-2 hover: hover:text-teal-500"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blogs
@@ -94,7 +97,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/data/islamic-calendar"
-                className="block px-4 py-2 hover:bg-teal-500"
+                className="block px-4 py-2 hover: hover:text-teal-500"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Islamic Calendar
@@ -104,23 +107,13 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/data/al-quran"
-                className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 ${
-                    isActive ? "text-blue-500 font-bold" : ""
-                  }`
-                }
+                className="block px-4 py-2 hover: hover:text-teal-500"
               >
                 Al Quran
               </NavLink>
-            </li>
-            <li>
               <NavLink
                 to="/data/prayer-times"
-                className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 ${
-                    isActive ? "text-blue-500 font-bold" : ""
-                  }`
-                }
+                className="block px-4 py-2 hover: hover:text-teal-500"
               >
                 Prayer Times
               </NavLink>
@@ -128,11 +121,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/data/prayer-times-table"
-                className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 ${
-                    isActive ? "text-blue-500 font-bold" : ""
-                  }`
-                }
+                className="block px-4 py-2 hover: hover:text-teal-500"
               >
                 Prayer Times Table
               </NavLink>
@@ -140,11 +129,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/data/date-converter"
-                className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 ${
-                    isActive ? "text-blue-500 font-bold" : ""
-                  }`
-                }
+                className="block px-4 py-2 hover: hover:text-teal-500"
               >
                 Date Converter
               </NavLink>
@@ -152,11 +137,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/data/zakat-calculator"
-                className={({ isActive }) =>
-                  `text-sm hover:text-blue-500 ${
-                    isActive ? "text-blue-500 font-bold" : ""
-                  }`
-                }
+                className="block px-4 py-2 hover: hover:text-teal-500"
               >
                 Zakat Calculator
               </NavLink>
