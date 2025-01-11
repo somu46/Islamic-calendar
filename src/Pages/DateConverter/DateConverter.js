@@ -1,42 +1,36 @@
-import React, { useState } from 'react';
-import { getDateChanger } from '../../apiServices/apiServices';
+import React, { useState } from "react";
+import { getDateChanger } from "../../apiServices/apiServices";
+import { CiCalendar } from "react-icons/ci";
 
 export const DateConverter = () => {
-  const [selectedDate, setSelectedDate] = useState('');
-  const [convertedDate, setConvertedDate] = useState('');
-  const [error, setError] = useState('');
+  const [selectedDate, setSelectedDate] = useState("");
+  const [convertedDate, setConvertedDate] = useState("");
+  const [error, setError] = useState("");
 
   const formatDateToDDMMYYYY = (date) => {
-    const [year, month, day] = date.split('-');
+    const [year, month, day] = date.split("-");
     return `${day}-${month}-${year}`;
   };
 
   const handleConvert = async () => {
     if (!selectedDate) {
-      setError('Please select a date first.');
-      setConvertedDate('');
+      setError("Please select a date first.");
+      setConvertedDate("");
       return;
     }
 
     const formattedDate = formatDateToDDMMYYYY(selectedDate);
-    // console.log('Formatted Date for API:', formattedDate); // Debug formatted date
 
     try {
       const result = await getDateChanger(formattedDate);
-      // console.log('Converted Date Result:', result); // Debug API result
       setConvertedDate(result);
-      setError('');
+      setError("");
     } catch (err) {
-      console.error('Conversion Error:', err);
-      setError('Failed to convert the date. Please try again.');
-      setConvertedDate('');
+      console.error("Conversion Error:", err);
+      setError("Failed to convert the date. Please try again.");
+      setConvertedDate("");
     }
   };
-
-
-  // console.log("convertedDate" , convertedDate);
-  
-
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -45,20 +39,26 @@ export const DateConverter = () => {
           Date Converter
         </h1>
         <div className="mb-4">
-          <label htmlFor="date" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="date"
+            className="block text-lg font-medium text-gray-700"
+          >
             Select a Date
           </label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={selectedDate}
-            onChange={(e) => {
-              setSelectedDate(e.target.value);
-              // console.log('Selected Date:', e.target.value); // Debugging log
-            }}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          />
+          <div className="relative mt-1">
+            <CiCalendar
+              className="absolute left-3 top-3 h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              className="block w-full pl-10 pr-3 py-2 rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+          </div>
         </div>
         <button
           onClick={handleConvert}
@@ -66,28 +66,36 @@ export const DateConverter = () => {
         >
           Convert
         </button>
-        {convertedDate && typeof convertedDate === 'string' && (
-          <p className="mt-4 text-green-600 text-center">
-            Converted Date: <strong>{convertedDate}</strong>
-          </p>
-        )}
-        {error && (
-          <p className="mt-4 text-red-600 text-center">{error}</p>
-        )}
-       {
-        convertedDate&&(
+        {convertedDate && typeof convertedDate === "object" && (
           <div className="mt-4 text-green-600 text-center">
-            <strong>Converted Date:</strong> {convertedDate.hijri.date} <br/>
-            <strong>Day in Hijri</strong> {convertedDate.hijri.weekday.en} <br/>
-            <strong>Day in Hijri</strong> {convertedDate.hijri.weekday.ar} <br/>
-            <strong>Day in Hijri</strong> {convertedDate.hijri.month.en} <br/>
-            <strong>Day in Hijri</strong> {convertedDate.hijri.month.ar} <br/>
-            <strong>Days in month</strong> {convertedDate.hijri.month.days} <br/>
-            <strong>Year in Hijri</strong> {convertedDate.hijri.year} <br/>
-            <strong>Year in Hijri</strong> {convertedDate.hijri.designation.expanded}
-            </div>
-        )
-       }
+            <p>
+              <strong>Hijri Date:</strong> {convertedDate.hijri.date}
+            </p>
+            <p>
+              <strong>Day (EN):</strong> {convertedDate.hijri.weekday.en}
+            </p>
+            <p>
+              <strong>Day (AR):</strong> {convertedDate.hijri.weekday.ar}
+            </p>
+            <p>
+              <strong>Month (EN):</strong> {convertedDate.hijri.month.en}
+            </p>
+            <p>
+              <strong>Month (AR):</strong> {convertedDate.hijri.month.ar}
+            </p>
+            <p>
+              <strong>Days in Month:</strong> {convertedDate.hijri.month.days}
+            </p>
+            <p>
+              <strong>Year:</strong> {convertedDate.hijri.year}
+            </p>
+            <p>
+              <strong>Year (Designation):</strong>{" "}
+              {convertedDate.hijri.designation.expanded}
+            </p>
+          </div>
+        )}
+        {error && <p className="mt-4 text-red-600 text-center">{error}</p>}
       </div>
     </div>
   );
