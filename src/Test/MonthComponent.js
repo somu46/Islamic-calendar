@@ -2,7 +2,7 @@ import React from "react";
 
 const MonthComponent = ({ month, hijri_month, hijri_year, days }) => {
   return (
-    <div className="bg-green-700 rounded-lg shadow-lg p-6 border border-yellow-500">
+    <div className="bg-green-300 rounded-lg shadow-lg p-6 border border-yellow-500 text-black">
       <h2 className="text-2xl font-semibold text-center mb-4">
         {hijri_month} - {hijri_year}
       </h2>
