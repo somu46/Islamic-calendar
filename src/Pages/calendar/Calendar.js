@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
-import FullYearHijriCalendar from '../../Test/FullYearHijriCalendar';
+import FullYearHijriCalendar from './FullYear/FullYearHijriCalendar';
 
 const IslamicCalendar = () => {
 
