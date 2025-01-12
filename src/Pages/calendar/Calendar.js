@@ -152,6 +152,7 @@ const IslamicCalendar = () => {
 
       {/* Days of the week */}
       <div className="grid grid-cols-7 text-center font-semibold mb-2">
+      
         {daysOfWeek.map((day, index) => (
           <div key={index} className="text-gray-700">{day}</div>
         ))}
