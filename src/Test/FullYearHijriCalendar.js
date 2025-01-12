@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "tailwindcss/tailwind.css";
+import MonthComponent from "./MonthComponent";
 
 const Calendar_BaseUrl = "https://api.aladhan.com/v1/gToHCalendar/";
 
@@ -18,13 +20,15 @@ const getFullHijriCalendar = async (year) => {
   for (let month = 1; month <= 12; month++) {
     try {
       const data = await getCalendar(year, month);
-      data.forEach((entry) => {
-        hijriCalendar.push({
-          gregorian: entry.gregorian.date,
-          hijri: entry.hijri.date,
-          hijri_month: entry.hijri.month.en,
-          hijri_year: entry.hijri.year,
-        });
+      hijriCalendar.push({
+        month,
+        hijri_month: data[0]?.hijri.month.en,
+        hijri_year: data[0]?.hijri.year,
+        days: data.map((entry) => ({
+          weekday: entry.gregorian.weekday.en,
+          date: entry.gregorian.date,
+          hijri_date: entry.hijri.date,
+        })),
       });
     } catch (error) {
       console.error(`Error fetching data for month ${month}:`, error);
@@ -48,46 +52,29 @@ const FullYearHijriCalendar = ({ year }) => {
     fetchCalendar();
   }, [year]);
 
-  // Group data by months
-  const months = [...Array(12).keys()].map((i) => ({
-    month: i + 1,
-    data: calendarData.filter((date) => {
-      const [year, month] = date.gregorian.split("-");
-      return parseInt(month) === i + 1;
-    }),
-  }));
-
   return (
-    <div className="container mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold text-center mb-6">
-        Hijri Calendar for {year}
-      </h1>
+    <div className="bg-gradient-to-b from-green-100 to-green-300 min-h-screen text-white font-sans p-6">
+      <h1 className="text-4xl font-bold text-center mb-8">{year} Islamic Calendar</h1>
+
       {loading ? (
-        <div className="text-center text-blue-500">Loading...</div>
+        <div className="text-center text-yellow-500">Loading...</div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {months.map(({ month, data }) => (
-            <div
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {calendarData.map(({ month, hijri_month, hijri_year, days }) => (
+            <MonthComponent
               key={month}
-              className="border rounded-lg shadow-md p-4 bg-white"
-            >
-              <h2 className="text-lg font-semibold text-center mb-3">
-                Month: {month}
-              </h2>
-              <ul className="text-sm text-gray-700 space-y-2">
-                {data.map((date, index) => (
-                  <li key={index} className="flex justify-between">
-                    <span className="font-medium">
-                      {date.gregorian} (Gregorian)
-                    </span>
-                    <span>{date.hijri} (Hijri)</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              month={month}
+              hijri_month={hijri_month}
+              hijri_year={hijri_year}
+              days={days}
+            />
           ))}
         </div>
       )}
+
+      <footer className="text-center mt-10">
+        <p className="text-sm text-gray-300">Data fetched from Aladhan API</p>
+      </footer>
     </div>
   );
 };
