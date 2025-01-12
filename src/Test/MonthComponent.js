@@ -31,7 +31,7 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
   const emptyDays = Array.from({ length: firstDayOfWeek }, () => null);
 
   return (
-    <div className="container mx-auto p-6 bg-green-50 rounded-lg shadow-lg border border-yellow-500">
+    <div className="container mx-auto p-4 bg-green-50 rounded-lg shadow-lg border border-yellow-500">
       {/* Color Indicator Section */}
       <div className="flex justify-between mb-4">
         <div className="flex items-center">
@@ -51,11 +51,11 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
       {/* Month Navigation */}
       <div className="flex justify-between items-center mb-4">
        
-        <div className=" flex justify-between px-3">
-          <h2 className="text-xl text-green-600 font-bold mr-4">
+        <div className=" flex justify-between ">
+          <h2 className="text-lg text-green-600 font-bold mr-1">
             {hijri_month}, {hijri_year}
           </h2>
-          <h3 className="ml-4 text-lg font-bold">
+          <h3 className="ml-1 text-lg font-bold">
             {monthIndex[month]} - {days[0].date.split("-")[2]}
           </h3>
         </div>
