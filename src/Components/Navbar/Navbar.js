@@ -67,6 +67,14 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <ul className="md:hidden bg-teal-600 space-y-2 py-4">
+             <li>
+              <NavLink
+                to=""
+                className="flex items-center px-3 hover:text-teal-500"
+              >
+                <SetLocation />
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to="#prayers"
