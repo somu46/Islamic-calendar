@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { getCountry } from "../../../apiServices/apiServices";
+import React from "react";
+
 
 const Modal = ({ isOpen, onClose, children}) => {
   
   //   console.log("children",children);
-  const [countryData, setcountryData] = useState([]);
-  
-  useEffect(() => {
-const fetchCountry = async () => {
-  try {
-    const response = await getCountry("asia");
-    setcountryData(response.data);
-    // console.log("response:",response.data[0].name.common);
-  }
-  catch (error) {
-    console.error(error);
-  }
-}
-fetchCountry();
-}, []);
-console.log("countryData:",countryData);
+ 
 
 if (!isOpen) return null;
   
@@ -45,7 +30,7 @@ if (!isOpen) return null;
         </button>
 
         {/* Modal Content */}
-        <div className="flex flex-col items-center">{children}</div>
+        <div className="flex flex-col items-center ">{children}</div>
       </div>
     </div>
   );
