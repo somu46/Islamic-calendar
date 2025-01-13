@@ -122,7 +122,7 @@ const getCountry = async (region) => {
 
 const getCountryCity = async (country) => {
   try {
-      const response = await axios.get(`${Country_City_BaseUrl}`,
+      const response = await axios.post(`${Country_City_BaseUrl}`,
         {
           "country": country,
         }
