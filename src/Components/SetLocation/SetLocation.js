@@ -13,6 +13,7 @@ const SetLocation = () => {
   const [country, setCountry] = useState("");
   const [cityData, setCityData] = useState([]);
   const [city, setCity] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
 
   const continents = [
     "Asia",
@@ -63,11 +64,10 @@ const SetLocation = () => {
   }, [country]);
 
   useEffect(() => {
-    if (country) {
-      sessionStorage.setItem("country", country);
-    }
-    if (city) {
-      sessionStorage.setItem("city", city);
+    if (country && city) {
+      const location = `${country}, ${city}`;
+      setSelectedLocation(location);
+      sessionStorage.setItem("location", location);
     }
   }, [country, city]);
 
@@ -88,11 +88,10 @@ const SetLocation = () => {
       <div className="relative w-full" onClick={() => setModalOpen(true)}>
         <input
           type="text"
-          placeholder={
-            city ? `${country}, ${city}` : country || "Set your location"
-          }
-          className="w-60 p-2 border border-gray-300 font-bold text-teal-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
+          placeholder="Set your location"
+          value={selectedLocation}
           readOnly
+          className="w-60 p-2 border border-gray-300 font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
         />
         <IoMdLocate className="absolute right-4 text-[1.6rem] font-bold top-1/2 transform -translate-y-1/2 text-teal-600" />
       </div>
