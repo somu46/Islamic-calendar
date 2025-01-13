@@ -155,7 +155,7 @@ const IslamicCalendar = () => {
           <span className="text-sm">First Day</span>
         </div>
         <div className="flex items-center">
-          <span className="w-4 h-4 bg-blue-300 rounded-full mr-2"></span>
+          <span className="w-4 h-4 border-2 border-blue-800 rounded-full mr-2"></span>
           <span className="text-sm">Today</span>
         </div>
       </div>
@@ -201,6 +201,7 @@ const IslamicCalendar = () => {
             const firstDay = isFirstDay(details);
 
             return (
+              <div className='flex justify-center'>
               <div
                 key={index}
                 onClick={() => details && setSelectedDay(details)}
@@ -208,7 +209,7 @@ const IslamicCalendar = () => {
                   ${day ? '' : ''} 
                   ${holiday ? 'bg-red-200 ' : ''} 
                   ${firstDay ? 'bg-green-300 border-2 border-green-400' : ''} 
-                  ${isToday(day) ? 'bg-blue-300 border-2 border-blue-900 font-bold text-blue-700' : ''} 
+                  ${isToday(day) ? 'bg-blue-300 border-2 border-blue-800 font-bold text-blue-700' : ''} 
                   ${day && !holiday && !firstDay && !isToday(day) ? 'bg-gray-100' : ''} 
                   cursor-pointer w-12 h-12 rounded-full`}
               >
@@ -220,6 +221,7 @@ const IslamicCalendar = () => {
                     <span className="text-gray-800 text-[10px]">{day}</span>
                   </>
                 ) : null}
+              </div>
               </div>
             );
           })}
