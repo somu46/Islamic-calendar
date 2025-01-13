@@ -43,7 +43,7 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
           <span className="text-sm">First Day</span>
         </div>
         <div className="flex items-center">
-          <span className="w-4 h-4 bg-blue-300 rounded-full mr-2"></span>
+          <span className="w-4 h-4 border-2 border-blue-800 rounded-full mr-2"></span>
           <span className="text-sm">Today</span>
         </div>
       </div>
@@ -63,7 +63,7 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
       </div>
 
       {/* Days of the Week */}
-      <div className="grid grid-cols-7 text-center font-semibold mb-2">
+      <div className="grid grid-cols-7  text-center font-semibold mb-2">
        
        
         {daysOfWeek.map((day, index) => (
@@ -73,7 +73,7 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
    
 
       {/* Calendar Days */}
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7  gap-2">
         {/* Empty slots */}
         {emptyDays.map((_, index) => (
           <div key={`empty-${index}`} className="w-12 h-12"></div>
@@ -83,13 +83,13 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
           <div
             key={index}
             onClick={() => setSelectedDay(day)}
-            className={`flex flex-col items-center justify-center w-12 h-12 rounded-full cursor-pointer
+            className={`flex flex-col items-center justify-center   w-12 h-12 rounded-full cursor-pointer
               ${isHoliday(day) ? "bg-red-300" : ""}
               ${isFirstDay(day) ? "bg-green-400 border-2 border-green-500" : ""}
               ${isToday(day) ? "bg-blue-300 border-2 border-blue-500 text-blue-700 font-bold" : ""}
               ${
                 !isHoliday(day) && !isFirstDay(day) && !isToday(day)
-                  ? "bg-gray-100 hover:bg-gray-200"
+                  ? " hover:bg-gray-200"
                   : ""
               }`}
           >
