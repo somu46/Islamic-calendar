@@ -15,7 +15,6 @@ const SetLocation = () => {
   const [city, setCity] = useState("");
 
   const continents = [
-    " ",
     "Asia",
     "Africa",
     "North America",
@@ -103,21 +102,25 @@ const SetLocation = () => {
         <div className="text-black text-xl font-semibold">
           {/* Continent Selector */}
           <div>
-            <label className="mx-3" htmlFor="continents">
-              Choose a Continent:
-            </label>
-            <select
-              id="continents"
-              onChange={(e) => setSelectContinents(e.target.value)}
-              className="text-lg"
-            >
-              {continents.map((continent, index) => (
-                <option key={index} value={continent}>
-                  {continent}
-                </option>
-              ))}
-            </select>
-          </div>
+  {/* <label className="mx-3" htmlFor="continents">
+    Choose a Continent:
+  </label> */}
+  <select
+    id="continents"
+    onChange={(e) => setSelectContinents(e.target.value)}
+    className="text-lg text-gray-700 border-2 border-teal-700 shadow-md rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500"
+  >
+    <option value="" disabled selected className="text-teal-500">
+      Please select a continent
+    </option>
+    {continents.map((continent, index) => (
+      <option key={index} value={continent}>
+        {continent}
+      </option>
+    ))}
+  </select>
+</div>
+
 
           {/* Search and Selection */}
           {selectContinents && (
