@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getCountry } from "../../../apiServices/apiServices";
 
 const Modal = ({ isOpen, onClose, children}) => {
-  if (!isOpen) return null;
-
-//   console.log("children",children);
   
+  //   console.log("children",children);
+  const [countryData, setcountryData] = useState([]);
+  
+  useEffect(() => {
+const fetchCountry = async () => {
+  try {
+    const response = await getCountry("asia");
+    setcountryData(response.data);
+    // console.log("response:",response.data[0].name.common);
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
+fetchCountry();
+}, []);
+console.log("countryData:",countryData);
+
+if (!isOpen) return null;
   
   const handleOutsideClick = (e) => {
     if (e.target.id === "modalOverlay") {

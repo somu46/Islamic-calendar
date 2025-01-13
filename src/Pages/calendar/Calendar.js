@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
+import FullYearHijriCalendar from './FullYear/FullYearHijriCalendar';
 
 const IslamicCalendar = () => {
+
+ const [view, setView] = useState("monthly")
+
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [daysInMonth, setDaysInMonth] = useState([]);
@@ -32,6 +36,9 @@ const IslamicCalendar = () => {
 
     setDaysInMonth(days);
   }, []);
+
+
+
 
   const fetchCalendarData = useCallback(async () => {
     setLoading(true);
@@ -111,8 +118,33 @@ const IslamicCalendar = () => {
   };
 
   return (
-    <div className="container mx-auto ">
-      {/* Color Indicator Section */}
+    <div className=''>
+      <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end ">
+          <button
+            onClick={() => setView("monthly")}
+            className={`px-4 py-2 rounded-md ${
+              view === "monthly"
+                ? "bg-gray-800 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Monthly
+          </button>
+          <button
+             onClick={() => setView("yearly")}
+            className={`px-4 py-2 rounded-md ${
+              view === "yearly"
+                ? "bg-gray-800 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Yearly
+          </button>
+        </div>
+   
+    {view === "monthly" ?(
+      <div className="container mx-auto mt-5">
+     
       <div className="flex justify-between mb-4">
         <div className="flex items-center">
           <span className="w-4 h-4 bg-red-300 rounded-full mr-2"></span>
@@ -152,6 +184,7 @@ const IslamicCalendar = () => {
 
       {/* Days of the week */}
       <div className="grid grid-cols-7 text-center font-semibold mb-2">
+      
         {daysOfWeek.map((day, index) => (
           <div key={index} className="text-gray-700">{day}</div>
         ))}
@@ -204,6 +237,12 @@ const IslamicCalendar = () => {
           <p><strong>Holidays:</strong> {selectedDay.hijri?.holidays?.join(', ') || 'None'}</p>
         </div>
       )}
+    </div>
+    ):
+     <div className=''>
+       <FullYearHijriCalendar year={2025}/>
+     </div>
+    }
     </div>
   );
 };

@@ -53,7 +53,7 @@ const FullYearHijriCalendar = ({ year }) => {
   }, [year]);
 
   return (
-    <div className="bg-gradient-to-b from-green-100 to-green-50 min-h-screen text-black font-sans p-6">
+    <div className="bg-gradient-to-b from-green-100 to-green-50 min-h-screen text-black font-sans p-5 ">
       <h1 className="text-4xl font-bold text-center mb-8">{year} Islamic Calendar</h1>
 
       {loading ? (

@@ -1,5 +1,6 @@
 import axios from "axios"
 
+//this all are aladhan and alquran cloud api url
 const Calendar_BaseUrl = `https://api.aladhan.com/v1/gToHCalendar/`;
 const PrayerTime_BaseUrl = `https://api.aladhan.com/v1/calendarByCity/`; 
 const quran_edition_BaseUrl = `https://api.alquran.cloud/v1/edition`; 
@@ -8,8 +9,11 @@ const Date_Changer_BaseUrl = `https://api.aladhan.com/v1/gToH/`;
 const PrayerTimeByAddress_BaseUrl = `https://api.aladhan.com/v1/timingsByAddress/`;
 const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/1/quran-uthmani?offset=3&limit=10`; 
 
+//this all are country state and city api url
+const Country_BaseUrl = `https://restcountries.com/v3.1/region/`;
 
 
+//This are all the api services of aladhan and alquran cloud api
 
  const getCalendar = async (year, month) => {
     try {
@@ -41,9 +45,6 @@ const getFullHijriCalendar = async (year) => {
   return hijriCalendar;
 };
 
-  
-
-
 const getDateChanger=async(date)=>{
     try{
         const response=await axios.get(`${Date_Changer_BaseUrl}${date}`)
@@ -52,7 +53,6 @@ const getDateChanger=async(date)=>{
             console.error(error)
             }
 }
-
 
 const getQuran_Juz=async()=>{
     try{
@@ -108,6 +108,17 @@ const getQuranEditionOnlyName= async () => {
     }
 };
 
+//This are all the api services for country state and city
+
+const getCountry = async (region) => {
+  try {
+      const response = await axios.get(`${Country_BaseUrl}${region}`)
+      return response;
+  } catch (error) {
+      console.error(error)
+  }
+}
+
 
 export {
      getCalendar,
@@ -117,5 +128,6 @@ export {
      getDateChanger,
      getPrayerTimeOfDayByAddress,
      getQuran_Juz,
-     getFullHijriCalendar
+     getFullHijriCalendar,
+     getCountry
     };
