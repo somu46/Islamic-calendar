@@ -127,7 +127,7 @@ const getCountryCity = async (country) => {
           "country": country,
         }
       )
-      return response;
+      return response.data;
   } catch (error) {
       console.error(error)
   }
