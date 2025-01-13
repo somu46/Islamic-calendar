@@ -72,6 +72,17 @@ const SetLocation = () => {
     }
   }, [country, city]);
 
+  const handleCountryClick = (country) => {
+    setCountry(country);
+    setCity("");
+    setQuery("");
+  };
+
+  const handleCityClick = (city) => {
+    setCity(city);
+    setModalOpen(false);
+  };
+
   return (
     <div className="max-w-md mx-auto">
       {/* Search Box Trigger */}
@@ -133,7 +144,7 @@ const SetLocation = () => {
                         <div
                           key={index}
                           className="py-2 border-b border-gray-300 cursor-pointer"
-                          onClick={() => setCountry(country.name.common)}
+                          onClick={() => handleCountryClick(country.name.common)}
                         >
                           <div className="flex flex-row items-center p-1">
                             <img
@@ -179,7 +190,7 @@ const SetLocation = () => {
                         <div
                           key={index}
                           className="py-2 border-b border-gray-300 cursor-pointer"
-                          onClick={() => setCity(city)}
+                          onClick={() => handleCityClick(city)}
                         >
                           <p className="text-lg font-medium">{city}</p>
                         </div>
