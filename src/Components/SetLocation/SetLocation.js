@@ -91,7 +91,7 @@ const SetLocation = () => {
           placeholder={
             city ? `${country}, ${city}` : country || "Set your location"
           }
-          className="w-60 p-2 border border-gray-300 font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
+          className="w-60 p-2 border border-gray-300 font-bold text-teal-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
           readOnly
         />
         <IoMdLocate className="absolute right-4 text-[1.6rem] font-bold top-1/2 transform -translate-y-1/2 text-teal-600" />
