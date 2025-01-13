@@ -105,7 +105,7 @@ const SetLocation = () => {
                   className="py-2 border-b border-gray-300 cursor-pointer"
                   onClick={() => setCountry(country.name.common)} // Capture selected country
                 >
-                  <p className="text-lg font-medium">{country.name.common}</p>
+                 <div className="flex flex-row border  items-center p-1">  <img src={country.flags.svg} className="size-5 mr-3" alt={country.flags.alt} /><p className="text-lg font-medium"> {country.name.common}</p></div>
                   <p className="text-sm text-gray-500">
                     Region: {country.region}
                   </p>

@@ -11,7 +11,7 @@ const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/1/quran-uthmani?offset=3
 
 //this all are country state and city api url
 const Country_BaseUrl = `https://restcountries.com/v3.1/region/`;
-
+const Country_City_BaseUrl = `https://countriesnow.space/api/v0.1/countries/cities`;
 
 //This are all the api services of aladhan and alquran cloud api
 
@@ -120,6 +120,18 @@ const getCountry = async (region) => {
   }
 }
 
+const getCountryCity = async (country) => {
+  try {
+      const response = await axios.get(`${Country_City_BaseUrl}`,
+        {
+          "country": country,
+        }
+      )
+      return response;
+  } catch (error) {
+      console.error(error)
+  }
+}
 
 export {
      getCalendar,
