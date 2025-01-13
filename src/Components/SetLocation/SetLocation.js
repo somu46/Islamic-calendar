@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal/Modal";
 import { IoMdLocate } from "react-icons/io";
-import { getCountry } from "../../apiServices/apiServices";
+import { getCountry,getCountryCity } from "../../apiServices/apiServices";
 import { FaSearch } from "react-icons/fa";
 
 const SetLocation = () => {
@@ -10,7 +10,7 @@ const SetLocation = () => {
   const [selectContinats, setselectContinats] = useState("");
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState("");
-
+ 
   const continents = [
     " ",
     "Asia",
@@ -40,6 +40,23 @@ const SetLocation = () => {
       fetchCountry();
     }
   }, [selectContinats]);
+
+  useEffect(() => {
+    if(country){
+    const fetchCountryCites = async () => {
+      try {
+        const response = await getCountryCity(country);
+        console.log("responseCity",response);
+        
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCountryCites();
+  }
+  },[])
+   
+
 
   useEffect(() => {
     if (country) {

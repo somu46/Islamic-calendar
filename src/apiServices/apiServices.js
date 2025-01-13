@@ -142,5 +142,6 @@ export {
      getPrayerTimeOfDayByAddress,
      getQuran_Juz,
      getFullHijriCalendar,
-     getCountry
+     getCountry,
+     getCountryCity
     };
