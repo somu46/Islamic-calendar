@@ -2,19 +2,19 @@ import React from "react";
 
 const features = [
   { name: "Al Quran", icon: "📖" },
-  { name: "Duas", icon: "🙏" },
+  // { name: "Duas", icon: "🙏" },
   { name: "Special Islamic Days", icon: "🌙" },
-  { name: "Islamic Gallery", icon: "🖼️" },
+  // { name: "Islamic Gallery", icon: "🖼️" },
   { name: "Calendar", icon: "📅" },
-  { name: "Hadith", icon: "📜" },
-  { name: "Qibla Direction", icon: "🧭" },
+  // { name: "Hadith", icon: "📜" },
+  // { name: "Qibla Direction", icon: "🧭" },
   { name: "Islamic Places", icon: "📍" },
   { name: "Date Converter", icon: "🔄" },
   { name: "Prayer Widgets", icon: "🕋" },
   { name: "Zakat Calculator", icon: "💰" },
-  { name: "Knowledge", icon: "📚" },
-  { name: "IslamicFinder News", icon: "📰" },
-  { name: "PrayerBook", icon: "📔" },
+  // { name: "Knowledge", icon: "📚" },
+  
+  // { name: "PrayerBook", icon: "📔" },
 ];
 
 const Feature = () => {
