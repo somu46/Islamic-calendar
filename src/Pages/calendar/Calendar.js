@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
 import FullYearHijriCalendar from './FullYear/FullYearHijriCalendar';
+import Indicator from './Indicator';
 
 const IslamicCalendar = () => {
 
@@ -118,7 +119,7 @@ const IslamicCalendar = () => {
   };
 
   return (
-    <div className=''>
+    <div className='bg-gradient-to-b from-green-100 to-green-50 min-h-screen p-4'>
       <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end ">
           <button
             onClick={() => setView("monthly")}
@@ -145,20 +146,7 @@ const IslamicCalendar = () => {
     {view === "monthly" ?(
       <div className="container mx-auto mt-5">
      
-      <div className="flex justify-between mb-4">
-        <div className="flex items-center">
-          <span className="w-4 h-4 bg-red-300 rounded-full mr-2"></span>
-          <span className="text-sm">Holiday</span>
-        </div>
-        <div className="flex items-center">
-          <span className="w-4 h-4 bg-green-400 rounded-full mr-2"></span>
-          <span className="text-sm">First Day</span>
-        </div>
-        <div className="flex items-center">
-          <span className="w-4 h-4 border-2 border-blue-800 rounded-full mr-2"></span>
-          <span className="text-sm">Today</span>
-        </div>
-      </div>
+      <Indicator/>
 
       {/* Calendar Section */}
       <div className="flex justify-between items-center mb-4">
@@ -210,7 +198,7 @@ const IslamicCalendar = () => {
                   ${holiday ? 'bg-red-200 ' : ''} 
                   ${firstDay ? 'bg-green-300 border-2 border-green-400' : ''} 
                   ${isToday(day) ? 'bg-blue-300 border-2 border-blue-800 font-bold text-blue-700' : ''} 
-                  ${day && !holiday && !firstDay && !isToday(day) ? 'bg-gray-100' : ''} 
+                  ${day && !holiday && !firstDay && !isToday(day) ? '' : ''} 
                   cursor-pointer w-12 h-12 rounded-full`}
               >
                 {day ? (
@@ -230,7 +218,7 @@ const IslamicCalendar = () => {
 
       {/* Selected Day Details Section */}
       {selectedDay && (
-        <div className="mt-4 p-4 border rounded-lg bg-gray-50 shadow-md">
+        <div className="mt-4 p-4 border rounded-lg bg-transparent shadow-md">
           <h3 className="text-lg text-center font-bold">Day Details</h3>
           <p><strong>Gregorian:</strong> {selectedDay.gregorian?.date || 'N/A'}</p>
           <p><strong>Islamic(Hijri):</strong> {selectedDay.hijri?.date || 'N/A'}</p>
@@ -242,6 +230,7 @@ const IslamicCalendar = () => {
     </div>
     ):
      <div className=''>
+      <Indicator/>
        <FullYearHijriCalendar year={2025}/>
      </div>
     }
