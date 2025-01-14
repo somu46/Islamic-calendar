@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress } from "../../apiServices/apiServices";
+import ApiTest from "../../Test/test";
 
 const PrayerTimes = () => {
+
+  const year=new Date().getFullYear();
+  const month=new Date().getMonth();
+  const todayDate=new Date().getDate();
+
+  const prayerDate=`${todayDate}-${month+1}-${year}`;
+
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,10 +26,10 @@ const PrayerTimes = () => {
   useEffect(() => {
     const fetchPrayerTime = async () => {
       try {
-        console.log("Fetching prayer times for:", prayerLocation);
-        
-        const response = await getPrayerTimeOfDayByAddress("09-01-2025", prayerLocation);
-        console.log("API Response:", response); // Debugging: Check the data structure
+        // console.log("Fetching prayer times for:", prayerLocation);
+        ApiTest();
+        const response = await getPrayerTimeOfDayByAddress(prayerDate, prayerLocation);
+        // console.log("API Response:", response); // Debugging: Check the data structure
         setPrayerResponse(response);
       } catch (error) {
         console.log("Error fetching prayer times:", error.message);
@@ -31,7 +39,7 @@ const PrayerTimes = () => {
     };
 
     fetchPrayerTime();
-  }, [prayerLocation]);
+  }, [prayerLocation,prayerDate]);
 
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
@@ -97,7 +105,7 @@ const PrayerTimes = () => {
 
       {/* Footer */}
       <div className="text-center mt-4 text-sm text-gray-500">
-        <p>{prayerLocation}</p>
+        <p>{prayerLocation},Todays Date is :{prayerDate}</p>
         <Link to="#" className="text-blue-500 underline hover:text-blue-700">
           Change
         </Link>
