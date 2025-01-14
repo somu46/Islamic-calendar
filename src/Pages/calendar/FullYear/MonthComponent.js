@@ -31,22 +31,9 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
   const emptyDays = Array.from({ length: firstDayOfWeek }, () => null);
 
   return (
-    <div className="container mx-auto p-4 bg-green-50 rounded-lg shadow-lg border border-yellow-500">
+    <div className="container mx-auto rounded-lg shadow-lg p-2">
       {/* Color Indicator Section */}
-      <div className="flex justify-between mb-4">
-        <div className="flex items-center">
-          <span className="w-4 h-4 bg-red-300 rounded-full mr-2"></span>
-          <span className="text-sm">Holiday</span>
-        </div>
-        <div className="flex items-center">
-          <span className="w-4 h-4 bg-green-400 rounded-full mr-2"></span>
-          <span className="text-sm">First Day</span>
-        </div>
-        <div className="flex items-center">
-          <span className="w-4 h-4 border-2 border-blue-800 rounded-full mr-2"></span>
-          <span className="text-sm">Today</span>
-        </div>
-      </div>
+      
 
       {/* Month Navigation */}
       <div className="flex justify-between items-center mb-4">

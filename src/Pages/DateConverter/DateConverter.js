@@ -33,8 +33,8 @@ export const DateConverter = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+    <div className="flex flex-col items-center justify-center sm:p-10 bg-gray-100">
+      <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center text-blue-600">
           Date Converter
         </h1>
@@ -68,32 +68,50 @@ export const DateConverter = () => {
         </button>
         {convertedDate && typeof convertedDate === "object" && (
           <div className="mt-4 text-green-600 text-center">
-            <p>
-              <strong>Hijri Date:</strong> {convertedDate.hijri.date}
-            </p>
-            <p>
-              <strong>Day (EN):</strong> {convertedDate.hijri.weekday.en}
-            </p>
-            <p>
-              <strong>Day (AR):</strong> {convertedDate.hijri.weekday.ar}
-            </p>
-            <p>
-              <strong>Month (EN):</strong> {convertedDate.hijri.month.en}
-            </p>
-            <p>
-              <strong>Month (AR):</strong> {convertedDate.hijri.month.ar}
-            </p>
-            <p>
-              <strong>Days in Month:</strong> {convertedDate.hijri.month.days}
-            </p>
-            <p>
-              <strong>Year:</strong> {convertedDate.hijri.year}
-            </p>
-            <p>
-              <strong>Year (Designation):</strong>{" "}
-              {convertedDate.hijri.designation.expanded}
-            </p>
-          </div>
+          <table className="table-auto mx-auto border-collapse border border-green-600">
+            <thead>
+              <tr>
+                <th className="border border-green-600 px-4 py-2">Attribute</th>
+                <th className="border border-green-600 px-4 py-2">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Hijri Date</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.date}</td>
+              </tr>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Day (EN)</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.weekday.en}</td>
+              </tr>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Day (AR)</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.weekday.ar}</td>
+              </tr>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Month (EN)</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.month.en}</td>
+              </tr>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Month (AR)</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.month.ar}</td>
+              </tr>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Days in Month</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.month.days}</td>
+              </tr>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Year</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.year}</td>
+              </tr>
+              <tr>
+                <td className="border border-green-600 px-4 py-2">Year (Designation)</td>
+                <td className="border border-green-600 px-4 py-2">{convertedDate.hijri.designation.expanded}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
         )}
         {error && <p className="mt-4 text-red-600 text-center">{error}</p>}
       </div>
