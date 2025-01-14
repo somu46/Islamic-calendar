@@ -6,10 +6,21 @@ const PrayerTimes = () => {
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
 
+ const [prayerLocation, setprayerLocation] = useState("bangladesh, dhaka");
+ 
+ useEffect(() => {
+  const location = sessionStorage.getItem("location");
+  if (location) {
+    setprayerLocation(location);
+  }
+}, []);
+
   useEffect(() => {
     const fetchPrayerTime = async () => {
       try {
-        const response = await getPrayerTimeOfDayByAddress("09-01-2025", "Islamabad");
+        console.log("Fetching prayer times for:", prayerLocation);
+        
+        const response = await getPrayerTimeOfDayByAddress("09-01-2025", prayerLocation);
         console.log("API Response:", response); // Debugging: Check the data structure
         setPrayerResponse(response);
       } catch (error) {
@@ -20,7 +31,7 @@ const PrayerTimes = () => {
     };
 
     fetchPrayerTime();
-  }, []);
+  }, [prayerLocation]);
 
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
@@ -30,10 +41,11 @@ const PrayerTimes = () => {
     return <div className="text-center mt-10">Failed to load prayer times.</div>;
   }
 
-  const { timings, date, meta } = prayerResponse;
+  // const { timings, date, meta } = prayerResponse;
+  const { timings, date } = prayerResponse;
   const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
   const gregorianDate = `${date.gregorian.date}`;
-  const location = meta.timezone;
+  // const location = meta.timezone;
 
   // Determine the upcoming prayer dynamically
   const upcomingPrayer =
@@ -50,7 +62,7 @@ const PrayerTimes = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-800">
-          Prayer Times in {location}
+          Prayer Times in {prayerLocation}
         </h2>
         <div className="text-sm text-gray-600 text-right">
           <p>{gregorianDate}</p>
@@ -85,7 +97,7 @@ const PrayerTimes = () => {
 
       {/* Footer */}
       <div className="text-center mt-4 text-sm text-gray-500">
-        <p>{meta.method.name}</p>
+        <p>{prayerLocation}</p>
         <Link to="#" className="text-blue-500 underline hover:text-blue-700">
           Change
         </Link>

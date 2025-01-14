@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
+import Feature from '../Feature/Feature';
 
 const DefaultLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -21,6 +22,7 @@ const DefaultLayout = ({ children }) => {
           <main>
             <div className="mx-auto max-w-screen-2xl ">
               {children}
+              <Feature />
             </div>
           </main>
         </div>
