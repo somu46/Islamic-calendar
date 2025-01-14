@@ -77,7 +77,7 @@ function ZakatCalculator() {
 
   return (
     
-      <div className="max-w-lg w-full bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <div className="">
         <h1 className="text-3xl font-bold text-center mb-6">Zakat Calculator</h1>
         <div className="flex flex-wrap justify-center mb-4">
           {["Gold & Silver", "Cash & Property", "Debts & Liabilities", "Summary"].map((tab) => (
