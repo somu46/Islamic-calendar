@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getPrayerTime } from "../../apiServices/apiServices";
 
 const PrayerTimetable = () => {
@@ -9,8 +9,16 @@ const PrayerTimetable = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [dataLoaded, setDataLoaded] = useState(false);
-  const city = "London";
-  const country = "GB";
+const [city, setcity] = useState("");
+const [country, setcountry] = useState("");
+
+useEffect(() => {
+  const city=sessionStorage.getItem('city');
+ const  country=sessionStorage.getItem('country');
+  setcity(city);
+  setcountry(country);
+
+}, []);
 
   const monthNames = [
     "January",
@@ -80,7 +88,7 @@ const PrayerTimetable = () => {
 
       {/* Location Info */}
       <div className="p-3 mb-3 font-semibold text-lg text-center sm:text-left">
-        <h3>Your Location: {city}</h3>
+        <h3>Your are in: {country}/{city}</h3>
       </div>
 
       {/* Month and Year Selectors */}
