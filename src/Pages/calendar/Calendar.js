@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
 import FullYearHijriCalendar from './FullYear/FullYearHijriCalendar';
 import Indicator from './Indicator';
+import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 const IslamicCalendar = () => {
 
@@ -120,6 +121,7 @@ const IslamicCalendar = () => {
 
   return (
     <div className='bg-gradient-to-b from-green-100 to-green-50 min-h-screen p-4'>
+      <Breadcrumb pageName='Islamic Calendar' />
       <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end ">
           <button
             onClick={() => setView("monthly")}

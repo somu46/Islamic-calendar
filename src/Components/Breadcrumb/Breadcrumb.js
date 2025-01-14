@@ -16,10 +16,7 @@ const Breadcrumb = ({ pageName,path }) => {
           </Link>
         </ol>
       </nav>
-      {/* <h2 className="text-title-md2 font-semibold text-black">
-        {pageName} 
-      </h2> */}
-
+      
     </div>
   );
 };

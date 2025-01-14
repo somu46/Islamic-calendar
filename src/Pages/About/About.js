@@ -1,8 +1,10 @@
 import React from 'react';
+import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 const About = () => {
   return (
     <div className="bg-gray-50 py-12 px-6 sm:px-10 lg:px-16">
+      <Breadcrumb pageName='About Us' />
       <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-4xl font-extrabold text-gray-800 mb-6">About Us</h1>
         <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
