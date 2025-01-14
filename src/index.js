@@ -7,7 +7,7 @@ import App from './App';
 import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter} from './Pages';
 import PrayerTimes from './Pages/PrayerTime/PrayerTime';
 import Home from './Components/Home/Home';
-
+import About from './Pages/About/About';
 
 
 
@@ -57,7 +57,10 @@ const Route =createBrowserRouter([
         path:'/data/date-converter',
         element:<DateConverter/>
       },
-        
+      {
+        path:'/data/about',
+        element:<About/>
+      },  
 
 
 

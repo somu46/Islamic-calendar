@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Feature from '../Feature/Feature';
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-teal-50 to-cyan-100">
@@ -38,7 +38,7 @@ const Home = () => {
             </a>
           </div>
         </section>
-
+        <Feature/>
         {/* Inspirational Quote */}
         <section id="prayers" className="bg-gradient-to-r from-teal-100 to-cyan-50 py-20">
           <div className="container mx-auto text-center">
