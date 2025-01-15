@@ -123,8 +123,8 @@ const Navbar = () => {
                     Blogs
                   </NavLink>
                 </li>
-                {/* <hr className="w-[85%] border-1 border-white " /> */}
-                <p className="text-3xl text-black mx-auto">Our products</p>
+                <hr className="w-full border-1 border-white " /> 
+                <p className="text-3xl text-white mx-auto">Our products</p>
                 <hr className="w-full border-1 border-white " />
                 <li>
                   <NavLink to="/data/islamic-calendar" onClick={handleMobileHistory}>
@@ -143,7 +143,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink to="/data/prayer-times-table" onClick={handleMobileHistory}>
-                 Monthly Prayer Times Table
+                 Monthly Prayer Times 
                   </NavLink>
                 </li>
                 <li>
@@ -156,29 +156,7 @@ const Navbar = () => {
                   Zakat Calculator
                   </NavLink>
                 </li>
-            {/* <li>
-                              <button
-                                className="focus:outline-none mb-2"
-                                onClick={() => setIsGalleryOpen(!isGalleryOpen)}
-                              >
-                                Gallery
-                                <ArrowDropDownIcon />
-                              </button>
-                              {isGalleryOpen && (
-                                <ul className="pl-4 space-y-2">
-                                  <li>
-                                    <NavLink to="/photos" onClick={handleMobileHistory}>
-                                      Photos
-                                    </NavLink>
-                                  </li>
-                                  <li>
-                                    <NavLink to="/videos" onClick={handleMobileHistory}>
-                                      Videos
-                                    </NavLink>
-                                  </li>
-                                </ul>
-                              )}
-                            </li> */}
+           
                 
               </ul>
             </nav>
