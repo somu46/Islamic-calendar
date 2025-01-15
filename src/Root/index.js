@@ -14,7 +14,7 @@ const Root = () => {
       <DefaultLayout>
         {outlet || <Feature />} {/* Render Feature if Outlet is empty */}
       </DefaultLayout>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
