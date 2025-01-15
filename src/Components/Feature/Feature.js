@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"; // Import Link for internal routing
 
 const features = [
   { name: "Al Quran", icon: "📖", path: "/data/al-quran" },
-  { name: "Islamic Holidays", icon: "🌙", path: "/holidays" },
+  { name: "Islamic Holidays", icon: "🌙", path: "/islamic-holidays" },
   { name: "Calendar", icon: "📅", path: "/data/islamic-calendar" },
   { name: "Islamic Places", icon: "📍", path: "/places" },
   { name: "Date Converter", icon: "🔄", path: "/data/date-converter" },

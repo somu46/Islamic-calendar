@@ -109,7 +109,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <NavLink
-                to="/IslamicHolidayPage"
+                to="/islamic-holidays"
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 ${
                     isActive ? "text-blue-500 font-bold" : "text-red-700"

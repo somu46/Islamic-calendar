@@ -27,7 +27,7 @@ const Route =createBrowserRouter([
         element:<Home/>
       },
       {
-        path:'/IslamicHolidayPage',
+        path:'/islamic-holidays',
         element:<IslamicHolidayPage/>
       },
       {

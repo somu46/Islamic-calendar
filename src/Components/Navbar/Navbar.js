@@ -143,8 +143,8 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/IslamicHolidayPage"
-                    className="hover:text-teal-300 transition"
+                    to="/islamic-holidays"
+                    className="text-red-700 hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
                     Holidays
