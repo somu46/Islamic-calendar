@@ -82,7 +82,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Sidebar Menu */}
       <div className="no-scrollbar flex flex-col overflow-y-auto px-5 py-6 lg:py-6 mt-[4.5rem]">
         <nav>
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 text-lg font-semibold">
             <li>
               <NavLink
                 to="/data/islamic-calendar"
@@ -110,8 +110,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <li>
               <NavLink
                 to="/IslamicHolidayPage"
-                className="hover:text-teal-300 transition"
-                onClick={handleMobileHistory}
+                className={({ isActive }) =>
+                  `text-sm hover:text-blue-500 ${
+                    isActive ? "text-blue-500 font-bold" : "text-red-700"
+                  }`
+                }
               >
                 Holidays
               </NavLink>
