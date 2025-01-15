@@ -46,7 +46,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`fixed left-0 top-0 z-50 flex h-screen w-56 flex-col overflow-y-hidden bg-[#1C2434] text-white duration-300 ease-linear lg:static lg:translate-x-0 ${
+      className={`fixed left-0 top-[3rem] z-30 flex h-screen w-56 flex-col overflow-y-hidden bg-[#1C2434] text-white duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
@@ -78,7 +78,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
 
       {/* Sidebar Menu */}
-      <div className="no-scrollbar flex flex-col overflow-y-auto px-4 py-4 lg:py-6">
+      <div className="no-scrollbar flex flex-col overflow-y-auto px-5 py-6 lg:py-6 mt-[4.5rem]">
         <nav>
           <ul className="flex flex-col gap-4">
             <li>
@@ -118,7 +118,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
                 }
               >
-                Prayer Times Table
+              Yearly Prayer Times Table
               </NavLink>
             </li>
             <li>

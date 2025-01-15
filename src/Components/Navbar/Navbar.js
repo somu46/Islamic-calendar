@@ -30,7 +30,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="text-white font-bold top-0 w-full fixed z-50">
+    <div className="text-white font-bold top-0 w-full fixed z-50 mb-3">
       <header className="bg-teal-600 text-white py-4 shadow-md">
         <nav className="container mx-auto flex justify-between items-center">
           {/* Logo */}
@@ -88,14 +88,14 @@ const Navbar = () => {
             </li> */}
           </ul>
 
-          {/* Button */}
+         
           
         </nav>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
-            className={`fixed top-0 left-0 min-h-screen w-[70%] bg-teal-600 z-20`}
+            className={`fixed top-[3.5rem] left-0 min-h-screen w-[95%] bg-teal-600 z-30 mb-5`}
             initial="closed"
             animate={isMenuOpen ? 'open' : 'closed'}
             variants={variants}
@@ -105,11 +105,6 @@ const Navbar = () => {
                 <li>
                   <NavLink to="/" onClick={handleMobileHistory}>
                     Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/data/islamic-calendar" onClick={handleMobileHistory}>
-                    Islamic Calendar
                   </NavLink>
                 </li>
                 <li>
@@ -127,29 +122,63 @@ const Navbar = () => {
                     Blogs
                   </NavLink>
                 </li>
-                {/* <li>
-                  <button
-                    className="focus:outline-none mb-2"
-                    onClick={() => setIsGalleryOpen(!isGalleryOpen)}
-                  >
-                    Gallery
-                    <ArrowDropDownIcon />
-                  </button>
-                  {isGalleryOpen && (
-                    <ul className="pl-4 space-y-2">
-                      <li>
-                        <NavLink to="/photos" onClick={handleMobileHistory}>
-                          Photos
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/videos" onClick={handleMobileHistory}>
-                          Videos
-                        </NavLink>
-                      </li>
-                    </ul>
-                  )}
-                </li> */}
+                {/* <hr className="w-[85%] border-1 border-white " /> */}
+                <p className="text-xl text-black mx-auto">Our products</p>
+                <hr className="w-full border-1 border-white " />
+                <li>
+                  <NavLink to="/data/islamic-calendar" onClick={handleMobileHistory}>
+                    Islamic Calendar
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/data/al-quran" onClick={handleMobileHistory}>
+                  Al Quran
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/data/prayer-times" onClick={handleMobileHistory}>
+                  Prayer Times
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/data/prayer-times-table" onClick={handleMobileHistory}>
+                 Yearly Prayer Times Table
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/data/date-converter" onClick={handleMobileHistory}>
+                  Date Converter
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/data/zakat-calculator" onClick={handleMobileHistory}>
+                  Zakat Calculator
+                  </NavLink>
+                </li>
+            {/* <li>
+                              <button
+                                className="focus:outline-none mb-2"
+                                onClick={() => setIsGalleryOpen(!isGalleryOpen)}
+                              >
+                                Gallery
+                                <ArrowDropDownIcon />
+                              </button>
+                              {isGalleryOpen && (
+                                <ul className="pl-4 space-y-2">
+                                  <li>
+                                    <NavLink to="/photos" onClick={handleMobileHistory}>
+                                      Photos
+                                    </NavLink>
+                                  </li>
+                                  <li>
+                                    <NavLink to="/videos" onClick={handleMobileHistory}>
+                                      Videos
+                                    </NavLink>
+                                  </li>
+                                </ul>
+                              )}
+                            </li> */}
+                
               </ul>
             </nav>
           </motion.div>
