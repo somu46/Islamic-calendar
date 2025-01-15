@@ -17,15 +17,15 @@ const DefaultLayout = ({ children }) => {
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         {/* Content Area */}
-        <div className="relative flex flex-1 flex-col overflow-y-auto ">
-          {/* Main Content */}
-          <main>
-            <div className="mx-auto max-w-screen-2xl ">
-              {children}
-              <Feature />
-            </div>
-          </main>
-        </div>
+        <div className="relative flex flex-1 flex-col overflow-y-auto">
+  {/* Main Content */}
+  <main>
+    <div className="mx-auto max-w-screen-2xl">
+      {children && React.Children.count(children) > 0 ? children : <Feature />}
+    </div>
+  </main>
+</div>
+
       </div>
     </div>
   );
