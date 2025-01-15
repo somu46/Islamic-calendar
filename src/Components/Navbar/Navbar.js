@@ -66,7 +66,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="#articles" className="hover:text-teal-500">
+              <NavLink to="/blogs" className="hover:text-teal-500">
                 Blogs
               </NavLink>
             </li>
@@ -124,7 +124,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="#articles" onClick={handleMobileHistory}>
+                  <NavLink to="/blogs" onClick={handleMobileHistory}>
                     Blogs
                   </NavLink>
                 </li>

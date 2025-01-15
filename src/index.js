@@ -8,6 +8,7 @@ import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConver
 import PrayerTimes from './Pages/PrayerTime/PrayerTime';
 import Home from './Components/Home/Home';
 import About from './Pages/About/About';
+import BlogPage from './Pages/Blogs/Blogs';
 
 
 
@@ -17,8 +18,18 @@ import About from './Pages/About/About';
 const Route =createBrowserRouter([
 
   {
-    path: '/',
+    path: '',
     element: <App/>,
+    children: [
+      {
+        path:'/',
+        element:<Home/>
+      },
+      {
+        path: '/blogs',
+        element: <BlogPage/>
+      }
+    ]
   },
   {
     path: '/test-api',
@@ -61,10 +72,6 @@ const Route =createBrowserRouter([
         path:'/data/about',
         element:<About/>
       },  
-
-
-
-
       {
         path: '*',
         element: <Error />,
