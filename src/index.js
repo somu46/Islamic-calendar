@@ -9,6 +9,7 @@ import PrayerTimes from './Pages/PrayerTime/PrayerTime';
 import Home from './Components/Home/Home';
 import About from './Pages/About/About';
 import BlogPage from './Pages/Blogs/Blogs';
+import IslamicHolidayPage from './Pages/IslamicHoliDays/IslamicHoliDays';
 
 
 
@@ -24,6 +25,10 @@ const Route =createBrowserRouter([
       {
         path:'/',
         element:<Home/>
+      },
+      {
+        path:'/IslamicHolidayPage',
+        element:<IslamicHolidayPage/>
       },
       {
         path: '/blogs',
