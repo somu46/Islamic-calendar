@@ -15,7 +15,7 @@ const features = [
 
 const Feature = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-6 p-2 rounded-lg">
+    <div className="flex flex-wrap justify-center gap-6 lg:gap-12 p-2 rounded-lg">
       {features.map((feature) => (
         <Link
           to={feature.path} // Use 'to' prop for routing
