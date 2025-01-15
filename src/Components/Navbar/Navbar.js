@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <div className="text-white font-bold top-0 w-full fixed z-50 mb-3">
       <header className="bg-teal-600 text-white py-4 shadow-md">
-        <nav className="container mx-auto flex justify-between items-center">
+        <nav className="container mx-auto flex justify-between items-center ">
           {/* Logo */}
           <Link to="/" className="text-xl font-bold tracking-wide mx-3 text-left">
             Islamic Knowledge
@@ -44,7 +44,7 @@ const Navbar = () => {
           </div>
 
           {/* Navigation Links (Desktop) */}
-          <ul className="hidden md:flex space-x-6">
+          <ul className="hidden md:flex space-x-6 mr-[5rem] items-center">
             <li>
               <NavLink to="/" className="flex items-center px-3 hover:text-teal-500">
                 <SetLocation />
@@ -102,6 +102,11 @@ const Navbar = () => {
           >
             <nav>
               <ul className="flex flex-col items-start p-8 space-y-4">
+              <li>
+              <NavLink to="/" className="flex items-center px-3 hover:text-teal-500">
+                <SetLocation />
+              </NavLink>
+            </li>
                 <li>
                   <NavLink to="/" onClick={handleMobileHistory}>
                     Home
