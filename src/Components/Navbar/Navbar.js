@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
 import SetLocation from "../SetLocation/SetLocation";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ReactTypingEffect from "react-typing-effect";
+// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 
 import { motion } from 'framer-motion';
 
@@ -22,7 +22,7 @@ const variants = {
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  // const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   const handleMobileHistory = () => {
     window.scrollTo(0, 0);
@@ -30,8 +30,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="text-white font-bold top-0 w-full">
-      <header className="bg-teal-700 text-white py-4 shadow-md">
+    <div className="text-white font-bold top-0 w-full fixed z-50">
+      <header className="bg-teal-600 text-white py-4 shadow-md">
         <nav className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="text-xl font-bold tracking-wide mx-3 text-left">
@@ -39,7 +39,7 @@ const Navbar = () => {
           </Link>
 
           {/* Hamburger Icon */}
-          <div className="md:hidden mx-3">
+          <div className="md:hidden mx-3 z-50">
             <Hamburger toggled={isMenuOpen} toggle={setIsMenuOpen} color="#FFFFFF" />
           </div>
 
@@ -70,7 +70,7 @@ const Navbar = () => {
                 Blogs
               </NavLink>
             </li>
-            <li className="nav-item gallery-dropdown">
+            {/* <li className="nav-item gallery-dropdown">
               <span>Gallery</span>
               <ArrowDropDownIcon />
               <ul className="dropdown bg-white bg-opacity-50 md:bg-opacity-70 backdrop-blur-md">
@@ -85,19 +85,17 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
 
           {/* Button */}
-          <div>
-            <button  fun={() => {}} >Book</button>
-          </div>
+          
         </nav>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
-            className={`fixed top-0 right-0 min-h-screen w-[65%] bg-teal-600 z-20`}
+            className={`fixed top-0 left-0 min-h-screen w-[70%] bg-teal-600 z-20`}
             initial="closed"
             animate={isMenuOpen ? 'open' : 'closed'}
             variants={variants}
@@ -129,7 +127,7 @@ const Navbar = () => {
                     Blogs
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <button
                     className="focus:outline-none mb-2"
                     onClick={() => setIsGalleryOpen(!isGalleryOpen)}
@@ -151,7 +149,7 @@ const Navbar = () => {
                       </li>
                     </ul>
                   )}
-                </li>
+                </li> */}
               </ul>
             </nav>
           </motion.div>
