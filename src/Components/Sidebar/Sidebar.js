@@ -118,7 +118,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   `text-sm hover:text-blue-500 ${isActive ? 'text-blue-500 font-bold' : ''}`
                 }
               >
-              Yearly Prayer Times Table
+              Monthly Prayer Times Table
               </NavLink>
             </li>
             <li>

@@ -95,7 +95,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
-            className={`fixed top-[3.5rem] left-0 min-h-screen w-[95%] bg-teal-600 z-30 mb-5`}
+            className={`fixed top-[3.5rem] left-0 min-h-screen w-[100%] bg-teal-600 z-30 mb-5`}
             initial="closed"
             animate={isMenuOpen ? 'open' : 'closed'}
             variants={variants}
@@ -107,14 +107,15 @@ const Navbar = () => {
                     Home
                   </NavLink>
                 </li>
+                
                 <li>
-                  <NavLink to="#prayers" onClick={handleMobileHistory}>
-                    Prayer Times
+                  <NavLink to="#about" onClick={handleMobileHistory}>
+                    About Us
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="#about" onClick={handleMobileHistory}>
-                    About
+                   Contact Us
                   </NavLink>
                 </li>
                 <li>
@@ -123,7 +124,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 {/* <hr className="w-[85%] border-1 border-white " /> */}
-                <p className="text-xl text-black mx-auto">Our products</p>
+                <p className="text-3xl text-black mx-auto">Our products</p>
                 <hr className="w-full border-1 border-white " />
                 <li>
                   <NavLink to="/data/islamic-calendar" onClick={handleMobileHistory}>
@@ -142,7 +143,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink to="/data/prayer-times-table" onClick={handleMobileHistory}>
-                 Yearly Prayer Times Table
+                 Monthly Prayer Times Table
                   </NavLink>
                 </li>
                 <li>

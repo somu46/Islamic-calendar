@@ -66,7 +66,7 @@ const PrayerTimes = () => {
     }) || ["Fajr", timings.Fajr]; // Default to Fajr if no upcoming prayer is found
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg px-6 py-5 border border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-800">
