@@ -18,7 +18,7 @@ const DefaultLayout = ({ children }) => {
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         {/* Content Area */}
-        <div className="relative flex flex-1 min-h-screen flex-col overflow-y-auto mt-[4.5rem]">
+        <div className="relative flex flex-1 min-h-screen flex-col overflow-y-auto mt-[4rem]">
   {/* Main Content */}
      <main>
     <div className="mx-auto max-w-screen-2xl mt-3">

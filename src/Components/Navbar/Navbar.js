@@ -123,7 +123,7 @@ const Navbar = () => {
                     Blogs
                   </NavLink>
                 </li>
-                <hr className="w-full border-1 border-white " /> 
+                {/* <hr className="w-full border-1 border-white " />  */}
                 <p className="text-3xl text-white mx-auto">Our products</p>
                 <hr className="w-full border-1 border-white " />
                 <li>
