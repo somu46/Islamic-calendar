@@ -12,7 +12,7 @@ const Indicator = () => {
           <span className="text-sm">First Day</span>
         </div>
         <div className="flex items-center">
-          <span className="w-4 h-4 border-2 border-blue-800 rounded-full mr-2"></span>
+          <span className="w-4 h-4 border-2 border-blue-800 bg-blue-300 rounded-full mr-2"></span>
           <span className="text-sm">Today</span>
         </div>
       </div>

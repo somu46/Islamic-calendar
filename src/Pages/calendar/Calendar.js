@@ -39,9 +39,6 @@ const IslamicCalendar = () => {
     setDaysInMonth(days);
   }, []);
 
-
-
-
   const fetchCalendarData = useCallback(async () => {
     setLoading(true);
     try {
@@ -174,7 +171,7 @@ const IslamicCalendar = () => {
       </div>
 
       {/* Days of the week */}
-      <div className="grid grid-cols-7 text-center font-semibold mb-2">
+      <div className="grid grid-cols-7 text-center font-semibold mb-2 ">
       
         {daysOfWeek.map((day, index) => (
           <div key={index} className="text-gray-700">{day}</div>
@@ -183,9 +180,9 @@ const IslamicCalendar = () => {
 
       {/* Calendar Days */}
       {loading ? (
-        <div className="text-center">Loading...</div>
+        <div className="text-center ">Loading...</div>
       ) : (
-        <div className="grid grid-cols-7 gap-2">
+        <div className="grid grid-cols-7 gap-2 ">
           
           {daysInMonth.map((day, index) => {
             const details = getDayDetails(day);
@@ -193,24 +190,24 @@ const IslamicCalendar = () => {
             const firstDay = isFirstDay(details);
 
             return (
-              <div className='flex justify-center'>
+              <div className='flex justify-center '>
               <div
                 key={index}
                 onClick={() => details && setSelectedDay(details)}
-                className={`flex flex-col items-center justify-center 
+                className={`flex flex-col items-center justify-center
                   ${day ? '' : ''} 
                   ${holiday ? 'bg-red-200 ' : ''} 
                   ${firstDay ? 'bg-green-300 border-2 border-green-400' : ''} 
                   ${isToday(day) ? 'bg-blue-300 border-2 border-blue-800 font-bold text-blue-700' : ''} 
                   ${day && !holiday && !firstDay && !isToday(day) ? '' : ''} 
-                  cursor-pointer w-12 h-12 rounded-full`}
+                  cursor-pointer w-12 h-12 rounded-md`}
               >
                 {day ? (
                   <>
-                    <span className="text-[16px] text-green-600">
+                    <span className="text-[18px] text-green-600">
                       {details?.hijri?.day || day}
                     </span>
-                    <span className="text-gray-800 text-[10px]">{day}</span>
+                    <span className="text-gray-800 text-[12px]">{day}</span>
                   </>
                 ) : null}
               </div>
