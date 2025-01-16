@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
+const MonthComponent = ({ month, hijri_month, hijri_year,hijri_month_name_Ar, days }) => {
   const [selectedDay, setSelectedDay] = useState(null);
 
+  console.log("days: ",days);
+  
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const monthIndex = {
@@ -20,10 +22,22 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
     12: "December",
   };
 
+  const getDayDetails = (day) => {
+    if (!day) return null;
+    const dayData = day.find(
+      (d) => d && parseInt(d.weekday) === day
+    );
+    return dayData || {};
+  };
 
 
-  const isHoliday = (day) => day?.isHoliday;
-  const isFirstDay = (day) => day?.isFirstDay;
+  const isHoliday = (day) => {
+    return day?.hijri_holidays !=='None';
+  };
+
+  const isFirstDay = (day) => {
+    return day?.hijri_day === '1';
+  };
   const isToday = (day) => day?.isToday;
 
   // Calculate empty slots for alignment
@@ -40,7 +54,7 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
        
         <div className=" flex justify-between ">
           <h2 className="text-lg text-green-600 font-bold mr-1">
-            {hijri_month}, {hijri_year}
+            {`(${hijri_month_name_Ar})`+hijri_month} - {hijri_year}
           </h2>
           <h3 className="ml-1 text-lg font-bold">
             {monthIndex[month]} - {days[0].date.split("-")[2]}
@@ -66,7 +80,10 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
           <div key={`empty-${index}`} className="w-12 h-12"></div>
         ))}
         {/* Calendar Days */}
-        {days.map((day, index) => (
+        {days.map((day, index) => {
+        
+        const details = getDayDetails(day);
+   return (
           <div
             key={index}
             onClick={() => setSelectedDay(day)}
@@ -80,14 +97,18 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
                   : ""
               }`}
           >
-            <span className="text-[16px] text-green-600">
-              {day?.hijri_date.split("-")[0]}
-            </span>
-            <span className="text-gray-800 text-[10px]">
-              {day?.date.split("-")[0]}
-            </span>
+           {day ? (
+                  <>
+                    <span className="text-[16px] text-green-600">
+                      {details?.hijri?.day || day}
+                    </span>
+                    <span className="text-gray-800 text-[10px]">{day}</span>
+                  </>
+                ) : null}
           </div>
-        ))}
+   )
+
+    })}
       </div>
 
       {/* Selected Day Details */}
@@ -102,6 +123,9 @@ const MonthComponent = ({ month, year, hijri_month, hijri_year, days }) => {
           </p>
           <p>
             <strong>Day (English):</strong> {selectedDay.weekday || "N/A"}
+          </p>
+          <p>
+            <strong>Holiday (English):</strong> {selectedDay?.hijri_holidays || "N/A"}
           </p>
         </div>
       )}
