@@ -151,6 +151,7 @@ const IslamicCalendar = () => {
       <Indicator/>
 
       {/* Calendar Section */}
+
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={handlePreviousMonth}
@@ -185,6 +186,7 @@ const IslamicCalendar = () => {
         <div className="text-center">Loading...</div>
       ) : (
         <div className="grid grid-cols-7 gap-2">
+          
           {daysInMonth.map((day, index) => {
             const details = getDayDetails(day);
             const holiday = isHoliday(details);
