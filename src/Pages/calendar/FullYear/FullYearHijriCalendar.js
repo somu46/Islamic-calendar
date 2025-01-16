@@ -82,7 +82,7 @@ const [isModalOpen, setModalOpen] = useState(false)
           )}
         </div>
 
-        <div className="grid grid-cols-7 gap-1 border-red-700 border-2">
+        <div className="grid grid-cols-7 gap-1">
           {days.map((day, index) => {
             const dayDetails = monthData.find(
               (d) => d && parseInt(d.gregorian.day) === day
