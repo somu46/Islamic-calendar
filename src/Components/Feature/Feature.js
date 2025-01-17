@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Import Link for internal routing
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
+
 
 const features = [
   { name: "Al Quran", icon: "📖", path: "/essentials/al-quran" },

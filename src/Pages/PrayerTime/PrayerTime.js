@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress } from "../../apiServices/apiServices";
-import ApiTest from "../../Test/test";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+
 
 const PrayerTimes = () => {
 
@@ -28,7 +28,7 @@ const PrayerTimes = () => {
     const fetchPrayerTime = async () => {
       try {
         // console.log("Fetching prayer times for:", prayerLocation);
-        ApiTest();
+      
         const response = await getPrayerTimeOfDayByAddress(prayerDate, prayerLocation);
         // console.log("API Response:", response); // Debugging: Check the data structure
         setPrayerResponse(response);
