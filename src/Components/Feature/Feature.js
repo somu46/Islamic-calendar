@@ -17,9 +17,7 @@ const features = [
 const Feature = () => {
   return (
     <>
-      <div>
-      <Breadcrumb pageName='Features' />
-      </div>
+   
 
     <div className="flex flex-wrap justify-center gap-6 lg:gap-12 p-2 rounded-lg">
      
