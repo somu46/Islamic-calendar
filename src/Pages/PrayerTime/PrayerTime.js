@@ -14,7 +14,7 @@ const PrayerTimes = () => {
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
 
- const [prayerLocation, setprayerLocation] = useState("bangladesh, dhaka");
+ const [prayerLocation, setprayerLocation] = useState("Lahore,Pakistan");
  
  useEffect(() => {
   const location = sessionStorage.getItem("location");
@@ -106,8 +106,8 @@ const PrayerTimes = () => {
       {/* Footer */}
       <div className="text-center mt-4 text-sm text-gray-500">
         <p>{prayerLocation},Todays Date is :{prayerDate}</p>
-        <Link to="#" className="text-blue-500 underline hover:text-blue-700">
-          Change
+        <Link to="" className="text-blue-500 underline hover:text-blue-700">
+          Change location
         </Link>
       </div>
     </div>

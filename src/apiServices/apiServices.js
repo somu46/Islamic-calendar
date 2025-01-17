@@ -65,7 +65,7 @@ const getQuran_Juz=async()=>{
     }
 }
 
-const getPrayerTimeOfDayByAddress = async (date = "09-01-2025", address = "Kolkata,India") => {
+const getPrayerTimeOfDayByAddress = async (date = "09-01-2025", address = "Lahore,Pakistan") => {
   try {
     const response = await axios.get(`${PrayerTimeByAddress_BaseUrl}${date}?address=${address}`, {
       maxRedirects: 5,
