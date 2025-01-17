@@ -167,6 +167,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 Zakat Calculator
               </NavLink>
             </li>
+            <li className="bg-[#FF0000]  w-[90%] my-3 p-1 rounded-md shadow-lg text-[23px]  ">
+              <NavLink
+                to="/islamic-holidays"
+                className={({ isActive }) =>
+                  `text-sm hover:text-blue-500 ${
+                    isActive ? "text-blue-500 font-bold" : "text-white"
+                  }`
+                }
+              >
+               Islamic Holidays
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>
