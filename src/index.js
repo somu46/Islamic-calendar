@@ -12,10 +12,6 @@ import BlogPage from './Pages/Blogs/Blogs';
 import IslamicHolidayPage from './Pages/IslamicHoliDays/IslamicHoliDays';
 
 
-
-
-
-
 const Route =createBrowserRouter([
 
   {
@@ -30,6 +26,10 @@ const Route =createBrowserRouter([
         path:'/islamic-holidays',
         element:<IslamicHolidayPage/>
       },
+      {
+        path:'/about-us',
+        element:<About/>
+      }, 
       {
         path: '/blogs',
         element: <BlogPage/>
@@ -73,10 +73,7 @@ const Route =createBrowserRouter([
         path:'/data/date-converter',
         element:<DateConverter/>
       },
-      {
-        path:'/data/about',
-        element:<About/>
-      },  
+       
       {
         path: '*',
         element: <Error />,
