@@ -20,13 +20,12 @@ function ZakatCalculator() {
   const nisab = 87.48; // Nisab in grams of gold
   const zakatRate = 0.025;
 
-  const handleInputChange = (section, field, value) => {
+  const handleInputChange = (field, value, subField = null) => {
     setFormData((prev) => ({
       ...prev,
-      [section]: {
-        ...prev[section],
-        [field]: parseFloat(value) || 0,
-      },
+      [field]: subField
+        ? { ...prev[field], [subField]: parseFloat(value) || 0 }
+        : parseFloat(value) || 0,
     }));
   };
 
@@ -71,166 +70,195 @@ function ZakatCalculator() {
 
   const handleCalculate = () => {
     setZakatAmount(calculateZakat());
+    setCurrentTab("Summary");
   };
 
-  const isDebtsValid = formData.debts > 0;
-
   return (
-    
-      <div className="max-w-lg w-full bg-white rounded-lg shadow-md p-4 sm:p-6">
-        <h1 className="text-3xl font-bold text-center mb-6">Zakat Calculator</h1>
-        <div className="flex flex-wrap justify-center mb-4">
-          {["Gold & Silver", "Cash & Property", "Debts & Liabilities", "Summary"].map((tab) => (
-            <button
-              key={tab}
-              className={`px-1 py-2 text-sm font-semibold border-b-2 sm:mx-1 my-1 w-[25%] sm:w-auto ${
-                currentTab === tab
-                  ? "border-blue-500 text-blue-500"
-                  : "border-gray-300 text-gray-600"
-              }`}
-              onClick={() => setCurrentTab(tab)}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+    <div className="p-4 sm:p-10">
+      <h1 className="text-3xl font-bold text-center mb-6">Zakat Calculator</h1>
+      <div className="flex flex-wrap justify-center mb-4">
+        {["Gold & Silver", "Cash & Property", "Debts & Liabilities", "Summary"].map((tab) => (
+          <button
+            key={tab}
+            className={`px-1 py-2 text-sm font-semibold border-b-2 sm:mx-1 my-1 w-[25%] sm:w-auto ${
+              currentTab === tab
+                ? "border-blue-500 text-blue-500"
+                : "border-gray-300 text-gray-600"
+            }`}
+            onClick={() => setCurrentTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
 
-        <div>
-          {currentTab === "Gold & Silver" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Gold</h2>
-              {["20", "22", "24"].map((k) => (
-                <div key={k} className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
-                  <label className="w-full sm:w-24 font-semibold">{k} Carats</label>
-                  <input
-                    type="number"
-                    placeholder="Grams"
-                    className="border rounded-md p-2 flex-1 w-full sm:w-auto mx-1"
-                    onChange={(e) => handleInputChange(`gold${k}`, "grams", e.target.value)}
-                  />
-                  <input
-                    type="number"
-                    placeholder="Price/10g"
-                    className="border rounded-md p-2 flex-1 w-full sm:w-auto"
-                    onChange={(e) => handleInputChange(`gold${k}`, "price", e.target.value)}
-                  />
-                </div>
-              ))}
-              <h2 className="text-xl font-bold mt-6 mb-4">Silver</h2>
-              <div className="flex flex-wrap  items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+      <div>
+        {currentTab === "Gold & Silver" && (
+          <div>
+            <h2 className="text-xl font-bold mb-4">Gold</h2>
+            {["20", "22", "24"].map((k) => (
+              <div key={k} className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+                <label className="w-full sm:w-24 font-semibold">{k} Carats</label>
                 <input
                   type="number"
                   placeholder="Grams"
-                  className="border rounded-md p-2 flex-1 w-full sm:w-auto "
-                  onChange={(e) => handleInputChange("silver", "grams", e.target.value)}
+                  className="border rounded-md p-2 flex-1 w-full sm:w-auto mx-1"
+                  onChange={(e) => handleInputChange(`gold${k}`, e.target.value, "grams")}
                 />
                 <input
                   type="number"
                   placeholder="Price/10g"
-                  className="border  rounded-md p-2 flex-1 w-full sm:w-auto mx-1"
-                  onChange={(e) => handleInputChange("silver", "price", e.target.value)}
+                  className="border rounded-md p-2 flex-1 w-full sm:w-auto"
+                  onChange={(e) => handleInputChange(`gold${k}`, e.target.value, "price")}
                 />
               </div>
+            ))}
+            <h2 className="text-xl font-bold mt-6 mb-4">Silver</h2>
+            <div className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+              <input
+                type="number"
+                placeholder="Grams"
+                className="border rounded-md p-2 flex-1 w-full sm:w-auto"
+                onChange={(e) => handleInputChange("silver", e.target.value, "grams")}
+              />
+              <input
+                type="number"
+                placeholder="Price/10g"
+                className="border rounded-md p-2 flex-1 w-full sm:w-auto mx-1"
+                onChange={(e) => handleInputChange("silver", e.target.value, "price")}
+              />
             </div>
-          )}
+          </div>
+        )}
 
-          {currentTab === "Cash & Property" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Cash</h2>
-              <div className="flex flex-col space-y-4">
-                <div>
-                  <label className="block font-semibold">In Hand</label>
+        {currentTab === "Cash & Property" && (
+          <div>
+            <h2 className="text-xl font-bold mb-4">Cash</h2>
+            <div className="flex flex-col space-y-4">
+              {[
+                { label: "In Hand", field: "cashInHand" },
+                { label: "In Bank Account", field: "cashInBank" },
+                { label: "In Business", field: "businessCash" },
+                { label: "Rental Income", field: "rentalIncome" },
+                { label: "Property Value", field: "propertyValue" },
+                { label: "Stocks", field: "stocks" },
+              ].map(({ label, field }) => (
+                <div key={field}>
+                  <label className="block font-semibold">{label}</label>
                   <input
                     type="number"
                     placeholder="Value"
                     className="border rounded-md p-2 w-full"
-                    onChange={(e) => setFormData((prev) => ({ ...prev, cashInHand: +e.target.value || 0 }))}
+                    onChange={(e) => handleInputChange(field, e.target.value)}
                   />
                 </div>
-                <div>
-                  <label className="block font-semibold">In Bank Account</label>
-                  <input
-                    type="number"
-                    placeholder="Value"
-                    className="border rounded-md p-2 w-full"
-                    onChange={(e) => setFormData((prev) => ({ ...prev, cashInBank: +e.target.value || 0 }))}
-                  />
-                </div>
-                <div>
-                  <label className="block font-semibold">In Business</label>
-                  <input
-                    type="number"
-                    placeholder="Value"
-                    className="border rounded-md p-2 w-full"
-                    onChange={(e) => setFormData((prev) => ({ ...prev, businessCash: +e.target.value || 0 }))}
-                  />
-                </div>
-              </div>
+              ))}
             </div>
-          )}
+          </div>
+        )}
 
-          {currentTab === "Debts & Liabilities" && (
+        {currentTab === "Debts & Liabilities" && (
+          <div>
+            <h2 className="text-xl font-bold mb-4">Debts & Liabilities</h2>
             <div>
-              <h2 className="text-xl font-bold mb-4">Debts</h2>
-              <label className="block font-semibold">Total Liabilities</label>
+              <label className="block font-semibold">Outstanding Debts</label>
               <input
                 type="number"
                 placeholder="Value"
                 className="border rounded-md p-2 w-full"
-                onChange={(e) => setFormData((prev) => ({ ...prev, debts: +e.target.value || 0 }))}
+                onChange={(e) => handleInputChange("debts", e.target.value)}
               />
             </div>
-          )}
+          </div>
+        )}
 
-          {currentTab === "Summary" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Summary</h2>
-              <div className="mb-4">
-                <h3 className="font-semibold text-lg mb-2">Gold & Silver</h3>
-                {["20", "22", "24"].map((k) => (
-                  <p key={k} className="text-sm">
-                    Gold {k} Carat: {formData[`gold${k}`].grams}g @ ₹{formData[`gold${k}`].price} per gram = ₹
-                    {(formData[`gold${k}`].grams * formData[`gold${k}`].price).toFixed(2)}
-                  </p>
-                ))}
-                <p className="text-sm">
-                  Silver: {formData.silver.grams}g @ ₹{formData.silver.price} per gram = ₹
-                  {(formData.silver.grams * formData.silver.price).toFixed(2)}
-                </p>
-              </div>
-
-              <div className="mb-4">
-                <h3 className="font-semibold text-lg mb-2">Total Wealth</h3>
-                <p className="text-sm font-bold">₹{calculateTotalWealth().toFixed(2)}</p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-lg">Payable Zakat</h3>
-                <p>
-                  {zakatAmount !== null
-                    ? `₹${zakatAmount.toFixed(2)}`
-                    : "Click 'Calculate' to determine your Zakat."}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="flex justify-center mt-6">
-          <button
-            className={`px-6 py-2 rounded-md shadow-md w-full sm:w-auto ${
-              currentTab === "Summary"
-                ? "bg-green-500 text-white hover:bg-green-600"
-                : "bg-blue-500 text-white hover:bg-blue-600"
-            }`}
-            onClick={currentTab === "Summary" ? handleCalculate : handleNext}
-            disabled={currentTab === "Debts & Liabilities" && !isDebtsValid}
-          >
-            {currentTab === "Summary" ? "Calculate" : "Continue"}
-          </button>
-        </div>
+        {currentTab === "Summary" && (
+          <div>
+            <h2 className="text-xl font-bold mb-4">Summary</h2>
+            <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
+              <thead>
+                <tr>
+                  <th className="border border-gray-300 p-2 text-left bg-gray-100">Category</th>
+                  <th className="border border-gray-300 p-2 text-right bg-gray-100">Amount (₹)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-300 p-2">Gold Value</td>
+                  <td className="border border-gray-300 p-2 text-right">
+                    ₹
+                    {(
+                      formData.gold20.grams * formData.gold20.price +
+                      formData.gold22.grams * formData.gold22.price +
+                      formData.gold24.grams * formData.gold24.price
+                    ).toFixed(2)}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 p-2">Silver Value</td>
+                  <td className="border border-gray-300 p-2 text-right">
+                    ₹{(formData.silver.grams * formData.silver.price).toFixed(2)}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 p-2">Cash</td>
+                  <td className="border border-gray-300 p-2 text-right">
+                    ₹
+                    {(
+                      formData.cashInHand +
+                      formData.cashInBank +
+                      formData.businessCash
+                    ).toFixed(2)}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 p-2">Total Wealth</td>
+                  <td className="border border-gray-300 p-2 text-right">
+                    ₹{calculateTotalWealth().toFixed(2)}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 p-2">Zakat Payable</td>
+                  <td className="border border-gray-300 p-2 text-right">
+                    ₹{zakatAmount !== null ? zakatAmount.toFixed(2) : "Calculate"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
-    
+
+      <div className="mt-4 flex justify-between">
+        {currentTab !== "Gold & Silver" && (
+          <button
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
+            onClick={() => setCurrentTab((prev) => {
+              if (prev === "Cash & Property") return "Gold & Silver";
+              if (prev === "Debts & Liabilities") return "Cash & Property";
+              return "Debts & Liabilities";
+            })}
+          >
+            Back
+          </button>
+        )}
+        {currentTab !== "Summary" ? (
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded"
+            onClick={handleNext}
+          >
+            Next
+          </button>
+        ) : (
+          <button
+            className="px-4 py-2 bg-green-500 text-white rounded"
+            onClick={handleCalculate}
+          >
+            Calculate Zakat
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 

@@ -1,19 +1,22 @@
-import { Outlet } from "react-router-dom";
-import Footer from "../Components/Footer/Footer";
+import {  useOutlet } from 'react-router-dom';
+// import Footer from "../Components/Footer/Footer";
 import DefaultLayout from "../Components/Layout/DefaultLayout";
+import Feature from '../Components/Feature/Feature';
 
 
 
-const Root=()=>{
-    return(
-        <>
-         
-          <DefaultLayout>
-          <Outlet/>
-          </DefaultLayout>
-          <Footer />
-        </>
-    );
-}
+
+const Root = () => {
+  const outlet = useOutlet();
+
+  return (
+    <>
+      <DefaultLayout>
+        {outlet || <Feature />} {/* Render Feature if Outlet is empty */}
+      </DefaultLayout>
+      {/* <Footer /> */}
+    </>
+  );
+};
 
 export default Root;

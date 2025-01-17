@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress } from "../../apiServices/apiServices";
+import ApiTest from "../../Test/test";
 
 const PrayerTimes = () => {
+
+  const year=new Date().getFullYear();
+  const month=new Date().getMonth();
+  const todayDate=new Date().getDate();
+
+  const prayerDate=`${todayDate}-${month+1}-${year}`;
+
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
+
+ const [prayerLocation, setprayerLocation] = useState("bangladesh, dhaka");
+ 
+ useEffect(() => {
+  const location = sessionStorage.getItem("location");
+  if (location) {
+    setprayerLocation(location);
+  }
+}, []);
 
   useEffect(() => {
     const fetchPrayerTime = async () => {
       try {
-        const response = await getPrayerTimeOfDayByAddress("09-01-2025", "Islamabad");
-        console.log("API Response:", response); // Debugging: Check the data structure
+        // console.log("Fetching prayer times for:", prayerLocation);
+        ApiTest();
+        const response = await getPrayerTimeOfDayByAddress(prayerDate, prayerLocation);
+        // console.log("API Response:", response); // Debugging: Check the data structure
         setPrayerResponse(response);
       } catch (error) {
         console.log("Error fetching prayer times:", error.message);
@@ -20,7 +39,7 @@ const PrayerTimes = () => {
     };
 
     fetchPrayerTime();
-  }, []);
+  }, [prayerLocation,prayerDate]);
 
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
@@ -30,10 +49,11 @@ const PrayerTimes = () => {
     return <div className="text-center mt-10">Failed to load prayer times.</div>;
   }
 
-  const { timings, date, meta } = prayerResponse;
+  // const { timings, date, meta } = prayerResponse;
+  const { timings, date } = prayerResponse;
   const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
   const gregorianDate = `${date.gregorian.date}`;
-  const location = meta.timezone;
+  // const location = meta.timezone;
 
   // Determine the upcoming prayer dynamically
   const upcomingPrayer =
@@ -46,11 +66,11 @@ const PrayerTimes = () => {
     }) || ["Fajr", timings.Fajr]; // Default to Fajr if no upcoming prayer is found
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg px-6 py-5 border border-gray-200">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-800">
-          Prayer Times in {location}
+          Prayer Times in {prayerLocation}
         </h2>
         <div className="text-sm text-gray-600 text-right">
           <p>{gregorianDate}</p>
@@ -85,7 +105,7 @@ const PrayerTimes = () => {
 
       {/* Footer */}
       <div className="text-center mt-4 text-sm text-gray-500">
-        <p>{meta.method.name}</p>
+        <p>{prayerLocation},Todays Date is :{prayerDate}</p>
         <Link to="#" className="text-blue-500 underline hover:text-blue-700">
           Change
         </Link>

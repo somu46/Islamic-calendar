@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Feature from '../Feature/Feature';
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-teal-50 to-cyan-100">
@@ -24,7 +24,7 @@ const Home = () => {
         </section>
 
         {/* Featured Content */}
-        <section id="calendar" className="bg-white py-16 shadow-inner">
+        <section id="calendar" className=" py-16 ">
           <div className="container mx-auto text-center">
             <h3 className="text-4xl font-bold text-teal-800 mb-4">Islamic Calendar</h3>
             <p className="text-gray-600 mb-6">
@@ -38,9 +38,9 @@ const Home = () => {
             </a>
           </div>
         </section>
-
+        <Feature/>
         {/* Inspirational Quote */}
-        <section id="prayers" className="bg-gradient-to-r from-teal-100 to-cyan-50 py-20">
+        <section id="prayers" className="bg-transparent py-20">
           <div className="container mx-auto text-center">
             <blockquote className="text-2xl italic text-gray-800 max-w-3xl mx-auto">
               "Indeed, the reminder benefits the believers."

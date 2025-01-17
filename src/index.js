@@ -7,7 +7,9 @@ import App from './App';
 import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter} from './Pages';
 import PrayerTimes from './Pages/PrayerTime/PrayerTime';
 import Home from './Components/Home/Home';
-
+import About from './Pages/About/About';
+import BlogPage from './Pages/Blogs/Blogs';
+import IslamicHolidayPage from './Pages/IslamicHoliDays/IslamicHoliDays';
 
 
 
@@ -17,8 +19,22 @@ import Home from './Components/Home/Home';
 const Route =createBrowserRouter([
 
   {
-    path: '/',
+    path: '',
     element: <App/>,
+    children: [
+      {
+        path:'/',
+        element:<Home/>
+      },
+      {
+        path:'/islamic-holidays',
+        element:<IslamicHolidayPage/>
+      },
+      {
+        path: '/blogs',
+        element: <BlogPage/>
+      }
+    ]
   },
   {
     path: '/test-api',
@@ -57,11 +73,10 @@ const Route =createBrowserRouter([
         path:'/data/date-converter',
         element:<DateConverter/>
       },
-        
-
-
-
-
+      {
+        path:'/data/about',
+        element:<About/>
+      },  
       {
         path: '*',
         element: <Error />,

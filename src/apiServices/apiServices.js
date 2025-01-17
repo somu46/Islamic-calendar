@@ -8,6 +8,7 @@ const quran_edition_with_audio_BaseUrl = `https://api.alquran.cloud/v1/quran/`;
 const Date_Changer_BaseUrl = `https://api.aladhan.com/v1/gToH/`; 
 const PrayerTimeByAddress_BaseUrl = `https://api.aladhan.com/v1/timingsByAddress/`;
 const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/1/quran-uthmani?offset=3&limit=10`; 
+const HoliDaya_BaseUrl=`https://api.aladhan.com/v1/islamicHolidaysByHijriYear/`
 
 //this all are country state and city api url
 const Country_BaseUrl = `https://restcountries.com/v3.1/region/`;
@@ -97,6 +98,14 @@ const getQuranAudio = async (edition) => {
 };
 
 
+const getIslamicHoliDays=async(year)=>{
+  try{
+    const response=await axios.get(`${HoliDaya_BaseUrl}${year}`);
+    return response.data.data;
+    }catch(error){
+      console.log(error);
+      }
+}
 
 
 const getQuranEditionOnlyName= async () => {
@@ -142,6 +151,7 @@ export {
      getPrayerTimeOfDayByAddress,
      getQuran_Juz,
      getFullHijriCalendar,
+     getIslamicHoliDays,
      getCountry,
      getCountryCity
     };

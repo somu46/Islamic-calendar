@@ -2,17 +2,19 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
 import FullYearHijriCalendar from './FullYear/FullYearHijriCalendar';
+import Indicator from './Indicator';
+import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
+import Modal from '../../Components/SetLocation/Modal/Modal';
 
 const IslamicCalendar = () => {
-
- const [view, setView] = useState("monthly")
-
+  const [view, setView] = useState("monthly");
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [daysInMonth, setDaysInMonth] = useState([]);
   const [calendarData, setCalendarData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const today = new Date();
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -36,9 +38,6 @@ const IslamicCalendar = () => {
 
     setDaysInMonth(days);
   }, []);
-
-
-
 
   const fetchCalendarData = useCallback(async () => {
     setLoading(true);
@@ -80,24 +79,17 @@ const IslamicCalendar = () => {
 
   const getDayDetails = (day) => {
     if (!day) return null;
-    const dayData = calendarData.find(
+    return calendarData.find(
       (d) => d && parseInt(d.gregorian.day) === day
-    );
-    return dayData || {};
+    ) || null;
   };
 
   const getHijriYear = () => {
-    if (calendarData.length > 0) {
-      return calendarData[0]?.hijri?.year || '';
-    }
-    return '';
+    return calendarData[0]?.hijri?.year || '';
   };
 
   const getHijriMonth = () => {
-    if (calendarData.length > 0) {
-      return calendarData[0]?.hijri?.month?.en || '';
-    }
-    return '';
+    return calendarData[0]?.hijri?.month?.en || '';
   };
 
   const isToday = (day) => {
@@ -117,134 +109,135 @@ const IslamicCalendar = () => {
     return details?.hijri?.day === '1';
   };
 
-  return (
-    <div className=''>
-      <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end ">
-          <button
-            onClick={() => setView("monthly")}
-            className={`px-4 py-2 rounded-md ${
-              view === "monthly"
-                ? "bg-gray-800 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-             onClick={() => setView("yearly")}
-            className={`px-4 py-2 rounded-md ${
-              view === "yearly"
-                ? "bg-gray-800 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            Yearly
-          </button>
-        </div>
-   
-    {view === "monthly" ?(
-      <div className="container mx-auto mt-5">
-     
-      <div className="flex justify-between mb-4">
-        <div className="flex items-center">
-          <span className="w-4 h-4 bg-red-300 rounded-full mr-2"></span>
-          <span className="text-sm">Holiday</span>
-        </div>
-        <div className="flex items-center">
-          <span className="w-4 h-4 bg-green-400 rounded-full mr-2"></span>
-          <span className="text-sm">First Day</span>
-        </div>
-        <div className="flex items-center">
-          <span className="w-4 h-4 border-2 border-blue-800 rounded-full mr-2"></span>
-          <span className="text-sm">Today</span>
-        </div>
-      </div>
-
-      {/* Calendar Section */}
-      <div className="flex justify-between items-center mb-4">
-        <button
-          onClick={handlePreviousMonth}
-          className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
-        >
-          <MdOutlineArrowBackIos className="text-[25px]" />
-        </button>
-        <div className="text-center">
-          <h2 className="text-xl text-green-600 font-bold">
-            {getHijriMonth()},{getHijriYear()}
-          </h2>
-          <h3 className="text-lg font-bold">{monthNames[month]} - {year}</h3>
-        </div>
-        <button
-          onClick={handleNextMonth}
-          className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
-        >
-          <MdOutlineArrowForwardIos className="text-[25px]" />
-        </button>
-      </div>
-
-      {/* Days of the week */}
-      <div className="grid grid-cols-7 text-center font-semibold mb-2">
-      
-        {daysOfWeek.map((day, index) => (
-          <div key={index} className="text-gray-700">{day}</div>
-        ))}
-      </div>
-
-      {/* Calendar Days */}
-      {loading ? (
-        <div className="text-center">Loading...</div>
-      ) : (
-        <div className="grid grid-cols-7 gap-2">
-          {daysInMonth.map((day, index) => {
-            const details = getDayDetails(day);
-            const holiday = isHoliday(details);
-            const firstDay = isFirstDay(details);
-
-            return (
-              <div className='flex justify-center'>
-              <div
-                key={index}
-                onClick={() => details && setSelectedDay(details)}
-                className={`flex flex-col items-center justify-center 
-                  ${day ? '' : ''} 
-                  ${holiday ? 'bg-red-200 ' : ''} 
-                  ${firstDay ? 'bg-green-300 border-2 border-green-400' : ''} 
-                  ${isToday(day) ? 'bg-blue-300 border-2 border-blue-800 font-bold text-blue-700' : ''} 
-                  ${day && !holiday && !firstDay && !isToday(day) ? 'bg-gray-100' : ''} 
-                  cursor-pointer w-12 h-12 rounded-full`}
-              >
-                {day ? (
-                  <>
-                    <span className="text-[16px] text-green-600">
-                      {details?.hijri?.day || day}
-                    </span>
-                    <span className="text-gray-800 text-[10px]">{day}</span>
-                  </>
-                ) : null}
-              </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Selected Day Details Section */}
-      {selectedDay && (
-        <div className="mt-4 p-4 border rounded-lg bg-gray-50 shadow-md">
-          <h3 className="text-lg text-center font-bold">Day Details</h3>
-          <p><strong>Gregorian:</strong> {selectedDay.gregorian?.date || 'N/A'}</p>
-          <p><strong>Islamic(Hijri):</strong> {selectedDay.hijri?.date || 'N/A'}</p>
-          <p><strong>Day (English):</strong> {selectedDay.hijri?.weekday?.en || 'N/A'}</p>
-          <p><strong>Day (Arabic):</strong> {selectedDay.hijri?.weekday?.ar || 'N/A'}</p>
-          <p><strong>Holidays:</strong> {selectedDay.hijri?.holidays?.join(', ') || 'None'}</p>
-        </div>
-      )}
-    </div>
-    ):
-     <div className=''>
-       <FullYearHijriCalendar year={2025}/>
-     </div>
+  const handleClick = (details) => {
+    if (details) {
+      setSelectedDay(details);
+      setModalOpen(true);
     }
+  };
+
+  return (
+    <div className='bg-gradient-to-b from-green-100 to-green-50 min-h-screen p-4'>
+      <Breadcrumb pageName='Islamic Calendar' />
+      <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end">
+        <button
+          onClick={() => setView("monthly")}
+          className={`px-4 py-2 rounded-md ${
+            view === "monthly"
+              ? "bg-gray-800 text-white"
+              : "bg-gray-200 text-gray-700"
+          }`}
+        >
+          Monthly
+        </button>
+        <button
+          onClick={() => setView("yearly")}
+          className={`px-4 py-2 rounded-md ${
+            view === "yearly"
+              ? "bg-gray-800 text-white"
+              : "bg-gray-200 text-gray-700"
+          }`}
+        >
+          Yearly
+        </button>
+      </div>
+      {view === "monthly" ? (
+        <div className="container mx-auto mt-5">
+          <Indicator />
+          <div className="flex justify-between items-center mb-4">
+            <button
+              onClick={handlePreviousMonth}
+              className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
+            >
+              <MdOutlineArrowBackIos className="text-[25px]" />
+            </button>
+            <div className="text-center">
+              <h2 className="text-xl text-green-600 font-bold">
+                {getHijriMonth()}, {getHijriYear()}
+              </h2>
+              <h3 className="text-lg font-bold">{monthNames[month]} - {year}</h3>
+            </div>
+            <button
+              onClick={handleNextMonth}
+              className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
+            >
+              <MdOutlineArrowForwardIos className="text-[25px]" />
+            </button>
+          </div>
+          <div className="grid grid-cols-7 text-center font-semibold mb-2">
+            {daysOfWeek.map((day, index) => (
+              <div key={index} className="text-gray-700">{day}</div>
+            ))}
+          </div>
+          {loading ? (
+            <div className="text-center">Loading...</div>
+          ) : (
+            <div className="grid grid-cols-7 gap-2">
+              {daysInMonth.map((day, index) => {
+                const details = getDayDetails(day);
+                const holiday = isHoliday(details);
+                const firstDay = isFirstDay(details);
+
+                return (
+                  <div className='flex justify-center' key={index}>
+                    <div
+                      onClick={() => details && handleClick(details)}
+                      className={`flex flex-col items-center justify-center
+                        ${day ? '' : ''} 
+                        ${holiday ? 'bg-red-200 ' : ''} 
+                        ${firstDay ? 'bg-green-300 border-2 border-green-400' : ''} 
+                        ${isToday(day) ? 'bg-blue-300 border-2 border-blue-800 font-bold text-blue-700' : ''} 
+                        ${day && !holiday && !firstDay && !isToday(day) ? '' : ''} 
+                        cursor-pointer w-12 h-12 rounded-md`}
+                    >
+                      {day ? (
+                        <>
+                          <span className="text-[18px] text-green-600">
+                            {details?.hijri?.day || ''}
+                          </span>
+                          <span className="text-gray-800 text-[12px]">{day}</span>
+                        </>
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {selectedDay && (
+            <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+              <div className="mt-4 p-4 border rounded-lg bg-transparent shadow-md">
+                <h3 className="text-lg text-center font-bold">Day Details</h3>
+                <p>
+                  <strong>Gregorian:</strong>{" "}
+                  {selectedDay?.gregorian?.date || "N/A"}
+                </p>
+                <p>
+                  <strong>Islamic (Hijri):</strong>{" "}
+                  {selectedDay?.hijri?.date || "N/A"}
+                </p>
+                <p>
+                  <strong>Day (English):</strong>{" "}
+                  {selectedDay?.hijri?.weekday?.en || "N/A"}
+                </p>
+                <p>
+                  <strong>Day (Arabic):</strong>{" "}
+                  {selectedDay?.hijri?.weekday?.ar || "N/A"}
+                </p>
+                <p>
+                  <strong>Holidays:</strong>{" "}
+                  {selectedDay?.hijri?.holidays?.join(", ") || "None"}
+                </p>
+              </div>
+            </Modal>
+          )}
+        </div>
+      ) : (
+        <div className="">
+          <Indicator />
+          <FullYearHijriCalendar year={2025} />
+        </div>
+      )}
     </div>
   );
 };
