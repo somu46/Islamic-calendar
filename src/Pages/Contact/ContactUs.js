@@ -1,9 +1,16 @@
 import React from 'react';
+import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 const ContactUs = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8">
+    <>
+     
+   
+    <div className="relative flex flex-col min-h-screen bg-gradient-to-r from-blue-50 to-blue-100  items-center justify-center px-4 sm:px-6 lg:px-8  mt-[4.8rem]"> 
+    <div className="absolute top-[1px] left-0">
+      <Breadcrumb pageName='Contact Us' />
+      </div>
+      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 mt-[3.5rem]">
         <h1 className="text-4xl font-extrabold text-gray-800 text-center mb-6">
           Contact Us
         </h1>
@@ -98,6 +105,7 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -85,7 +85,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <ul className="flex flex-col gap-4 text-lg font-semibold">
             <li>
               <NavLink
-                to="/data/islamic-calendar"
+                to="/essentials/islamic-calendar"
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 ${
                     isActive ? "text-blue-500 font-bold" : ""
@@ -97,7 +97,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <NavLink
-                to="/data/al-quran"
+                to="/essentials/al-quran"
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 ${
                     isActive ? "text-blue-500 font-bold" : ""
@@ -121,7 +121,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <NavLink
-                to="/data/prayer-times"
+                to="/essentials/prayer-times"
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 ${
                     isActive ? "text-blue-500 font-bold" : ""
@@ -133,7 +133,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <NavLink
-                to="/data/prayer-times-table"
+                to="/essentials/prayer-times-table"
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 ${
                     isActive ? "text-blue-500 font-bold" : ""
@@ -145,7 +145,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <NavLink
-                to="/data/date-converter"
+                to="/essentials/date-converter"
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 ${
                     isActive ? "text-blue-500 font-bold" : ""
@@ -157,7 +157,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <NavLink
-                to="/data/zakat-calculator"
+                to="/essentials/zakat-calculator"
                 className={({ isActive }) =>
                   `text-sm hover:text-blue-500 ${
                     isActive ? "text-blue-500 font-bold" : ""

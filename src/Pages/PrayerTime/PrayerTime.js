@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress } from "../../apiServices/apiServices";
 import ApiTest from "../../Test/test";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const PrayerTimes = () => {
 
@@ -66,8 +67,13 @@ const PrayerTimes = () => {
     }) || ["Fajr", timings.Fajr]; // Default to Fajr if no upcoming prayer is found
 
   return (
+    <>
+     <div>
+      <Breadcrumb pageName='Prayer Times' />
+      </div>
     <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg px-6 py-5 border border-gray-200">
       {/* Header */}
+     
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-800">
           Prayer Times in {prayerLocation}
@@ -111,6 +117,7 @@ const PrayerTimes = () => {
         </Link>
       </div>
     </div>
+    </>
   );
 };
 

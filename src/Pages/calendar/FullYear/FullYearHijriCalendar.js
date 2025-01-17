@@ -69,6 +69,7 @@ const [isModalOpen, setModalOpen] = useState(false)
         key={monthIndex}
         className="border  rounded-lg p-4 shadow-md bg-white"
       >
+       
         <h3 className="text-lg font-bold text-center mb-2">
           {monthNames[monthIndex]}
         </h3>

@@ -3,7 +3,7 @@ import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 const About = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-100 to-gray-50 py-12 px-6 sm:px-10 lg:px-16">
+    <div className="bg-gradient-to-b from-gray-100 to-gray-50 py-12 px-6 sm:px-10 lg:px-16 mt-[5.1rem]">
       {/* Breadcrumb */}
       <Breadcrumb pageName="About Us" />
 

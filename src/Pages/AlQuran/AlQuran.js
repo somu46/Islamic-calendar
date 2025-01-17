@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Surahs from "./Surahs";
 import Juz from "./Juz";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("surahs");
@@ -49,6 +50,10 @@ const Tabs = () => {
 
 const AlQuran = () => {
   return (
+    <>
+    <div>
+      <Breadcrumb pageName='Al Quran' />
+      </div>
     <div className="container mx-auto p-2 sm:p-8">
       {/* Header */}
       <header className="mb-6 text-center">
@@ -63,6 +68,7 @@ const AlQuran = () => {
       {/* Tabs */}
       <Tabs />
     </div>
+    </>
   );
 };
 

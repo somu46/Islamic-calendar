@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getIslamicHoliDays } from "../../apiServices/apiServices";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const IslamicHolidayPage = () => {
   const [holidays, setHolidays] = useState([]);
@@ -21,7 +22,9 @@ const IslamicHolidayPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800 mt-[4.7rem]">
-      {/* Header */}
+     <div>
+      <Breadcrumb pageName='Islamic Holidays' />
+      </div>
       <header className="text-gray-700 py-6 shadow-sm">
         <div className="container mx-auto text-center">
           <h1 className="text-3xl font-bold">Islamic Holidays</h1>

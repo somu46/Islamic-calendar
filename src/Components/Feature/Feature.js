@@ -1,21 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Import Link for internal routing
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
 
 const features = [
-  { name: "Al Quran", icon: "📖", path: "/data/al-quran" },
+  { name: "Al Quran", icon: "📖", path: "/essentials/al-quran" },
   { name: "Islamic Holidays", icon: "🌙", path: "/islamic-holidays" },
-  { name: "Calendar", icon: "📅", path: "/data/islamic-calendar" },
+  { name: "Calendar", icon: "📅", path: "/essentials/islamic-calendar" },
   { name: "Islamic Places", icon: "📍", path: "/places" },
-  { name: "Date Converter", icon: "🔄", path: "/data/date-converter" },
+  { name: "Date Converter", icon: "🔄", path: "/essentials/date-converter" },
   { name: "Prayer Widgets", icon: "🕋", path: "/widgets" },
-  { name: "Zakat Calculator", icon: "💰", path: "/data/zakat-calculator" },
-  { name: "Prayer Times", icon: "🕌", path: "/data/prayer-times" },
+  { name: "Zakat Calculator", icon: "💰", path: "/essentials/zakat-calculator" },
+  { name: "Prayer Times", icon: "🕌", path: "/essentials/prayer-times" },
 ];
 
 
 const Feature = () => {
   return (
+    <>
+      <div>
+      <Breadcrumb pageName='Features' />
+      </div>
+
     <div className="flex flex-wrap justify-center gap-6 lg:gap-12 p-2 rounded-lg">
+     
       {features.map((feature) => (
         <Link
           to={feature.path} // Use 'to' prop for routing
@@ -29,6 +36,7 @@ const Feature = () => {
         </Link>
       ))}
     </div>
+    </>
   );
 };
 
