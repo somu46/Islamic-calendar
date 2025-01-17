@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Feature from '../Feature/Feature';
+// import ScrollTop from '../ScrollTop/ScrollTop';
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-teal-50 to-cyan-100">
@@ -49,7 +50,7 @@ const Home = () => {
           </div>
         </section>
       </main>
-
+     {/* <ScrollTop/> */}
       {/* Footer */}
  
     </div>

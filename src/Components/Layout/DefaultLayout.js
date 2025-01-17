@@ -3,6 +3,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
 import Feature from '../Feature/Feature';
 import Footer from '../Footer/Footer';
+// import ScrollTop from '../ScrollTop/ScrollTop';
 
 const DefaultLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,7 +27,7 @@ const DefaultLayout = ({ children }) => {
     </div>
   </main>
  </div>
-
+{/* <ScrollTop/> */}
       </div>
       <Footer/>
     </div>

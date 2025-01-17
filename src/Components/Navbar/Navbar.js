@@ -143,15 +143,6 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/islamic-holidays"
-                    className="text-red-700 hover:text-teal-300 transition"
-                    onClick={handleMobileHistory}
-                  >
-                    Holidays
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
                     to="/data/prayer-times"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
@@ -184,6 +175,15 @@ const Navbar = () => {
                     onClick={handleMobileHistory}
                   >
                     Zakat Calculator
+                  </NavLink>
+                </li>
+                <li className="border border-red-500 w-[70%] my-3 p-1 ">
+                  <NavLink
+                    to="/islamic-holidays"
+                    className=" hover:text-teal-300 transition"
+                    onClick={handleMobileHistory}
+                  >
+                  Islamic  Holidays
                   </NavLink>
                 </li>
                 <SetLocation />
