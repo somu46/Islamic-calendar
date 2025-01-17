@@ -10,6 +10,7 @@ import Home from './Components/Home/Home';
 import About from './Pages/About/About';
 import BlogPage from './Pages/Blogs/Blogs';
 import IslamicHolidayPage from './Pages/IslamicHoliDays/IslamicHoliDays';
+import ContactUs from './Pages/Contact/ContactUs';
 
 
 const Route =createBrowserRouter([
@@ -33,6 +34,10 @@ const Route =createBrowserRouter([
       {
         path: '/blogs',
         element: <BlogPage/>
+      },
+      {
+        path:'/contact-us',
+        element:<ContactUs/>
       }
     ]
   },
@@ -41,36 +46,36 @@ const Route =createBrowserRouter([
     element:<div>This is for test api</div>
   },
  {
-    path: '/data',
+    path: '/essentials',
     element: <Root />,
     children: [
       {
-        path:'/data/home',
+        path:'/essentials/home',
         element:<Home/>
       },
      
       {
-        path: '/data/zakat-calculator', 
+        path: '/essentials/zakat-calculator', 
         element:<ZakatCalculator/>
       },
       {
-        path:'/data/islamic-calendar',
+        path:'/essentials/islamic-calendar',
         element:<IslamicCalendar/>
       },
       {
-        path:'/data/prayer-times',
+        path:'/essentials/prayer-times',
         element:<PrayerTimes/>
       },
       {
-        path:'/data/prayer-times-table',
+        path:'/essentials/prayer-times-table',
         element:<PrayerTimetable/>
       },
       {
-        path:'/data/al-quran',
+        path:'/essentials/al-quran',
         element:<AlQuran/>
       },
       {
-        path:'/data/date-converter',
+        path:'/essentials/date-converter',
         element:<DateConverter/>
       },
        

@@ -35,23 +35,31 @@ const Navbar = () => {
             <Link to="/" className="flex items-center space-x-3">
               <img src={logo} alt="Islamic Knowledge" className="w-10 h-10" />
               <span className="text-xl font-bold tracking-wide hover:text-teal-300 transition">
-                Islamic Knowledge
+                Islamic Essentials
               </span>
             </Link>
           </div>
 
           {/* Center Menu (Desktop) */}
           <ul className="hidden md:flex space-x-8 items-center">
+          <li>
+              <NavLink
+                to="/"
+                className="hover:text-teal-300 transition"
+              >
+                Home
+              </NavLink>
+            </li>
             <li>
               <NavLink
-                to="/data/islamic-calendar"
+                to="/essentials/islamic-calendar"
                 className="hover:text-teal-300 transition"
               >
                 Islamic Calendar
               </NavLink>
             </li>
             <li>
-              <NavLink to="/data/prayer-times" className="hover:text-teal-300 transition">
+              <NavLink to="/essentials/prayer-times" className="hover:text-teal-300 transition">
                 Prayer Times
               </NavLink>
             </li>
@@ -63,6 +71,11 @@ const Navbar = () => {
             <li>
               <NavLink to="/blogs" className="hover:text-teal-300 transition">
                 Blogs
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact-us" className="hover:text-teal-300 transition">
+                Contact Us
               </NavLink>
             </li>
           </ul>
@@ -119,13 +132,18 @@ const Navbar = () => {
                     Blogs
                   </NavLink>
                 </li>
+                <li>
+              <NavLink to="/contact-us" className="hover:text-teal-300 transition">
+                Contact Us
+              </NavLink>
+            </li>
 
-                <p className="text-2xl text-white mt-4">Islamic Essentials                </p>
+                <p className="text-2xl text-white mt-4">Islamic Essentials</p>
                 <hr className="border-teal-300 my-2" />
 
                 <li>
                   <NavLink
-                    to="/data/islamic-calendar"
+                    to="/essentials/islamic-calendar"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
@@ -134,7 +152,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/data/al-quran"
+                    to="/essentials/al-quran"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
@@ -143,7 +161,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/data/prayer-times"
+                    to="/essentials/prayer-times"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
@@ -152,7 +170,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/data/prayer-times-table"
+                    to="/essentials/prayer-times-table"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
@@ -161,7 +179,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/data/date-converter"
+                    to="/essentials/date-converter"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
@@ -170,14 +188,14 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/data/zakat-calculator"
+                    to="/essentials/zakat-calculator"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
                     Zakat Calculator
                   </NavLink>
                 </li>
-                <li className="bg-[#FF0000] w-[70%] my-3 p-1 rounded-md shadow-lg text-xl  ">
+                {/* <li className="bg-[#FF0000] w-[70%] my-3 p-1 rounded-md shadow-lg text-xl  ">
                   <NavLink
                     to="/islamic-holidays"
                     className=" hover:text-teal-300 transition "
@@ -185,7 +203,7 @@ const Navbar = () => {
                   >
                   Islamic  Holidays
                   </NavLink>
-                </li>
+                </li> */}
                 <SetLocation />
               </ul>
             </nav>

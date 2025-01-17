@@ -116,7 +116,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   }`
                 }
               >
-                Holidays
+                Islamic Holidays
               </NavLink>
             </li>
             <li>
@@ -167,7 +167,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 Zakat Calculator
               </NavLink>
             </li>
-            <li className="bg-[#FF0000]  w-[90%] my-3 p-1 rounded-md shadow-lg text-[23px]  ">
+            {/* <li className="bg-[#FF0000]  w-[90%] my-3 p-1 rounded-md shadow-lg text-[23px]  ">
               <NavLink
                 to="/islamic-holidays"
                 className={({ isActive }) =>
@@ -178,7 +178,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               >
                Islamic Holidays
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>
