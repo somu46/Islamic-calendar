@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 function ZakatCalculator() {
   const [formData, setFormData] = useState({
@@ -74,6 +75,11 @@ function ZakatCalculator() {
   };
 
   return (
+    <>
+      <div>
+      <Breadcrumb pageName='Zakat Calculator' />
+      </div>
+   
     <div className="p-4 sm:p-10">
       <h1 className="text-3xl font-bold text-center mb-6">Zakat Calculator</h1>
       <div className="flex flex-wrap justify-center mb-4">
@@ -259,6 +265,7 @@ function ZakatCalculator() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

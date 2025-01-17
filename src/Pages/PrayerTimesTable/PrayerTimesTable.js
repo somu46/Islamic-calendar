@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getPrayerTime } from "../../apiServices/apiServices";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const PrayerTimetable = () => {
   const [view, setView] = useState("monthly");
@@ -56,8 +57,13 @@ useEffect(() => {
   };
 
   return (
+    <>
+     <div>
+      <Breadcrumb pageName='Monthly Prayer Times Table' />
+      </div>
     <div className="container mx-auto p-4 border rounded-lg bg-white shadow-lg max-w-md sm:max-w-4xl">
       {/* Header */}
+     
       <div className="flex flex-wrap justify-between items-center mb-4">
         <h2 className="text-lg font-bold text-center sm:text-xl">
           Prayer Timetable
@@ -196,6 +202,7 @@ useEffect(() => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

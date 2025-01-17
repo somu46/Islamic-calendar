@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getDateChanger } from "../../apiServices/apiServices";
 import { CiCalendar } from "react-icons/ci";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 export const DateConverter = () => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -33,8 +34,12 @@ export const DateConverter = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <>
+    <div className="relative flex flex-col items-center  min-h-screen bg-gradient-to-br from-blue-100 via-white to-gray-100">
+      <div className="absolute top-[1px] left-0">
+      <Breadcrumb pageName=' Date Converter:(Gregorian to Hijri)' />
+      </div>
+      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg mt-[6.5rem]">
         <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
           Hijri Date Converter
         </h1>
@@ -139,6 +144,7 @@ export const DateConverter = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
