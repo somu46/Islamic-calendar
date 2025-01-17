@@ -120,7 +120,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
 
-                <p className="text-2xl text-white mt-4">Our Products</p>
+                <p className="text-2xl text-white mt-4">Islamic Essentials                </p>
                 <hr className="border-teal-300 my-2" />
 
                 <li>
