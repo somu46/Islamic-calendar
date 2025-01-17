@@ -47,7 +47,13 @@ const PrayerTimesWidge = () => {
 
   const { timings, date } = prayerResponse;
   const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
-  // const gregorianDate = `${date.gregorian.date}`;
+
+  const formatTime = (time) => {
+    const [hour, minute] = time.split(":").map(Number);
+    const period = hour >= 12 ? "PM" : "AM";
+    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
+    return `${formattedHour}:${minute < 10 ? "0" + minute : minute} ${period}`;
+  };
 
   const upcomingPrayer =
     Object.entries(timings).find(([prayer, time]) => {
@@ -63,20 +69,23 @@ const PrayerTimesWidge = () => {
       {/* Header Section */}
       <div className="flex justify-between items-center">
         <div>
-        <div className="flex items-center gap-4 justify-center">
-          {/* <div className="w-10 h-10 bg-blue-500 rounded-md flex justify-center items-center border border-red-500 ">
-         
-            <span className="text-white font-bold text-sm">Athan</span>
-          </div> */}
-          <h2 className="text-[25px] font-semibold">{upcomingPrayer[0]} {upcomingPrayer[1]}</h2>
-        </div>
-        <div className="text-sm text-right my-1 px-3">
-          <span className="mx-1">{hijriDate}</span>
-          <span className="text-gray-400 mx-1">{prayerLocation}</span>
-        </div>
+          <div className="flex items-center gap-4 justify-center">
+            <h2 className="text-[25px] font-semibold">
+              {upcomingPrayer[0]} {formatTime(upcomingPrayer[1])}
+            </h2>
+          </div>
+          <div className="text-sm text-right my-1 px-3">
+            <span className="mx-1">{hijriDate}</span>
+            <span className="text-gray-400 mx-1">{prayerLocation}</span>
+          </div>
         </div>
         <div>
-          <Link to="/essentials/prayer-times" className="underline text-lg font-bold hover:text-blue-600">All Prayer times</Link>
+          <Link
+            to="/essentials/prayer-times"
+            className="underline text-lg font-bold hover:text-blue-600"
+          >
+            All Prayer times
+          </Link>
         </div>
       </div>
     </div>

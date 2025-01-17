@@ -3,44 +3,40 @@ import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress } from "../../apiServices/apiServices";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
-
 const PrayerTimes = () => {
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth();
+  const todayDate = new Date().getDate();
 
-  const year=new Date().getFullYear();
-  const month=new Date().getMonth();
-  const todayDate=new Date().getDate();
-
-  const prayerDate=`${todayDate}-${month+1}-${year}`;
-
+  const prayerDate = `${todayDate}-${month + 1}-${year}`;
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [prayerLocation, setPrayerLocation] = useState("Lahore, Pakistan");
 
- const [prayerLocation, setprayerLocation] = useState("Lahore,Pakistan");
- 
- useEffect(() => {
-  const location = sessionStorage.getItem("location");
-  if (location) {
-    setprayerLocation(location);
-  }
-}, []);
+  useEffect(() => {
+    const location = sessionStorage.getItem("location");
+    if (location) {
+      setPrayerLocation(location);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchPrayerTime = async () => {
       try {
-        // console.log("Fetching prayer times for:", prayerLocation);
-      
-        const response = await getPrayerTimeOfDayByAddress(prayerDate, prayerLocation);
-        // console.log("API Response:", response); // Debugging: Check the data structure
+        const response = await getPrayerTimeOfDayByAddress(
+          prayerDate,
+          prayerLocation
+        );
         setPrayerResponse(response);
       } catch (error) {
-        console.log("Error fetching prayer times:", error.message);
+        console.error("Error fetching prayer times:", error.message);
       } finally {
         setLoading(false);
       }
     };
 
     fetchPrayerTime();
-  }, [prayerLocation,prayerDate]);
+  }, [prayerLocation, prayerDate]);
 
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
@@ -50,13 +46,17 @@ const PrayerTimes = () => {
     return <div className="text-center mt-10">Failed to load prayer times.</div>;
   }
 
-  // const { timings, date, meta } = prayerResponse;
   const { timings, date } = prayerResponse;
   const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
   const gregorianDate = `${date.gregorian.date}`;
-  // const location = meta.timezone;
 
-  // Determine the upcoming prayer dynamically
+  const formatTime = (time) => {
+    const [hour, minute] = time.split(":").map(Number);
+    const period = hour >= 12 ? "PM" : "AM";
+    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
+    return `${formattedHour}:${minute < 10 ? "0" + minute : minute} ${period}`;
+  };
+
   const upcomingPrayer =
     Object.entries(timings).find(([prayer, time]) => {
       const now = new Date();
@@ -64,59 +64,62 @@ const PrayerTimes = () => {
       const prayerTime = new Date(now);
       prayerTime.setHours(hour, minute, 0);
       return now < prayerTime;
-    }) || ["Fajr", timings.Fajr]; // Default to Fajr if no upcoming prayer is found
+    }) || ["Fajr", timings.Fajr];
 
   return (
     <>
-     <div>
-      <Breadcrumb pageName='Prayer Times' />
+      <div>
+        <Breadcrumb pageName="Prayer Times" />
       </div>
-    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg px-6 py-5 border border-gray-200">
-      {/* Header */}
-     
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-800">
-          Prayer Times in {prayerLocation}
-        </h2>
-        <div className="text-sm text-gray-600 text-right">
-          <p>{gregorianDate}</p>
-          <p>{hijriDate}</p>
-        </div>
-      </div>
-
-      {/* Upcoming Prayer */}
-      <div className="flex items-center justify-between bg-blue-100 rounded-lg p-4 mb-4">
-        <div className="text-center">
-          <p className="text-sm text-gray-600">Upcoming Prayer</p>
-          <p className="text-lg font-semibold text-blue-600">
-            {upcomingPrayer[0]}
-          </p>
-        </div>
-        <div className="text-center">
-          <p className="text-4xl font-bold text-blue-800">
-            {upcomingPrayer[1]}
-          </p>
-        </div>
-      </div>
-
-      {/* Prayer Times */}
-      <div className="grid grid-cols-3 gap-4 text-center">
-        {Object.entries(timings).map(([prayer, time]) => (
-          <div key={prayer} className="bg-gray-50 border rounded-lg p-2">
-            <p className="text-sm font-medium text-gray-600">{prayer}</p>
-            <p className="text-lg font-semibold text-gray-800">{time}</p>
+      <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg px-6 py-5 border border-gray-200">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold text-gray-800">
+            Prayer Times in {prayerLocation}
+          </h2>
+          <div className="text-sm text-gray-600 text-right">
+            <p>{gregorianDate}</p>
+            <p>{hijriDate}</p>
           </div>
-        ))}
-      </div>
+        </div>
 
-      {/* Footer */}
-      <div className="text-center mt-4 text-sm text-gray-500">
-        <p>{prayerLocation},Todays Date is :{prayerDate}</p>
-        <Link to="" className="text-blue-500 underline hover:text-blue-700">
-          Change location
-        </Link>
+        {/* Upcoming Prayer */}
+        <div className="flex items-center justify-between bg-blue-100 rounded-lg p-4 mb-4">
+          <div className="text-center">
+            <p className="text-sm text-gray-600">Upcoming Prayer</p>
+            <p className="text-lg font-semibold text-blue-600">
+              {upcomingPrayer[0]}
+            </p>
+          </div>
+          <div className="text-center">
+            <p className="text-4xl font-bold text-blue-800">
+              {formatTime(upcomingPrayer[1])}
+            </p>
+          </div>
+        </div>
+
+        {/* Prayer Times */}
+        <div className="grid grid-cols-3 gap-4 text-center">
+          {Object.entries(timings).map(([prayer, time]) => (
+            <div key={prayer} className="bg-gray-50 border rounded-lg p-2">
+              <p className="text-sm font-medium text-gray-600">{prayer}</p>
+              <p className="text-lg font-semibold text-gray-800">
+                {formatTime(time)}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-4 text-sm text-gray-500">
+          <p>
+            {prayerLocation}, Today's Date is: {prayerDate}
+          </p>
+          <Link to="" className="text-blue-500 underline hover:text-blue-700">
+            Change location
+          </Link>
+        </div>
       </div>
-    </div>
     </>
   );
 };
