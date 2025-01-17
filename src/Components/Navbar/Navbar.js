@@ -51,12 +51,12 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="#prayers" className="hover:text-teal-300 transition">
+              <NavLink to="/data/prayer-times" className="hover:text-teal-300 transition">
                 Prayer Times
               </NavLink>
             </li>
             <li>
-              <NavLink to="#about" className="hover:text-teal-300 transition">
+              <NavLink to="/about-us" className="hover:text-teal-300 transition">
                 About
               </NavLink>
             </li>
@@ -103,7 +103,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="#about"
+                    to="/about-us"
                     className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >

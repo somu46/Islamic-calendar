@@ -3,51 +3,96 @@ import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 const About = () => {
   return (
-    <div className="bg-gray-50 py-12 px-6 sm:px-10 lg:px-16">
-      <Breadcrumb pageName='About Us' />
+    <div className="bg-gradient-to-b from-gray-100 to-gray-50 py-12 px-6 sm:px-10 lg:px-16">
+      {/* Breadcrumb */}
+      <Breadcrumb pageName="About Us" />
+
+      {/* Hero Section */}
       <div className="max-w-7xl mx-auto text-center">
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-6">About Us</h1>
-        <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
-          Our company was founded in 2020 by a group of passionate individuals who wanted to make Islamic knowledge more accessible to everyone. We believe that by providing accurate and reliable information about Islam, we can help people better understand and appreciate the beauty of this great religion.
+        <h1 className="text-5xl font-bold text-gray-800 mb-6 leading-tight">
+          Empowering the Islamic Community Worldwide
+        </h1>
+        <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+          As a non-profit organization, we are committed to connecting Muslims living in non-Islamic countries with tools, resources, and a community that supports their spiritual journey.
         </p>
+      </div>
 
+      {/* Sections */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {/* Section 1 */}
+        <div className="bg-white shadow-lg rounded-lg p-8">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+            Our Vision
+          </h2>
+          <p className="text-gray-600">
+            To foster a global community where every Muslim can practice their faith with ease and confidence, no matter their location.
+          </p>
+        </div>
+
+        {/* Section 2 */}
+        <div className="bg-white shadow-lg rounded-lg p-8">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+            Our Mission
+          </h2>
+          <p className="text-gray-600">
+            To provide an authentic platform for prayer timings, Islamic teachings, and event notifications to connect Muslims worldwide.
+          </p>
+        </div>
+
+        {/* Section 3 */}
+        <div className="bg-gradient-to-r from-teal-50 to-cyan-100 shadow-lg rounded-lg p-8 flex items-center">
+          <div>
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+              Serving the Community
+            </h2>
+            <p className="text-gray-600">
+              Our platform offers a wide range of features, including prayer reminders, an Islamic calendar, and access to resources that strengthen faith and unity.
+            </p>
+          </div>
+        </div>
+
+        {/* Section 4 */}
+        <div className="bg-gradient-to-r from-cyan-50 to-teal-100 shadow-lg rounded-lg p-8 flex items-center">
+          <div>
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+              Join Our Cause
+            </h2>
+            <p className="text-gray-600">
+              We invite you to be part of this noble mission. Whether through volunteering, contributing, or connecting, you can make a difference.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="mt-16 bg-white shadow-lg rounded-lg p-8 text-center">
+        <h3 className="text-3xl font-semibold text-gray-800 mb-6">
+          What Our Community Says
+        </h3>
         <div className="flex flex-wrap justify-center gap-8">
-          {/* Vision Section */}
-          <div className="bg-white shadow-lg rounded-lg p-6 w-full sm:w-72">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Our Vision</h2>
+          <div className="w-full sm:w-72 bg-gray-50 p-6 rounded-lg shadow-md">
             <p className="text-gray-600">
-              To create a world where accurate knowledge about Islam is easily accessible to all, promoting peace, understanding, and tolerance.
+              "This platform has been a blessing for me. I feel more connected to my faith and community than ever before."
             </p>
+            <p className="mt-4 text-teal-700 font-semibold">— Amina, UK</p>
           </div>
-
-          {/* Mission Section */}
-          <div className="bg-white shadow-lg rounded-lg p-6 w-full sm:w-72">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Our Mission</h2>
+          <div className="w-full sm:w-72 bg-gray-50 p-6 rounded-lg shadow-md">
             <p className="text-gray-600">
-              To provide a reliable platform for authentic Islamic content, helping individuals deepen their understanding and practice of Islam.
+              "The prayer reminders and Islamic calendar have made my life so much easier. JazakAllah Khair!"
             </p>
-          </div>
-
-          {/* Values Section */}
-          <div className="bg-white shadow-lg rounded-lg p-6 w-full sm:w-72">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Our Values</h2>
-            <ul className="list-disc pl-5 text-gray-600">
-              <li>Integrity in our content</li>
-              <li>Commitment to accuracy</li>
-              <li>Respect for diverse perspectives</li>
-              <li>Empathy and community building</li>
-            </ul>
+            <p className="mt-4 text-teal-700 font-semibold">— Faisal, USA</p>
           </div>
         </div>
+      </div>
 
-        <div className="mt-12 text-center">
-          <a
-            href="/contact"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-200"
-          >
-            Get In Touch
-          </a>
-        </div>
+      {/* Call to Action */}
+      <div className="mt-12 text-center">
+        <a
+          href="/contact"
+          className="inline-block px-8 py-4 bg-teal-600 text-white rounded-lg text-lg font-semibold hover:bg-teal-700 shadow-lg transition duration-300"
+        >
+          Contact Us
+        </a>
       </div>
     </div>
   );
