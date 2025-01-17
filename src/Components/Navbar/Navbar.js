@@ -177,10 +177,10 @@ const Navbar = () => {
                     Zakat Calculator
                   </NavLink>
                 </li>
-                <li className="border border-red-500 w-[70%] my-3 p-1 ">
+                <li className="bg-[#FF0000] w-[70%] my-3 p-1 rounded-md shadow-lg text-xl  ">
                   <NavLink
                     to="/islamic-holidays"
-                    className=" hover:text-teal-300 transition"
+                    className=" hover:text-teal-300 transition "
                     onClick={handleMobileHistory}
                   >
                   Islamic  Holidays
