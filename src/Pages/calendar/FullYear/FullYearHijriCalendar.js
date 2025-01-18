@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import Modal from "../../../Components/SetLocation/Modal/Modal";
+import Modal from "../../../Components/Modal/Modal";
 
 const FullYearHijriCalendar = ({ year }) => {
   const [calendarData, setCalendarData] = useState([]);

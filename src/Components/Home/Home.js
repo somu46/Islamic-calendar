@@ -2,11 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Feature from '../Feature/Feature';
 import PrayerTimesWidge from '../../Pages/PrayerTime/Widgets/PrayerTimesWidge';
+import LocationTracker from '../SetLocation/AutoDetectedLocation/LocationTracker';
 // import ScrollTop from '../ScrollTop/ScrollTop';
+
 const Home = () => {
   return (
     <>
+    <div>
+      <LocationTracker/>
+    </div>
     <div className='bg-gradient-to-r from-teal-50 to-cyan-100  mt-[4.9rem]'>
+      
       <PrayerTimesWidge/>
     </div>
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-teal-50 to-cyan-100  ">

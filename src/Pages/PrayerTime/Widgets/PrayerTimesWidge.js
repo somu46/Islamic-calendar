@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPrayerTimeOfDayByAddress } from "../../../apiServices/apiServices";
+import { getPrayerTimeOfDayByLocation } from "../../../apiServices/apiServices";
 import { Link } from "react-router-dom";
 
 const PrayerTimesWidge = () => {
@@ -10,26 +10,44 @@ const PrayerTimesWidge = () => {
   const prayerDate = `${todayDate}-${month + 1}-${year}`;
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [prayerLocation, setPrayerLocation] = useState("Lahore, Pakistan");
+  const [prayerLocation, setPrayerLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
 
   useEffect(() => {
-    const location = sessionStorage.getItem("location");
-    if (location) {
-      setPrayerLocation(location);
+    // Retrieve location from sessionStorage
+    const latitude = sessionStorage.getItem("latitude");
+    const longitude = sessionStorage.getItem("longitude");
+    if (latitude && longitude) {
+      setPrayerLocation({
+        latitude,
+        longitude,
+      });
+    } else {
+      console.error("Latitude and longitude not found in sessionStorage.");
     }
   }, []);
 
   useEffect(() => {
     const fetchPrayerTime = async () => {
-      try {
-        const response = await getPrayerTimeOfDayByAddress(
-          prayerDate,
-          prayerLocation
-        );
-        setPrayerResponse(response);
-      } catch (error) {
-        console.error("Error fetching prayer times:", error.message);
-      } finally {
+      if (prayerLocation.latitude && prayerLocation.longitude) {
+        try {
+          // console.log("Fetching prayer times with location:", prayerLocation);
+          const response = await getPrayerTimeOfDayByLocation(
+            prayerDate,
+            prayerLocation.latitude,
+            prayerLocation.longitude
+          );
+          console.log("Prayer times response:", response);
+          setPrayerResponse(response);
+        } catch (error) {
+          console.error("Error fetching prayer times:", error.message);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        console.error("Invalid prayerLocation:", prayerLocation);
         setLoading(false);
       }
     };
@@ -45,13 +63,16 @@ const PrayerTimesWidge = () => {
     return <div className="text-center mt-10">Failed to load prayer times.</div>;
   }
 
+  // console.log("Final prayerLocation:", prayerLocation);
+  // console.log("PrayerResponse:", prayerResponse);
+
   const { timings, date } = prayerResponse;
   const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
 
   const formatTime = (time) => {
     const [hour, minute] = time.split(":").map(Number);
     const period = hour >= 12 ? "PM" : "AM";
-    const formattedHour = hour % 12 || 12; 
+    const formattedHour = hour % 12 || 12;
     return `${formattedHour}:${minute < 10 ? "0" + minute : minute} ${period}`;
   };
 
@@ -66,9 +87,8 @@ const PrayerTimesWidge = () => {
 
   return (
     <div className="max-w-full mx-auto bg-gray-900 text-white rounded-md px-1 sm:px-6 py-3 sm:py-5 shadow-lg">
-      
-      <div className="flex justify-between  items-center gap-x-6">
-        <div className="">
+      <div className="flex justify-between items-center gap-x-6">
+        <div>
           <div className="flex items-center gap-4 justify-center">
             <h2 className="text-[25px] font-semibold">
               {upcomingPrayer[0]} {formatTime(upcomingPrayer[1])}
@@ -76,10 +96,10 @@ const PrayerTimesWidge = () => {
           </div>
           <div className="text-sm text-right my-1 px-3">
             <span className="mx-1">{hijriDate}</span>
-            <span className="text-gray-400 mx-1">{prayerLocation}</span>
+            <span className="text-gray-400 mx-1">{prayerResponse?.meta?.timezone}</span>
           </div>
         </div>
-        <div className="">
+        <div>
           <Link
             to="/essentials/prayer-times"
             className="hover:underline text-[1rem] sm:text-lg font-bold hover:text-blue-600"

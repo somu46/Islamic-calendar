@@ -4,7 +4,7 @@ import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md'
 import FullYearHijriCalendar from './FullYear/FullYearHijriCalendar';
 import Indicator from './Indicator';
 import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
-import Modal from '../../Components/SetLocation/Modal/Modal';
+import Modal from '../../Components/Modal/Modal';
 
 const IslamicCalendar = () => {
   const [view, setView] = useState("monthly");

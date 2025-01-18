@@ -3,12 +3,15 @@ import axios from "axios"
 //this all are aladhan and alquran cloud api url
 const Calendar_BaseUrl = `https://api.aladhan.com/v1/gToHCalendar/`;
 const PrayerTime_BaseUrl = `https://api.aladhan.com/v1/calendarByCity/`; 
+const PrayerTimeByLatLog_BaseUrl=`http://api.aladhan.com/v1/timings/`;
 const quran_edition_BaseUrl = `https://api.alquran.cloud/v1/edition`; 
 const quran_edition_with_audio_BaseUrl = `https://api.alquran.cloud/v1/quran/`;
 const Date_Changer_BaseUrl = `https://api.aladhan.com/v1/gToH/`; 
 const PrayerTimeByAddress_BaseUrl = `https://api.aladhan.com/v1/timingsByAddress/`;
 const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/1/quran-uthmani?offset=3&limit=10`; 
 const HoliDaya_BaseUrl=`https://api.aladhan.com/v1/islamicHolidaysByHijriYear/`
+
+
 
 //this all are country state and city api url
 const Country_BaseUrl = `https://restcountries.com/v3.1/region/`;
@@ -77,6 +80,15 @@ const getPrayerTimeOfDayByAddress = async (date = "09-01-2025", address = "Lahor
   }
 };
 
+const getPrayerTimeOfDayByLocation = async (date = "09-01-2025",latitude=31.5204,longitude=74.3587)=>{
+  try {
+    // 04-01-2025?latitude=22.628212&longitude=88.447541
+    const response = await axios.get(`${PrayerTimeByLatLog_BaseUrl}${date}?latitude=${latitude}&longitude=${longitude}`);
+    return response.data.data; 
+  } catch (error) {
+    console.error("Error fetching prayer times By Location from API:", error.message);
+  }
+}
 
 
 const getPrayerTime = async (city, country, method=1, year, month) => {
@@ -148,6 +160,7 @@ export {
      getQuranEditionOnlyName,
      getQuranAudio,
      getDateChanger,
+     getPrayerTimeOfDayByLocation,
      getPrayerTimeOfDayByAddress,
      getQuran_Juz,
      getFullHijriCalendar,
