@@ -1,11 +1,16 @@
 import React from 'react';
 import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-100 to-gray-50 py-12 px-6 sm:px-10 lg:px-16 mt-[5.1rem]">
+    <>
+    <div className='mt-[5.1rem]'>
+    <Breadcrumb pageName="About Us" />
+    </div>
+    <div className="bg-gradient-to-b from-gray-100 to-gray-50 py-12 px-6 sm:px-10 lg:px-16 ">
       {/* Breadcrumb */}
-      <Breadcrumb pageName="About Us" />
+    
 
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto text-center">
@@ -87,14 +92,15 @@ const About = () => {
 
       {/* Call to Action */}
       <div className="mt-12 text-center">
-        <a
-          href="/contact"
+        <Link
+          to="/contact-us"
           className="inline-block px-8 py-4 bg-teal-600 text-white rounded-lg text-lg font-semibold hover:bg-teal-700 shadow-lg transition duration-300"
         >
           Contact Us
-        </a>
+        </Link>
       </div>
     </div>
+    </>
   );
 };
 

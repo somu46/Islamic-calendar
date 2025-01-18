@@ -51,7 +51,7 @@ const PrayerTimesWidge = () => {
   const formatTime = (time) => {
     const [hour, minute] = time.split(":").map(Number);
     const period = hour >= 12 ? "PM" : "AM";
-    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
+    const formattedHour = hour % 12 || 12; 
     return `${formattedHour}:${minute < 10 ? "0" + minute : minute} ${period}`;
   };
 
@@ -65,10 +65,10 @@ const PrayerTimesWidge = () => {
     }) || ["Fajr", timings.Fajr];
 
   return (
-    <div className="max-w-full mx-auto bg-gray-900 text-white rounded-md px-6 py-5 shadow-lg">
-      {/* Header Section */}
-      <div className="flex justify-between items-center">
-        <div>
+    <div className="max-w-full mx-auto bg-gray-900 text-white rounded-md px-1 sm:px-6 py-3 sm:py-5 shadow-lg">
+      
+      <div className="flex justify-between  items-center gap-x-6">
+        <div className="">
           <div className="flex items-center gap-4 justify-center">
             <h2 className="text-[25px] font-semibold">
               {upcomingPrayer[0]} {formatTime(upcomingPrayer[1])}
@@ -79,10 +79,10 @@ const PrayerTimesWidge = () => {
             <span className="text-gray-400 mx-1">{prayerLocation}</span>
           </div>
         </div>
-        <div>
+        <div className="">
           <Link
             to="/essentials/prayer-times"
-            className="underline text-lg font-bold hover:text-blue-600"
+            className="hover:underline text-[1rem] sm:text-lg font-bold hover:text-blue-600"
           >
             All Prayer times
           </Link>
