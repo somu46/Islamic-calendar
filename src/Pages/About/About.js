@@ -1,107 +1,62 @@
 import React from 'react';
-import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
-import { Link } from 'react-router-dom';
+import { FaHandsHelping, FaHeart, FaPeace } from 'react-icons/fa';
 
-const About = () => {
+const AboutUs = () => {
   return (
-    <>
-    <div className='mt-[5.1rem]'>
-    <Breadcrumb pageName="About Us" />
-    </div>
-    <div className="bg-gradient-to-b from-gray-100 to-gray-50 py-12 px-6 sm:px-10 lg:px-16 ">
-      {/* Breadcrumb */}
-    
-
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto text-center">
-        <h1 className="text-5xl font-bold text-gray-800 mb-6 leading-tight">
-          Empowering the Islamic Community Worldwide
-        </h1>
-        <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-          As a non-profit organization, we are committed to connecting Muslims living in non-Islamic countries with tools, resources, and a community that supports their spiritual journey.
-        </p>
-      </div>
-
-      {/* Sections */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Section 1 */}
-        <div className="bg-white shadow-lg rounded-lg p-8">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-            Our Vision
-          </h2>
-          <p className="text-gray-600">
-            To foster a global community where every Muslim can practice their faith with ease and confidence, no matter their location.
+    <section className="bg-teal-700 text-white py-12 mt-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold mb-4">About Us</h2>
+          <p className="text-lg text-gray-100 mb-8">
+            We are a non-profit organization blessed by Allah, driven by love, gratitude, and a
+            passion for spreading peace. Our mission is to share the message of Islam, the most
+            peaceful and compassionate religion, with people around the world, regardless of their
+            background or beliefs.
           </p>
         </div>
 
-        {/* Section 2 */}
-        <div className="bg-white shadow-lg rounded-lg p-8">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-            Our Mission
-          </h2>
-          <p className="text-gray-600">
-            To provide an authentic platform for prayer timings, Islamic teachings, and event notifications to connect Muslims worldwide.
-          </p>
-        </div>
-
-        {/* Section 3 */}
-        <div className="bg-gradient-to-r from-teal-50 to-cyan-100 shadow-lg rounded-lg p-8 flex items-center">
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-              Serving the Community
-            </h2>
-            <p className="text-gray-600">
-              Our platform offers a wide range of features, including prayer reminders, an Islamic calendar, and access to resources that strengthen faith and unity.
+        {/* About Cards Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Card 1 */}
+          <div className="bg-transparent text-white rounded-lg shadow shadow-white p-6 hover:scale-105 transform transition-all">
+            <div className="flex justify-center mb-4">
+              <FaHandsHelping className="text-white text-5xl" />
+            </div>
+            <h4 className="text-xl font-semibold mb-2 text-center">Our Purpose</h4>
+            <p className="text-sm text-white text-center">
+              We are here to spread love and kindness to all, guided by the teachings of Islam. Our
+              platform is dedicated to helping individuals connect with the true spirit of Islam.
             </p>
           </div>
-        </div>
 
-        {/* Section 4 */}
-        <div className="bg-gradient-to-r from-cyan-50 to-teal-100 shadow-lg rounded-lg p-8 flex items-center">
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-              Join Our Cause
-            </h2>
-            <p className="text-gray-600">
-              We invite you to be part of this noble mission. Whether through volunteering, contributing, or connecting, you can make a difference.
+          {/* Card 2 */}
+          <div className="bg-transparent text-white rounded-lg shadow shadow-white p-6 hover:scale-105 transform transition-all">
+            <div className="flex justify-center mb-4">
+              <FaHeart className="text-white text-5xl" />
+            </div>
+            <h4 className="text-xl font-semibold mb-2 text-center">Our Belief</h4>
+            <p className="text-sm text-white text-center">
+              We believe that Islam is a religion of peace, compassion, and gratitude. Our goal is
+              to foster understanding, unity, and peace by sharing the core values of Islam.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-transparent text-white rounded-lg shadow shadow-white p-6 hover:scale-105 transform transition-all">
+            <div className="flex justify-center mb-4">
+              <FaPeace className="text-white text-5xl" />
+            </div>
+            <h4 className="text-xl font-semibold mb-2 text-center">Our Vision</h4>
+            <p className="text-sm text-white text-center">
+              Our vision is to bring peace, hope, and blessings to every individual we reach. By
+              sharing the teachings of Islam, we hope to inspire others to live with compassion and
+              gratitude.
             </p>
           </div>
         </div>
       </div>
-
-      {/* Testimonials */}
-      <div className="mt-16 bg-white shadow-lg rounded-lg p-8 text-center">
-        <h3 className="text-3xl font-semibold text-gray-800 mb-6">
-          What Our Community Says
-        </h3>
-        <div className="flex flex-wrap justify-center gap-8">
-          <div className="w-full sm:w-72 bg-gray-50 p-6 rounded-lg shadow-md">
-            <p className="text-gray-600">
-              "This platform has been a blessing for me. I feel more connected to my faith and community than ever before."
-            </p>
-            <p className="mt-4 text-teal-700 font-semibold">— Amina, UK</p>
-          </div>
-          <div className="w-full sm:w-72 bg-gray-50 p-6 rounded-lg shadow-md">
-            <p className="text-gray-600">
-              "The prayer reminders and Islamic calendar have made my life so much easier. JazakAllah Khair!"
-            </p>
-            <p className="mt-4 text-teal-700 font-semibold">— Faisal, USA</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Call to Action */}
-      <div className="mt-12 text-center">
-        <Link
-          to="/contact-us"
-          className="inline-block px-8 py-4 bg-teal-600 text-white rounded-lg text-lg font-semibold hover:bg-teal-700 shadow-lg transition duration-300"
-        >
-          Contact Us
-        </Link>
-      </div>
-    </div>
-    </>
+    </section>
   );
 };
 
-export default About;
+export default AboutUs;
