@@ -106,7 +106,7 @@ const [isModalOpen, setModalOpen] = useState(false)
                 >
                   {day ? (
                     <>
-                      <span className="text-xs text-green-600 m-1">
+                      <span className="text-md text-green-600">
                         {dayDetails?.hijri?.day || day}
                       </span>
                       <span className="text-gray-800 text-[10px] m-1">
@@ -131,30 +131,45 @@ const [isModalOpen, setModalOpen] = useState(false)
       <div>
         {selectedDay && (
           <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-            <div className="mt-4 p-4 border rounded-lg bg-transparent shadow-md">
-              <h3 className="text-lg text-center font-bold">Day Details</h3>
-              <p>
-                <strong>Gregorian:</strong>{" "}
-                {selectedDay.gregorian?.date || "N/A"}
-              </p>
-              <p>
-                <strong>Islamic(Hijri):</strong>{" "}
-                {selectedDay.hijri?.date || "N/A"}
-              </p>
-              <p>
-                <strong>Day (English):</strong>{" "}
-                {selectedDay.hijri?.weekday?.en || "N/A"}
-              </p>
-              <p>
-                <strong>Day (Arabic):</strong>{" "}
-                {selectedDay.hijri?.weekday?.ar || "N/A"}
-              </p>
-              <p>
-                <strong>Holidays:</strong>{" "}
-                {selectedDay.hijri?.holidays?.join(", ") || "None"}
-              </p>
-            </div>
-          </Modal>
+          <div className="mt-4 p-4 rounded-lg bg-transparent">
+            <h3 className="text-lg text-center font-bold mb-4">Day Details</h3>
+            <table className="w-full border border-gray-200">
+              <tbody>
+                <tr>
+                  <td className="border px-4 py-2 font-semibold">Gregorian</td>
+                  <td className="border px-4 py-2">
+                    {selectedDay?.gregorian?.date || "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-semibold">Islamic (Hijri)</td>
+                  <td className="border px-4 py-2">
+                    {selectedDay?.hijri?.date || "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-semibold">Day (English)</td>
+                  <td className="border px-4 py-2">
+                    {selectedDay?.hijri?.weekday?.en || "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-semibold">Day (Arabic)</td>
+                  <td className="border px-4 py-2">
+                    {selectedDay?.hijri?.weekday?.ar || "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-semibold">Holidays</td>
+                  <td className="border px-4 py-2">
+                    {selectedDay?.hijri?.holidays?.join(", ") || "None"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Modal>
+        
         )}
       </div>
       {loading ? (
