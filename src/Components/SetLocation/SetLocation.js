@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Modal from "./Modal/Modal";
+import Modal from "../Modal/Modal";
 import { IoMdLocate } from "react-icons/io";
 import { getCountry, getCountryCity } from "../../apiServices/apiServices";
 import { FaSearch } from "react-icons/fa";

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getDateChanger } from "../../apiServices/apiServices";
 import { CiCalendar } from "react-icons/ci";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import LocationTracker from "../../Components/SetLocation/AutoDetectedLocation/LocationTracker";
 
 export const DateConverter = () => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -38,6 +39,9 @@ export const DateConverter = () => {
     <div className="relative flex flex-col items-center  min-h-screen bg-gradient-to-br from-blue-100 via-white to-gray-100">
       <div className="absolute top-[1px] left-0 hidden sm:block">
       <Breadcrumb pageName=' Date Converter:(Gregorian to Hijri)' />
+      </div>
+      <div>
+        <LocationTracker/>
       </div>
       <div className="absolute top-[1px] left-0 sm:hidden ">
       <Breadcrumb pageName=' Date Converter:(Greg to Hijri)' />

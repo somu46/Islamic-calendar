@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPrayerTimeOfDayByAddress } from "../../../apiServices/apiServices";
+import { getPrayerTimeOfDayByLocation } from "../../../apiServices/apiServices";
 import { Link } from "react-router-dom";
 
 const PrayerTimesWidge = () => {
@@ -22,10 +22,7 @@ const PrayerTimesWidge = () => {
   useEffect(() => {
     const fetchPrayerTime = async () => {
       try {
-        const response = await getPrayerTimeOfDayByAddress(
-          prayerDate,
-          prayerLocation
-        );
+        const response = await getPrayerTimeOfDayByLocation( );
         setPrayerResponse(response);
       } catch (error) {
         console.error("Error fetching prayer times:", error.message);
@@ -44,6 +41,8 @@ const PrayerTimesWidge = () => {
   if (!prayerResponse) {
     return <div className="text-center mt-10">Failed to load prayer times.</div>;
   }
+  console.log("prayerResponse: " ,prayerResponse);
+  
 
   const { timings, date } = prayerResponse;
   const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
@@ -76,7 +75,7 @@ const PrayerTimesWidge = () => {
           </div>
           <div className="text-sm text-right my-1 px-3">
             <span className="mx-1">{hijriDate}</span>
-            <span className="text-gray-400 mx-1">{prayerLocation}</span>
+            <span className="text-gray-400 mx-1">{prayerResponse?.meta?.timezone}</span>
           </div>
         </div>
         <div className="">
