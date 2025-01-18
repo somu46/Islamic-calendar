@@ -80,7 +80,7 @@ const getPrayerTimeOfDayByAddress = async (date = "09-01-2025", address = "Lahor
   }
 };
 
-const getPrayerTimeOfDayByLocation = async (date = "09-01-2025",latitude=22.628212,longitude=88.447541)=>{
+const getPrayerTimeOfDayByLocation = async (date = "09-01-2025",latitude=31.5204,longitude=74.3587)=>{
   try {
     // 04-01-2025?latitude=22.628212&longitude=88.447541
     const response = await axios.get(`${PrayerTimeByLatLog_BaseUrl}${date}?latitude=${latitude}&longitude=${longitude}`);

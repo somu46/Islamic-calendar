@@ -11,6 +11,7 @@ import About from './Pages/About/About';
 import BlogPage from './Pages/Blogs/Blogs';
 import IslamicHolidayPage from './Pages/IslamicHoliDays/IslamicHoliDays';
 import ContactUs from './Pages/Contact/ContactUs';
+import SetLocation from './Components/SetLocation/SetLocation';
 
 
 const Route =createBrowserRouter([
@@ -38,6 +39,12 @@ const Route =createBrowserRouter([
       {
         path:'/contact-us',
         element:<ContactUs/>
+      },
+      {
+        path:'/change-location',
+        element:<div className='my-[10rem]'>
+          <SetLocation/>
+        </div>
       }
     ]
   },

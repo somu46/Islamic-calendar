@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getDateChanger } from "../../apiServices/apiServices";
 import { CiCalendar } from "react-icons/ci";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
-import LocationTracker from "../../Components/SetLocation/AutoDetectedLocation/LocationTracker";
+
 
 export const DateConverter = () => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -13,6 +13,7 @@ export const DateConverter = () => {
     const [year, month, day] = date.split("-");
     return `${day}-${month}-${year}`;
   };
+
 
   const handleConvert = async () => {
     if (!selectedDate) {
@@ -40,9 +41,7 @@ export const DateConverter = () => {
       <div className="absolute top-[1px] left-0 hidden sm:block">
       <Breadcrumb pageName=' Date Converter:(Gregorian to Hijri)' />
       </div>
-      <div>
-        <LocationTracker/>
-      </div>
+     
       <div className="absolute top-[1px] left-0 sm:hidden ">
       <Breadcrumb pageName=' Date Converter:(Greg to Hijri)' />
       </div>

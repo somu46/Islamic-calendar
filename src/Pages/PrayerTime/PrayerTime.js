@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getPrayerTimeOfDayByAddress } from "../../apiServices/apiServices";
+import {  getPrayerTimeOfDayByLocation } from "../../apiServices/apiServices";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const PrayerTimes = () => {
@@ -11,26 +11,44 @@ const PrayerTimes = () => {
   const prayerDate = `${todayDate}-${month + 1}-${year}`;
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [prayerLocation, setPrayerLocation] = useState("Lahore, Pakistan");
+  const [prayerLocation, setPrayerLocation] = useState({
+     latitude: null,
+     longitude: null,
+   });
 
-  useEffect(() => {
-    const location = sessionStorage.getItem("location");
-    if (location) {
-      setPrayerLocation(location);
+   useEffect(() => {
+    // Retrieve location from sessionStorage
+    const latitude = sessionStorage.getItem("latitude");
+    const longitude = sessionStorage.getItem("longitude");
+    if (latitude && longitude) {
+      setPrayerLocation({
+        latitude,
+        longitude,
+      });
+    } else {
+      console.error("Latitude and longitude not found in sessionStorage.");
     }
   }, []);
 
   useEffect(() => {
     const fetchPrayerTime = async () => {
-      try {
-        const response = await getPrayerTimeOfDayByAddress(
-          prayerDate,
-          prayerLocation
-        );
-        setPrayerResponse(response);
-      } catch (error) {
-        console.error("Error fetching prayer times:", error.message);
-      } finally {
+      if (prayerLocation.latitude && prayerLocation.longitude) {
+        try {
+          // console.log("Fetching prayer times with location:", prayerLocation);
+          const response = await getPrayerTimeOfDayByLocation(
+            prayerDate,
+            prayerLocation.latitude,
+            prayerLocation.longitude
+          );
+          console.log("Prayer times response:", response);
+          setPrayerResponse(response);
+        } catch (error) {
+          console.error("Error fetching prayer times:", error.message);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        console.error("Invalid prayerLocation:", prayerLocation);
         setLoading(false);
       }
     };
@@ -45,6 +63,7 @@ const PrayerTimes = () => {
   if (!prayerResponse) {
     return <div className="text-center mt-10">Failed to load prayer times.</div>;
   }
+
 
   const { timings, date } = prayerResponse;
   const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
@@ -75,7 +94,7 @@ const PrayerTimes = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-800">
-            Prayer Times in {prayerLocation}
+            Prayer Times in {prayerResponse?.meta?.timezone}
           </h2>
           <div className="text-sm text-gray-600 text-right">
             <p>{gregorianDate}</p>
@@ -113,9 +132,9 @@ const PrayerTimes = () => {
         {/* Footer */}
         <div className="text-center mt-4 text-sm text-gray-500">
           <p>
-            {prayerLocation}, Today's Date is: {prayerDate}
+            {prayerResponse?.meta?.timezone}, Today's Date is: {prayerDate}
           </p>
-          <Link to="" className="text-blue-500 underline hover:text-blue-700">
+          <Link to="/change-location" className="text-blue-500 underline hover:text-blue-700">
             Change location
           </Link>
         </div>
