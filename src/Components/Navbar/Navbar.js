@@ -4,6 +4,9 @@ import Hamburger from "hamburger-react";
 import SetLocation from "../SetLocation/SetLocation";
 import logo from "../../Assets/Logo.png";
 import { motion } from "framer-motion";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import './Navbar.css'
+
 
 const variants = {
   open: {
@@ -17,6 +20,9 @@ const variants = {
     transition: { type: "spring", stiffness: 200, damping: 20 },
   },
 };
+const handleHistory=()=>{
+  window.scrollTo(0, 0);
+}
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,19 +56,42 @@ const Navbar = () => {
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/essentials/islamic-calendar"
-                className="hover:text-teal-300 transition"
-              >
-                Islamic Calendar
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/essentials/prayer-times" className="hover:text-teal-300 transition">
-                Prayer Times
-              </NavLink>
-            </li>
+            
+            <li className="nav-item gallery-dropdown">
+            <span>Our Feature</span>
+            <ArrowDropDownIcon/>
+            <ul className="dropdown bg-white bg-opacity-50 md:bg-opacity-70  backdrop-blur-md">
+              <li>
+                <NavLink activeClass="active"   to="/essentials/islamic-calendar"
+                 onClick={handleHistory}>  Islamic Calendar</NavLink>
+              </li>
+              <li>
+                <NavLink activeClass="active"   to="/essentials/al-quran"
+                 onClick={handleHistory}> Al-Quran</NavLink>
+              </li>
+              <li>
+                <NavLink activeClass="active"   to="/essentials/prayer-times"
+                 onClick={handleHistory}>  Prayer Times</NavLink>
+              </li>
+              <li>
+                <NavLink activeClass="active"   to="/essentials/prayer-times-table"
+                 onClick={handleHistory}> Monthly Prayer Times</NavLink>
+              </li>
+              <li>
+                <NavLink activeClass="active"   to="/essentials/date-converter"
+                 onClick={handleHistory}> 
+                 Date Converter
+                 </NavLink>
+              </li>
+              <li>
+                <NavLink activeClass="active"   to="/essentials/zakat-calculator"
+                 onClick={handleHistory}>
+                  Zakat Calculator
+                 </NavLink>
+              </li>
+            </ul>
+          </li>
+
             <li>
               <NavLink to="/about-us" className="hover:text-teal-300 transition">
                 About
