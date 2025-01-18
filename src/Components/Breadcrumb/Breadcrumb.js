@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import { IoIosArrowForward } from "react-icons/io";
 
 const Breadcrumb = ({ pageName,path }) => {
   return (
@@ -8,7 +8,12 @@ const Breadcrumb = ({ pageName,path }) => {
         <ol className="flex items-center gap-2 text-xl text-blue-700">
           <li>
             <Link className="font-medium" to="/">
-              Home /
+              Home 
+            </Link>
+          </li>
+          <li>
+            <Link className="font-medium" to="/">
+            <IoIosArrowForward />
             </Link>
           </li>
           <Link className="font-medium" to={path} >
