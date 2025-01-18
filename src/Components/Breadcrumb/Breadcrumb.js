@@ -3,7 +3,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const Breadcrumb = ({ pageName,path }) => {
   return (
-    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mt-3 mx-3">
+    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mt-5 mx-3">
       <nav>
         <ol className="flex items-center gap-2 text-xl text-blue-700">
           <li>

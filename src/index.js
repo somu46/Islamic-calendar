@@ -49,10 +49,6 @@ const Route =createBrowserRouter([
     path: '/essentials',
     element: <Root />,
     children: [
-      // {
-      //   path:'/essentials/home',
-      //   element:<Home/>
-      // },
      
       {
         path: '/essentials/zakat-calculator', 

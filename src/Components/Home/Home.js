@@ -22,10 +22,10 @@ const Home = () => {
             and stay informed about key events and dates.
           </p>
           <Link 
-            href="/data/islamic-calendar" 
+            to="/essentials" 
             className="px-8 py-4 bg-amber-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-amber-600 transition-all duration-300"
           >
-            Explore the Islamic Calendar
+            Explore the Islamic Knoledge
           </Link>
         </section>
 
@@ -37,7 +37,7 @@ const Home = () => {
               Keep track of important Islamic dates, events, and holidays throughout the year.
             </p>
             <a 
-              href="/data/islamic-calendar"
+              href="/essentials/islamic-calendar"
               className="px-6 py-3 bg-cyan-500 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300"
             >
               Open Calendar

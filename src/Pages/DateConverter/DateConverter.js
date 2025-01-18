@@ -36,8 +36,11 @@ export const DateConverter = () => {
   return (
     <>
     <div className="relative flex flex-col items-center  min-h-screen bg-gradient-to-br from-blue-100 via-white to-gray-100">
-      <div className="absolute top-[1px] left-0">
+      <div className="absolute top-[1px] left-0 hidden sm:block">
       <Breadcrumb pageName=' Date Converter:(Gregorian to Hijri)' />
+      </div>
+      <div className="absolute top-[1px] left-0 sm:hidden ">
+      <Breadcrumb pageName=' Date Converter:(Greg to Hijri)' />
       </div>
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg mt-[6.5rem]">
         <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
