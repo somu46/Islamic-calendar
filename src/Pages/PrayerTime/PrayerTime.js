@@ -131,8 +131,14 @@ const PrayerTimes = () => {
 
         {/* Footer */}
         <div className="text-center mt-4 text-sm text-gray-500">
+          <p className="text-black teext-lg font-semibold">
+           {prayerResponse?.meta?.method?.name}
+          </p>
           <p>
-            {prayerResponse?.meta?.timezone}, Today's Date is: {prayerDate}
+          Fajr: { parseInt(prayerResponse?.meta?.method?.params?.Fajr)} degrees, Isha:{parseFloat(prayerResponse?.meta?.method?.params?.Isha)} degrees
+          </p>
+          <p>
+            {/* {(prayerResponse?.meta?.timezone)}, Today's Date is: {prayerDate} */}
           </p>
           <Link to="/change-location" className="text-blue-500 underline hover:text-blue-700">
             Change location
