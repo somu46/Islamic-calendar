@@ -140,7 +140,11 @@ const PrayerTimes = () => {
           <p>
             {/* {(prayerResponse?.meta?.timezone)}, Today's Date is: {prayerDate} */}
           </p>
-          <Link to="/change-location" className="text-blue-500 underline hover:text-blue-700">
+          <Link 
+           
+           onClick={()=> window.scrollTo(0, 0)}
+
+          to="/change-location" className="text-blue-500 underline hover:text-blue-700">
             Change location
           </Link>
         </div>
