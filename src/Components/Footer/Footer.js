@@ -11,6 +11,10 @@ const Footer = () => {
     setEmail(e.target.value);
   };
 
+  const handleScrolle=()=>{
+    window.scrollTo(0, 0);
+  }
+
   const handleSubscribe = (e) => {
     e.preventDefault();
     // Simple email validation
@@ -42,37 +46,37 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li>
+              <li onClick={handleScrolle}>
                 <Link to="/" className="text-sm text-gray-300 hover:text-amber-400 transition">
                   Home
                 </Link>
               </li>
-              <li>
+              <li onClick={handleScrolle} >
                 <Link to="/about-us" className="text-sm text-gray-300 hover:text-amber-400 transition">
                   About Us
                 </Link>
               </li>
-              <li>
+              <li onClick={handleScrolle} >
                 <Link to="/contact-us" className="text-sm text-gray-300 hover:text-amber-400 transition">
                   Contact Us
                 </Link>
               </li>
-              <li>
+              <li onClick={handleScrolle} >
                 <Link to="/essentials/prayer-times" className="text-sm text-gray-300 hover:text-amber-400 transition">
                   Prayer Times
                 </Link>
               </li>
-              <li>
+              <li onClick={handleScrolle} >
                 <Link to="/essentials/islamic-calendar" className="text-sm text-gray-300 hover:text-amber-400 transition">
                   Islamic Calendar
                 </Link>
               </li>
-              <li>
+              <li onClick={handleScrolle} >
                 <Link to="/essentials/zakat-calculator" className="text-sm text-gray-300 hover:text-amber-400 transition">
                   Zakat Calculator
                 </Link>
               </li>
-              <li>
+              <li onClick={handleScrolle} >
                 <Link to="/essentials/al-quran" className="text-sm text-gray-300 hover:text-amber-400 transition">
                   Al-Quran
                 </Link>
