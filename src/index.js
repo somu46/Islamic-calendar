@@ -10,7 +10,7 @@ import LocationTracker from './Components/SetLocation/AutoDetectedLocation/Locat
 import ChangeLocation from './Components/SetLocation/ChangeLocation/ChangeLocation';
 
 
-const Home = lazy(() => waitPromise(1500).then(() => import('./Components/Home/Home')));
+const Home = lazy(() => waitPromise(3000).then(() => import('./Components/Home/Home')));
 
 // Simulate a promise for loading delay
 const waitPromise = (time) => {

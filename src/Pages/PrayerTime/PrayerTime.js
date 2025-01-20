@@ -1,90 +1,108 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {  getPrayerTimeOfDayByLocation } from "../../apiServices/apiServices";
+import { getPrayerTimeOfDayByAddress, getPrayerTimeOfDayByLocation } from "../../apiServices/apiServices";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const PrayerTimes = () => {
-  const year = new Date().getFullYear();
-  const month = new Date().getMonth();
-  const todayDate = new Date().getDate();
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1; // Month is 0-indexed
+  const date = today.getDate();
 
-  const prayerDate = `${todayDate}-${month + 1}-${year}`;
+  const prayerDate = `${date}-${month}-${year}`;
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [prayerLocation, setPrayerLocation] = useState({
-     latitude: null,
-     longitude: null,
-   });
+    latitude: null,
+    longitude: null,
+    location: null,
+  });
 
-   useEffect(() => {
-    // Retrieve location from sessionStorage
+  // Load location from sessionStorage
+  useEffect(() => {
     const latitude = sessionStorage.getItem("latitude");
     const longitude = sessionStorage.getItem("longitude");
+    const location = sessionStorage.getItem("location");
+
+    console.log("Retrieved Location:", { latitude, longitude, location });
+    
     if (latitude && longitude) {
-      setPrayerLocation({
-        latitude,
-        longitude,
-      });
+      setPrayerLocation({ latitude, longitude, location: null });
+    } else if (location) {
+      setPrayerLocation({ latitude: null, longitude: null, location });
     } else {
-      console.error("Latitude and longitude not found in sessionStorage.");
+      console.error("No location data found in sessionStorage.");
+      setLoading(false);
     }
   }, []);
 
+  // console.log("prayerLocation",prayerLocation);
+  
+  // Fetch prayer times
   useEffect(() => {
-    const fetchPrayerTime = async () => {
-      if (prayerLocation.latitude && prayerLocation.longitude) {
-        try {
-          // console.log("Fetching prayer times with location:", prayerLocation);
-          const response = await getPrayerTimeOfDayByLocation(
-            prayerDate,
-            prayerLocation.latitude,
-            prayerLocation.longitude
-          );
-          console.log("Prayer times response:", response);
-          setPrayerResponse(response);
-        } catch (error) {
-          console.error("Error fetching prayer times:", error.message);
-        } finally {
-          setLoading(false);
+    const fetchPrayerTimes = async () => {
+      try {
+        let response = null;
+
+        if (prayerLocation.latitude && prayerLocation.longitude) {
+          console.log("Fetching prayer times using latitude and longitude...");
+          response = await getPrayerTimeOfDayByLocation(prayerDate, prayerLocation.latitude, prayerLocation.longitude);
+        } else if (prayerLocation.location) {
+          console.log("Fetching prayer times using location name...");
+          response = await getPrayerTimeOfDayByAddress(prayerDate, prayerLocation.location);
         }
-      } else {
-        console.error("Invalid prayerLocation:", prayerLocation);
+
+        if (response) {
+          console.log("Prayer Times Response:", response);
+          setPrayerResponse(response);
+        } else {
+          console.error("No response received for prayer times.");
+        }
+      } catch (error) {
+        console.error("Error fetching prayer times:", error.message);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchPrayerTime();
+    if (prayerLocation.latitude || prayerLocation.location) {
+      fetchPrayerTimes();
+    }
   }, [prayerLocation, prayerDate]);
 
+  // Loading State
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
   }
 
+  // Error State
   if (!prayerResponse) {
-    return <div className="text-center mt-10">Failed to load prayer times.</div>;
+    return <div className="text-center mt-10">Failed to load prayer times. Please try again later.</div>;
   }
 
+  // Extracting Data from Response
+  const { timings, date: prayerDateData, meta } = prayerResponse;
+  const hijriDate = `${prayerDateData.hijri.day} ${prayerDateData.hijri.month.en}, ${prayerDateData.hijri.year}`;
+  const gregorianDate = `${prayerDateData.gregorian.date}`;
 
-  const { timings, date } = prayerResponse;
-  const hijriDate = `${date.hijri.day} ${date.hijri.month.en}, ${date.hijri.year}`;
-  const gregorianDate = `${date.gregorian.date}`;
-
+  // Format Time to 12-Hour Clock
   const formatTime = (time) => {
     const [hour, minute] = time.split(":").map(Number);
     const period = hour >= 12 ? "PM" : "AM";
     const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
-    return `${formattedHour}:${minute < 10 ? "0" + minute : minute} ${period}`;
+    return `${formattedHour}:${minute.toString().padStart(2, "0")} ${period}`;
   };
 
-  const upcomingPrayer =
-    Object.entries(timings).find(([prayer, time]) => {
-      const now = new Date();
-      const [hour, minute] = time.split(":").map(Number);
-      const prayerTime = new Date(now);
-      prayerTime.setHours(hour, minute, 0);
-      return now < prayerTime;
-    }) || ["Fajr", timings.Fajr];
+  // Determine Upcoming Prayer
+  const upcomingPrayer = Object.entries(timings).find(([_, time]) => {
+    const now = new Date();
+    const [hour, minute] = time.split(":").map(Number);
+    const prayerTime = new Date();
+    prayerTime.setHours(hour, minute, 0);
+    return now < prayerTime;
+  }) || ["Fajr", timings.Fajr];
 
+  // Render Component
   return (
     <>
       <div>
@@ -94,7 +112,7 @@ const PrayerTimes = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-800">
-            Prayer Times in {prayerResponse?.meta?.timezone}
+            Prayer Times in {meta?.timezone || "Unknown Location"}
           </h2>
           <div className="text-sm text-gray-600 text-right">
             <p>{gregorianDate}</p>
@@ -106,14 +124,10 @@ const PrayerTimes = () => {
         <div className="flex items-center justify-between bg-blue-100 rounded-lg p-4 mb-4">
           <div className="text-center">
             <p className="text-sm text-gray-600">Upcoming Prayer</p>
-            <p className="text-lg font-semibold text-blue-600">
-              {upcomingPrayer[0]}
-            </p>
+            <p className="text-lg font-semibold text-blue-600">{upcomingPrayer[0]}</p>
           </div>
           <div className="text-center">
-            <p className="text-4xl font-bold text-blue-800">
-              {formatTime(upcomingPrayer[1])}
-            </p>
+            <p className="text-4xl font-bold text-blue-800">{formatTime(upcomingPrayer[1])}</p>
           </div>
         </div>
 
@@ -122,29 +136,22 @@ const PrayerTimes = () => {
           {Object.entries(timings).map(([prayer, time]) => (
             <div key={prayer} className="bg-gray-50 border rounded-lg p-2">
               <p className="text-sm font-medium text-gray-600">{prayer}</p>
-              <p className="text-lg font-semibold text-gray-800">
-                {formatTime(time)}
-              </p>
+              <p className="text-lg font-semibold text-gray-800">{formatTime(time)}</p>
             </div>
           ))}
         </div>
 
         {/* Footer */}
         <div className="text-center mt-4 text-sm text-gray-500">
-          <p className="text-black teext-lg font-semibold">
-           {prayerResponse?.meta?.method?.name}
-          </p>
+          <p className="text-black text-lg font-semibold">{meta?.method?.name || "Unknown Method"}</p>
           <p>
-          Fajr: { parseInt(prayerResponse?.meta?.method?.params?.Fajr)} degrees, Isha:{parseFloat(prayerResponse?.meta?.method?.params?.Isha)} degrees
+            Fajr: {meta?.method?.params?.Fajr || "N/A"}°, Isha: {meta?.method?.params?.Isha || "N/A"}°
           </p>
-          <p>
-            {/* {(prayerResponse?.meta?.timezone)}, Today's Date is: {prayerDate} */}
-          </p>
-          <Link 
-           
-           onClick={()=> window.scrollTo(0, 0)}
-
-          to="/change-location" className="text-blue-500 underline hover:text-blue-700">
+          <Link
+            onClick={() => window.scrollTo(0, 0)}
+            to="/change-location"
+            className="text-blue-500 underline hover:text-blue-700"
+          >
             Change location
           </Link>
         </div>
