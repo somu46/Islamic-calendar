@@ -101,13 +101,13 @@ const SetLocation = () => {
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="relative w-full" onClick={() => setModalOpen(true)}>
+      <div className="relative w-full  " onClick={() => setModalOpen(true)}>
         <input
           type="text"
           placeholder="Set your location"
           value={selectedLocation || ""}
           readOnly
-          className="w-60 p-2 border border-gray-300 font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
+          className="w-60 p-[9px] border-2 border-blue-500 font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
         />
         <IoMdLocate className="absolute right-4 text-[1.6rem] font-bold top-1/2 transform -translate-y-1/2 text-teal-600" />
       </div>

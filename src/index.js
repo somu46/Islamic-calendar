@@ -1,24 +1,43 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import './index.css';
 import Root from './Root';
 import App from './App';
-import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter} from './Pages';
-import PrayerTimes from './Pages/PrayerTime/PrayerTime';
-import Home from './Components/Home/Home';
-import About from './Pages/About/About';
-import BlogPage from './Pages/Blogs/Blogs';
-import IslamicHolidayPage from './Pages/IslamicHoliDays/IslamicHoliDays';
-import ContactUs from './Pages/Contact/ContactUs';
-import SetLocation from './Components/SetLocation/SetLocation';
+import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter,ContactUs,BlogPage,About,PrayerTimes,IslamicHolidayPage} from './Pages';
+import Loading from './Components/Loading/Loading';
+import LocationTracker from './Components/SetLocation/AutoDetectedLocation/LocationTracker';
+import ChangeLocation from './Components/SetLocation/ChangeLocation/ChangeLocation';
+
+
+const Home = lazy(() => waitPromise(3000).then(() => import('./Components/Home/Home')));
+
+// Simulate a promise for loading delay
+const waitPromise = (time) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+}
+
+
+
+
 
 
 const Route =createBrowserRouter([
 
   {
     path: '',
-    element: <App/>,
+    element: (
+       <>
+      <LocationTracker />
+      <Suspense fallback={<Loading />}>
+        <App />
+      </Suspense>
+    </>
+    ),
     children: [
       {
         path:'/',
@@ -42,9 +61,7 @@ const Route =createBrowserRouter([
       },
       {
         path:'/change-location',
-        element:<div className='my-[10rem]'>
-          <SetLocation/>
-        </div>
+        element:<ChangeLocation/>
       }
     ]
   },

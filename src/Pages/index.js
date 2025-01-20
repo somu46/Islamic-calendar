@@ -5,6 +5,22 @@ import AlQuran from "./AlQuran/AlQuran";
 import ZakatCalculator from "./ZakatCalculator/ZakatCalculator";
 import DateConverter from "./DateConverter/DateConverter";
 import About from "./About/About";
+import ContactUs from "./Contact/ContactUs";
+import IslamicHolidayPage from "./IslamicHoliDays/IslamicHoliDays";
+import PrayerTimesWidge from "./PrayerTime/Widgets/PrayerTimesWidge";
+import PrayerTimes from "./PrayerTime/PrayerTime";
+import BlogPage from "./Blogs/Blogs";
 
 
-export {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter,About}
+export {Error,IslamicCalendar,
+    PrayerTimetable,
+    AlQuran,
+    ZakatCalculator,
+    DateConverter,
+    About,
+    ContactUs,
+    IslamicHolidayPage,
+    PrayerTimes,
+    PrayerTimesWidge,
+    BlogPage
+}
