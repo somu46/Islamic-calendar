@@ -10,9 +10,9 @@ const BlogPost = ({ post }) => {
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 w-full min-h-full">
+    <div className="bg-white rounded-lg p-1  w-full min-h-full">
       {/* Blog Title */}
-      <h1 className="text-4xl font-bold text-teal-600 mb-4">{post.title}</h1>
+      <h1 className="text-3xl text-center font-bold text-teal-600 mb-4 ">{post.title}</h1>
       
       {/* Blog Image */}
       <div className="w-full flex justify-center mb-4">
