@@ -110,7 +110,7 @@ const SetLocation = () => {
           placeholder="Set your location"
           value={selectedLocation || ""}
           readOnly
-          className="w-full p-3 pl-10 border-2 border-blue-500 font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
+          className="w-full p-3 pl-10  font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
         />
         <IoMdLocate className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xl text-teal-600" />
       </div>

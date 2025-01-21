@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const LocationTracker = () => {
-  const [locationObject, setLocation] = useState({ latitude: null, longitude: null });
+  const [locationObj, setLocation] = useState({ latitude: null, longitude: null });
   const [error, setError] = useState("");
 
   // Fetch the current location when the app loads
@@ -35,7 +35,7 @@ const LocationTracker = () => {
   }, [error]);
 
   // Debugging or logging purposes only
-  // console.log("Location (LocationTracker):", locationObject);
+  console.log("Location (LocationTracker):", locationObj);
 
   return null; // No UI, purely functional
 };
