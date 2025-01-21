@@ -17,7 +17,7 @@ const LocationTracker = () => {
             sessionStorage.setItem("latitude", latitude);
             sessionStorage.setItem("longitude", longitude);
 
-            console.log("Location loaded:", { latitude, longitude });
+            // console.log("Location loaded:", { latitude, longitude });
           },
           (err) => {
             setError(err.message);
@@ -35,7 +35,7 @@ const LocationTracker = () => {
   }, [error]);
 
   // Debugging or logging purposes only
-  console.log("Location (LocationTracker):", locationObject);
+  // console.log("Location (LocationTracker):", locationObject);
 
   return null; // No UI, purely functional
 };

@@ -24,7 +24,7 @@ const PrayerTimes = () => {
     const longitude = sessionStorage.getItem("longitude");
     const location = sessionStorage.getItem("location");
 
-    console.log("Retrieved Location:", { latitude, longitude, location });
+    // console.log("Retrieved Location:", { latitude, longitude, location });
     
     if (latitude && longitude) {
       setPrayerLocation({ latitude, longitude, location: null });
@@ -45,15 +45,15 @@ const PrayerTimes = () => {
         let response = null;
 
         if (prayerLocation.latitude && prayerLocation.longitude) {
-          console.log("Fetching prayer times using latitude and longitude...");
+          // console.log("Fetching prayer times using latitude and longitude...");
           response = await getPrayerTimeOfDayByLocation(prayerDate, prayerLocation.latitude, prayerLocation.longitude);
         } else if (prayerLocation.location) {
-          console.log("Fetching prayer times using location name...");
+          // console.log("Fetching prayer times using location name...");
           response = await getPrayerTimeOfDayByAddress(prayerDate, prayerLocation.location);
         }
 
         if (response) {
-          console.log("Prayer Times Response:", response);
+          // console.log("Prayer Times Response:", response);
           setPrayerResponse(response);
         } else {
           console.error("No response received for prayer times.");

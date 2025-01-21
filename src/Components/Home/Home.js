@@ -11,9 +11,9 @@ const Home = () => {
     const longitude = sessionStorage.getItem('longitude');
     const location = sessionStorage.getItem('location');
 
-    console.log('latitude:', latitude);
-    console.log('longitude:', longitude);
-    console.log('location:', location);
+    // console.log('latitude:', latitude);
+    // console.log('longitude:', longitude);
+    // console.log('location:', location);
 
     if ((!latitude && !longitude) && !location) {
      
