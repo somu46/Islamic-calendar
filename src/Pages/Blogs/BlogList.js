@@ -11,7 +11,7 @@ const BlogList = ({ posts, selectPost }) => {
           <div className="p-4">
             <h2 className="text-2xl font-bold">{post.title}</h2>
             <p className="mt-2 text-gray-600">{post.excerpt}</p>
-            <button onClick={ ()=> {selectPost(post); window.scrollTo(0, 0)}} className="mt-4 text-blue-500 hover:underline">Read More</button>
+            <button onClick={ ()=> {selectPost(post); window.scrollTo(0, 0)}} className="mt-4 text-blue-500 hover:underline">View Post</button>
           </div>
         </div>
       ))}
