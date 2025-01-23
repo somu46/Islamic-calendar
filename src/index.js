@@ -9,6 +9,7 @@ import Loading from './Components/Loading/Loading';
 import LocationTracker from './Components/SetLocation/AutoDetectedLocation/LocationTracker';
 import ChangeLocation from './Components/SetLocation/ChangeLocation/ChangeLocation';
 import Quran from './Pages/AlQuran/WholeQuran';
+import SurahPage from './Pages/AlQuran/ayahs';
 
 
 const Home = lazy(() => waitPromise(3000).then(() => import('./Components/Home/Home')));
@@ -63,6 +64,10 @@ const Route =createBrowserRouter([
       {
         path:'/change-location',
         element:<ChangeLocation/>
+      },
+      {
+        path: '/surah-ayahs',
+        element:<div className='min-h-screen mt-[6.5rem]'><SurahPage/></div>
       },
       {
         path: '/test-api',
