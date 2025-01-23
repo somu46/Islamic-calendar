@@ -8,7 +8,7 @@ const Surahs = () => {
   const [surahs, setSurahs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [itemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {

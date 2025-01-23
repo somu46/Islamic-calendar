@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getQuran_Juz } from "../../apiServices/apiServices";
+import {ArrowForwardIosRounded, ArrowBackIosNewRounded} from '@mui/icons-material';
 
 const Juz = () => {
   const [juzData, setJuzData] = useState(null);
@@ -65,21 +66,23 @@ const Juz = () => {
       {/* Pagination Controls */}
       <div className="flex justify-center mt-8">
         <button
+          aria-label="Previous Page"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           className="bg-blue-500 text-white px-4 py-2 rounded-md mr-4 disabled:opacity-50"
           disabled={currentPage === 1}
         >
-          Previous
+          <ArrowBackIosNewRounded/>
         </button>
         <span className="text-xl text-gray-700">
           Page {currentPage} of {totalPages}
         </span>
         <button
+        aria-label="Next Page"
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           className="bg-blue-500 text-white px-4 py-2 rounded-md ml-4 disabled:opacity-50"
           disabled={currentPage === totalPages}
         >
-          Next
+          <ArrowForwardIosRounded/>
         </button>
       </div>
     </div>
