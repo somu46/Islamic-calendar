@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Quran = () => {
+  const navigate = useNavigate();
   const [quranData, setQuranData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedSurah, setSelectedSurah] = useState(null);
 
+  // Fetch Quran Data
   useEffect(() => {
     const fetchQuranData = async () => {
       try {
@@ -18,7 +21,7 @@ const Quran = () => {
         setLoading(false);
       } catch (err) {
         console.error("Error fetching Quran data:", err.message);
-        setError("কুরআনের ডেটা লোড করতে ব্যর্থ।");
+        setError(`কুরআনের ডেটা লোড করতে ব্যর্থ। ত্রুটি: ${err.message}`);
         setLoading(false);
       }
     };
@@ -26,10 +29,23 @@ const Quran = () => {
     fetchQuranData();
   }, []);
 
+  // Navigate when a Surah is selected
+  useEffect(() => {
+    if (selectedSurah) {
+      navigate("/surah-ayahs", {
+        state: {
+          selectedSurah: selectedSurah,
+        },
+      });
+    }
+  }, [selectedSurah, navigate]);
+
+  // Loading State
   if (loading) {
     return <p className="text-center text-gray-600">লোড হচ্ছে...</p>;
   }
 
+  // Error State
   if (error) {
     return <p className="text-center text-red-600">{error}</p>;
   }
@@ -46,13 +62,13 @@ const Quran = () => {
               selectedSurah?.number === surah.number ? "bg-blue-100" : ""
             }`}
             key={surah.number}
-            onClick={() => setSelectedSurah(surah)}
+            onClick={() => setSelectedSurah(surah)} // Set selected Surah
           >
             <h2 className="text-lg font-semibold text-gray-700 mb-2">
               {surah.number}. {surah.name} ({surah.englishName})
             </h2>
             <p className="text-sm text-gray-600 mb-4">
-              <span className="font-semibold">আয়াত সংখ্যা:</span> {surah.numberOfAyahs}
+              <span className="font-semibold">আয়াত সংখ্যা:</span> {surah.ayahs.length}
             </p>
             <p className="text-sm">
               <span className="font-semibold">প্রকাশের ধরণ:</span>{" "}
@@ -61,33 +77,6 @@ const Quran = () => {
           </div>
         ))}
       </div>
-
-      {/* Ayahs in Selected Surah */}
-      {selectedSurah && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            সূরা {selectedSurah.name} ({selectedSurah.englishName}) - আয়াতসমূহ
-          </h2>
-          <div className="bg-gray-100 p-4 rounded-lg shadow">
-            {selectedSurah.ayahs.map((ayah) => (
-              <div key={ayah.number} className="mb-4">
-                <p className="text-lg font-semibold text-gray-800 mb-2">
-                  আয়াত {ayah.numberInSurah}: {ayah.text}
-                </p>
-                <p className="text-sm text-gray-600">
-                  <span className="font-semibold">পৃষ্ঠা:</span> {ayah.page}
-                </p>
-              </div>
-            ))}
-          </div>
-          <button
-            onClick={() => setSelectedSurah(null)}
-            className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md"
-          >
-            ফিরে যান
-          </button>
-        </div>
-      )}
     </div>
   );
 };
