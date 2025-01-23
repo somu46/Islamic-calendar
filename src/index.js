@@ -8,6 +8,7 @@ import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConver
 import Loading from './Components/Loading/Loading';
 import LocationTracker from './Components/SetLocation/AutoDetectedLocation/LocationTracker';
 import ChangeLocation from './Components/SetLocation/ChangeLocation/ChangeLocation';
+import Quran from './Pages/AlQuran/WholeQuran';
 
 
 const Home = lazy(() => waitPromise(3000).then(() => import('./Components/Home/Home')));
@@ -62,12 +63,12 @@ const Route =createBrowserRouter([
       {
         path:'/change-location',
         element:<ChangeLocation/>
-      }
+      },
+      {
+        path: '/test-api',
+        element:<div className='min-h-screen mt-[6.5rem]'><Quran/></div>
+      },
     ]
-  },
-  {
-    path: '/test-api',
-    element:<div>This is for test api</div>
   },
  {
     path: '/essentials',
