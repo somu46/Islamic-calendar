@@ -14,7 +14,7 @@ import Surahs from './Pages/AlQuran/Surahs';
 import Juz from './Pages/AlQuran/Juz';
 
 
-const Home = lazy(() => waitPromise(3500).then(() => import('./Components/Home/Home')));
+const Home = lazy(() => waitPromise(3000).then(() => import('./Components/Home/Home')));
 
 // Simulate a promise for loading delay
 const waitPromise = (time) => {
@@ -67,10 +67,7 @@ const Route =createBrowserRouter([
         path:'/change-location',
         element:<ChangeLocation/>
       },
-      {
-        path: '/:surahNumber/:surahName-ayahs',
-        element:<div className='min-h-screen mt-[6.5rem]'><SurahPage/></div>
-      },
+      
       {
         path: '/test-api',
         element:<div className='min-h-screen mt-[6.5rem]'><Quran/></div>
@@ -99,17 +96,25 @@ const Route =createBrowserRouter([
         element:<PrayerTimetable/>
       },
       {
+        path:'/essentials/al-quran',
+        element:<AlQuran/>,
+        
+      },
+      {
+        path: '/essentials/:surahNumber/:surahName-ayahs',
+        element:<SurahPage/>
+      },
+      {
+        path: '/essentials/full-quran',
+        element:<Quran/>
+      },
+      {
         path:'/essentials/surahs',
         element:<Surahs/>
       },
       {
         path:'/essentials/juz',
         element:<Juz/>
-      },
-      {
-        path:'/essentials/al-quran',
-        element:<AlQuran/>,
-        
       },
       {
         path:'/essentials/date-converter',
