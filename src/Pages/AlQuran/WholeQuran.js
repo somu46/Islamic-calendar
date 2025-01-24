@@ -30,9 +30,11 @@ const Quran = () => {
   }, []);
 
   // Navigate when a Surah is selected
+  // /services/${path}
   useEffect(() => {
+    console.log("selectedSurah",selectedSurah);
     if (selectedSurah) {
-      navigate("/surah-ayahs", {
+      navigate(`/${selectedSurah.number}/${selectedSurah.englishName}-ayahs`, {
         state: {
           selectedSurah: selectedSurah,
         },
@@ -42,7 +44,7 @@ const Quran = () => {
 
   // Loading State
   if (loading) {
-    return <p className="text-center text-gray-600">লোড হচ্ছে...</p>;
+    return <p className="text-center text-3xl mt-[21rem] text-blue-600">লোড হচ্ছে.....</p>;
   }
 
   // Error State

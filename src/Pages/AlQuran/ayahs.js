@@ -27,7 +27,7 @@ const SurahAyahs = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">
-        সূরা {selectedSurah.name} ({selectedSurah.englishName})
+        সূরা: {selectedSurah.englishName}  ({selectedSurah.name})
       </h1>
 
       <div className="bg-gray-100 p-4 rounded-lg shadow">
