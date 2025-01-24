@@ -34,7 +34,7 @@ const Quran = () => {
   useEffect(() => {
     console.log("selectedSurah",selectedSurah);
     if (selectedSurah) {
-      navigate(`/${selectedSurah.number}/${selectedSurah.englishName}-ayahs`, {
+      navigate(`/essentials/${selectedSurah.number}/${selectedSurah.englishName}-ayahs`, {
         state: {
           selectedSurah: selectedSurah,
         },

@@ -26,6 +26,7 @@ const AlQuran = () => {
   const [activeSection, setActiveSection] = useState({});
 const navigate=useNavigate();
   const cards = [
+    { label: "Full Quarn", value: "Quarn", icon: "☪",path:'/essentials/full-quran' },
     { label: "Surahs", value: "surahs", icon: "📖",path:'/essentials/surahs' },
     { label: "Juz", value: "juz", icon: "🕌",path:'/essentials/juz' },
     { label: "Translations", value: "translations", icon: "🌐",path:'/essentials/al-quran' },
