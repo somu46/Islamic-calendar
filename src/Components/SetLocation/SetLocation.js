@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import { IoMdLocate } from "react-icons/io";
-import { getCountry, getCountryCity } from "../../apiServices/apiServices";
 import { FaSearch } from "react-icons/fa";
+import { getCountry, getCountryCity } from "../../apiServices/apiServices";
+import { useNavigate } from "react-router-dom";
 
 const SetLocation = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -14,25 +15,22 @@ const SetLocation = () => {
   const [cityData, setCityData] = useState([]);
   const [city, setCity] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [loading, setLoading] = useState(false); // New loading state
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const continents = [
-    "Asia",
-    "Africa",
-    "North America",
-    "South America",
-    "Antarctica",
-    "Europe",
-    "Oceania",
-  ];
+  const continents = ["Asia", "Africa", "North America", "South America", "Antarctica", "Europe", "Oceania"];
 
-  const filteredCountries = countryData.filter((country) =>
-    country.name.common.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredCountries = query
+    ? countryData.filter((country) =>
+        country.name.common.toLowerCase().includes(query.toLowerCase())
+      )
+    : countryData;
 
-  const filteredCities = cityData.filter((city) =>
-    city.toLowerCase().includes(cityQuery.toLowerCase())
-  );
+  const filteredCities = cityQuery
+    ? cityData.filter((city) =>
+        city.toLowerCase().includes(cityQuery.toLowerCase())
+      )
+    : cityData;
 
   useEffect(() => {
     if (selectContinents) {
@@ -41,7 +39,7 @@ const SetLocation = () => {
           const response = await getCountry(selectContinents);
           setCountryData(response.data);
         } catch (error) {
-          console.error(error);
+          console.error("Error fetching countries:", error.message);
         }
       };
       fetchCountry();
@@ -51,80 +49,77 @@ const SetLocation = () => {
   useEffect(() => {
     if (country) {
       const fetchCountryCities = async () => {
-        setLoading(true); // Start loading
+        setLoading(true);
         try {
           const response = await getCountryCity(country);
           setCityData(response.data);
         } catch (error) {
-          console.error(error);
+          console.error("Error fetching cities:", error.message);
         } finally {
-          setLoading(false); // Stop loading
+          setLoading(false);
         }
       };
       fetchCountryCities();
     }
   }, [country]);
 
-  useEffect(() => {
+  const handleClickSetSession = () => {
     if (country && city) {
       const location = `${country}, ${city}`;
       sessionStorage.setItem("country", country);
       sessionStorage.setItem("city", city);
       sessionStorage.setItem("location", location);
-      const getLocation = sessionStorage.getItem("location");
-      setSelectedLocation(getLocation);
+      setSelectedLocation(location);
+      setModalOpen(false);
+      navigate("/");
     }
-  }, [country, city]);
+  };
 
-  useEffect(() => {
-    const getLocation = sessionStorage.getItem("location");
-    setSelectedLocation(getLocation);
-  }, []);
 
-  const handleCountryClick = (country) => {
-    setCountry(country);
+
+  const handleCountryClick = (countryName) => {
+    setCountry(countryName);
     setCity("");
     setQuery("");
   };
 
-  const handleCityClick = (city) => {
-    setCity(city);
-    setModalOpen(false);
+  const handleCityClick = (cityName) => {
+    setCity(cityName);
+    setCityQuery("");
   };
 
   const handleReset = () => {
     sessionStorage.removeItem("country");
     sessionStorage.removeItem("city");
     sessionStorage.removeItem("location");
+    setCountry("");
+    setCity("");
     setSelectedLocation(null);
   };
 
   return (
     <div className="max-w-md mx-auto">
-      <div
-        className="relative w-full"
-        onClick={() => setModalOpen(true)}
-      >
+      <div className="relative w-full" onClick={() => setModalOpen(true)}>
         <input
           type="text"
           placeholder="Set your location"
           value={selectedLocation || ""}
           readOnly
-          className="w-full p-3 pl-10  font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
+          className="w-full p-3 pl-10 font-bold text-teal-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
         />
         <IoMdLocate className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xl text-teal-600" />
       </div>
 
-      {selectedLocation === null ? (
-        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        {!selectedLocation ? (
           <div className="text-black text-xl font-semibold">
             <div>
               <select
-                id="continents"
+                value={selectContinents}
                 onChange={(e) => setSelectContinents(e.target.value)}
                 className="text-lg text-gray-700 border-2 border-teal-700 shadow-md rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500"
               >
-                <option value="" disabled selected className="text-teal-500">
+                <option value="" disabled>
                   Please select a continent
                 </option>
                 {continents.map((continent, index) => (
@@ -149,7 +144,6 @@ const SetLocation = () => {
                       />
                       <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     </div>
-
                     <div className="mt-2 max-h-64 overflow-y-auto">
                       {filteredCountries.length > 0 ? (
                         filteredCountries.map((country, index) => (
@@ -158,19 +152,16 @@ const SetLocation = () => {
                             className="py-2 border-b border-gray-300 cursor-pointer"
                             onClick={() => handleCountryClick(country.name.common)}
                           >
-                            <div className="flex flex-row items-center p-1">
+                            <div className="flex items-center p-1">
                               <img
                                 src={country.flags.svg}
-                                className="size-5 mr-3"
+                                className="w-5 h-5 mr-3"
                                 alt={country.flags.alt}
                               />
                               <p className="text-lg font-medium">
                                 {country.name.common}
                               </p>
                             </div>
-                            <p className="text-sm text-gray-500">
-                              Region: {country.region}
-                            </p>
                           </div>
                         ))
                       ) : (
@@ -182,7 +173,7 @@ const SetLocation = () => {
 
                 {country && (
                   <div>
-                    {loading ? ( // Loading indicator
+                    {loading ? (
                       <p className="text-center text-blue-600">Loading cities...</p>
                     ) : (
                       <>
@@ -196,7 +187,6 @@ const SetLocation = () => {
                           />
                           <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                         </div>
-
                         <div className="mt-2 max-h-64 overflow-y-auto">
                           {filteredCities.length > 0 ? (
                             filteredCities.map((city, index) => (
@@ -216,31 +206,33 @@ const SetLocation = () => {
                     )}
                   </div>
                 )}
+
+                {country && city && (
+                  <div className="mt-4 mx-auto">
+                    <button
+                      onClick={handleClickSetSession}
+                      className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300"
+                    >
+                      Set Location
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
-        </Modal>
-      ) : (
-        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        ) : (
           <div>
-            <span className="text-lg font-bold text-teal-700 m-1">
-              Your current location is :
-            </span>
-            <span className="text-lg text-green-600 font-semibold mx-1">
-              {selectedLocation}
-            </span>
-            <p className="text-lg text-red-500 font-semibold mt-3 text-center ">
-              If wrong location?
-            </p>
+            <p className="text-lg font-bold text-teal-700">Your current location:</p>
+            <p className="text-lg text-green-600 font-semibold">{selectedLocation}</p>
             <p
-              className="text-lg text-blue-700 font-semibold m-1 text-center cursor-pointer"
+              className="text-lg text-blue-700 font-semibold mt-3 cursor-pointer"
               onClick={handleReset}
             >
-              Click to reset
+              Reset Location
             </p>
           </div>
-        </Modal>
-      )}
+        )}
+      </Modal>
     </div>
   );
 };
