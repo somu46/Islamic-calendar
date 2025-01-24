@@ -1,5 +1,7 @@
 import axios from "axios"
 
+
+
 //this all are aladhan and alquran cloud api url
 const Calendar_BaseUrl = `https://api.aladhan.com/v1/gToHCalendar/`;
 const PrayerTime_BaseUrl = `https://api.aladhan.com/v1/calendarByCity/`; 
