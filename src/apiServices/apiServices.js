@@ -3,7 +3,7 @@ import axios from "axios"
 //this all are aladhan and alquran cloud api url
 const Calendar_BaseUrl = `https://api.aladhan.com/v1/gToHCalendar/`;
 const PrayerTime_BaseUrl = `https://api.aladhan.com/v1/calendarByCity/`; 
-const PrayerTimeByLatLog_BaseUrl=`http://api.aladhan.com/v1/timings/`;
+const PrayerTimeByLatLog_BaseUrl=`https://api.aladhan.com/v1/timings/`;
 const quran_edition_BaseUrl = `https://api.alquran.cloud/v1/edition`; 
 const quran_edition_with_audio_BaseUrl = `https://api.alquran.cloud/v1/quran/`;
 const Date_Changer_BaseUrl = `https://api.aladhan.com/v1/gToH/`; 
