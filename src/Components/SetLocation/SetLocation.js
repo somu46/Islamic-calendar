@@ -74,6 +74,13 @@ const SetLocation = () => {
       navigate("/");
     }
   };
+  
+  useEffect(() => {
+    if (sessionStorage.getItem("location")) {
+      setSelectedLocation(sessionStorage.getItem("location"));
+    }
+    
+  }, [selectedLocation]);
 
 
 
