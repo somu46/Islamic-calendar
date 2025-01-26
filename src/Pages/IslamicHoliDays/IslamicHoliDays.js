@@ -46,7 +46,7 @@ const IslamicHolidayPage = () => {
           id="hijriYear"
           name="hijriYear"
           value={hijriYear}
-          onChange={(e) => setHijriYear(e.target.value)}
+          onChange={(e) => setHijriYear(e.target.value.length > 4 ? e.target.value.slice(0, 4) : e.target.value)}
           className="w-full max-w-sm px-4 py-2 border border-teal-400 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none"
           placeholder="e.g., 1445"
         />
