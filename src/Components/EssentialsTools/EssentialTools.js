@@ -7,25 +7,25 @@ const EssentialTools = () => {
       title: 'Prayer Times',
       description: 'Accurate prayer times based on your location with Qibla direction',
       icon: <FaPray className="text-4xl text-green-500" />,
-      link: '#',
+      link: "/essentials/prayer-times",
     },
     {
       title: 'Digital Quran',
       description: 'Read and listen to the Quran with multiple translations',
       icon: <FaQuran className="text-4xl text-green-500" />,
-      link: '#',
+      link: "/essentials/al-quran",
     },
     {
       title: 'Islamic Calendar',
       description: 'Track Hijri dates and important Islamic events',
       icon: <FaCalendarAlt className="text-4xl text-green-500" />,
-      link: '#',
+      link: "/essentials/islamic-calendar",
     },
     {
       title: 'Zakat Calculator',
       description: 'Calculate your Zakat easily with our comprehensive tool',
       icon: <FaCalculator className="text-4xl text-green-500" />,
-      link: '#',
+      link:  "/essentials/zakat-calculator" ,
     },
     {
       title: 'Islamic Knowledge',
@@ -37,13 +37,13 @@ const EssentialTools = () => {
       title: 'Date Converter',
       description: 'Convert between Hijri and Gregorian calendars',
       icon: <FaSyncAlt className="text-4xl text-green-500" />,
-      link: '#',
+      link: "/essentials/date-converter",
     },
   ];
 
   return (
     <div className="p-6">
-      <h1 className="text-center text-3xl font-bold mb-4">Essential Islamic Tools</h1>
+      <h1 className="text-center text-3xl font-bold mb-4">Our most popular islamic tools</h1>
       <h3 className="text-center text-lg mb-6">
         Discover our comprehensive collection of Islamic resources designed to enhance your spiritual journey
       </h3>
