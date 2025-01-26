@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Feature from '../Feature/Feature';
 import PrayerTimesWidge from '../../Pages/PrayerTime/Widgets/PrayerTimesWidge';
+import EssentialTools from '../EssentialsTools/EssentialTools';
+import Community from '../Community/Community';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -23,10 +25,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-teal-50 to-cyan-100 mt-[4.9rem]">
+      <div className="mt-[4.9rem]">
         <PrayerTimesWidge />
       </div>
-      <div className="flex flex-col min-h-screen bg-gradient-to-r from-teal-50 to-cyan-100">
+      <div className="flex flex-col min-h-screen ">
         <main className="flex-grow">
           {/* Welcome Section */}
           <section className="container mx-auto text-center py-20">
@@ -44,33 +46,21 @@ const Home = () => {
               Explore the Islamic Knowledge
             </Link>
           </section>
-
+          <EssentialTools />
           {/* Featured Content */}
-          <section id="calendar" className="py-16">
-            <div className="container mx-auto text-center">
-              <h3 className="text-4xl font-bold text-teal-800 mb-4">Islamic Calendar</h3>
-              <p className="text-gray-600 mb-6">
-                Keep track of important Islamic dates, events, and holidays throughout the year.
-              </p>
-              <a
-                href="/essentials/islamic-calendar"
-                className="px-6 py-3 bg-cyan-500 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-600 transition-all duration-300"
-              >
-                Open Calendar
-              </a>
-            </div>
-          </section>
+          
           <Feature />
           {/* Inspirational Quote */}
-          <section id="prayers" className="bg-transparent py-20">
+          {/* <section id="prayers" className="bg-transparent py-20">
             <div className="container mx-auto text-center">
               <blockquote className="text-2xl italic text-gray-800 max-w-3xl mx-auto">
                 "Indeed, the reminder benefits the believers."
                 <span className="block mt-4 text-lg font-semibold text-teal-700">— Quran 51:55</span>
               </blockquote>
             </div>
-          </section>
+          </section> */}
         </main>
+        <Community/>
       </div>
     </>
   );
