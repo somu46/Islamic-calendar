@@ -7,7 +7,7 @@ function Loading() {
         className="h-16 w-16 animate-spin rounded-full border-4 border-solid border-blue-500 border-t-transparent"
         role="status"
       ></div>
-      <p className="mt-4 text-lg font-medium text-gray-700 dark:text-gray-300">
+      <p className="mt-4 text-lg font-medium text-gray-700">
         Please wait, loading...
       </p>
     </div>

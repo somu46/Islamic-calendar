@@ -13,9 +13,9 @@ const Juz = () => {
   useEffect(() => {
     const fetchJuzData = async () => {
       try {
-        const response = await getQuran_Juz(currentPage, itemsPerPage); // Fetch data with pagination
-        setJuzData(response); // Assuming the response structure
-        setTotalPages(Math.ceil(response.total / itemsPerPage)); // Assuming the API provides a total count of ayahs
+        const response = await getQuran_Juz(currentPage, itemsPerPage); 
+        setJuzData(response); 
+        setTotalPages(Math.ceil(response.total / itemsPerPage)); 
         setLoading(false);
       } catch (err) {
         console.error("Error fetching Juz data:", err);
@@ -38,7 +38,7 @@ const Juz = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-center text-2xl font-bold text-gray-800 mb-6">
-        Juz {juzData.number} - {juzData.edition.name} ({juzData.edition.englishName})
+        Juz {juzData.number} - {juzData.edition.name} 
       </h1>
 
       {/* Display Ayahs */}
