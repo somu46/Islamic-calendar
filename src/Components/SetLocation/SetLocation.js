@@ -122,7 +122,7 @@ const SetLocation = () => {
           <div className="text-black text-xl font-semibold">
             <div>
               <select
-                value={selectContinents}
+                value={selectContinents||" Select Continent"}
                 onChange={(e) => setSelectContinents(e.target.value)}
                 className="text-lg text-gray-700 border-2 border-teal-700 shadow-md rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500"
               >
