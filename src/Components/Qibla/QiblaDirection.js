@@ -11,10 +11,7 @@ const QiblaDirection = () => {
     const kaabaLatitude = 21.4225; // Latitude of the Kaaba
     const kaabaLongitude = 39.8262; // Longitude of the Kaaba
 
-    // Convert degrees to radians
     const toRadians = (deg) => (deg * Math.PI) / 180;
-
-    // Convert radians to degrees
     const toDegrees = (rad) => (rad * 180) / Math.PI;
 
     const userLat = toRadians(lat);
@@ -42,12 +39,11 @@ const QiblaDirection = () => {
           setLatitude(latitude);
           setLongitude(longitude);
 
-          // Calculate Qibla direction
           const result = calculateQiblaDirection(latitude, longitude);
           setDirection(result.toFixed(2));
           setError(null);
         },
-        (err) => {
+        () => {
           setError("Unable to fetch your location. Please allow location access.");
         }
       );
@@ -76,24 +72,34 @@ const QiblaDirection = () => {
           <h3 className="text-lg text-gray-700">
             Your Location: {latitude.toFixed(2)}, {longitude.toFixed(2)}
           </h3>
+
           {direction !== null && (
             <div className="mt-6">
               <h3 className="text-xl font-bold text-teal-800">Qibla Direction:</h3>
               <p className="text-lg text-gray-800 mb-6">{direction}°</p>
 
-              {/* Compass */}
-              <div className="relative w-32 h-32 mx-auto">
+              {/* Compass with Arrow */}
+              <div className="relative w-40 h-40 mx-auto">
+                {/* Compass Circle */}
                 <div className="absolute w-full h-full rounded-full border-4 border-gray-400 flex items-center justify-center">
-                  <div className="text-gray-500 font-bold">N</div>
+                  <div className="absolute top-2 text-gray-500 font-bold">N</div>
+                  <div className="absolute bottom-2 text-gray-500 font-bold">S</div>
+                  <div className="absolute left-2 text-gray-500 font-bold">W</div>
+                  <div className="absolute right-2 text-gray-500 font-bold">E</div>
                 </div>
+
+                {/* Rotating Arrow */}
                 <div
-                  className="absolute w-full h-full rounded-full border-4 border-teal-600 flex items-center justify-center"
+                  className="absolute w-full h-full rounded-full flex items-center justify-center"
                   style={{
                     transform: `rotate(${direction}deg)`,
                     transition: "transform 0.3s ease",
                   }}
                 >
-                  <div className="text-teal-800 font-bold">Kaaba</div>
+                  <div className="w-1/2 h-1 bg-teal-600 transform rotate-45 origin-bottom-left rounded-sm">
+                    {/* Arrow head */}
+                    <div className="w-3 h-3 bg-teal-600 rounded-tr-md rotate-45 absolute top-0 -right-1" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -102,9 +108,7 @@ const QiblaDirection = () => {
       )}
 
       {error && (
-        <div className="mt-4 text-center text-red-500 font-medium">
-          {error}
-        </div>
+        <div className="mt-4 text-center text-red-500 font-medium">{error}</div>
       )}
     </div>
   );
