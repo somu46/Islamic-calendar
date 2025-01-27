@@ -2,7 +2,7 @@ import React from 'react'
 
 const Indicator = () => {
   return (
-    <div className="flex justify-between mb-4">
+    <div className="flex justify-between mb-4 px-12">
         <div className="flex items-center">
           <span className="w-4 h-4 bg-red-300 rounded-full mr-2"></span>
           <span className="text-sm">Holiday</span>

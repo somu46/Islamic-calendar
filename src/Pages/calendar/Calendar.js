@@ -6,6 +6,7 @@ import Indicator from './Indicator';
 import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 import Modal from '../../Components/Modal/Modal';
 
+
 const IslamicCalendar = () => {
   const [view, setView] = useState("monthly");
   const [month, setMonth] = useState(new Date().getMonth());
@@ -117,7 +118,7 @@ const IslamicCalendar = () => {
   };
 
   return (
-    <div className='bg-gradient-to-b from-green-100 to-green-50 min-h-screen p-4'>
+    <div className='bg-gradient-to-b from-green-100 to-green-50 min-h-screen sm:p-5'>
       <Breadcrumb pageName='Islamic Calendar' />
       <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end">
         <button
@@ -250,7 +251,9 @@ const IslamicCalendar = () => {
       ) : (
         <div className="">
           <Indicator />
-          <FullYearHijriCalendar year={2025} />
+          <FullYearHijriCalendar year={2025} /> 
+            
+        
         </div>
       )}
     </div>
