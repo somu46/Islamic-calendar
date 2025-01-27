@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CgArrowLongUp } from "react-icons/cg";// Importing an arrow icon from React Icons
 
 const QiblaDirection = () => {
   const [latitude, setLatitude] = useState(null);
@@ -53,7 +54,7 @@ const QiblaDirection = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 rounded-lg shadow-lg max-w-md mx-auto">
+    <div className="p-4 bg-gray-100 rounded-lg shadow-lg max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold text-center text-teal-800 mb-4">
         Calculate Qibla Direction
       </h2>
@@ -70,8 +71,10 @@ const QiblaDirection = () => {
       {latitude && longitude && (
         <div className="mt-4 text-center">
           <h3 className="text-lg text-gray-700">
-            Your Location: {latitude.toFixed(2)}, {longitude.toFixed(2)}
+            Your Location   
           </h3>
+          <p>Latitude :{latitude.toFixed(6)}</p>
+          <p>Longitude : {longitude.toFixed(6)} </p>
 
           {direction !== null && (
             <div className="mt-6">
@@ -90,25 +93,23 @@ const QiblaDirection = () => {
 
                 {/* Rotating Arrow */}
                 <div
-                  className="absolute w-full h-full rounded-full flex items-center justify-center"
+                  className="absolute w-full h-full flex items-center justify-center"
                   style={{
                     transform: `rotate(${direction}deg)`,
-                    transition: "transform 0.3s ease",
+                    transition: "transform 0.5s ease",
                   }}
                 >
-                  <div className="w-1/2 h-1 bg-teal-600 transform rotate-45 origin-bottom-left rounded-sm">
-                    {/* Arrow head */}
-                    <div className="w-3 h-3 bg-teal-600 rounded-tr-md rotate-45 absolute top-0 -right-1" />
-                  </div>
+                  <CgArrowLongUp className="text-teal-600 text-6xl" />
                 </div>
               </div>
+              <p className="text-gray-600 mt-4 text-sm">Note: This is an approximate direction based on <strong>Mathematical Calculation</strong> based on your location and the location of the Kaaba in Mecca. for better accuracy use your mobile compass to get the degree in realtime</p>
             </div>
           )}
         </div>
       )}
 
       {error && (
-        <div className="mt-4 text-center text-red-500 font-medium">{error}</div>
+        <div className="mt-4 text-center text-red-500  font-medium">{error}</div>
       )}
     </div>
   );
