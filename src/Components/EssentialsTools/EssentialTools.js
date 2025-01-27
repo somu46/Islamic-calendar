@@ -1,7 +1,11 @@
 import React from 'react';
 import { FaPray, FaQuran, FaCalendarAlt, FaCalculator, FaBook, FaSyncAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const EssentialTools = () => {
+  const handleHistory=()=>{
+    window.scrollTo(0,0);
+  }
   const tools = [
     {
       title: 'Prayer Times',
@@ -56,12 +60,13 @@ const EssentialTools = () => {
             <div className="mb-4">{tool.icon}</div>
             <h2 className="text-xl font-semibold mb-2">{tool.title}</h2>
             <p className="text-gray-600 mb-4">{tool.description}</p>
-            <a
-              href={tool.link}
+            <Link
+              to={tool.link}
+              onClick={handleHistory}
               className="text-green-500 font-medium hover:underline"
             >
               Learn more →
-            </a>
+            </Link>
           </div>
         ))}
       </div>
