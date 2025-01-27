@@ -48,25 +48,6 @@ const Community = () => {
         </div>
       </div>
 
-      {/* Subscription Section */}
-      <div className="bg-white shadow-md rounded-lg p-6 mb-10">
-        <h3 className="text-lg font-semibold text-center mb-4">
-          Stay Connected
-        </h3>
-        <p className="text-center text-gray-600 mb-4">
-          Subscribe to receive daily Islamic reminders and updates
-        </p>
-        <form className="flex flex-col md:flex-row justify-center items-center gap-4">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="p-3 border rounded-lg w-full md:w-2/3 focus:outline-none"
-          />
-          <button className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
-            Subscribe
-          </button>
-        </form>
-      </div>
 
       {/* Testimonials Section */}
       <h2 className="text-center text-2xl font-bold mb-6">
@@ -93,6 +74,25 @@ const Community = () => {
         <button className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
           Join Our Community
         </button>
+      </div>
+      {/* Subscription Section */}
+      <div className="bg-white shadow-md rounded-lg p-6 mb-10">
+        <h3 className="text-lg font-semibold text-center mb-4">
+          Stay Connected
+        </h3>
+        <p className="text-center text-gray-600 mb-4">
+          Subscribe to receive daily Islamic reminders and updates
+        </p>
+        <form className="flex flex-col md:flex-row justify-center items-center gap-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="p-3 border rounded-lg w-full md:w-2/3 focus:outline-none"
+          />
+          <button className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
+            Subscribe
+          </button>
+        </form>
       </div>
     </div>
   );
