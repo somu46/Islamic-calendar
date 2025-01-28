@@ -33,21 +33,18 @@ const Community = () => {
       </p>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-3xl font-bold text-teal-500">50K+</h2>
-          <p className="text-gray-600">Active Members</p>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-3xl font-bold text-teal-500">1M+</h2>
-          <p className="text-gray-600">Daily Prayers</p>
-        </div>
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-3xl font-bold text-teal-500">5K+</h2>
-          <p className="text-gray-600">Daily Questions</p>
-        </div>
-      </div>
-
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+  {[
+    { value: '50K+', label: 'Active Members' },
+    { value: '1M+', label: 'Daily Prayers' },
+    { value: '5K+', label: 'Daily Questions' },
+  ].map((stat, index) => (
+    <div key={index} className='bg-white shadow-md rounded-lg p-6 text-center flex flex-col ' >
+      <h2 className="text-3xl font-bold text-teal-500">{stat.value}</h2>
+      <p className="text-gray-600">{stat.label}</p>
+    </div>
+  ))}
+</div>
 
       {/* Testimonials Section */}
       <h2 className="text-center text-2xl font-bold mb-6">

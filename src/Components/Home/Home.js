@@ -4,7 +4,7 @@ import Feature from '../Feature/Feature';
 import PrayerTimesWidge from '../../Pages/PrayerTime/Widgets/PrayerTimesWidge';
 import EssentialTools from '../EssentialsTools/EssentialTools';
 import Community from '../Community/Community';
-import QiblaDirection from '../Qibla/QiblaDirection';
+
 
 const Home = () => {
 
@@ -36,7 +36,7 @@ const Home = () => {
           {/* Featured Content */}
           
           <Feature />
-          <QiblaDirection/>
+          
           {/* Inspirational Quote */}
           {/* <section id="prayers" className="bg-transparent py-20">
             <div className="container mx-auto text-center">

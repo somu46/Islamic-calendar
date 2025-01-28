@@ -10,6 +10,7 @@ import IslamicHolidayPage from "./IslamicHoliDays/IslamicHoliDays";
 import PrayerTimesWidge from "./PrayerTime/Widgets/PrayerTimesWidge";
 import PrayerTimes from "./PrayerTime/PrayerTime";
 import BlogPage from "./Blogs/Blogs";
+import QiblaDir from "./QiblaDir/QiblaDir";
 
 
 export {Error,IslamicCalendar,
@@ -22,5 +23,6 @@ export {Error,IslamicCalendar,
     IslamicHolidayPage,
     PrayerTimes,
     PrayerTimesWidge,
-    BlogPage
+    BlogPage,
+    QiblaDir
 }
