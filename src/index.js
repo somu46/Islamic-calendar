@@ -14,7 +14,7 @@ import Surahs from './Pages/AlQuran/Surahs';
 import Juz from './Pages/AlQuran/Juz';
 
 
-const Home = lazy(() => waitPromise(3000).then(() => import('./Components/Home/Home')));
+const Home = lazy(() => waitPromise(1000).then(() => import('./Components/Home/Home')));
 
 // Simulate a promise for loading delay
 const waitPromise = (time) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress, getPrayerTimeOfDayByLocation } from "../../../apiServices/apiServices";
+import SetLocation from "../../../Components/SetLocation/SetLocation";
 // import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const PrayerTimesWidge = () => {
@@ -77,7 +78,12 @@ const PrayerTimesWidge = () => {
 
   // Error State
   if (!prayerResponse) {
-    return <div className="text-center mt-10">Failed to load prayer times. Please try again later.</div>;
+    return <div className=" text-xl text-center mt-10 text-red-600 border-2 border-red-500 py-5">
+      <p className="text-red-600">Failed to load prayer times. Please try again later.</p>
+      <div className="">
+    <div className="rounded-lg text-center max-w-sm w-full "><SetLocation/></div>
+      </div>
+    </div>;
   }
 
   // Extracting Data from Response
