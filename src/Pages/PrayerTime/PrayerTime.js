@@ -107,8 +107,10 @@ const PrayerTimes = () => {
   // Render Component
   return (
     <>
-      
-      <div className="max-w-lg mx-auto  shadow-lg rounded-lg px-6  border border-gray-200"
+       <div className="bg-white rounded-lg opacity-75 px-4 mb-2 ">
+      <Breadcrumb pageName="Prayer Times" />
+      </div>
+      <div className="max-w-lg mx-auto -mt-6 shadow-lg rounded-lg px-6   border border-gray-200"
       style={{
         backgroundImage: `url(${fullbg})`,
         backgroundSize: "cover",
@@ -116,15 +118,13 @@ const PrayerTimes = () => {
         backgroundColor: "#FEFBF1",
       }}
       >
-      <div className="bg-white rounded-lg opacity-75 px-4 mb-2 mt-24">
-      <Breadcrumb pageName="Prayer Times" />
-      </div>
+     
         {/* Header */}
-        <div className="flex justify-between items-center mb-4 bg-white rounded-lg opacity-80 px-3 ">
-          <h2 className="text-lg font-semibold text-black">
+        <div className="flex justify-between items-center mb-4  bg-white rounded-lg opacity-80 px-3 ">
+          <h2 className="text-lg font-semibold text-blue-600">
             Prayer Times in {meta?.timezone || "Unknown Location"}
           </h2>
-          <div className="text-sm text-black font-bold text-right">
+          <div className="text-sm text-blue-600 font-bold text-right">
             <p>{gregorianDate}</p>
             <p>{hijriDate}</p>
           </div>

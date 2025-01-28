@@ -54,7 +54,7 @@ const QiblaDirection = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div className="p-4 bg-gradient-to-br from-teal-200 via-white to-teal-200  rounded-lg shadow-lg max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold text-center text-teal-800 mb-4">
         Calculate Qibla Direction
       </h2>
