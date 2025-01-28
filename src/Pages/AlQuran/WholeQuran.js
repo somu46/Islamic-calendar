@@ -49,7 +49,7 @@ const Quran = () => {
 
   // Error State
   if (error) {
-    return <p className="text-center text-red-600">{error}</p>;
+    return <p className="text-center text-red-600 mt-[10rem]">{error}</p>;
   }
 
   return (

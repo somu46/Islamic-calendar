@@ -10,7 +10,7 @@ const quran_edition_BaseUrl = `https://api.alquran.cloud/v1/edition`;
 const quran_edition_with_audio_BaseUrl = `https://api.alquran.cloud/v1/quran/`;
 const Date_Changer_BaseUrl = `https://api.aladhan.com/v1/gToH/`; 
 const PrayerTimeByAddress_BaseUrl = `https://api.aladhan.com/v1/timingsByAddress/`;
-const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/1/quran-uthmani?offset=3&limit=10`; 
+const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/`; 
 const HoliDaya_BaseUrl=`https://api.aladhan.com/v1/islamicHolidaysByHijriYear/`
 
 
@@ -60,9 +60,9 @@ const getDateChanger=async(date)=>{
             }
 }
 
-const getQuran_Juz=async()=>{
+const getQuran_Juz=async(currentPage)=>{
     try{
-        const response=await axios.get(Quran_Juz_url);
+        const response=await axios.get(`${Quran_Juz_url}/${currentPage}/quran-uthmani?offset=3&limit=10`);
         return response.data.data;
     }catch(error){
         console.log(error);
