@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MdOutlineArrowBackIos ,MdOutlineArrowForwardIos} from "react-icons/md";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const quranApiUrl = "https://api.alquran.cloud/v1/quran/ar.alafasy";
 
@@ -51,6 +52,8 @@ const Surahs = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
+      <Breadcrumb pageName="Surahs"/>
+      <h1 className="text-2xl font-semibold mb-4 text-center">Al-Quran Surahs</h1>
       {loading ? (
         <div className="text-center">
           <p className="text-lg font-semibold">Loading Surahs...</p>
