@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaQuran, FaCalendarAlt, FaMapMarkerAlt, FaSyncAlt, FaKaaba, FaCalculator, FaPray, FaMoon } from "react-icons/fa";
+import { FaQuran, FaCalendarAlt, FaMapMarkerAlt, FaSyncAlt, FaCalculator, FaPray, FaMoon } from "react-icons/fa";
 
 const features = [
   { name: "Al Quran", icon: <FaQuran />, path: "/essentials/al-quran" },

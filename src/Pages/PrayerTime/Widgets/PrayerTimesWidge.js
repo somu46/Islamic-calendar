@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getPrayerTimeOfDayByAddress, getPrayerTimeOfDayByLocation } from "../../../apiServices/apiServices";
+import {
+  getPrayerTimeOfDayByAddress,
+  getPrayerTimeOfDayByLocation,
+} from "../../../apiServices/apiServices";
 import SetLocation from "../../../Components/SetLocation/SetLocation";
 // import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
-import bg from '../../../Assets/widgetBG.png'
+import bg from "../../../Assets/widgetBG.png";
 
 const PrayerTimesWidge = () => {
   const today = new Date();
@@ -27,7 +30,7 @@ const PrayerTimesWidge = () => {
     const location = sessionStorage.getItem("location");
 
     // console.log("Retrieved Location:", { latitude, longitude, location });
-    
+
     if (latitude && longitude) {
       setPrayerLocation({ latitude, longitude, location: null });
     } else if (location) {
@@ -39,7 +42,7 @@ const PrayerTimesWidge = () => {
   }, []);
 
   // console.log("prayerLocation",prayerLocation);
-  
+
   // Fetch prayer times
   useEffect(() => {
     const fetchPrayerTimes = async () => {
@@ -48,10 +51,17 @@ const PrayerTimesWidge = () => {
 
         if (prayerLocation.latitude && prayerLocation.longitude) {
           // console.log("Fetching prayer times using latitude and longitude...");
-          response = await getPrayerTimeOfDayByLocation(prayerDate, prayerLocation.latitude, prayerLocation.longitude);
+          response = await getPrayerTimeOfDayByLocation(
+            prayerDate,
+            prayerLocation.latitude,
+            prayerLocation.longitude
+          );
         } else if (prayerLocation.location) {
           console.log("Fetching prayer times using location name...");
-          response = await getPrayerTimeOfDayByAddress(prayerDate, prayerLocation.location);
+          response = await getPrayerTimeOfDayByAddress(
+            prayerDate,
+            prayerLocation.location
+          );
         }
 
         if (response) {
@@ -79,12 +89,18 @@ const PrayerTimesWidge = () => {
 
   // Error State
   if (!prayerResponse) {
-    return <div className=" text-xl text-center mt-10 text-red-600 border-2 border-red-500 py-5">
-      <p className="text-red-600">Failed to load prayer times. Please try again later.</p>
-      <div className="">
-    <div className="rounded-lg text-center max-w-sm w-full "><SetLocation/></div>
+    return (
+      <div className=" text-xl text-center mt-10 text-red-600 py-5">
+        <p className="text-red-600">
+          Failed to load prayer times. Please try again later.
+        </p>
+        <div className="flex justify-center items-center ">
+          <div className="rounded-lg text-center max-w-sm w-full ">
+            <SetLocation  />
+          </div>
+        </div>
       </div>
-    </div>;
+    );
   }
 
   // Extracting Data from Response
@@ -110,12 +126,14 @@ const PrayerTimesWidge = () => {
   }) || ["Fajr", timings.Fajr];
 
   return (
-    <div className="max-w-full mx-auto bg-gray-900 text-white px-1 sm:px-6 py-3 sm:py-5 shadow-lg"
-    style={{
-      backgroundImage: `url(${bg})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundColor: "#FEFBF1",}}
+    <div
+      className="max-w-full mx-auto bg-gray-900 text-white px-1 sm:px-6 py-3 sm:py-5 shadow-lg"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundColor: "#FEFBF1",
+      }}
     >
       <div className="flex justify-between items-center gap-x-6">
         <div>
@@ -126,7 +144,9 @@ const PrayerTimesWidge = () => {
           </div>
           <div className="text-sm text-right my-1 px-3">
             <span className="mx-1">{hijriDate}</span>
-            <span className="text-gray-400 mx-1">{prayerResponse?.meta?.timezone}</span>
+            <span className="text-gray-400 mx-1">
+              {prayerResponse?.meta?.timezone}
+            </span>
           </div>
         </div>
         <div>
