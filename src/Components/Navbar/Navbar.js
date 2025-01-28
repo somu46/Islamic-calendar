@@ -47,7 +47,7 @@ const Navbar = () => {
           </div>
 
           {/* Center Menu (Desktop) */}
-          <ul className="hidden md:flex space-x-8 items-center">
+          <ul className="hidden lg:flex space-x-8 items-center">
           <li>
               <NavLink
                 to="/"
@@ -110,12 +110,12 @@ const Navbar = () => {
           </ul>
 
           {/* Right Section */}
-          <div className="hidden md:block" style={{ marginRight: "20px" }}>
+          <div className="hidden lg:block" style={{ marginRight: "20px" }}>
             <SetLocation />
           </div>
 
           {/* Hamburger Menu (Mobile) */}
-          <div className="md:hidden z-50">
+          <div className="lg:hidden z-50">
             <Hamburger
               toggled={isMenuOpen}
               toggle={setIsMenuOpen}

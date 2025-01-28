@@ -48,24 +48,23 @@ const PrayerTimesWidge = () => {
     const fetchPrayerTimes = async () => {
       try {
         let response = null;
-
-        if (prayerLocation.latitude && prayerLocation.longitude) {
-          // console.log("Fetching prayer times using latitude and longitude...");
+  
+        if (prayerLocation.location) {
+          // Fetch prayer times using location name
+          response = await getPrayerTimeOfDayByAddress(
+            prayerDate,
+            prayerLocation.location
+          );
+        } else if (prayerLocation.latitude && prayerLocation.longitude) {
+          // Fetch prayer times using latitude and longitude
           response = await getPrayerTimeOfDayByLocation(
             prayerDate,
             prayerLocation.latitude,
             prayerLocation.longitude
           );
-        } else if (prayerLocation.location) {
-          console.log("Fetching prayer times using location name...");
-          response = await getPrayerTimeOfDayByAddress(
-            prayerDate,
-            prayerLocation.location
-          );
         }
-
+  
         if (response) {
-          // console.log("Prayer Times Response:", response);
           setPrayerResponse(response);
         } else {
           console.error("No response received for prayer times.");
@@ -76,12 +75,20 @@ const PrayerTimesWidge = () => {
         setLoading(false);
       }
     };
-
-    if (prayerLocation.latitude || prayerLocation.location) {
+  
+    if (
+      (prayerLocation.latitude && prayerLocation.longitude) || 
+      prayerLocation.location
+    ) {
       fetchPrayerTimes();
     }
-  }, [prayerLocation, prayerDate]);
-
+  }, [
+    prayerLocation.latitude,
+    prayerLocation.longitude,
+    prayerLocation.location,
+    prayerDate,
+  ]);
+  
   // Loading State
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
