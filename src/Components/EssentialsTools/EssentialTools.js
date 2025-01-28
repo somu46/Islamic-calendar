@@ -10,37 +10,37 @@ const EssentialTools = () => {
     {
       title: 'Prayer Times',
       description: 'Accurate prayer times based on your location with Qibla direction',
-      icon: <FaPray className="text-4xl text-green-500" />,
+      icon: <FaPray className="text-4xl text-teal-500" />,
       link: "/essentials/prayer-times",
     },
     {
       title: 'Digital Quran',
       description: 'Read and listen to the Quran with multiple translations',
-      icon: <FaQuran className="text-4xl text-green-500" />,
+      icon: <FaQuran className="text-4xl text-teal-500" />,
       link: "/essentials/al-quran",
     },
     {
       title: 'Islamic Calendar',
       description: 'Track Hijri dates and important Islamic events',
-      icon: <FaCalendarAlt className="text-4xl text-green-500" />,
+      icon: <FaCalendarAlt className="text-4xl text-teal-500" />,
       link: "/essentials/islamic-calendar",
     },
     {
       title: 'Zakat Calculator',
       description: 'Calculate your Zakat easily with our comprehensive tool',
-      icon: <FaCalculator className="text-4xl text-green-500" />,
+      icon: <FaCalculator className="text-4xl text-teal-500" />,
       link:  "/essentials/zakat-calculator" ,
     },
     {
       title: 'Islamic Knowledge',
       description: 'Access Hadiths, Duas, and Islamic teachings',
-      icon: <FaBook className="text-4xl text-green-500" />,
+      icon: <FaBook className="text-4xl text-teal-500" />,
       link: '#',
     },
     {
       title: 'Date Converter',
       description: 'Convert between Hijri and Gregorian calendars',
-      icon: <FaSyncAlt className="text-4xl text-green-500" />,
+      icon: <FaSyncAlt className="text-4xl text-teal-500" />,
       link: "/essentials/date-converter",
     },
   ];
@@ -63,7 +63,7 @@ const EssentialTools = () => {
             <Link
               to={tool.link}
               onClick={handleHistory}
-              className="text-green-500 font-medium hover:underline"
+              className="text-teal-500 font-medium hover:underline"
             >
               Learn more →
             </Link>

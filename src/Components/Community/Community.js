@@ -35,15 +35,15 @@ const Community = () => {
       {/* Stats Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-3xl font-bold text-green-500">50K+</h2>
+          <h2 className="text-3xl font-bold text-teal-500">50K+</h2>
           <p className="text-gray-600">Active Members</p>
         </div>
         <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-3xl font-bold text-green-500">1M+</h2>
+          <h2 className="text-3xl font-bold text-teal-500">1M+</h2>
           <p className="text-gray-600">Daily Prayers</p>
         </div>
         <div className="bg-white shadow-md rounded-lg p-6 text-center">
-          <h2 className="text-3xl font-bold text-green-500">5K+</h2>
+          <h2 className="text-3xl font-bold text-teal-500">5K+</h2>
           <p className="text-gray-600">Daily Questions</p>
         </div>
       </div>
@@ -59,7 +59,7 @@ const Community = () => {
             key={index}
             className="bg-white shadow-md rounded-lg p-6 text-center"
           >
-            <div className="flex justify-center items-center w-16 h-16 bg-green-100 text-green-500 rounded-full mx-auto mb-4 text-xl font-bold">
+            <div className="flex justify-center items-center w-16 h-16 bg-teal-100 text-teal-500 rounded-full mx-auto mb-4 text-xl font-bold">
               {testimonial.initials}
             </div>
             <h3 className="text-lg font-semibold">{testimonial.name}</h3>
@@ -71,7 +71,7 @@ const Community = () => {
 
       {/* Call to Action */}
       <div className="text-center mt-10">
-        <button className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
+        <button className="bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
           Join Our Community
         </button>
       </div>
@@ -89,7 +89,7 @@ const Community = () => {
             placeholder="Enter your email"
             className="p-3 border rounded-lg w-full md:w-2/3 focus:outline-none"
           />
-          <button className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
+          <button className="bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
             Subscribe
           </button>
         </form>
