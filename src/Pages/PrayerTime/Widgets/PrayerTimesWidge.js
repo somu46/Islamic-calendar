@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress, getPrayerTimeOfDayByLocation } from "../../../apiServices/apiServices";
 import SetLocation from "../../../Components/SetLocation/SetLocation";
 // import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import bg from '../../../Assets/widgetBG.png'
 
 const PrayerTimesWidge = () => {
   const today = new Date();
@@ -109,7 +110,13 @@ const PrayerTimesWidge = () => {
   }) || ["Fajr", timings.Fajr];
 
   return (
-    <div className="max-w-full mx-auto bg-gray-900 text-white rounded-md px-1 sm:px-6 py-3 sm:py-5 shadow-lg">
+    <div className="max-w-full mx-auto bg-gray-900 text-white px-1 sm:px-6 py-3 sm:py-5 shadow-lg"
+    style={{
+      backgroundImage: `url(${bg})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundColor: "#FEFBF1",}}
+    >
       <div className="flex justify-between items-center gap-x-6">
         <div>
           <div className="flex items-center gap-4 justify-center">

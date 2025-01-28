@@ -55,15 +55,15 @@ const EssentialTools = () => {
         {tools.map((tool, index) => (
           <div
             key={index}
-            className="bg-white shadow-md rounded-lg p-6 flex flex-col items-start"
+            className="bg-white shadow-md rounded-lg p-6 flex flex-col"
           >
-            <div className="mb-4">{tool.icon}</div>
-            <h2 className="text-xl font-semibold mb-2">{tool.title}</h2>
-            <p className="text-gray-600 mb-4">{tool.description}</p>
+            <div className="mb-4 mx-auto">{tool.icon}</div>
+            <h2 className="text-xl font-semibold mb-2 mx-auto">{tool.title}</h2>
+            <p className="text-gray-600 mb-4 text-center">{tool.description}</p>
             <Link
               to={tool.link}
               onClick={handleHistory}
-              className="text-teal-500 font-medium hover:underline"
+              className="text-teal-500 text-center font-medium hover:underline hover:scale-105 duration-300 "
             >
               Learn more →
             </Link>

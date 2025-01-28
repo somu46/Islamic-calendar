@@ -47,10 +47,7 @@ const Route =createBrowserRouter([
         path:'/',
         element:<Home/>
       },
-      {
-        path:'/islamic-holidays',
-        element:<IslamicHolidayPage/>
-      },
+      
       {
         path:'/about-us',
         element:<About/>
@@ -78,6 +75,11 @@ const Route =createBrowserRouter([
     path: '/essentials',
     element: <Root />,
     children: [
+
+      {
+        path:'/essentials/islamic-holidays',
+        element:<IslamicHolidayPage/>
+      },
      
       {
         path: '/essentials/zakat-calculator', 

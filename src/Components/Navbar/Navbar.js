@@ -162,7 +162,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-              <NavLink to="/contact-us" className="hover:text-teal-300 transition">
+              <NavLink to="/contact-us" className="hover:text-teal-300 transition" onClick={handleMobileHistory}>
                 Contact Us
               </NavLink>
             </li>
@@ -224,15 +224,15 @@ const Navbar = () => {
                     Zakat Calculator
                   </NavLink>
                 </li>
-                {/* <li className="bg-[#FF0000] w-[70%] my-3 p-1 rounded-md shadow-lg text-xl  ">
+                <li>
                   <NavLink
-                    to="/islamic-holidays"
-                    className=" hover:text-teal-300 transition "
+                    to="/essentials/islamic-holidays"
+                    className="hover:text-teal-300 transition"
                     onClick={handleMobileHistory}
                   >
-                  Islamic  Holidays
+                    Islamic Holidays
                   </NavLink>
-                </li> */}
+                </li>
                 <SetLocation />
               </ul>
             </nav>

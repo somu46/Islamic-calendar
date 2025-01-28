@@ -4,11 +4,11 @@ import { FaQuran, FaCalendarAlt, FaMapMarkerAlt, FaSyncAlt, FaKaaba, FaCalculato
 
 const features = [
   { name: "Al Quran", icon: <FaQuran />, path: "/essentials/al-quran" },
-  { name: "Islamic Holidays", icon: <FaMoon />, path: "/islamic-holidays" },
+  { name: "Islamic Holidays", icon: <FaMoon />, path: "/essentials/islamic-holidays" },
   { name: "Calendar", icon: <FaCalendarAlt />, path: "/essentials/islamic-calendar" },
   { name: "Islamic Places", icon: <FaMapMarkerAlt />, path: "/places" },
   { name: "Date Converter", icon: <FaSyncAlt />, path: "/essentials/date-converter" },
-  { name: "Prayer Widgets", icon: <FaKaaba />, path: "/widgets" },
+  // { name: "Prayer Widgets", icon: <FaKaaba />, path: "/widgets" },
   { name: "Zakat Calculator", icon: <FaCalculator />, path: "/essentials/zakat-calculator" },
   { name: "Prayer Times", icon: <FaPray />, path: "/essentials/prayer-times" },
 ];
