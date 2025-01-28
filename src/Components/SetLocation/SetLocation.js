@@ -101,6 +101,7 @@ const SetLocation = () => {
       setSelectedLocation(location);
       setModalOpen(false);
       navigate("/");
+      window.location.reload(); 
     }
   };
 
@@ -118,7 +119,7 @@ const SetLocation = () => {
     <div className="max-w-md mx-auto">
       {/* Location Input */}
       <div
-        className="relative w-full"
+        className="relative w-full text-teal-500"
         onClick={() => setModalOpen(true)}
       >
         <input

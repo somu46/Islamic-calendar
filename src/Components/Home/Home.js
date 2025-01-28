@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Feature from '../Feature/Feature';
 import PrayerTimesWidge from '../../Pages/PrayerTime/Widgets/PrayerTimesWidge';
 import EssentialTools from '../EssentialsTools/EssentialTools';
@@ -7,22 +7,7 @@ import Community from '../Community/Community';
 import QiblaDirection from '../Qibla/QiblaDirection';
 
 const Home = () => {
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const latitude = sessionStorage.getItem('latitude');
-    const longitude = sessionStorage.getItem('longitude');
-    const location = sessionStorage.getItem('location');
-
-    // console.log('latitude:', latitude);
-    // console.log('longitude:', longitude);
-    // console.log('location:', location);
-
-    if ((!latitude && !longitude) && !location) {
-     
-      navigate('/change-location');
-    }
-  }, [navigate]);
 
   return (
     <>
