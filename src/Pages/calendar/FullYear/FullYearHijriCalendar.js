@@ -70,7 +70,7 @@ const FullYearHijriCalendar = ({ year }) => {
     return (
       <div
         key={monthIndex}
-        className="border rounded-lg p-1 md:p-4 shadow-md bg-white"
+        className="border rounded-lg p-1 md:p-4 shadow-md bg-transparent border-red-500"
       >
         <h3 className="text-sm md:text-lg font-bold text-center mb-2">
           {monthNames[monthIndex]}
@@ -99,7 +99,7 @@ const FullYearHijriCalendar = ({ year }) => {
               today.getFullYear() === year;
 
             return (
-              <div key={index} className="flex justify-center text-[8px] sm:text-[15px]">
+              <div key={index} className="flex justify-center text-[8px] sm:text-[15px] ">
                 <div
                   className={`flex flex-col items-center m-[0.5px] p-[5.5px] justify-center w-[12px] h-[12px] sm:m-1 sm:p-3 md:w-12 md:h-12  sm:rounded-md cursor-pointer 
                     ${!day ? "bg-transparent" : ""} 
@@ -131,7 +131,9 @@ const FullYearHijriCalendar = ({ year }) => {
   };
 
   return (
-    <div className="container mx-auto p-2 min-h-screen">
+    <div className="container mx-auto  px-1 "
+      
+    >
       
       <h2 className="text-2xl font-bold text-center text-green-700 mb-4">
         Hijri Calendar - {year}
