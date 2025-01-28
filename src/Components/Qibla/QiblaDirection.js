@@ -70,15 +70,15 @@ const QiblaDirection = () => {
 
       {latitude && longitude && (
         <div className="mt-4 text-center">
-          <h3 className="text-lg text-gray-700">
+          {/* <h3 className="text-lg text-gray-700">
             Your Location   
           </h3>
           <p>Latitude :{latitude.toFixed(6)}</p>
-          <p>Longitude : {longitude.toFixed(6)} </p>
+          <p>Longitude : {longitude.toFixed(6)} </p> */}
 
           {direction !== null && (
             <div className="mt-6">
-              <h3 className="text-xl font-bold text-teal-800">Qibla Direction:</h3>
+              <h3 className="text-xl font-bold text-teal-600">Qibla Direction:</h3>
               <p className="text-lg text-gray-800 mb-6">{direction}°</p>
 
               {/* Compass with Arrow */}
