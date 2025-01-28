@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPrayerTimeOfDayByAddress, getPrayerTimeOfDayByLocation } from "../../apiServices/apiServices";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import bg from '../../Assets/widgetBG.png'
+import fullbg from '../../Assets/prayertimeBG1.png'
 
 const PrayerTimes = () => {
   const today = new Date();
@@ -105,57 +107,74 @@ const PrayerTimes = () => {
   // Render Component
   return (
     <>
-      <div>
-        <Breadcrumb pageName="Prayer Times" />
+      
+      <div className="max-w-lg mx-auto  shadow-lg rounded-lg px-6  border border-gray-200"
+      style={{
+        backgroundImage: `url(${fullbg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundColor: "#FEFBF1",
+      }}
+      >
+      <div className="bg-white rounded-lg opacity-75 px-4 mb-2 mt-24">
+      <Breadcrumb pageName="Prayer Times" />
       </div>
-      <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg px-6 py-5 border border-gray-200">
         {/* Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold text-gray-800">
+        <div className="flex justify-between items-center mb-4 bg-white rounded-lg opacity-80 px-3 ">
+          <h2 className="text-lg font-semibold text-black">
             Prayer Times in {meta?.timezone || "Unknown Location"}
           </h2>
-          <div className="text-sm text-gray-600 text-right">
+          <div className="text-sm text-black font-bold text-right">
             <p>{gregorianDate}</p>
             <p>{hijriDate}</p>
           </div>
         </div>
 
         {/* Upcoming Prayer */}
-        <div className="flex items-center justify-between bg-blue-100 rounded-lg p-4 mb-4">
+        <div className="flex items-center justify-between  rounded-xl opacity-90 p-4 mb-4"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "fit",
+          backgroundPosition: "center",
+          backgroundColor: "#FEFBF1",
+        }}
+        >
           <div className="text-center">
-            <p className="text-sm text-gray-600">Upcoming Prayer</p>
-            <p className="text-lg font-semibold text-blue-600">{upcomingPrayer[0]}</p>
+            <p className="text-sm text-white">Upcoming Prayer</p>
+            <p className="text-lg font-semibold text-white">{upcomingPrayer[0]}</p>
           </div>
           <div className="text-center">
-            <p className="text-4xl font-bold text-blue-800">{formatTime(upcomingPrayer[1])}</p>
+            <p className="text-4xl font-bold text-white">{formatTime(upcomingPrayer[1])}</p>
           </div>
         </div>
 
         {/* Prayer Times */}
         <div className="grid grid-cols-3 gap-4 text-center">
           {Object.entries(timings).map(([prayer, time]) => (
-            <div key={prayer} className="bg-gray-50 border rounded-lg p-2">
-              <p className="text-sm font-medium text-gray-600">{prayer}</p>
-              <p className="text-lg font-semibold text-gray-800">{formatTime(time)}</p>
+            <div key={prayer} className=" border rounded-lg p-2">
+              <p className="text-sm font-medium text-white">{prayer}</p>
+              <p className="text-lg font-semibold text-white">{formatTime(time)}</p>
             </div>
           ))}
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-4 text-sm text-gray-500">
-          <p className="text-black text-lg font-semibold">{meta?.method?.name || "Unknown Method"}</p>
-          <p>
-            Fajr: {meta?.method?.params?.Fajr || "N/A"}°, Isha: {meta?.method?.params?.Isha || "N/A"}°
-          </p>
           <Link
             onClick={() => window.scrollTo(0, 0)}
             to="/change-location"
-            className="text-blue-500 underline hover:text-blue-700"
+            className="text-white underline hover:text-blue-700 text-md"
           >
-            Change location
+            <button className="bg-teal-500 rounded-lg font-semibold opacity-100 p-2">Change location</button>
           </Link>
         </div>
+        <div className="text-center mt-4 mb-28 text-white">
+          <p className=" text-lg font-semibold">{meta?.method?.name || "Unknown Method"}</p>
+          <p className="">
+            Fajr: {meta?.method?.params?.Fajr || "N/A"}°, Isha: {meta?.method?.params?.Isha || "N/A"}°
+          </p>
+        </div>
+        
+        
       </div>
+
+     
     </>
   );
 };
