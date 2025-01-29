@@ -128,12 +128,14 @@ const IslamicCalendar = () => {
     }}
     >
       <Breadcrumb pageName='Islamic Calendar' />
-      <div>
-        <div className='flex justify-center items-center gap-x-4'>
-          <lebal className="text-xl font-semibold text-teal-700 hover:text-blue-600">You can Know any date of any Year:</lebal>
+      <div className='mb-6'>
+        <div className='flex justify-center items-center gap-x-4 sm:gap-x-4 mb-5'>
+          <lebal className="sm:text-xl font-semibold text-teal-700 hover:text-blue-600">You can Know any date of any Year:</lebal>
           <input 
           type='number'
           value={year}
+          min={1}
+          max={9665}
           onChange={(e) => setYear(e.target.value)}
           className='p-1 border-2 border-blue-500 rounded-lg shadow-lg'
           />
