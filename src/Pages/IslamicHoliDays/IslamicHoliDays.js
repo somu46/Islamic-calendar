@@ -25,10 +25,14 @@ const IslamicHolidayPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 mt-[4.7rem]">
-     <div>
+    <>
+   
+    <div>
       <Breadcrumb pageName='Islamic Holidays' />
-      </div>
+    
+    </div>
+    <div className="min-h-screen bg-gray-100 text-gray-800 ">
+     
       <header className="text-gray-700 py-6 shadow-sm">
         <div className="container mx-auto text-center">
           <h1 className="text-3xl font-bold">Islamic Holidays</h1>
@@ -108,6 +112,7 @@ const IslamicHolidayPage = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

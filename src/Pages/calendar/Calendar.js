@@ -118,7 +118,7 @@ const IslamicCalendar = () => {
   };
 
   return (
-    <div className=' min-h-screen sm:p-5'
+    <div className=' min-h-screen sm:p-5 mb-1'
     style={{
       backgroundImage: `url(${bgimage})`,
       backgroundSize: "cover",
@@ -128,6 +128,17 @@ const IslamicCalendar = () => {
     }}
     >
       <Breadcrumb pageName='Islamic Calendar' />
+      <div>
+        <div className='flex justify-center items-center gap-x-4'>
+          <lebal className="text-xl font-semibold text-teal-700 hover:text-blue-600">You can Know any date of any Year:</lebal>
+          <input 
+          type='number'
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          className='p-1 border-2 border-blue-500 rounded-lg shadow-lg'
+          />
+        </div>
+      </div>
       <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end">
         <button
           onClick={() => setView("monthly")}
@@ -259,7 +270,7 @@ const IslamicCalendar = () => {
       ) : (
         <div className="">
           <Indicator />
-          <FullYearHijriCalendar year={2025} /> 
+          <FullYearHijriCalendar year={year} /> 
             
         
         </div>

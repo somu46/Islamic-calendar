@@ -99,7 +99,7 @@ const PrayerTimesWidge = () => {
     return (
       <div className=" text-xl text-center mt-10 text-red-600 py-5">
         <p className="text-red-600">
-          Failed to load prayer times. Please try again later.
+          Failed to load prayer times. Please set your Location !
         </p>
         <div className="flex justify-center items-center ">
           <div className="rounded-lg text-center max-w-sm w-full ">

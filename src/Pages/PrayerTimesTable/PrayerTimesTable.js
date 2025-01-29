@@ -56,6 +56,8 @@ useEffect(() => {
     }
   };
 
+  console.log("Response: ",response);
+
   return (
     <>
      <div>
@@ -84,8 +86,8 @@ useEffect(() => {
       </div>
 
       {/* Location Info */}
-      <div className="p-3 mb-3 font-semibold text-lg text-center sm:text-left">
-        <h3>Your are in: {country}/{city}</h3>
+      <div className="p-3 mb-3 font-semibold text-xl text-teal-700 text-center sm:text-left">
+     {response[0]?.meta?.timezone && <h3>This prayer Time is Based on your Location: {response[0]?.meta?.timezone}</h3>}
       </div>
 
       {/* Month and Year Selectors */}
