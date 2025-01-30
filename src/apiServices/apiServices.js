@@ -11,6 +11,7 @@ const quran_edition_with_audio_BaseUrl = `https://api.alquran.cloud/v1/quran/`;
 const Date_Changer_BaseUrl = `https://api.aladhan.com/v1/gToH/`; 
 const PrayerTimeByAddress_BaseUrl = `https://api.aladhan.com/v1/timingsByAddress/`;
 const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/`; 
+const Quran_Translations_url = `http://api.alquran.cloud/v1/edition/type/translation`; 
 const HoliDaya_BaseUrl=`https://api.aladhan.com/v1/islamicHolidaysByHijriYear/`
 
 
@@ -69,6 +70,21 @@ const getQuran_Juz=async(currentPage)=>{
         
     }
 }
+const getQuranTranslations = async (cancelToken) => { // 1. Fixed typo in function name
+  try {
+    const response = await axios.get(Quran_Translations_url, {
+      cancelToken: cancelToken // 2. Accept cancel token as parameter
+    });
+    return response.data.data;
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      console.log("Request canceled:", error.message);
+    } else {
+      console.error("Error fetching Translation from API:", error.message);
+    }
+    throw error;
+  }
+};
 
 const getPrayerTimeOfDayByAddress = async (date = "09-01-2025", address = "Lahore,Pakistan") => {
   try {
@@ -167,6 +183,7 @@ export {
      getPrayerTimeOfDayByLocation,
      getPrayerTimeOfDayByAddress,
      getQuran_Juz,
+     getQuranTranslations,
      getFullHijriCalendar,
      getIslamicHoliDays,
      getCountry,

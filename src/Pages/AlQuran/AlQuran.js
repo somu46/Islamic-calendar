@@ -29,7 +29,7 @@ const navigate=useNavigate();
     { label: "Full Quarn", value: "Quarn", icon: "☪",path:'/essentials/full-quran' },
     { label: "Surahs", value: "surahs", icon: "📖",path:'/essentials/surahs' },
     { label: "Juz", value: "juz", icon: "🕌",path:'/essentials/juz' },
-    { label: "Translations", value: "translations", icon: "🌐",path:'/essentials/al-quran' },
+    { label: "Translations", value: "translations", icon: "🌐",path:'/essentials/translations' },
     { label: "Topics", value: "topics", icon: "📚",path:'/essentials/al-quran' },
   ];
 

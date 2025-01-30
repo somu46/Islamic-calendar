@@ -1,10 +1,11 @@
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 
 
 const Error = () => {
+  const navigate=useNavigate();
   return (
     <>
       <Breadcrumb pageName="Error" />
@@ -17,7 +18,7 @@ const Error = () => {
           Sorry ! Page Not Found.
         </div>
         <Link
-          to="/"
+          onClick={()=>navigate(-1)}
           className="mt-8 border-2 border-black shadow-lg border-white-600 p-2 rounded-md font-semibold text-inherit hover:border-blue-700 hover:border-2 transition-all duration-300 ease-in-out hover:tracking-wider"
         >
           Back to Home &rarr;
