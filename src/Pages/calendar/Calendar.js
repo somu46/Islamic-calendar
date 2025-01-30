@@ -16,6 +16,9 @@ const IslamicCalendar = () => {
   const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [inputYear, setInputYear] = useState(new Date().getFullYear()); // State for the input year
+  const [inputMonth, setInputMonth] = useState(new Date().getMonth() + 1); // State for the input month (1-12)
+  const [shouldFetchData, setShouldFetchData] = useState(true); // State to control API call (set to true initially)
 
   const today = new Date();
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -56,9 +59,12 @@ const IslamicCalendar = () => {
   }, [month, year]);
 
   useEffect(() => {
-    generateDaysInMonth(month, year);
-    fetchCalendarData();
-  }, [month, year, generateDaysInMonth, fetchCalendarData]);
+    if (shouldFetchData) {
+      generateDaysInMonth(month, year);
+      fetchCalendarData();
+      setShouldFetchData(false); // Reset the flag after fetching data
+    }
+  }, [month, year, generateDaysInMonth, fetchCalendarData, shouldFetchData]);
 
   const handlePreviousMonth = () => {
     if (month === 0) {
@@ -67,6 +73,7 @@ const IslamicCalendar = () => {
     } else {
       setMonth(month - 1);
     }
+    setShouldFetchData(true); // Trigger API call for the new month
   };
 
   const handleNextMonth = () => {
@@ -76,6 +83,14 @@ const IslamicCalendar = () => {
     } else {
       setMonth(month + 1);
     }
+    setShouldFetchData(true); // Trigger API call for the new month
+  };
+
+  const handleTodayButtonClick = () => {
+    const currentDate = new Date();
+    setMonth(currentDate.getMonth()); // Set to current month
+    setYear(currentDate.getFullYear()); // Set to current year
+    setShouldFetchData(true); // Trigger API call to fetch current month data
   };
 
   const getDayDetails = (day) => {
@@ -117,6 +132,16 @@ const IslamicCalendar = () => {
     }
   };
 
+  const handleGoButtonClick = () => {
+    if (inputYear >= 1 && inputYear <= 9665 && inputMonth >= 1 && inputMonth <= 12) {
+      setYear(inputYear); // Update the year state
+      setMonth(inputMonth - 1); // Update the month state (subtract 1 because months are 0-indexed)
+      setShouldFetchData(true); // Trigger the API call
+    } else {
+      alert("Please enter a valid year (1-9665) and month (1-12).");
+    }
+  };
+
   return (
     <div className=' min-h-screen sm:p-5 mb-1'
     style={{
@@ -130,15 +155,32 @@ const IslamicCalendar = () => {
       <Breadcrumb pageName='Islamic Calendar' />
       <div className='mb-6'>
         <div className='flex justify-center items-center gap-x-4 sm:gap-x-4 mb-5'>
-          <lebal className="sm:text-xl font-semibold text-teal-700 hover:text-blue-600">You can Know any date of any Year:</lebal>
+          <lebal className="sm:text-xl font-semibold text-teal-700 hover:text-blue-600">Select Month and Year:</lebal>
+          <select
+            value={inputMonth}
+            onChange={(e) => setInputMonth(Number(e.target.value))}
+            className='p-1 border-2 border-blue-500 rounded-lg shadow-lg'
+          >
+            {monthNames.map((monthName, index) => (
+              <option key={index} value={index + 1}>
+                {monthName}
+              </option>
+            ))}
+          </select>
           <input 
-          type='number'
-          value={year}
-          min={1}
-          max={9665}
-          onChange={(e) => setYear(e.target.value)}
-          className='p-1 border-2 border-blue-500 rounded-lg shadow-lg'
+            type='number'
+            value={inputYear}
+            min={1}
+            max={9665}
+            onChange={(e) => setInputYear(Math.min(Number(e.target.value), 9665))}
+            className='p-1 border-2 border-blue-500 rounded-lg shadow-lg'
           />
+          <button
+            onClick={handleGoButtonClick}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600"
+          >
+            Go
+          </button>
         </div>
       </div>
       <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end">
@@ -184,6 +226,14 @@ const IslamicCalendar = () => {
               className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
             >
               <MdOutlineArrowForwardIos className="text-[25px]" />
+            </button>
+          </div>
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={handleTodayButtonClick}
+              className="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600"
+            >
+              Today
             </button>
           </div>
           <div className="grid grid-cols-7 text-center font-semibold mb-2">

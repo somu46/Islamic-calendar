@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaQuran, FaCalendarAlt, FaMapMarkerAlt, FaSyncAlt, FaCalculator, FaPray, FaMoon , FaKaaba } from "react-icons/fa";
+import { FaQuran, FaCalendarAlt,  FaSyncAlt, FaCalculator, FaPray, FaMoon , FaKaaba } from "react-icons/fa";
 
 const features = [
   { name: "Al Quran", icon: <FaQuran />, path: "/essentials/al-quran" },
   { name: "Islamic Holidays", icon: <FaMoon />, path: "/essentials/islamic-holidays" },
   { name: "Calendar", icon: <FaCalendarAlt />, path: "/essentials/islamic-calendar" },
-  { name: "Islamic Places", icon: <FaMapMarkerAlt />, path: "/places" },
+  // { name: "Islamic Places", icon: <FaMapMarkerAlt />, path: "/places" },
   { name: "Date Converter", icon: <FaSyncAlt />, path: "/essentials/date-converter" },
   { name: "Qibla Direction", icon: <FaKaaba />, path: "/essentials/qibla-direction" },
   { name: "Zakat Calculator", icon: <FaCalculator />, path: "/essentials/zakat-calculator" },

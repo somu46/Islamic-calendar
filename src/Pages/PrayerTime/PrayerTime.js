@@ -113,14 +113,14 @@ const PrayerTimes = () => {
       <div className="max-w-lg mx-auto -mt-6 shadow-lg rounded-lg px-6   border border-gray-200"
       style={{
         backgroundImage: `url(${fullbg})`,
-        backgroundSize: "cover",
+        backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundColor: "#FEFBF1",
       }}
       >
      
         {/* Header */}
-        <div className="flex justify-between items-center mb-4  bg-white rounded-lg opacity-80 px-3 ">
+        <div className="flex justify-between items-center mb-4  bg-white rounded-lg opacity-80 px-3 mt-32">
           <h2 className="text-lg font-semibold text-blue-600">
             Prayer Times in {meta?.timezone || "Unknown Location"}
           </h2>
@@ -161,7 +161,7 @@ const PrayerTimes = () => {
             to="/change-location"
             className="text-white underline hover:text-blue-700 text-md"
           >
-            <button className="bg-teal-500 rounded-lg font-semibold opacity-100 p-2">Change location</button>
+            <button className="bg-teal-500 rounded-lg font-semibold opacity-100 p-3">Change location</button>
           </Link>
         </div>
         <div className="text-center mt-4 mb-28 text-white">

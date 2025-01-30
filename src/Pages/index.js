@@ -11,7 +11,8 @@ import PrayerTimesWidge from "./PrayerTime/Widgets/PrayerTimesWidge";
 import PrayerTimes from "./PrayerTime/PrayerTime";
 import BlogPage from "./Blogs/Blogs";
 import QiblaDir from "./QiblaDir/QiblaDir";
-
+import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
+import Tandc from "./T&C/TermsAndConditions";
 
 export {Error,IslamicCalendar,
     PrayerTimetable,
@@ -24,5 +25,7 @@ export {Error,IslamicCalendar,
     PrayerTimes,
     PrayerTimesWidge,
     BlogPage,
-    QiblaDir
+    QiblaDir,
+    PrivacyPolicy,
+    Tandc
 }

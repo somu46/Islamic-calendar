@@ -4,7 +4,7 @@ import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import './index.css';
 import Root from './Root';
 import App from './App';
-import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter,ContactUs,BlogPage,About,PrayerTimes,IslamicHolidayPage, QiblaDir} from './Pages';
+import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter,ContactUs,BlogPage,About,PrayerTimes,IslamicHolidayPage, QiblaDir, PrivacyPolicy,Tandc} from './Pages';
 import Loading from './Components/Loading/Loading';
 import LocationTracker from './Components/SetLocation/AutoDetectedLocation/LocationTracker';
 import ChangeLocation from './Components/SetLocation/ChangeLocation/ChangeLocation';
@@ -63,6 +63,14 @@ const Route =createBrowserRouter([
       {
         path:'/change-location',
         element:<ChangeLocation/>
+      },
+      {
+        path:'/privacy-policy',
+        element:<PrivacyPolicy/>
+      },
+      {
+        path:'/terms-and-conditions',
+        element:<Tandc/>
       },
       
       {
