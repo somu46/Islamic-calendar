@@ -32,7 +32,7 @@ const Translations = () => {
     FetchTranslation();
   }, []);
 
-  console.log("TranslationData:  ",TranslationData);
+  // console.log("TranslationData:  ",TranslationData);
   
   return  <TranslationSelector translations={TranslationData} />;
 };

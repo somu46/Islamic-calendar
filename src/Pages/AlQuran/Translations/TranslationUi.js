@@ -4,7 +4,13 @@ import { useState } from 'react';
 const TranslationSelector = ({ translations }) => {
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [selectedTranslation, setSelectedTranslation] = useState(null);
-
+  
+  const allowedLanguages = {
+    en: "English",
+    bn: "Bengali",
+    ar: "Arabic",
+    hi: "Hindi"
+  };
   // Group translations by language
   const languages = Array.from(new Set(translations.map(t => t.language)));
   const filtered = translations.filter(t => t.language === selectedLanguage);
@@ -29,7 +35,7 @@ const TranslationSelector = ({ translations }) => {
               : 'bg-[#e9f0e5] text-[#2a5f3e] hover:bg-[#d4e0cd]'
           }`}
       >
-        {lang.toUpperCase()}
+        {allowedLanguages[lang]}
       </button>
     ))}
   </div>
@@ -60,7 +66,7 @@ const TranslationSelector = ({ translations }) => {
               {translation.format}
             </span>
             <span className="text-xs text-[#6b8979]">
-              {translation.language.toUpperCase()}
+              {allowedLanguages[translation.language]}
             </span>
           </div>
         </div>
