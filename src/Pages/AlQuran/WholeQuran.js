@@ -11,6 +11,7 @@ const Quran = () => {
   const [error, setError] = useState(null);
   const [selectedSurah, setSelectedSurah] = useState(null);
 
+  // Fetch Quran Data with timeout and cancel token
   useEffect(() => {
     const source = axios.CancelToken.source();
     const timeout = setTimeout(() => {
@@ -18,14 +19,12 @@ const Quran = () => {
     }, 15000); // 15 seconds timeout
 
     const fetchQuranData = async () => {
-      console.log("Fetching Quran data...");
       try {
         const response = await axios.get(
           "https://api.alquran.cloud/v1/quran/bn.hoque",
           { cancelToken: source.token }
         );
-        console.log("Response received:", response);
-
+        
         if (response.data.code !== 200) {
           throw new Error("Failed to fetch Quran data");
         }
