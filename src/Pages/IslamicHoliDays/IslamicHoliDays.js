@@ -9,7 +9,9 @@ const IslamicHolidayPage = () => {
 
   const fetchHolidays = async () => {
     if (!hijriYear) return;
-    setIsLoading(true);
+   
+    if(hijriYear<9666) {
+      setIsLoading(true);
     try {
       const response = await getIslamicHoliDays(hijriYear);
       setHolidays(response);
@@ -18,13 +20,19 @@ const IslamicHolidayPage = () => {
     } finally {
       setIsLoading(false);
     }
+  }
+  
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 mt-[4.7rem]">
-     <div>
+    <>
+   
+    <div>
       <Breadcrumb pageName='Islamic Holidays' />
-      </div>
+    
+    </div>
+    <div className="min-h-screen bg-gray-100 text-gray-800 ">
+     
       <header className="text-gray-700 py-6 shadow-sm">
         <div className="container mx-auto text-center">
           <h1 className="text-3xl font-bold">Islamic Holidays</h1>
@@ -88,7 +96,7 @@ const IslamicHolidayPage = () => {
         </main>
       ) : (
         <p className="text-xl text-red-700 font-semibold text-center py-36">
-          {hijriYear ? "No holidays found for the entered year." : "Please Enter a Hijri Year"}
+          {hijriYear || hijriYear>9665 ? "No holidays found for the entered year." : "Please Enter a Valid  Hijri Year which is less Then 9666"}
         </p>
       )}
 
@@ -104,6 +112,7 @@ const IslamicHolidayPage = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
