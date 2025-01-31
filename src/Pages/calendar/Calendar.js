@@ -153,7 +153,7 @@ const IslamicCalendar = () => {
     }}
     >
       <Breadcrumb pageName='Islamic Calendar' />
-      <div className='mb-6'>
+      <div className='mb-6 '>
   <div className='flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mb-5 p-2'>
     <h4 className="text-lg font-semibold">
       Select Month and Year:
@@ -233,7 +233,7 @@ const IslamicCalendar = () => {
   </div>
 </div>
       {view === "monthly" ? (
-        <div className="container mx-auto mt-5">
+        <div className="container mx-auto mt-5 p-2">
           <Indicator />
           <div className="flex justify-between items-center mb-4 p-4">
             <button

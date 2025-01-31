@@ -23,7 +23,7 @@ const Feature = () => {
         Keep track of important Islamic dates, events, and holidays throughout the year.
       </p>
 
-      <div className="flex flex-wrap justify-center gap-6 mx-auto">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-12 mx-auto">
         {features.map((feature) => (
           <Link
             to={feature.path}

@@ -235,7 +235,7 @@ function ZakatCalculator() {
         )}
       </div>
 
-      <div className="mt-4 flex justify-between">
+      <div className="mt-4 flex justify-center space-x-6">
         {currentTab !== "Gold & Silver" && (
           <button
             className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
@@ -249,6 +249,7 @@ function ZakatCalculator() {
           </button>
         )}
         {currentTab !== "Summary" ? (
+        
           <button
             className="px-4 py-2 bg-blue-500 text-white rounded"
             onClick={handleNext}
@@ -262,6 +263,7 @@ function ZakatCalculator() {
           >
             Calculate Zakat
           </button>
+          
         )}
       </div>
     </div>
