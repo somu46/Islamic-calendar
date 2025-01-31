@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaArrowLeft, FaQuran } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const Quran = () => {
+const Quran = ({identifier}) => {
   const navigate = useNavigate();
   const [quranData, setQuranData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,8 +20,16 @@ const Quran = () => {
 
     const fetchQuranData = async () => {
       try {
-        const response = await axios.get(
-          "https://api.alquran.cloud/v1/quran/bn.hoque",
+        let response={}
+      if(!identifier){
+        response = await axios.get(
+          `https://api.alquran.cloud/v1/quran/bn.hoque`,
+          { cancelToken: source.token }
+        );
+
+      }
+         response = await axios.get(
+          `https://api.alquran.cloud/v1/quran/${identifier}`,
           { cancelToken: source.token }
         );
         
@@ -44,7 +52,11 @@ const Quran = () => {
 
     fetchQuranData();
     return () => source.cancel("Component unmounted");
-  }, []);
+  }, [identifier]);
+
+  console.log("identifier: ",identifier);
+  
+  console.log("quranData:", quranData);
 
   const handleRetry = () => {
     setError(null);
