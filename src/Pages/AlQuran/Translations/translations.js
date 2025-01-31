@@ -22,7 +22,7 @@ const Translations = () => {
         setTranslationData(filteredTranslations);
       } catch (error) {
         if (!axios.isCancel(error)) {
-          // Handle non-cancellation errors
+          
         }
       }
 
