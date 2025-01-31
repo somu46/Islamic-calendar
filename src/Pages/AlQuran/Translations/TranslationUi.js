@@ -7,9 +7,9 @@ const TranslationSelector = ({ translations }) => {
   
   const allowedLanguages = {
     en: "English",
-    bn: "Bengali",
-    ar: "Arabic",
-    hi: "Hindi"
+    bn: "বাংলা",
+    ar: "عربي",
+    hi: "हिन्दी"
   };
   // Group translations by language
   const languages = Array.from(new Set(translations.map(t => t.language)));

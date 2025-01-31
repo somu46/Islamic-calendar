@@ -138,7 +138,7 @@ const IslamicCalendar = () => {
       setMonth(inputMonth - 1); // Update the month state (subtract 1 because months are 0-indexed)
       setShouldFetchData(true); // Trigger the API call
     } else {
-      alert("Please enter a valid year (1-9665) and month (1-12).");
+      alert("Please enter a valid year (1000-9665).");
     }
   };
 
@@ -154,61 +154,88 @@ const IslamicCalendar = () => {
     >
       <Breadcrumb pageName='Islamic Calendar' />
       <div className='mb-6'>
-        <div className='flex justify-center items-center gap-x-4 sm:gap-x-4 mb-5'>
-          <lebal className="sm:text-xl font-semibold text-teal-700 hover:text-blue-600">Select Month and Year:</lebal>
-          <select
-            value={inputMonth}
-            onChange={(e) => setInputMonth(Number(e.target.value))}
-            className='p-1 border-2 border-blue-500 rounded-lg shadow-lg'
-          >
-            {monthNames.map((monthName, index) => (
-              <option key={index} value={index + 1}>
-                {monthName}
-              </option>
-            ))}
-          </select>
-          <input 
-            type='number'
-            value={inputYear}
-            min={1}
-            max={9665}
-            onChange={(e) => setInputYear(Math.min(Number(e.target.value), 9665))}
-            className='p-1 border-2 border-blue-500 rounded-lg shadow-lg'
-          />
-          <button
-            onClick={handleGoButtonClick}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600"
-          >
-            Go
-          </button>
-        </div>
+  <div className='flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mb-5 p-2'>
+    <h4 className="text-lg font-semibold">
+      Select Month and Year:
+    </h4>
+    <div className='flex justify-center items-center gap-2 sm:gap-4'>
+    <select
+      value={inputMonth}
+      onChange={(e) => setInputMonth(Number(e.target.value))}
+      className='p-1 border-2 border-blue-500 rounded-lg shadow-lg w-28 sm:w-auto'
+    >
+      {monthNames.map((monthName, index) => (
+        <option key={index} value={index + 1}>
+          {monthName}
+        </option>
+      ))}
+    </select>
+    <input
+      type='number'
+      value={inputYear}
+      min={1000}
+      max={9665}
+      onChange={(e) => {
+        const value = e.target.value;
+        if (value.length <= 4 && !isNaN(value)) {
+          setInputYear(Math.min(Number(value), 9999));
+        }
+      }}
+      onBlur={(e) => {
+        if (e.target.value.length !== 4) {
+          alert("Please enter a valid 4-digit year.");
+          setInputYear(new Date().getFullYear());
+        }
+      }}
+      className='p-1 border-2 border-blue-500 rounded-lg shadow-lg w-20 sm:w-24'
+      placeholder='Year'
+      pattern='\d{4}'
+      required
+    />
+    <button
+      onClick={handleGoButtonClick}
+      className="px-3 py-1 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 whitespace-nowrap"
+    >
+      Go
+    </button>
+    </div>
+  </div>
       </div>
-      <div className="flex space-x-2 sm:space-x-4 mt-2 sm:mt-0 mb-3 justify-end">
-        <button
-          onClick={() => setView("monthly")}
-          className={`px-4 py-2 rounded-md ${
-            view === "monthly"
-              ? "bg-gray-800 text-white"
-              : "bg-gray-200 text-gray-700"
-          }`}
-        >
-          Monthly
-        </button>
-        <button
-          onClick={() => setView("yearly")}
-          className={`px-4 py-2 rounded-md ${
-            view === "yearly"
-              ? "bg-gray-800 text-white"
-              : "bg-gray-200 text-gray-700"
-          }`}
-        >
-          Yearly
-        </button>
-      </div>
+      <div className='flex flex-row justify-between items-center mt-2 sm:mt-0 mb-3 px-4'>
+  {/* Today Button */}
+  <div className="flex">
+    <button
+      onClick={handleTodayButtonClick}
+      className="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600"
+    >
+      Today
+    </button>
+  </div>
+
+  {/* Monthly/Yearly Buttons */}
+  <div className="flex space-x-2 sm:space-x-4">
+    <button
+      onClick={() => setView("monthly")}
+      className={`px-4 py-2 rounded-md ${
+        view === "monthly" ? "bg-gray-800 text-white" : "bg-white text-black"
+      }`}
+    >
+      Monthly
+    </button>
+    <button
+      onClick={() => setView("yearly")}
+      className={`px-4 py-2 rounded-md ${
+        view === "yearly" ? "bg-gray-800 text-white" : "bg-white text-black"
+      }`}
+    >
+      Yearly
+    </button>
+  </div>
+</div>
       {view === "monthly" ? (
         <div className="container mx-auto mt-5">
           <Indicator />
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-4 p-4">
             <button
               onClick={handlePreviousMonth}
               className="px-4 py-2 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300"
@@ -228,14 +255,7 @@ const IslamicCalendar = () => {
               <MdOutlineArrowForwardIos className="text-[25px]" />
             </button>
           </div>
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={handleTodayButtonClick}
-              className="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600"
-            >
-              Today
-            </button>
-          </div>
+          
           <div className="grid grid-cols-7 text-center font-semibold mb-2">
             {daysOfWeek.map((day, index) => (
               <div key={index} className="text-gray-700">{day}</div>
