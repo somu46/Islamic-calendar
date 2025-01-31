@@ -6,7 +6,7 @@ const Card = ({ label, icon, onClick, isActive, color }) => {
   return (
     <div
       onClick={onClick}
-      className={`cursor-pointer bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-4 sm:p-6 text-center ${
+      className={`cursor-pointer  shadow-md hover:scale-110 transition-all duration-300 rounded-lg p-4 sm:p-6 text-center ${
         isActive ? "border-2 border-blue-500 scale-105" : "border border-gray-200"
       }`}
     >
@@ -43,15 +43,15 @@ const AlQuran = () => {
   }, [activeSection, navigate]);
 
   return (
-    <>
+    <div className="mt-[1rem]">
       <div>
-        <Breadcrumb pageName="Al Quran" />
+        <Breadcrumb pageName="Al-Quran" />
       </div>
-      <div className="container mx-auto p-4 sm:p-8">
+      <div className="container mx-auto p-4 sm:p-8  ">
         {/* Header */}
         <header className="mb-8 text-center">
-          <h1 className="text-2xl sm:text-4xl font-bold">
-            Al Quran with Translation
+          <h1 className="text-2xl sm:text-4xl font-bold  ">
+            Al-Quran with Translation
           </h1>
           <p className="text-gray-500 text-sm sm:text-lg mt-2">
             Explore the beauty of the Quran with Surahs, Juz, Translations, and
@@ -83,7 +83,7 @@ const AlQuran = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
