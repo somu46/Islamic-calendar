@@ -3,25 +3,25 @@ import React from 'react';
 const Community = () => {
   const testimonials = [
     {
-      name: 'Ahmed Hassan',
-      country: 'United Kingdom',
-      initials: 'AH',
+      name: 'Anis Khan',
+      country: 'Bangladesh',
+      initials: 'AK',
       feedback:
-        'This platform has helped me stay connected with my faith despite my busy schedule. The prayer times and Quran features are invaluable.',
+        'এই প্ল্যাটফর্মটি আমাকে আমার ব্যস্ত সময়সূচী সত্ত্বেও আমার বিশ্বাসের সাথে সংযুক্ত থাকতে সাহায্য করেছে। নামাজের সময় এবং কুরআনের বৈশিষ্ট্যগুলি অমূল্য।',
     },
     {
-      name: 'Fatima Rahman',
-      country: 'Malaysia',
-      initials: 'FR',
+      name: 'Md. Anisur Rahman',
+      country: 'India',
+      initials: 'AR',
       feedback:
-        'The Zakat calculator and Islamic calendar have made it so much easier to fulfill my religious obligations accurately.',
+        'The Prayer Time feature and Islamic calendar have made it so much easier to fulfill my religious obligations accurately.',
     },
     {
-      name: 'Mohammad Khan',
-      country: 'Canada',
-      initials: 'MK',
+      name: 'Zakir Hossain',
+      country: 'India',
+      initials: 'ZH',
       feedback:
-        'The daily Hadith and Duas section has become an essential part of my morning routine. Thank you for this beautiful platform.',
+        'Al-Quran and Prayer times section has become an essential part of my morning routine. Thank you for this beautiful platform.',
     },
   ];
 
@@ -67,11 +67,11 @@ const Community = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="text-center mt-10">
+      {/* <div className="text-center mt-10">
         <button className="bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
           Join Our Community
         </button>
-      </div>
+      </div> */}
       {/* Subscription Section */}
       <div className="bg-white shadow-md rounded-lg p-6 mb-10">
         <h3 className="text-lg font-semibold text-center mb-4">
@@ -86,7 +86,7 @@ const Community = () => {
             placeholder="Enter your email"
             className="p-3 border rounded-lg w-full md:w-2/3 focus:outline-none"
           />
-          <button className="bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">
+          <button className="bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600">
             Subscribe
           </button>
         </form>

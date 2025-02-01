@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPray, FaQuran, FaCalendarAlt, FaCalculator, FaBook, FaSyncAlt } from 'react-icons/fa';
+import { FaPray, FaQuran, FaCalendarAlt, FaCalculator,  FaSyncAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const EssentialTools = () => {
@@ -10,7 +10,7 @@ const EssentialTools = () => {
     {
       title: 'Prayer Times',
       description: 'Accurate prayer times based on your location with Qibla direction',
-      icon: <FaPray className="text-4xl text-teal-500" />,
+      icon: <FaPray className="text-4xl text-teal-500 scale-x-[-1]" />,
       link: "/essentials/prayer-times",
     },
     {
@@ -31,12 +31,12 @@ const EssentialTools = () => {
       icon: <FaCalculator className="text-4xl text-teal-500" />,
       link:  "/essentials/zakat-calculator" ,
     },
-    {
-      title: 'Islamic Knowledge',
-      description: 'Access Hadiths, Duas, and Islamic teachings',
-      icon: <FaBook className="text-4xl text-teal-500" />,
-      link: '#',
-    },
+    // {
+    //   title: 'Islamic Knowledge',
+    //   description: 'Access Hadiths, Duas, and Islamic teachings',
+    //   icon: <FaBook className="text-4xl text-teal-500" />,
+    //   link: '#',
+    // },
     {
       title: 'Date Converter',
       description: 'Convert between Hijri and Gregorian calendars',
