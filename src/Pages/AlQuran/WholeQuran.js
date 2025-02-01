@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FaArrowLeft, FaQuran } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const Quran = ({identifier}) => {
+const Quran = () => {
   const navigate = useNavigate();
+  
   const [quranData, setQuranData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedSurah, setSelectedSurah] = useState(null);
-
+  
+  
+  const {identifier}=useParams();
+  console.log("Location identifier: ",identifier);
+  
   // Fetch Quran Data with timeout and cancel token
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -54,9 +59,9 @@ const Quran = ({identifier}) => {
     return () => source.cancel("Component unmounted");
   }, [identifier]);
 
-  console.log("identifier: ",identifier);
+  // console.log("identifier: ",identifier);
   
-  console.log("quranData:", quranData);
+  // console.log("quranData:", quranData);
 
   const handleRetry = () => {
     setError(null);
