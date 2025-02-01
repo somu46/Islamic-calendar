@@ -47,7 +47,7 @@ const Quran = () => {
       } catch (err) {
         if (!axios.isCancel(err)) {
           console.error("Error fetching Quran data:", err.message);
-          setError(`কুরআনের ডেটা লোড করতে ব্যর্থ। ত্রুটি: ${err.message}`);
+          setError(` Failed to fetch Quran data: ${err.message}`);
           setLoading(false);
         }
       } finally {
@@ -125,7 +125,7 @@ const Quran = () => {
           className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center font-bangla">
-           Translation of Quran
+           Translation of Quran({quranData?.language} By {quranData?.englishName})
           </h1>
           <button
             onClick={() => navigate(-1)}
@@ -165,11 +165,11 @@ const Quran = () => {
 
               <div className="space-y-2">
                 <p className="text-sm text-gray-600">
-                  <span className="font-semibold">অর্থ:</span>{" "}
+                  <span className="font-semibold"> Meaning :</span>{" "}
                   {surah.englishNameTranslation}
                 </p>
                 <p className="text-sm text-gray-600">
-                  <span className="font-semibold">আয়াত সংখ্যা:</span>{" "}
+                  <span className="font-semibold">Ayahs:</span>{" "}
                   {surah.ayahs.length}
                 </p>
               </div>
@@ -177,10 +177,10 @@ const Quran = () => {
               <div className="mt-4 flex justify-between items-center text-sm text-emerald-800">
                 <span className="flex items-center gap-1">
                   <FaQuran className="text-emerald-600" />
-                  সূরা শুরু
+                 Surahs
                 </span>
                 <span className="bg-emerald-600 text-white px-2 py-1 rounded-md">
-                  পৃষ্ঠা {surah.ayahs[0].page}
+                  Pages {surah.ayahs[0].page}
                 </span>
               </div>
             </motion.div>
