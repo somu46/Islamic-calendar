@@ -137,6 +137,10 @@ const Route =createBrowserRouter([
         element:<Translations/>
       },
       {
+        path:'/essentials/quran/translations/:identifier',
+        element:<Quran/>
+      },
+      {
         path:'/essentials/date-converter',
         element:<DateConverter/>
       },

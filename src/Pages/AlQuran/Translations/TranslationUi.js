@@ -1,18 +1,21 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-import Quran from '../WholeQuran';
+import { useNavigate } from 'react-router-dom';
+// import Quran from '../WholeQuran';
 
 
 const TranslationSelector = ({ translations }) => {
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [selectedTranslation, setSelectedTranslation] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-//  const handleNavigate = (selectedTranslation) => {
-//     // navigate(`/essentials/${identifier}`);
-//     const identifier=translations.find(t => t.identifier === selectedTranslation)?.identifier;
-//     <Quran props={identifier}/>
-//   };
+ const handleNavigate = (selectedidentifier) => {
+  setSelectedTranslation(selectedidentifier);
+  // console.log("selectedidentifier: ",selectedidentifier);
+  const identifier=translations.find(t => t.identifier === selectedidentifier)?.identifier;
+  // console.log("identifier: ",identifier);
+  navigate(`/essentials/quran/translations/${identifier}`);
+ 
+  };
 
   const allowedLanguages = {
     en: "English",
@@ -54,7 +57,7 @@ const TranslationSelector = ({ translations }) => {
     {filtered.map(translation => (
       <div
         key={translation.identifier}
-        onClick={() => setSelectedTranslation(translation.identifier)}
+        onClick={() => handleNavigate(translation.identifier)}
         className={`p-4 rounded-lg border cursor-pointer transition-all
           ${
             selectedTranslation === translation.identifier
@@ -82,16 +85,6 @@ const TranslationSelector = ({ translations }) => {
       </div>
     ))}
   </div>
-
-  {/* Selected Translation Preview */}
-  {selectedTranslation && (
-    <div className="mt-8 p-4 border rounded-lg bg-[#f5f8f3] border-[#dde7d5]">
-      <h3 className="text-lg font-semibold mb-4 text-[#2a5f3e]">
-        {/* Selected Translation: {translations.find(t => t.identifier === selectedTranslation)?.identifier} */}
-        <Quran identifier={translations.find(t => t.identifier === selectedTranslation)?.identifier}/>
-      </h3>
-    </div>
-  )}
 </div>
     </>
   );

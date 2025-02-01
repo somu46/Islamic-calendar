@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FaArrowLeft, FaQuran } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const Quran = ({identifier}) => {
+const Quran = () => {
   const navigate = useNavigate();
+  
   const [quranData, setQuranData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedSurah, setSelectedSurah] = useState(null);
-
+  
+  
+  const {identifier}=useParams();
+  console.log("Location identifier: ",identifier);
+  
   // Fetch Quran Data with timeout and cancel token
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -23,7 +28,7 @@ const Quran = ({identifier}) => {
         let response={}
       if(!identifier){
         response = await axios.get(
-          `https://api.alquran.cloud/v1/quran/bn.hoque`,
+          `https://api.alquran.cloud/v1/quran/en.asad`,
           { cancelToken: source.token }
         );
 
@@ -42,7 +47,7 @@ const Quran = ({identifier}) => {
       } catch (err) {
         if (!axios.isCancel(err)) {
           console.error("Error fetching Quran data:", err.message);
-          setError(`কুরআনের ডেটা লোড করতে ব্যর্থ। ত্রুটি: ${err.message}`);
+          setError(` Failed to fetch Quran data: ${err.message}`);
           setLoading(false);
         }
       } finally {
@@ -54,9 +59,9 @@ const Quran = ({identifier}) => {
     return () => source.cancel("Component unmounted");
   }, [identifier]);
 
-  console.log("identifier: ",identifier);
+  // console.log("identifier: ",identifier);
   
-  console.log("quranData:", quranData);
+  // console.log("quranData:", quranData);
 
   const handleRetry = () => {
     setError(null);
@@ -80,7 +85,7 @@ const Quran = ({identifier}) => {
             <FaQuran className="text-6xl text-emerald-600 animate-pulse" />
           </div>
           <p className="text-center text-2xl text-emerald-800 font-semibold">
-            কুরআন লোড হচ্ছে...
+            Loading Quran Data...
           </p>
           <div className="flex justify-center">
             <div className="w-48 h-1 bg-emerald-100 rounded-full overflow-hidden">
@@ -103,7 +108,7 @@ const Quran = ({identifier}) => {
             className="bg-emerald-600 text-white px-8 py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg flex items-center justify-center gap-2 mx-auto"
           >
             <FaQuran />
-            আবার চেষ্টা করুন
+          Please Try Again
           </button>
         </div>
       </div>
@@ -120,14 +125,14 @@ const Quran = ({identifier}) => {
           className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center font-bangla">
-            পবিত্র কুরআন (বাংলা অনুবাদ)
+           Translation of Quran({quranData?.language} By {quranData?.englishName})
           </h1>
           <button
             onClick={() => navigate(-1)}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2"
           >
             <FaArrowLeft />
-            ফিরে যান
+            Go Back
           </button>
         </motion.div>
 
@@ -160,11 +165,11 @@ const Quran = ({identifier}) => {
 
               <div className="space-y-2">
                 <p className="text-sm text-gray-600">
-                  <span className="font-semibold">অর্থ:</span>{" "}
+                  <span className="font-semibold"> Meaning :</span>{" "}
                   {surah.englishNameTranslation}
                 </p>
                 <p className="text-sm text-gray-600">
-                  <span className="font-semibold">আয়াত সংখ্যা:</span>{" "}
+                  <span className="font-semibold">Ayahs:</span>{" "}
                   {surah.ayahs.length}
                 </p>
               </div>
@@ -172,10 +177,10 @@ const Quran = ({identifier}) => {
               <div className="mt-4 flex justify-between items-center text-sm text-emerald-800">
                 <span className="flex items-center gap-1">
                   <FaQuran className="text-emerald-600" />
-                  সূরা শুরু
+                 Surahs
                 </span>
                 <span className="bg-emerald-600 text-white px-2 py-1 rounded-md">
-                  পৃষ্ঠা {surah.ayahs[0].page}
+                  Pages {surah.ayahs[0].page}
                 </span>
               </div>
             </motion.div>
