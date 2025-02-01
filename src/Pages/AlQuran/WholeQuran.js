@@ -28,7 +28,7 @@ const Quran = () => {
         let response={}
       if(!identifier){
         response = await axios.get(
-          `https://api.alquran.cloud/v1/quran/bn.hoque`,
+          `https://api.alquran.cloud/v1/quran/en.asad`,
           { cancelToken: source.token }
         );
 
@@ -85,7 +85,7 @@ const Quran = () => {
             <FaQuran className="text-6xl text-emerald-600 animate-pulse" />
           </div>
           <p className="text-center text-2xl text-emerald-800 font-semibold">
-            কুরআন লোড হচ্ছে...
+            Loading Quran Data...
           </p>
           <div className="flex justify-center">
             <div className="w-48 h-1 bg-emerald-100 rounded-full overflow-hidden">
@@ -108,7 +108,7 @@ const Quran = () => {
             className="bg-emerald-600 text-white px-8 py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg flex items-center justify-center gap-2 mx-auto"
           >
             <FaQuran />
-            আবার চেষ্টা করুন
+          Please Try Again
           </button>
         </div>
       </div>
@@ -125,14 +125,14 @@ const Quran = () => {
           className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center font-bangla">
-            পবিত্র কুরআন (বাংলা অনুবাদ)
+           Translation of Quran
           </h1>
           <button
             onClick={() => navigate(-1)}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2"
           >
             <FaArrowLeft />
-            ফিরে যান
+            Go Back
           </button>
         </motion.div>
 
