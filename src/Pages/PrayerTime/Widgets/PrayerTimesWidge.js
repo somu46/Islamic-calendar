@@ -134,12 +134,12 @@ const PrayerTimesWidge = () => {
 
   return (
     <div
-      className="max-w-full mx-auto bg-gray-900 text-white px-1 sm:px-6 py-3 sm:py-5 shadow-lg"
+      className="w-full  text-white px-2 sm:px-6 py-3 sm:py-5 shadow-lg"
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundColor: "#FEFBF1",
+        // backgroundColor: "#FEFBF1",
       }}
     >
       <div className="flex justify-between items-center gap-x-6">
@@ -159,7 +159,7 @@ const PrayerTimesWidge = () => {
         <div>
           <Link
             to="/essentials/prayer-times"
-            className="hover:underline text-[1rem] sm:text-lg font-bold hover:text-blue-600"
+            className="hover:underline text-md sm:text-lg font-bold px-2"
           >
             All Prayer times
           </Link>

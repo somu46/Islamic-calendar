@@ -4,6 +4,7 @@ import { getPrayerTimeOfDayByAddress, getPrayerTimeOfDayByLocation } from "../..
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 import bg from '../../Assets/widgetBG.png'
 import fullbg from '../../Assets/prayertimeBG1.png'
+import SetLocation from "../../Components/SetLocation/SetLocation";
 
 const PrayerTimes = () => {
   const today = new Date();
@@ -79,7 +80,13 @@ const PrayerTimes = () => {
 
   // Error State
   if (!prayerResponse) {
-    return <div className="text-center mt-10">Failed to load prayer times. Please try again later.</div>;
+    return <div className="text-center mt-10">
+      <p>Unable to fetch prayer times.</p>
+      <div className="mt-4 border border-teal-400 p-4 rounded-lg bg-white opacity-75 w-[300px] mx-auto">
+      <SetLocation />
+      </div>
+      
+    </div>;
   }
 
   // Extracting Data from Response
@@ -113,7 +120,7 @@ const PrayerTimes = () => {
       <div className="max-w-lg mx-auto -mt-6 shadow-lg rounded-lg px-6   border border-gray-200"
       style={{
         backgroundImage: `url(${fullbg})`,
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundColor: "#FEFBF1",
       }}

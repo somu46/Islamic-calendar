@@ -160,49 +160,52 @@ const Juz = () => {
           </div>
 
           {/* Pagination Controls */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center justify-center gap-6 mt-12"
-          >
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:-translate-x-1 shadow-lg hover:shadow-emerald-200/50"
-            >
-              <ArrowBackIosNewRounded fontSize="small" />
-              Previous Juz
-            </button>
-            
-            <div className="flex items-center gap-2">
-              {[...Array(5)].map((_, i) => {
-                const page = currentPage - 2 + i;
-                if (page < 1 || page > totalPages) return null;
-                return (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`w-10 h-10 rounded-lg ${
-                      currentPage === page 
-                        ? 'bg-emerald-600 text-white' 
-                        : 'bg-emerald-100 text-emerald-900 hover:bg-emerald-200'
-                    } transition-colors`}
-                  >
-                    {page}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="w-full px-4">
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-12"
+  >
+    <button
+      onClick={() => handlePageChange(currentPage - 1)}
+      disabled={currentPage === 1}
+      className="flex items-center gap-1 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:-translate-x-1 shadow-lg hover:shadow-emerald-200/50 text-sm sm:text-lg"
+    >
+      <ArrowBackIosNewRounded fontSize="large" />
+      <span className="hidden sm:inline">Previous Juz</span>
+    </button>
 
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:translate-x-1 shadow-lg hover:shadow-emerald-200/50"
-            >
-              Next Juz
-              <ArrowForwardIosRounded fontSize="small" />
-            </button>
-          </motion.div>
+    <div className="flex items-center gap-2 sm:gap-3">
+      {[...Array(5)].map((_, i) => {
+        const page = currentPage - 2 + i;
+        if (page < 1 || page > totalPages) return null;
+        return (
+          <button
+            key={page}
+            onClick={() => handlePageChange(page)}
+            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-sm sm:text-base ${
+              currentPage === page
+                ? 'bg-emerald-600 text-white'
+                : 'bg-emerald-100 text-emerald-900 hover:bg-emerald-200'
+            } transition-colors`}
+          >
+            {page}
+          </button>
+        );
+      })}
+    </div>
+
+    <button
+      onClick={() => handlePageChange(currentPage + 1)}
+      disabled={currentPage === totalPages}
+      className="flex items-center gap-1 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:translate-x-1 shadow-lg hover:shadow-emerald-200/50 text-sm sm:text-lg"
+    >
+      <span className="hidden sm:inline">Next Juz</span>
+      <ArrowForwardIosRounded fontSize="large" />
+    </button>
+  </motion.div>
+</div>
+
         </>
       )}
     </div>
