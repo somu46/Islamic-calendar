@@ -3,6 +3,7 @@ import {  useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FaArrowLeft, FaQuran } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const Quran = () => {
   const navigate = useNavigate();
@@ -58,6 +59,10 @@ const Quran = () => {
     fetchQuranData();
     return () => source.cancel("Component unmounted");
   }, [identifier]);
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   // console.log("identifier: ",identifier);
   
@@ -120,6 +125,21 @@ const Quran = () => {
       <div className="container mx-auto p-4 lg:p-8">
         {/* Header */}
         <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  className="flex justify-between items-center w-full mb-6"
+>
+  <Breadcrumb pageName='Full Quran'/>
+  <button
+    onClick={goBack}
+    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg hover:shadow-emerald-200/50"
+  >
+    <FaArrowLeft className="text-lg" />
+    Go Back
+  </button>
+</motion.div>
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4"
@@ -127,13 +147,7 @@ const Quran = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center font-bangla">
            Translation of Quran({quranData?.language} By {quranData?.englishName})
           </h1>
-          <button
-            onClick={() => navigate(-1)}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2"
-          >
-            <FaArrowLeft />
-            Go Back
-          </button>
+          
         </motion.div>
 
         {/* Surah Grid */}

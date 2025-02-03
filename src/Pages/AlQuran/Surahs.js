@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay, FaPause , FaArrowLeft} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const QuranSurah = () => {
+  const navigate = useNavigate();
   const [surahs, setSurahs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,7 +21,7 @@ const QuranSurah = () => {
       const source = axios.CancelToken.source();
       const timeout = setTimeout(() => {
         source.cancel("Request timed out");
-      }, 15000); // 15 seconds timeout
+      }, 15000);
 
       const response = await axios.get("https://api.alquran.cloud/v1/quran/ar.alafasy", {
         cancelToken: source.token
@@ -47,7 +49,7 @@ const QuranSurah = () => {
     setRetryCount(prev => prev + 1);
   };
 
-  // Custom Audio Player Component
+
   const AudioPlayer = ({ src }) => {
     const [playing, setPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -75,7 +77,7 @@ const QuranSurah = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={togglePlay}
-            className="p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white"
+            className="p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white transition-colors"
           >
             {playing ? <FaPause size={14} /> : <FaPlay size={14} />}
           </button>
@@ -90,7 +92,6 @@ const QuranSurah = () => {
     );
   };
 
-  // Pagination Logic
   const handlePageChange = (direction) => {
     setCurrentPage(prev => direction === "next" ? prev + 1 : prev - 1);
   };
@@ -103,7 +104,17 @@ const QuranSurah = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Breadcrumb pageName="Surahs" />
+      <div className="flex justify-between items-center mb-6">
+        <Breadcrumb pageName="Surahs" />
+       <button
+          onClick={() => navigate(-1)}
+          className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2"
+        >
+          <FaArrowLeft />
+            Go Back
+        </button>
+      </div>
+
       <h1 className="text-3xl font-bold mb-8 text-center text-emerald-800">Quran Surahs</h1>
 
       {loading ? (
@@ -161,7 +172,7 @@ const QuranSurah = () => {
             <button
               onClick={() => handlePageChange("prev")}
               disabled={currentPage === 1}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <MdOutlineArrowBackIos />
               Previous
@@ -174,7 +185,7 @@ const QuranSurah = () => {
             <button
               onClick={() => handlePageChange("next")}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Next
               <MdOutlineArrowForwardIos />
