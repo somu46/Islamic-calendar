@@ -74,7 +74,7 @@ const Quran = () => {
           className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center font-bangla">
-            Translation of Quran ({quranData?.language}) By {quranData?.englishName}
+            Translation of Quran ({quranData?.edition.language}) By {quranData?.edition.englishName}
           </h1>
           <button
             onClick={() => navigate(-1)}
