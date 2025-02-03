@@ -33,15 +33,15 @@ const Community = () => {
       </p>
 
       {/* Stats Section */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+    <div className="flex flex-wrap justify-center gap-6 sm:gap-12 mx-auto">
   {[
-    { value: '50K+', label: 'Active Members' },
-    { value: '1M+', label: 'Daily Prayers' },
-    { value: '5K+', label: 'Daily Questions' },
+    { value: '5K+', label: 'Active Members' },
+    { value: '100K+', label: 'Daily Prayers' },
+    { value: '500+', label: 'Daily Questions' },
   ].map((stat, index) => (
-    <div key={index} className='bg-white shadow-md rounded-lg p-6 text-center flex flex-col ' >
-      <h2 className="text-3xl font-bold text-teal-500">{stat.value}</h2>
-      <p className="text-gray-600">{stat.label}</p>
+    <div key={index} className='flex flex-col items-center justify-center w-[140px] h-[140px] p-4 bg-white rounded-lg shadow-lg ' >
+      <h2 className="text-3xl font-bold text-teal-500 mb-1">{stat.value}</h2>
+      <p className="text-gray-600 text-center">{stat.label}</p>
     </div>
   ))}
 </div>
