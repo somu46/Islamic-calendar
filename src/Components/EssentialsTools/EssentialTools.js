@@ -3,9 +3,10 @@ import { FaPray, FaQuran, FaCalendarAlt, FaCalculator,  FaSyncAlt } from 'react-
 import { Link } from 'react-router-dom';
 
 const EssentialTools = () => {
-  const handleHistory=()=>{
+  const handleHistory = () => {
     window.scrollTo(0,0);
-  }
+  };
+
   const tools = [
     {
       title: 'Prayer Times',
@@ -53,21 +54,19 @@ const EssentialTools = () => {
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tools.map((tool, index) => (
-          <div
+          <Link
             key={index}
-            className="bg-white shadow-md rounded-lg p-6 flex flex-col"
+            to={tool.link}
+            onClick={handleHistory}
+            className="bg-white shadow-md rounded-lg p-6 flex flex-col hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
           >
             <div className="mb-4 mx-auto">{tool.icon}</div>
             <h2 className="text-xl font-semibold mb-2 mx-auto">{tool.title}</h2>
             <p className="text-gray-600 mb-4 text-center">{tool.description}</p>
-            <Link
-              to={tool.link}
-              onClick={handleHistory}
-              className="text-teal-500 text-center font-medium hover:underline hover:scale-105 duration-300 "
-            >
+            <span className="text-teal-500 text-center font-medium group-hover:underline group-hover:scale-105 duration-300">
               Learn more →
-            </Link>
-          </div>
+            </span>
+          </Link>
         ))}
       </div>
     </div>

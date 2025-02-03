@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import Breadcrumb from '../../../Components/Breadcrumb/Breadcrumb';
+import { FaArrowLeft } from 'react-icons/fa';
 // import Quran from '../WholeQuran';
 
 
@@ -14,6 +17,8 @@ const TranslationSelector = ({ translations }) => {
   const identifier=translations.find(t => t.identifier === selectedidentifier)?.identifier;
   // console.log("identifier: ",identifier);
   navigate(`/essentials/quran/translations/${identifier}`);
+
+  
  
   };
 
@@ -27,9 +32,28 @@ const TranslationSelector = ({ translations }) => {
   const languages = Array.from(new Set(translations.map(t => t.language)));
   const filtered = translations.filter(t => t.language === selectedLanguage);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <>
     <div className="max-w-4xl mx-auto p-4">
+    <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  className="flex justify-between items-center w-full mb-6"
+>
+  <Breadcrumb pageName='Translations'/>
+  <button
+    onClick={goBack}
+    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg hover:shadow-emerald-200/50"
+  >
+    <FaArrowLeft className="text-lg" />
+    Go Back
+  </button>
+</motion.div>
   <h1 className="text-2xl font-bold mb-6 text-[#2a5f3e]">
     Quran Translations
   </h1>

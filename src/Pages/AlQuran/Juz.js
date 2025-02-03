@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getQuran_Juz } from "../../apiServices/apiServices";
 import { ArrowForwardIosRounded, ArrowBackIosNewRounded } from '@mui/icons-material';
 import { motion } from "framer-motion";
+import { FaArrowLeft } from "react-icons/fa";
+import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 
 const Juz = () => {
+  const navigate = useNavigate();
   const [juzData, setJuzData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,6 +38,10 @@ const Juz = () => {
     }
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   if (error) {
     return (
       <motion.div 
@@ -61,6 +69,23 @@ const Juz = () => {
 
   return (
     <div className="container mx-auto p-4 lg:p-6 bg-gradient-to-br from-emerald-50 to-white min-h-screen">
+      {/* Go Back Button */}
+      <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  className="flex justify-between items-center w-full mb-6"
+>
+  <Breadcrumb pageName='Juz'/>
+  <button
+    onClick={goBack}
+    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg hover:shadow-emerald-200/50"
+  >
+    <FaArrowLeft className="text-lg" />
+    Go Back
+  </button>
+</motion.div>
+
       {/* Header Section */}
       <motion.div 
         initial={{ y: -20, opacity: 0 }}
@@ -160,49 +185,51 @@ const Juz = () => {
           </div>
 
           {/* Pagination Controls */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center justify-center gap-6 mt-12"
-          >
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:-translate-x-1 shadow-lg hover:shadow-emerald-200/50"
+          <div className="w-full px-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-12"
             >
-              <ArrowBackIosNewRounded fontSize="small" />
-              Previous Juz
-            </button>
-            
-            <div className="flex items-center gap-2">
-              {[...Array(5)].map((_, i) => {
-                const page = currentPage - 2 + i;
-                if (page < 1 || page > totalPages) return null;
-                return (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`w-10 h-10 rounded-lg ${
-                      currentPage === page 
-                        ? 'bg-emerald-600 text-white' 
-                        : 'bg-emerald-100 text-emerald-900 hover:bg-emerald-200'
-                    } transition-colors`}
-                  >
-                    {page}
-                  </button>
-                );
-              })}
-            </div>
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="flex items-center gap-1 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:-translate-x-1 shadow-lg hover:shadow-emerald-200/50 text-sm sm:text-lg"
+              >
+                <ArrowBackIosNewRounded fontSize="large" />
+                <span className="hidden sm:inline">Previous Juz</span>
+              </button>
 
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:translate-x-1 shadow-lg hover:shadow-emerald-200/50"
-            >
-              Next Juz
-              <ArrowForwardIosRounded fontSize="small" />
-            </button>
-          </motion.div>
+              <div className="flex items-center gap-2 sm:gap-3">
+                {[...Array(5)].map((_, i) => {
+                  const page = currentPage - 2 + i;
+                  if (page < 1 || page > totalPages) return null;
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => handlePageChange(page)}
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-sm sm:text-base ${
+                        currentPage === page
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-emerald-100 text-emerald-900 hover:bg-emerald-200'
+                      } transition-colors`}
+                    >
+                      {page}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="flex items-center gap-1 px-2 py-1 sm:px-4 sm:py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:translate-x-1 shadow-lg hover:shadow-emerald-200/50 text-sm sm:text-lg"
+              >
+                <span className="hidden sm:inline">Next Juz</span>
+                <ArrowForwardIosRounded fontSize="large" />
+              </button>
+            </motion.div>
+          </div>
         </>
       )}
     </div>

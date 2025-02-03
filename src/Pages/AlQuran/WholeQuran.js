@@ -98,6 +98,10 @@ const Quran = () => {
     }
   }, [identifier]);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     fetchData(source);
@@ -176,23 +180,80 @@ const ErrorScreen = ({ error, onRetry }) => (
   </div>
 );
 
-const Header = ({ quranData, navigate }) => (
-  <motion.div
-    initial={{ opacity: 0, y: -20 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4"
-  >
-    <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center font-bangla">
-      Translation of Quran <span className="text-xl " >( lang: {quranData?.edition?.language} By {quranData?.edition?.englishName})</span>
-    </h1>
-    <button
-      onClick={() => navigate(-1)}
-      className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2"
-    >
-      <FaArrowLeft />
-      Go Back
-    </button>
-  </motion.div>
-);
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white">
+      <div className="container mx-auto p-4 lg:p-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4"
+        >
+          <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 text-center font-bangla">
+           Translation of Quran({quranData?.language} By {quranData?.englishName})
+          </h1>
+          <button
+            onClick={() => navigate(-1)}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2"
+          >
+            <FaArrowLeft />
+            Go Back
+          </button>
+        </motion.div>
+
+        {/* Surah Grid */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
+          {quranData.surahs.map((surah) => (
+            <motion.div
+              key={surah.number}
+              whileHover={{ scale: 1.02 }}
+              className="bg-white border-2 border-emerald-100 rounded-2xl shadow-lg hover:shadow-xl transition-all p-6 cursor-pointer group"
+              onClick={() => setSelectedSurah(surah)}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-emerald-900">
+                    {surah.number}. {surah.englishName}
+                  </h2>
+                  <p className="text-2xl text-emerald-800 font-arabic mt-2">
+                    {surah.name}
+                  </p>
+                </div>
+                <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
+                  {surah.revelationType === "Meccan" ? "মাক্কী" : "মাদানী"}
+                </span>
+              </div>
+
+              <div className="space-y-2">
+                <p className="text-sm text-gray-600">
+                  <span className="font-semibold"> Meaning :</span>{" "}
+                  {surah.englishNameTranslation}
+                </p>
+                <p className="text-sm text-gray-600">
+                  <span className="font-semibold">Ayahs:</span>{" "}
+                  {surah.ayahs.length}
+                </p>
+              </div>
+
+              <div className="mt-4 flex justify-between items-center text-sm text-emerald-800">
+                <span className="flex items-center gap-1">
+                  <FaQuran className="text-emerald-600" />
+                 Surahs
+                </span>
+                <span className="bg-emerald-600 text-white px-2 py-1 rounded-md">
+                  Pages {surah.ayahs[0].page}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+};
 
 export default Quran;
