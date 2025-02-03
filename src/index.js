@@ -6,16 +6,15 @@ import Root from './Root';
 import App from './App';
 import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter,ContactUs,BlogPage,About,PrayerTimes,IslamicHolidayPage, QiblaDir, PrivacyPolicy,Tandc} from './Pages';
 import Loading from './Components/Loading/Loading';
-import LocationTracker from './Components/SetLocation/AutoDetectedLocation/LocationTracker';
 import ChangeLocation from './Components/SetLocation/ChangeLocation/ChangeLocation';
 import Quran from './Pages/AlQuran/WholeQuran';
 import SurahPage from './Pages/AlQuran/ayahs';
 import Surahs from './Pages/AlQuran/Surahs';
 import Juz from './Pages/AlQuran/Juz';
 import Translations from './Pages/AlQuran/Translations/translations';
+import LocationTracker from './Components/SetLocation/AutoDetectedLocation/LocationTracker';
 
 
-const Home = lazy(() => waitPromise(1000).then(() => import('./Components/Home/Home')));
 
 // Simulate a promise for loading delay
 const waitPromise = (time) => {
@@ -26,14 +25,15 @@ const waitPromise = (time) => {
   });
 }
 
+const Home = lazy(() => waitPromise(1000).then(() => import('./Components/Home/Home')));
 
 
 
 
 
 const Route =createBrowserRouter([
-
   {
+
     path: '',
     element: (
        <>

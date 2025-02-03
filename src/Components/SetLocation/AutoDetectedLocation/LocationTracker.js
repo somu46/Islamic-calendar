@@ -4,7 +4,7 @@ const LocationTracker = () => {
   const [locationObj, setLocation] = useState({ latitude: null, longitude: null });
   const [error, setError] = useState("");
 
-  // Fetch the current location when the app loads
+  // Fetch the current location when the component mounts
   useEffect(() => {
     const getLocation = () => {
       if (navigator.geolocation) {
@@ -16,8 +16,6 @@ const LocationTracker = () => {
             setLocation({ latitude, longitude });
             sessionStorage.setItem("latitude", latitude);
             sessionStorage.setItem("longitude", longitude);
-
-            // console.log("Location loaded:", { latitude, longitude });
           },
           (err) => {
             setError(err.message);
@@ -27,16 +25,15 @@ const LocationTracker = () => {
       } else {
         const errorMessage = "Geolocation is not supported by your browser.";
         setError(errorMessage);
-        console.error(errorMessage);
+        console.error(error);
       }
     };
 
     getLocation();
-  }, [error]);
-
-  // Debugging or logging purposes only
-  console.log("Location (LocationTracker):", locationObj);
-
+    
+  }, []); // Empty dependency array ensures this runs only once on mount
+  console.log("LocationTracker component mounted: ",locationObj);
+  
   return null; // No UI, purely functional
 };
 
