@@ -48,11 +48,11 @@ const EssentialTools = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-center text-3xl font-bold mb-4">Our most popular islamic tools</h1>
+      <h1 className="text-center text-3xl font-bold mb-4">Our most popular tools</h1>
       <h3 className="text-center text-lg mb-6">
         Discover our comprehensive collection of Islamic resources designed to enhance your spiritual journey
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-12 mx-auto">
         {tools.map((tool, index) => (
           <Link
             key={index}
