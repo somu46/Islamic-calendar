@@ -33,7 +33,7 @@ const AlQuran = () => {
     { label: "Surahs", value: "surahs", icon: "📖", path: "/essentials/surahs", color: "text-indigo-500" },
     { label: "Juz", value: "juz", icon: "🕌", path: "/essentials/juz", color: "text-green-500" },
     { label: "Translations", value: "translations", icon: "🌐", path: "/essentials/translations", color: "text-purple-500" },
-    { label: "Topics", value: "topics", icon: "📚", path: "/essentials/al-quran", color: "text-orange-500" },
+    // { label: "Topics", value: "topics", icon: "📚", path: "/essentials/al-quran", color: "text-orange-500" },
   ];
 
   useEffect(() => {
