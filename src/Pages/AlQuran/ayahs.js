@@ -25,17 +25,17 @@ const SurahAyahs = () => {
         <div className="text-center space-y-6 max-w-md">
           <div className="text-red-500 text-6xl">⚠️</div>
           <h1 className="text-2xl font-semibold text-gray-800">
-            সূরা নির্বাচন করা হয়নি
+            surah is not selected
           </h1>
           <p className="text-gray-600">
-            অনুগ্রহ করে পিছনে গিয়ে একটি সূরা নির্বাচন করুন
+            Please go back and select a surah to view its ayahs.
           </p>
           <button
             onClick={() => navigate(-1)}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-xl transition-colors flex items-center justify-center gap-2 mx-auto"
           >
             <FaArrowLeft />
-            ফিরে যান
+           Go Back
           </button>
         </div>
       </div>
@@ -53,7 +53,7 @@ const SurahAyahs = () => {
             className="text-center"
           >
             <h1 className="text-2xl md:text-3xl font-bold text-emerald-900">
-              সূরা {selectedSurah.englishName}
+             surah:{selectedSurah.englishName}
             </h1>
             <p className="text-3xl md:text-4xl font-arabic text-emerald-800 mt-2">
               {selectedSurah.name}
@@ -67,7 +67,7 @@ const SurahAyahs = () => {
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2"
           >
             <FaArrowLeft />
-            ফিরে যান
+            Go Back
           </motion.button>
         </div>
 
@@ -86,10 +86,10 @@ const SurahAyahs = () => {
             >
               <div className="flex justify-between items-start mb-4">
                 <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
-                  আয়াত {ayah.numberInSurah}
+                Ayah {ayah.numberInSurah}
                 </span>
                 <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-sm">
-                  পৃষ্ঠা {ayah.page}
+                 Page{ayah.page}
                 </span>
               </div>
 
@@ -102,7 +102,7 @@ const SurahAyahs = () => {
               <div className="flex items-center justify-between text-sm text-gray-600">
                 <span className="flex items-center gap-2">
                   <FaBookOpen className="text-emerald-600" />
-                  সূরা {selectedSurah.englishName}
+                 surah:{selectedSurah.englishName}
                 </span>
               </div>
             </motion.div>

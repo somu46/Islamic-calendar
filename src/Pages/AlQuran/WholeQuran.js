@@ -23,7 +23,8 @@ const SurahCard = React.memo(({ surah, onClick }) => (
         </p>
       </div>
       <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
-        {surah.revelationType === "Meccan" ? "মাক্কী" : "মাদানী"}
+        {/* {surah.revelationType === "Meccan" ? "মাক্কী" : "মাদানী"} */}
+        {surah.revelationType}
       </span>
     </div>
 
