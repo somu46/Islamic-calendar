@@ -1,172 +1,183 @@
-import React, { lazy, Suspense } from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
-import './index.css';
-import Root from './Root';
-import App from './App';
-import {Error,IslamicCalendar,PrayerTimetable,AlQuran,ZakatCalculator,DateConverter,ContactUs,BlogPage,About,PrayerTimes,IslamicHolidayPage, QiblaDir, PrivacyPolicy,Tandc} from './Pages';
-import Loading from './Components/Loading/Loading';
-import ChangeLocation from './Components/SetLocation/ChangeLocation/ChangeLocation';
-import Quran from './Pages/AlQuran/WholeQuran';
-import SurahPage from './Pages/AlQuran/ayahs';
-import Surahs from './Pages/AlQuran/Surahs';
-import Juz from './Pages/AlQuran/Juz';
-import Translations from './Pages/AlQuran/Translations/translations';
-import LocationTracker from './Components/SetLocation/AutoDetectedLocation/LocationTracker';
+import React, { lazy, Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import Root from "./Root";
+import App from "./App";
+import {
+  Error,
+  IslamicCalendar,
+  PrayerTimetable,
+  AlQuran,
+  Quran,
+  SurahPage,
+  Surahs,
+  Juz,
+  Translations,
+  FullQuran,
+  ZakatCalculator,
+  DateConverter,
+  ContactUs,
+  BlogPage,
+  About,
+  PrayerTimes,
+  IslamicHolidayPage,
+  QiblaDir,
+  PrivacyPolicy,
+  Tandc,
+} from "./Pages";
+import Loading from "./Components/Loading/Loading";
+import ChangeLocation from "./Components/SetLocation/ChangeLocation/ChangeLocation";
+import LocationTracker from "./Components/SetLocation/AutoDetectedLocation/LocationTracker";
 
-
+import ApiTest from "./Test/test";
 
 // Simulate a promise for loading delay
 const waitPromise = (time) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, time);
   });
-}
+};
 
-const Home = lazy(() => waitPromise(1000).then(() => import('./Components/Home/Home')));
+const Home = lazy(() =>
+  waitPromise(1000).then(() => import("./Components/Home/Home"))
+);
 
-
-
-
-
-const Route =createBrowserRouter([
+const Route = createBrowserRouter([
   {
-
-    path: '',
+    path: "",
     element: (
-       <>
-      <LocationTracker />
-      <Suspense fallback={<Loading />}>
-        <App />
-      </Suspense>
-    </>
+      <>
+        <LocationTracker />
+        <Suspense fallback={<Loading />}>
+          <App />
+        </Suspense>
+      </>
     ),
     children: [
       {
-        path:'/',
-        element:<Home/>
+        path: "/",
+        element: <Home />,
       },
-      
+
       {
-        path:'/about-us',
-        element:<About/>
-      }, 
-      {
-        path: '/blogs',
-        element: <BlogPage/>
+        path: "/about-us",
+        element: <About />,
       },
       {
-        path:'/contact-us',
-        element:<ContactUs/>
+        path: "/blogs",
+        element: <BlogPage />,
       },
       {
-        path:'/change-location',
-        element:<ChangeLocation/>
+        path: "/contact-us",
+        element: <ContactUs />,
       },
       {
-        path:'/privacy-policy',
-        element:<PrivacyPolicy/>
+        path: "/change-location",
+        element: <ChangeLocation />,
       },
       {
-        path:'/terms-and-conditions',
-        element:<Tandc/>
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
-      
       {
-        path: '/test-api',
-        element:<div className='min-h-screen mt-[6.5rem]'><Quran/></div>
+        path: "/terms-and-conditions",
+        element: <Tandc />,
       },
-    ]
+
+      {
+        path: "/test-api",
+        element: (
+          <div className="min-h-screen mt-[6.5rem]">
+            <ApiTest />
+          </div>
+        ),
+      },
+    ],
   },
- {
-    path: '/essentials',
+  {
+    path: "/essentials",
     element: <Root />,
     children: [
       {
-        path:'/essentials/qibla-direction',
-        element:<QiblaDir/>
+        path: "/essentials/qibla-direction",
+        element: <QiblaDir />,
       },
-     
 
       {
-        path:'/essentials/islamic-holidays',
-        element:<IslamicHolidayPage/>
+        path: "/essentials/islamic-holidays",
+        element: <IslamicHolidayPage />,
       },
-     
+
       {
-        path: '/essentials/zakat-calculator', 
-        element:<ZakatCalculator/>
-      },
-      {
-        path:'/essentials/islamic-calendar',
-        element:<IslamicCalendar/>
+        path: "/essentials/zakat-calculator",
+        element: <ZakatCalculator />,
       },
       {
-        path:'/essentials/prayer-times',
-        element:<PrayerTimes/>
+        path: "/essentials/islamic-calendar",
+        element: <IslamicCalendar />,
       },
       {
-        path:'/essentials/prayer-times-table',
-        element:<PrayerTimetable/>
+        path: "/essentials/prayer-times",
+        element: <PrayerTimes />,
       },
       {
-        path:'/essentials/al-quran',
-        element:<AlQuran/>,
-        
+        path: "/essentials/prayer-times-table",
+        element: <PrayerTimetable />,
       },
       {
-        path: '/essentials/:surahNumber/:surahName-ayahs',
-        element:<SurahPage/>
+        path: "/essentials/al-quran",
+        element: <AlQuran />,
       },
       {
-        path: '/essentials/full-quran',
-        element:<Quran/>
+        path: "/essentials/:surahNumber/:surahName-ayahs",
+        element: <SurahPage />,
       },
       {
-        path:'/essentials/surahs',
-        element:<Surahs/>
+        path: "/essentials/full-quran",
+        element: <FullQuran />,
       },
       {
-        path:'/essentials/juz',
-        element:<Juz/>
+        path: "/essentials/surahs",
+        element: <Surahs />,
       },
       {
-        path:'/essentials/translations',
-        element:<Translations/>
+        path: "/essentials/juz",
+        element: <Juz />,
       },
       {
-        path:'/essentials/quran/translations/:identifier',
-        element:<Quran/>
+        path: "/essentials/translations",
+        element: <Translations />,
       },
       {
-        path:'/essentials/date-converter',
-        element:<DateConverter/>
+        path: "/essentials/quran/translations/:identifier",
+        element: <Quran />,
       },
-       
       {
-        path: '*',
+        path: "/essentials/date-converter",
+        element: <DateConverter />,
+      },
+
+      {
+        path: "*",
         element: <Error />,
-      }
-    ]
+      },
+    ],
+  },
 
-    },
+  {
+    path: "*",
+    element: <Error />,
+  },
+]);
 
-    {
-      path: '*',
-      element:<Error/>,
-    }
-])
-
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-  <React.StrictMode>
-    <RouterProvider router={Route}/>
-  </React.StrictMode>
+    <React.StrictMode>
+      <RouterProvider router={Route} />
+    </React.StrictMode>
   </>
 );
-
