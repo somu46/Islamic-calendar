@@ -129,7 +129,7 @@ const Route = createBrowserRouter([
       },
       {
         path: "/essentials/al-quran",
-        element: <AlQuran />,
+        element: <AlQuran/>,
       },
       {
         path: "/essentials/:surahNumber/:surahName-ayahs",
@@ -137,7 +137,7 @@ const Route = createBrowserRouter([
       },
       {
         path: "/essentials/full-quran",
-        element: <FullQuran />,
+        element: <FullQuran/>,
       },
       {
         path: "/essentials/surahs",
