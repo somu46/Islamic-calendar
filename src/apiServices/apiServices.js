@@ -14,6 +14,7 @@ const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/`;
 const Quran_Translations_url = `https://api.alquran.cloud/v1/edition/type/translation`; 
 const HoliDaya_BaseUrl=`https://api.aladhan.com/v1/islamicHolidaysByHijriYear/`
 
+const Full_Quran_BaseUrl=`https://quranapi.pages.dev/api/1.json`
 
 
 //this all are country state and city api url
@@ -21,6 +22,27 @@ const Country_BaseUrl = `https://restcountries.com/v3.1/region/`;
 const Country_City_BaseUrl = `https://countriesnow.space/api/v0.1/countries/cities`;
 
 //This are all the api services of aladhan and alquran cloud api
+
+const getFullQuran= async(cancelToken)=>{
+
+  try {
+    const response=await axios.get(Full_Quran_BaseUrl,{
+      // cancelToken: cancelToken,
+    });
+    return response.data;
+    
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      console.log("Request canceled:", error.message);
+    } else {
+      console.error("Error fetching Translation from API:", error.message);
+    }
+    throw error;
+  }
+
+}
+
+
 
  const getCalendar = async (year, month) => {
     try {
@@ -186,6 +208,8 @@ export {
      getQuranTranslations,
      getFullHijriCalendar,
      getIslamicHoliDays,
+     getFullQuran,
+
      getCountry,
      getCountryCity
     };

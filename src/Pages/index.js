@@ -13,12 +13,29 @@ import BlogPage from "./Blogs/Blogs";
 import QiblaDir from "./QiblaDir/QiblaDir";
 import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
 import Tandc from "./T&C/TermsAndConditions";
+import Quran from "./AlQuran/TranslateQuranComonents";
+import SurahPage from "./AlQuran/ayahs";
+import Surahs from "./AlQuran/SurahsAudio";
+import Juz from "./AlQuran/Juz";
+import Translations from "./AlQuran/Translations/translations";
+import FullQuran from "./AlQuran/FullQuran/fullQuran";
+
+
+
+
+
 
 export {Error,IslamicCalendar,
     PrayerTimetable,
     AlQuran,
     ZakatCalculator,
     DateConverter,
+    Quran,
+    SurahPage,
+    Surahs,
+    Juz,
+    Translations,
+    FullQuran,
     About,
     ContactUs,
     IslamicHolidayPage,
@@ -27,5 +44,5 @@ export {Error,IslamicCalendar,
     BlogPage,
     QiblaDir,
     PrivacyPolicy,
-    Tandc
+    Tandc,
 }

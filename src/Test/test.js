@@ -1,18 +1,27 @@
-// import { 
+ import { 
+  getFullQuran
 //   getCalendar,
 //    getPrayerTime, 
 //    getQuranAudio,
 //     getQuranEditionOnlyName,
 //     getDateChanger,
 //      getFullHijriCalendar
-//      } from "../apiServices/apiServices";
+   } from "../apiServices/apiServices";
  
 
 
 const ApiTest = async () => {
 
- console.log("ApiTest");
-  
+ console.log("ApiTest  File is run");
+ (
+  async()=>{
+    const data =await getFullQuran();
+    console.log("Full Quran Data", data);
+    
+  }
+ )(); 
+ 
+
   // const year=new Date().getFullYear();
   // const month=new Date().getMonth();
   // const date=new Date().getDate();
