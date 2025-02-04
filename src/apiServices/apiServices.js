@@ -23,24 +23,22 @@ const Country_City_BaseUrl = `https://countriesnow.space/api/v0.1/countries/citi
 
 //This are all the api services of aladhan and alquran cloud api
 
-const getFullQuran= async(cancelToken)=>{
-
+const getFullQuran = async (cancelToken) => {
   try {
-    const response=await axios.get(Full_Quran_BaseUrl,{
-      // cancelToken: cancelToken,
+    const response = await axios.get(Full_Quran_BaseUrl, {
+      cancelToken: cancelToken.token, // Pass the token correctly
+      timeout: 10000, // 10 seconds timeout
     });
     return response.data;
-    
   } catch (error) {
     if (axios.isCancel(error)) {
       console.log("Request canceled:", error.message);
     } else {
       console.error("Error fetching Translation from API:", error.message);
     }
-    throw error;
+    return null; // Return null instead of throwing an error
   }
-
-}
+};
 
 
 
