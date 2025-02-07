@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getFullQuran } from "../../../apiServices/apiServices";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaArrowLeft } from "react-icons/fa";
+import Breadcrumb from "../../../Components/Breadcrumb/Breadcrumb";
+import { FaPause , FaPlay } from "react-icons/fa";
 
 const FullQuran = () => {
+  const navigate = useNavigate();
   const [surahList, setSurahList] = useState([]);
   const [selectedSurah, setSelectedSurah] = useState(1);
   const [fullQuranResponse, setFullQuranResponse] = useState(null);
@@ -25,6 +31,52 @@ const FullQuran = () => {
     fetchSurahList();
   }, []);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
+  const AudioPlayer = ({ src }) => {
+      const [playing, setPlaying] = useState(false);
+      const [progress, setProgress] = useState(0);
+      const audioRef = React.useRef(null);
+  
+      const togglePlay = () => {
+        if (playing) {
+          audioRef.current.pause();
+        } else {
+          audioRef.current.play();
+        }
+        setPlaying(!playing);
+      };
+  
+      const handleTimeUpdate = () => {
+        const percentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+        setProgress(percentage);
+      };
+  
+      return (
+        <div className="mt-3">
+          <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setPlaying(false)}>
+            <source src={src} type="audio/mpeg" />
+          </audio>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={togglePlay}
+              className="p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white transition-colors"
+            >
+              {playing ? <FaPause size={14} /> : <FaPlay size={14} />}
+            </button>
+            <div className="flex-1 bg-gray-200 h-1 rounded-full">
+              <div
+                className="bg-emerald-500 h-1 rounded-full transition-all"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    };
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     const fetchFullQuranData = async () => {
@@ -45,21 +97,46 @@ const FullQuran = () => {
   return (
     <main className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-2xl mx-auto px-4">
+      <Breadcrumb pageName="Al-Quran" />
+      <div className="flex items-center justify-between gap-4 p-4">
+  {/* Breadcrumb aligned to the left */}
+  <div className="flex items-center gap-4">
+    
+    <h1 className="text-5xl font-semibold text-green-600">Al-Quran</h1>
+  </div>
+
+  {/* Go Back button aligned to the right */}
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    <button
+      onClick={goBack}
+      className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg hover:shadow-emerald-200/50"
+    >
+      <FaArrowLeft className="text-lg" /> Go Back
+    </button>
+  </motion.div>
+</div>
         {/* Surah Selection Dropdown */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Surahs</label>
-          <select
-            className="w-full p-2 border rounded-lg"
-            value={selectedSurah}
-            onChange={(e) => setSelectedSurah(Number(e.target.value))}
-          >
-            {surahList.map((surah) => (
-              <option key={surah.number} value={surah.number}>
-                {surah.number} : {surah.englishName}
-              </option>
-            ))}
-          </select>
-        </div>
+  <label className="text-gray-700 font-semibold p-4">Select Surahs</label>
+  <select
+    className="w-[250px] p-2 border rounded-lg"
+    value={selectedSurah}
+    onChange={(e) => setSelectedSurah(Number(e.target.value))}
+  >
+    {surahList.map((surah) => (
+      <option key={surah.number} value={surah.number}>
+        {surah.number} : {surah.englishName}
+      </option>
+    ))}
+  </select>
+
+
+</div>
+
 
         {/* Quran Content */}
         {error && <div className="text-red-600">Error: {error}</div>}
@@ -89,17 +166,16 @@ const FullQuran = () => {
 
             {/* Audio Recitations */}
             <section className="mb-12">
-              <h3 className="text-xl font-semibold text-emerald-900 mb-4">Audio Recitations</h3>
-              {Object.values(fullQuranResponse.audio).map((recitation, index) => (
-                <div key={index} className="bg-white p-4 mb-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                  <p className="font-medium text-gray-700 mb-2">{recitation.reciter}</p>
-                  <audio controls className="w-full mt-2">
-                    <source src={recitation.url} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                </div>
-              ))}
-            </section>
+  <h3 className="text-xl font-semibold text-emerald-900 mb-4">Audio Recitations</h3>
+  {Object.values(fullQuranResponse.audio).map((recitation, index) => (
+    <div key={index} className="bg-white p-4 mb-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+      <p className="font-medium text-gray-700 mb-2">{recitation.reciter}</p>
+      
+      {/* Replace default audio controls with the custom AudioPlayer */}
+      <AudioPlayer src={recitation.url} />
+    </div>
+  ))}
+</section>
 
             {/* Verses Section */}
             <section className="space-y-8">

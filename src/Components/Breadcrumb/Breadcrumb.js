@@ -5,7 +5,7 @@ const Breadcrumb = ({ pageName,path }) => {
   return (
     <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mt-5 mx-3">
       <nav>
-        <ol className="flex items-center gap-2 text-xl text-blue-700">
+        <ol className="flex items-center gap-2 text-xl text-green-700">
           <li>
             <Link className="font-medium" to="/">
               Home 
