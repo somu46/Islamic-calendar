@@ -5,125 +5,128 @@ import {
   getPrayerTimeOfDayByLocation,
 } from "../../../apiServices/apiServices";
 import SetLocation from "../../../Components/SetLocation/SetLocation";
-// import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 import bg from "../../../Assets/widgetBG.png";
 
 const PrayerTimesWidge = () => {
   const today = new Date();
   const year = today.getFullYear();
-  const month = today.getMonth() + 1; // Month is 0-indexed
+  const month = today.getMonth() + 1;
   const date = today.getDate();
-
   const prayerDate = `${date}-${month}-${year}`;
+
   const [prayerResponse, setPrayerResponse] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [prayerLocation, setPrayerLocation] = useState({
     latitude: null,
     longitude: null,
     location: null,
   });
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
-  // Load location from sessionStorage
+  // Load location and handle storage changes
   useEffect(() => {
-    const latitude = sessionStorage.getItem("latitude");
-    const longitude = sessionStorage.getItem("longitude");
-    const location = sessionStorage.getItem("location");
+    const loadLocation = () => {
+      const latitude = sessionStorage.getItem("latitude");
+      const longitude = sessionStorage.getItem("longitude");
+      const location = sessionStorage.getItem("location");
 
-    // console.log("Retrieved Location:", { latitude, longitude, location });
+      if (latitude && longitude) {
+        setPrayerLocation({ latitude, longitude, location: null });
+      } else if (location) {
+        setPrayerLocation({ latitude: null, longitude: null, location });
+      } else {
+        setLoading(false);
+        setError("Please set your location to view prayer times");
+      }
+    };
 
-    if (latitude && longitude) {
-      setPrayerLocation({ latitude, longitude, location: null });
-    } else if (location) {
-      setPrayerLocation({ latitude: null, longitude: null, location });
-    } else {
-      console.error("No location data found in sessionStorage.");
-      setLoading(false);
-    }
+    // Initial load
+    loadLocation();
+
+    // Storage event listener
+    const handleStorageChange = (e) => {
+      if (["latitude", "longitude", "location"].includes(e.key)) {
+        loadLocation();
+        setRefreshTrigger(prev => prev + 1);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
-
-  // console.log("prayerLocation",prayerLocation);
 
   // Fetch prayer times
   useEffect(() => {
     const fetchPrayerTimes = async () => {
       try {
+        setLoading(true);
+        setError("");
         let response = null;
-  
+
         if (prayerLocation.location) {
-          // Fetch prayer times using location name
           response = await getPrayerTimeOfDayByAddress(
             prayerDate,
             prayerLocation.location
           );
         } else if (prayerLocation.latitude && prayerLocation.longitude) {
-          // Fetch prayer times using latitude and longitude
           response = await getPrayerTimeOfDayByLocation(
             prayerDate,
             prayerLocation.latitude,
             prayerLocation.longitude
           );
         }
-  
+
         if (response) {
           setPrayerResponse(response);
         } else {
-          console.error("No response received for prayer times.");
+          setError("Failed to load prayer times");
         }
       } catch (error) {
         console.error("Error fetching prayer times:", error.message);
+        setError("Failed to load prayer times. Please try again.");
       } finally {
         setLoading(false);
       }
     };
-  
-    if (
-      (prayerLocation.latitude && prayerLocation.longitude) || 
-      prayerLocation.location
-    ) {
+
+    if (prayerLocation.latitude || prayerLocation.location) {
       fetchPrayerTimes();
     }
-  }, [
-    prayerLocation.latitude,
-    prayerLocation.longitude,
-    prayerLocation.location,
-    prayerDate,
-  ]);
-  
-  // Loading State
+  }, [prayerLocation, prayerDate, refreshTrigger]);
+
+  const handleLocationUpdate = () => {
+    setRefreshTrigger(prev => prev + 1);
+  };
+
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
   }
 
-  // Error State
-  if (!prayerResponse) {
+  if (error || !prayerResponse) {
     return (
-      <div className=" text-xl text-center mt-10 text-red-600 py-5">
-        <p className="text-red-600">
-          Failed to load prayer times. Please set your Location !
-        </p>
-        <div className="flex justify-center items-center ">
-          <div className="rounded-lg text-center max-w-sm w-full ">
-            <SetLocation  />
+      <div className="text-xl text-center mt-10 text-red-600 py-5">
+        <p className="text-red-600">{error || "Failed to load prayer times"}</p>
+        <div className="flex justify-center items-center">
+          <div className="rounded-lg text-center max-w-sm w-full">
+            <SetLocation onLocationSet={handleLocationUpdate} />
           </div>
         </div>
       </div>
     );
   }
 
-  // Extracting Data from Response
+  // Rest of the component remains the same
   const { timings, date: prayerDateData } = prayerResponse;
   const hijriDate = `${prayerDateData.hijri.day} ${prayerDateData.hijri.month.en}, ${prayerDateData.hijri.year}`;
-  // const gregorianDate = `${prayerDateData.gregorian.date}`;
 
-  // Format Time to 12-Hour Clock
   const formatTime = (time) => {
     const [hour, minute] = time.split(":").map(Number);
     const period = hour >= 12 ? "PM" : "AM";
-    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
+    const formattedHour = hour % 12 || 12;
     return `${formattedHour}:${minute.toString().padStart(2, "0")} ${period}`;
   };
 
-  // Determine Upcoming Prayer
   const upcomingPrayer = Object.entries(timings).find(([_, time]) => {
     const now = new Date();
     const [hour, minute] = time.split(":").map(Number);
@@ -134,12 +137,11 @@ const PrayerTimesWidge = () => {
 
   return (
     <div
-      className="w-full  text-white px-2 sm:px-6 py-3 sm:py-5 shadow-lg"
+      className="w-full text-white px-2 sm:px-6 py-3 sm:py-5 shadow-lg"
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        // backgroundColor: "#FEFBF1",
       }}
     >
       <div className="flex justify-between items-center gap-x-6">
