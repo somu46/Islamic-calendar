@@ -18,7 +18,7 @@ import SurahPage from "./AlQuran/ayahs";
 import Surahs from "./AlQuran/SurahsAudio";
 import Juz from "./AlQuran/Juz";
 import Translations from "./AlQuran/Translations/translations";
-import FullQuran from "./AlQuran/FullQuran/FullQuran";
+import FullQuran from "./AlQuran/FullQuran/fullQuran";
 
 
 
