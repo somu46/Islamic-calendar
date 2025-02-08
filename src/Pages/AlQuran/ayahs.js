@@ -53,7 +53,7 @@ const SurahAyahs = () => {
             className="text-center"
           >
             <h1 className="text-2xl md:text-3xl font-bold text-emerald-900">
-             surah:{selectedSurah.englishName}
+             {selectedSurah.number} . {selectedSurah.englishName}
             </h1>
             <p className="text-3xl md:text-4xl font-arabic text-emerald-800 mt-2">
               {selectedSurah.name}
@@ -89,7 +89,7 @@ const SurahAyahs = () => {
                 Ayah {ayah.numberInSurah}
                 </span>
                 <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-sm">
-                 Page{ayah.page}
+                 Page {ayah.page}
                 </span>
               </div>
 
@@ -102,7 +102,7 @@ const SurahAyahs = () => {
               <div className="flex items-center justify-between text-sm text-gray-600">
                 <span className="flex items-center gap-2">
                   <FaBookOpen className="text-emerald-600" />
-                 surah:{selectedSurah.englishName}
+                 {selectedSurah.englishName}
                 </span>
               </div>
             </motion.div>

@@ -39,7 +39,7 @@ const Community = () => {
     { value: '100K+', label: 'Daily Prayers' },
     { value: '500+', label: 'Daily Questions' },
   ].map((stat, index) => (
-    <div key={index} className='flex flex-col items-center justify-center w-[140px] h-[140px] p-4 bg-white rounded-lg shadow-lg ' >
+    <div key={index} className='flex flex-col items-center justify-center w-[140px] h-[140px] p-4 bg-white rounded-lg shadow-lg mb-10' >
       <h2 className="text-3xl font-bold text-teal-500 mb-1">{stat.value}</h2>
       <p className="text-gray-600 text-center">{stat.label}</p>
     </div>

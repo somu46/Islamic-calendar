@@ -135,9 +135,8 @@ const SurahCard = ({ surah, onClick }) => (
     onClick={onClick}
     className="p-6 bg-white shadow-lg rounded-lg cursor-pointer hover:shadow-xl transition-all"
   >
-    <h2 className="text-2xl font-semibold text-emerald-800">{surah.englishName}</h2>
+    <h2 className="text-2xl font-semibold text-emerald-800">{surah.number} . {surah.englishName}</h2>
     <p className="text-gray-600">{surah.englishNameTranslation}</p>
-    <p className="text-gray-500">Surah {surah.number}</p>
   </div>
 );
 

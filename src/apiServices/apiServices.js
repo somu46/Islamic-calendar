@@ -14,7 +14,7 @@ const Quran_Juz_url = `https://api.alquran.cloud/v1/juz/`;
 const Quran_Translations_url = `https://api.alquran.cloud/v1/edition/type/translation`; 
 const HoliDaya_BaseUrl=`https://api.aladhan.com/v1/islamicHolidaysByHijriYear/`
 
-const Full_Quran_BaseUrl=`https://quranapi.pages.dev/api/1.json`
+const Full_Quran_BaseUrl=`https://quranapi.pages.dev/api`
 
 
 //this all are country state and city api url
@@ -23,9 +23,9 @@ const Country_City_BaseUrl = `https://countriesnow.space/api/v0.1/countries/citi
 
 //This are all the api services of aladhan and alquran cloud api
 
-const getFullQuran = async (cancelToken) => {
+const getFullQuran = async (cancelToken,surahNumber ) => {
   try {
-    const response = await axios.get(Full_Quran_BaseUrl, {
+    const response = await axios.get(`${Full_Quran_BaseUrl}/${surahNumber}.json`, {
       cancelToken: cancelToken.token, // Pass the token correctly
       timeout: 10000, // 10 seconds timeout
     });

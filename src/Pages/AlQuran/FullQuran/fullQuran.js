@@ -1,147 +1,210 @@
-import React, { useEffect, useState } from 'react';
-import { getFullQuran } from '../../../apiServices/apiServices';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { getFullQuran } from "../../../apiServices/apiServices";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaArrowLeft } from "react-icons/fa";
+import Breadcrumb from "../../../Components/Breadcrumb/Breadcrumb";
+import { FaPause , FaPlay } from "react-icons/fa";
 
 const FullQuran = () => {
+  const navigate = useNavigate();
+  const [surahList, setSurahList] = useState([]);
+  const [selectedSurah, setSelectedSurah] = useState(1);
   const [fullQuranResponse, setFullQuranResponse] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const source = axios.CancelToken.source();
+    // Fetch Surah List
+    const fetchSurahList = async () => {
+      try {
+        const response = await axios.get("https://api.alquran.cloud/v1/quran/ar.alafasy");
+        const surahs = response.data.data.surahs.map(surah => ({
+          number: surah.number,
+          englishName: surah.englishName
+        }));
+        setSurahList(surahs);
+      } catch (err) {
+        console.error("Error fetching Surah list:", err);
+      }
+    };
+    fetchSurahList();
+  }, []);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
+  const AudioPlayer = ({ src }) => {
+      const [playing, setPlaying] = useState(false);
+      const [progress, setProgress] = useState(0);
+      const audioRef = React.useRef(null);
+  
+      const togglePlay = () => {
+        if (playing) {
+          audioRef.current.pause();
+        } else {
+          audioRef.current.play();
+        }
+        setPlaying(!playing);
+      };
+  
+      const handleTimeUpdate = () => {
+        const percentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+        setProgress(percentage);
+      };
+  
+      return (
+        <div className="mt-3">
+          <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setPlaying(false)}>
+            <source src={src} type="audio/mpeg" />
+          </audio>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={togglePlay}
+              className="p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white transition-colors"
+            >
+              {playing ? <FaPause size={14} /> : <FaPlay size={14} />}
+            </button>
+            <div className="flex-1 bg-gray-200 h-1 rounded-full">
+              <div
+                className="bg-emerald-500 h-1 rounded-full transition-all"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchFullQuranData = async () => {
       try {
-        const response = await getFullQuran(source);
+        const response = await getFullQuran(source, selectedSurah);
         setFullQuranResponse(response);
       } catch (error) {
         if (!axios.isCancel(error)) {
-          console.error('Error fetching Quran data:', error);
+          console.error("Error fetching Quran data:", error);
           setError(error.message);
         }
       }
     };
-
     fetchFullQuranData();
-
-    return () => {
-      source.cancel('Component unmounted, canceling request');
-    };
-  }, []);
-
-  if (error) {
-    return (
-      <div className="p-4 text-red-600 bg-red-100 rounded-lg">
-        Error: {error}
-      </div>
-    );
-  }
-
-  if (!fullQuranResponse) {
-    return (
-      <div className="p-4 text-center text-gray-600">
-        Loading Quran...
-      </div>
-    );
-  }
+    return () => source.cancel("Component unmounted, canceling request");
+  }, [selectedSurah]);
 
   return (
-    <>
     <main className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-2xl mx-auto px-4">
-        {/* Header Section */}
-        <header className="text-center mb-8">
-          <h1 className="font-amiri text-4xl text-emerald-900 mb-4 leading-tight">
-            {fullQuranResponse.surahNameArabicLong}
-          </h1>
-          <h2 className="text-2xl font-semibold text-gray-700">
-            {fullQuranResponse.surahNameTranslation} ({fullQuranResponse.surahName})
-          </h2>
-        </header>
+      <Breadcrumb pageName="Al-Quran" />
+      <div className="flex items-center justify-between gap-4 p-4">
+  {/* Breadcrumb aligned to the left */}
+  <div className="flex items-center gap-4">
+    
+    <h1 className="text-5xl font-semibold text-green-600">Al-Quran</h1>
+  </div>
 
-        {/* Meta Information */}
-        <section className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="space-y-2">
-            <p className="text-gray-600">
-              <span className="font-semibold text-emerald-800">Revelation Place:</span>{' '}
-              {fullQuranResponse.revelationPlace}
-            </p>
-            <p className="text-gray-600">
-              <span className="font-semibold text-emerald-800">Total Verses:</span>{' '}
-              {fullQuranResponse.totalAyah}
-            </p>
-          </div>
-        </section>
+  {/* Go Back button aligned to the right */}
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    <button
+      onClick={goBack}
+      className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg hover:shadow-emerald-200/50"
+    >
+      <FaArrowLeft className="text-lg" /> Go Back
+    </button>
+  </motion.div>
+</div>
+        {/* Surah Selection Dropdown */}
+        <div className="mb-4">
+  <label className="text-gray-700 font-semibold p-4">Select Surahs</label>
+  <select
+    className="w-[250px] p-2 border rounded-lg"
+    value={selectedSurah}
+    onChange={(e) => setSelectedSurah(Number(e.target.value))}
+  >
+    {surahList.map((surah) => (
+      <option key={surah.number} value={surah.number}>
+        {surah.number} : {surah.englishName}
+      </option>
+    ))}
+  </select>
 
-        {/* Audio Recitations */}
-        <section className="mb-12">
-          <h3 className="text-xl font-semibold text-emerald-900 mb-4">
-            Audio Recitations
-          </h3>
-          <div className="space-y-4">
-            {Object.values(fullQuranResponse.audio).map((recitation, index) => (
-              <div 
-                key={index}
-                className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-              >
-                <p className="font-medium text-gray-700 mb-2">
-                  {recitation.reciter}
-                </p>
-                <audio 
-                  controls 
-                  className="w-full mt-2 audio-player"
-                  data-reciter={recitation.reciter}
-                >
-                  <source src={recitation.url} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-              </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Verses Section */}
-        <section className="space-y-8">
-          {Array.from({ length: fullQuranResponse.totalAyah }).map((_, index) => (
-            <article 
-              key={index}
-              className="bg-white rounded-lg shadow-sm p-6 verse-card"
-            >
-              {/* Arabic Text */}
-              <div className="mb-6" dir="rtl">
-                <p className="font-amiri text-3xl leading-relaxed text-emerald-900">
-                  {fullQuranResponse.arabic1[index]}
-                </p>
-                <p className="font-amiri text-xl text-gray-600 mt-4">
-                  {fullQuranResponse.arabic2[index]}
-                </p>
-              </div>
+</div>
 
-              {/* Translations */}
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="text-sm font-semibold text-emerald-800 mb-2">
-                    English Translation
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    {fullQuranResponse.english[index]}
-                  </p>
-                </div>
 
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="text-sm font-semibold text-emerald-800 mb-2">
-                    Bengali Translation
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    {fullQuranResponse.bengali[index]}
-                  </p>
-                </div>
-              </div>
-            </article>
-          ))}
-        </section>
+        {/* Quran Content */}
+        {error && <div className="text-red-600">Error: {error}</div>}
+        {fullQuranResponse && (
+          <>
+            {/* Header Section */}
+            <header className="text-center mb-8">
+              <h1 className="font-amiri text-4xl text-emerald-900 mb-4 leading-tight">
+                {fullQuranResponse.surahNameArabicLong}
+              </h1>
+              <h2 className="text-2xl font-semibold text-gray-700">
+                {fullQuranResponse.surahNameTranslation} ({fullQuranResponse.surahName})
+              </h2>
+            </header>
+
+            {/* Meta Information */}
+            <section className="bg-white rounded-lg shadow-sm p-6 mb-8">
+              <p className="text-gray-600">
+                <span className="font-semibold text-emerald-800">Revelation Place:</span>{' '}
+                {fullQuranResponse.revelationPlace}
+              </p>
+              <p className="text-gray-600">
+                <span className="font-semibold text-emerald-800">Total Verses:</span>{' '}
+                {fullQuranResponse.totalAyah}
+              </p>
+            </section>
+
+            {/* Audio Recitations */}
+            <section className="mb-12">
+  <h3 className="text-xl font-semibold text-emerald-900 mb-4">Audio Recitations</h3>
+  {Object.values(fullQuranResponse.audio).map((recitation, index) => (
+    <div key={index} className="bg-white p-4 mb-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+      <p className="font-medium text-gray-700 mb-2">{recitation.reciter}</p>
+      
+      {/* Replace default audio controls with the custom AudioPlayer */}
+      <AudioPlayer src={recitation.url} />
+    </div>
+  ))}
+</section>
+
+            {/* Verses Section */}
+            <section className="space-y-8">
+              {Array.from({ length: fullQuranResponse.totalAyah }).map((_, index) => (
+                <article key={index} className="bg-white rounded-lg shadow-sm p-6">
+                  <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                    <h4 className="text-sm font-semibold text-emerald-800 mb-2">Arabic</h4>
+                    <p className="font-amiri text-3xl leading-relaxed text-emerald-900">
+                      {fullQuranResponse.arabic1[index]}
+                    </p>
+                    <p className="font-amiri text-xl text-gray-600 mt-4">
+                      {fullQuranResponse.arabic2[index]}
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                    <h4 className="text-sm font-semibold text-emerald-800 mb-2">English Translation</h4>
+                    <p className="text-gray-700 leading-relaxed">{fullQuranResponse.english[index]}</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                    <h4 className="text-sm font-semibold text-emerald-800 mb-2">Bengali Translation</h4>
+                    <p className="text-gray-700 leading-relaxed">{fullQuranResponse.bengali[index]}</p>
+                  </div>
+                </article>
+              ))}
+            </section>
+          </>
+        )}
       </div>
     </main>
-    </>
   );
 };
 
