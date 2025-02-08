@@ -26,8 +26,8 @@ const Country_City_BaseUrl = `https://countriesnow.space/api/v0.1/countries/citi
 const getFullQuran = async (cancelToken,surahNumber ) => {
   try {
     const response = await axios.get(`${Full_Quran_BaseUrl}/${surahNumber}.json`, {
-      cancelToken: cancelToken.token, // Pass the token correctly
-      timeout: 10000, // 10 seconds timeout
+      cancelToken: cancelToken.token, 
+      timeout: 10000, 
     });
     return response.data;
   } catch (error) {

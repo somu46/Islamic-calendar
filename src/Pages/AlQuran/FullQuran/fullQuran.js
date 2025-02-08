@@ -18,8 +18,10 @@ const FullQuran = () => {
     // Fetch Surah List
     const fetchSurahList = async () => {
       try {
-        const response = await axios.get("https://api.alquran.cloud/v1/quran/ar.alafasy");
-        const surahs = response.data.data.surahs.map(surah => ({
+        const response = await axios.get("http://api.alquran.cloud/v1/surah");
+        // console.log("response:",response.data.data);
+        
+        const surahs = response.data.data.map(surah => ({
           number: surah.number,
           englishName: surah.englishName
         }));
@@ -123,10 +125,12 @@ const FullQuran = () => {
         <div className="mb-4">
   <label className="text-gray-700 font-semibold p-4">Select Surahs</label>
   <select
+
     className="w-[250px] p-2 border rounded-lg"
     value={selectedSurah}
     onChange={(e) => setSelectedSurah(Number(e.target.value))}
   >
+    {/* {console.log("surahList:",surahList)} */}
     {surahList.map((surah) => (
       <option key={surah.number} value={surah.number}>
         {surah.number} : {surah.englishName}
