@@ -130,9 +130,10 @@ const FullQuran = () => {
               </label>
               <select
                 className="w-full p-2 border rounded-lg"
-                value={selectedSurah}
+                // value={selectedSurah}
                 onChange={(e) => setSelectedSurah(Number(e.target.value))}
               >
+                  <option value="">Please Select a Surah</option>
                 {surahList.map((surah) => (
                   <option key={surah.number} value={surah.number}>
                     {surah.number}: {surah.englishName}
@@ -147,9 +148,10 @@ const FullQuran = () => {
               </label>
               <select
                 className="w-full p-2 border rounded-lg"
-                value={selectLanguage}
+                // value={selectLanguage}
                 onChange={(e) => setSelectLanguage(e.target.value)}
               >
+                <option value="">Please Select your Language</option>
                 <option value="arabic1">Arabic (Version 1)</option>
                 <option value="arabic2">Arabic (Version 2)</option>
                 <option value="english">English</option>
@@ -166,11 +168,12 @@ const FullQuran = () => {
                 value={selectAudioRecitation}
                 onChange={(e) => setSelectAudioRecitation(e.target.value)}
               >
+                  <option value="">Please Select a Audio Recitation</option>
                 {fullRawQuranResponse?.audio &&
                   Object.keys(fullRawQuranResponse.audio).map((reciter) => (
                     <option key={reciter} value={reciter}>
                       {/* {console.log(fullRawQuranResponse.audio[reciter].reciter)} */}
-                      {reciter}.{fullRawQuranResponse.audio[reciter].reciter}
+                      {fullRawQuranResponse.audio[reciter].reciter}
                     </option>
                   ))}
               </select>
@@ -179,7 +182,11 @@ const FullQuran = () => {
         </div>
 
         {error && <div className="text-red-600 p-4">Error: {error}</div>}
-
+{
+  
+  selectAudioRecitation&&selectedSurah&&selectLanguage&&
+  
+  <div>
         {fullRawQuranResponse && (
           <>
             <header className="text-center mb-8">
@@ -196,13 +203,13 @@ const FullQuran = () => {
               <p className="text-gray-600">
                 <span className="font-semibold text-emerald-800">
                   Revelation Place:
-                </span>{" "}
+                </span>
                 {fullRawQuranResponse.revelationPlace}
               </p>
               <p className="text-gray-600">
                 <span className="font-semibold text-emerald-800">
                   Total Verses:
-                </span>{" "}
+                </span>
                 {fullRawQuranResponse.totalAyah}
               </p>
             </section>
@@ -211,10 +218,10 @@ const FullQuran = () => {
               <h3 className="text-xl font-semibold text-emerald-900 mb-4">
                 Audio Recitations
               </h3>
-              {fullRawQuranResponse.audio[selectAudioRecitation]?.reciter && (
+              {fullRawQuranResponse.audio[selectAudioRecitation] && (
                 <div className="bg-white p-4 mb-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                   <p className="font-medium text-gray-700 mb-2">
-                    {selectAudioRecitation}
+                   {fullRawQuranResponse.audio[selectAudioRecitation].reciter}
                   </p>
                   <AudioPlayer
                     src={fullRawQuranResponse.audio[selectAudioRecitation].url}
@@ -262,6 +269,8 @@ const FullQuran = () => {
             </section>
           </>
         )}
+        </div>
+}
       </div>
     </main>
   );
