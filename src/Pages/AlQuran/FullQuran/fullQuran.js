@@ -20,7 +20,7 @@ const FullQuran = () => {
   useEffect(() => {
     const fetchSurahList = async () => {
       try {
-        const response = await axios.get("http://api.alquran.cloud/v1/surah");
+        const response = await axios.get("https://api.alquran.cloud/v1/surah");
         const surahs = response.data.data.map((surah) => ({
           number: surah.number,
           englishName: surah.englishName,
