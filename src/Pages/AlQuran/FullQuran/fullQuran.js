@@ -10,13 +10,12 @@ import { FaPause, FaPlay } from "react-icons/fa";
 const FullQuran = () => {
   const navigate = useNavigate();
   const [surahList, setSurahList] = useState([]);
-  const [selectedSurah, setSelectedSurah] = useState(1);
+  const [selectedSurah, setSelectedSurah] = useState("");
   const [fullRawQuranResponse, setRawFullQuranResponse] = useState(null);
-  const [selectLanguage, setSelectLanguage] = useState("arabic1");
-  const [selectAudioRecitation, setSelectAudioRecitation] = useState(
-    "Mishary Rashid Al-Afasy"
-  );
+  const [selectLanguage, setSelectLanguage] = useState("");
+  const [selectAudioRecitation, setSelectAudioRecitation] = useState("");
   const [error, setError] = useState(null);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     const fetchSurahList = async () => {
@@ -38,8 +37,10 @@ const FullQuran = () => {
     const source = axios.CancelToken.source();
     const fetchFullQuranData = async () => {
       try {
-        const response = await getFullQuran(source, selectedSurah);
-        setRawFullQuranResponse(response);
+        if (selectedSurah) {
+          const response = await getFullQuran(source, selectedSurah);
+          setRawFullQuranResponse(response);
+        }
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.error("Error fetching Quran data:", error);
@@ -50,6 +51,10 @@ const FullQuran = () => {
     fetchFullQuranData();
     return () => source.cancel("Component unmounted, canceling request");
   }, [selectedSurah]);
+
+  useEffect(() => {
+    setShowContent(false);
+  }, [selectedSurah, selectLanguage, selectAudioRecitation]);
 
   const goBack = () => navigate(-1);
 
@@ -100,6 +105,10 @@ const FullQuran = () => {
     );
   };
 
+  const allSelectionsMade = () => {
+    return selectedSurah && selectLanguage && selectAudioRecitation;
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-2xl mx-auto px-4">
@@ -131,8 +140,9 @@ const FullQuran = () => {
               <select
                 className="w-full p-2 border rounded-lg"
                 value={selectedSurah}
-                onChange={(e) => setSelectedSurah(Number(e.target.value))}
+                onChange={(e) => setSelectedSurah(e.target.value)}
               >
+                <option value="">Please Select a Surah</option>
                 {surahList.map((surah) => (
                   <option key={surah.number} value={surah.number}>
                     {surah.number}: {surah.englishName}
@@ -150,6 +160,7 @@ const FullQuran = () => {
                 value={selectLanguage}
                 onChange={(e) => setSelectLanguage(e.target.value)}
               >
+                <option value="">Please Select your Language</option>
                 <option value="arabic1">Arabic (Version 1)</option>
                 <option value="arabic2">Arabic (Version 2)</option>
                 <option value="english">English</option>
@@ -166,22 +177,36 @@ const FullQuran = () => {
                 value={selectAudioRecitation}
                 onChange={(e) => setSelectAudioRecitation(e.target.value)}
               >
+                <option value="">Please Select a Audio Recitation</option>
                 {fullRawQuranResponse?.audio &&
                   Object.keys(fullRawQuranResponse.audio).map((reciter) => (
                     <option key={reciter} value={reciter}>
-                      {/* {console.log(fullRawQuranResponse.audio[reciter].reciter)} */}
-                      {reciter}.{fullRawQuranResponse.audio[reciter].reciter}
+                      {fullRawQuranResponse.audio[reciter].reciter}
                     </option>
                   ))}
               </select>
+            </div>
+
+            <div className="mt-6">
+              <button
+                onClick={() => setShowContent(true)}
+                disabled={!allSelectionsMade()}
+                className={`w-full py-3 px-6 rounded-lg transition-all font-semibold ${
+                  allSelectionsMade()
+                    ? "bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                }`}
+              >
+                Show Quran Content
+              </button>
             </div>
           </div>
         </div>
 
         {error && <div className="text-red-600 p-4">Error: {error}</div>}
 
-        {fullRawQuranResponse && (
-          <>
+        {showContent && fullRawQuranResponse && (
+          <div>
             <header className="text-center mb-8">
               <h1 className="font-amiri text-4xl text-emerald-900 mb-4 leading-tight">
                 {fullRawQuranResponse.surahNameArabicLong}
@@ -211,10 +236,10 @@ const FullQuran = () => {
               <h3 className="text-xl font-semibold text-emerald-900 mb-4">
                 Audio Recitations
               </h3>
-              {fullRawQuranResponse.audio[selectAudioRecitation]?.reciter && (
+              {fullRawQuranResponse.audio[selectAudioRecitation] && (
                 <div className="bg-white p-4 mb-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                   <p className="font-medium text-gray-700 mb-2">
-                    {selectAudioRecitation}
+                    {fullRawQuranResponse.audio[selectAudioRecitation].reciter}
                   </p>
                   <AudioPlayer
                     src={fullRawQuranResponse.audio[selectAudioRecitation].url}
@@ -260,7 +285,7 @@ const FullQuran = () => {
                 )
               )}
             </section>
-          </>
+          </div>
         )}
       </div>
     </main>
