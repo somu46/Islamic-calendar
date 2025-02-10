@@ -147,11 +147,11 @@ const PrayerTimesWidge = () => {
       <div className="flex justify-between items-center sm:gap-x-6 ">
         <div className=" ">
           <div className="flex items-center gap-4 justify-center ">
-            <h2 className="text-[25px] font-semibold">
+            <h2 className="text-[20px] text-left sm:text-[25px] font-semibold">
               {upcomingPrayer[0]} {formatTime(upcomingPrayer[1])}
             </h2>
           </div>
-          <div className="text-sm text-right my-1 px-3">
+          <div className="text-sm text-left sm:text-right my-1 px-3">
             <span className="mx-1">{hijriDate}</span>
             <span className="text-gray-400 mx-1">
               {prayerResponse?.meta?.timezone}
@@ -161,7 +161,7 @@ const PrayerTimesWidge = () => {
         <div className=" text-right">
           <Link
             to="/essentials/prayer-times"
-            className="hover:underline text-sm sm:text-lg font-bold "
+            className="hover:underline text-sm sm:text-lg font-bold inline-block bg-white/20 hover:bg-white/30 transition-all rounded-lg px-4 py-2 sm:px-5 sm:py-2.5 whitespace-nowrap "
           >
             All Prayer times
           </Link>
