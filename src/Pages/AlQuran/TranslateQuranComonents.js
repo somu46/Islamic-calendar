@@ -28,7 +28,7 @@ const Quran = () => {
         }
       }
 
-      const url = `https://api.alquran.cloud/v1/quran/quran-uthmani`;
+      const url = `https://api.alquran.cloud/v1/quran/${identifier || 'quran-uthmani'}`;
       const response = await axios.get(url, {
         cancelToken: source.token,
         timeout: 10000,
