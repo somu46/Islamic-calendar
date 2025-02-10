@@ -122,7 +122,7 @@ const ContactUs = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="w-1/3 bg-yellow-400 text-white py-2 rounded-lg font-semibold text-base hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
+                className="w-1/2 sm:w-1/3 bg-yellow-400 text-white py-2 rounded-lg font-semibold text-base hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
               >
                 Send Message
               </button>
