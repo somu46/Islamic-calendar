@@ -291,7 +291,7 @@ function ZakatCalculator() {
             </ul>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 p-4">
             <h3 className="text-lg font-semibold mb-2">Understanding Nisab in Modern Context</h3>
             <p>
               The current Nisab value ({nisab}g of gold) is equivalent to ₹{(nisab * formData.gold24.price).toFixed(2)}. 

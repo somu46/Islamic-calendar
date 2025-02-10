@@ -116,6 +116,7 @@ const QiblaDirection = () => {
                         ({latitude.toFixed(4)}°N, {longitude.toFixed(4)}°E)
                       </span>
                     </p>
+                    <p><strong>Note :</strong> Use your device's compass and match the degrees to get a more accurate direction.</p>
                   </div>
                 </div>
               </article>
