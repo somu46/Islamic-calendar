@@ -28,9 +28,10 @@ import {
 } from "./Pages";
 import Loading from "./Components/Loading/Loading";
 import ChangeLocation from "./Components/SetLocation/ChangeLocation/ChangeLocation";
-import LocationTracker from "./Components/SetLocation/AutoDetectedLocation/LocationTracker";
+// import LocationTracker from "./Components/SetLocation/AutoDetectedLocation/LocationTracker";
 
 import ApiTest from "./Test/test";
+import {LocationTracker} from "./Store/stateLocationStore";
 
 // Simulate a promise for loading delay
 const waitPromise = (time) => {
@@ -41,16 +42,20 @@ const waitPromise = (time) => {
   });
 };
 
+
 const Home = lazy(() =>
   waitPromise(1000).then(() => import("./Components/Home/Home"))
 );
+
+
+
 
 const Route = createBrowserRouter([
   {
     path: "",
     element: (
       <>
-        <LocationTracker />
+        <LocationTracker/>
         <Suspense fallback={<Loading />}>
           <App />
         </Suspense>
