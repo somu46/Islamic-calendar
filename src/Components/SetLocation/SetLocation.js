@@ -84,10 +84,12 @@ const SetLocation = () => {
     fetchCities();
   }, [country]);
 
+ 
+  
   // Load selected location from sessionStorage
   useEffect(() => {
     const storedLocation = sessionStorage.getItem("location");
-    console.log("storedLocation", storedLocation);
+    // console.log("storedLocation", storedLocation);
     if (storedLocation) setSelectedLocation(storedLocation);
   }, []);
 

@@ -28,7 +28,7 @@ const Quran = () => {
         }
       }
 
-      const url = `https://api.alquran.cloud/v1/quran/quran-uthmani`;
+      const url = `https://api.alquran.cloud/v1/quran/${identifier || 'quran-uthmani'}`;
       const response = await axios.get(url, {
         cancelToken: source.token,
         timeout: 10000,
@@ -110,9 +110,9 @@ const Quran = () => {
 // Loading Screen Component
 const LoadingScreen = () => (
   <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-emerald-50 to-white">
-    <div className="space-y-4">
-      <FaQuran className="text-6xl text-emerald-600 animate-pulse" />
-      <p className="text-center text-2xl text-emerald-800 font-semibold">
+    <div className="space-y-4 items-center ">
+      <FaQuran className=" mx-auto text-6xl text-center text-emerald-600 animate-pulse  " />
+      <p className="text-center text-2xl text-emerald-800 font-semibold   ">
         Loading Quran Data...
       </p>
     </div>
