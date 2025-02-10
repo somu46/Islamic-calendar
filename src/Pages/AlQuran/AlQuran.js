@@ -6,7 +6,7 @@ const Card = ({ label, icon, onClick, isActive, color }) => {
   return (
     <div
       onClick={onClick}
-      className={`cursor-pointer  shadow-md hover:scale-110 transition-all duration-300 rounded-lg p-4 sm:p-6 text-center ${
+      className={`cursor-pointer size-[85%]  shadow-md hover:scale-110 transition-all duration-300 rounded-lg px-1 py-7 sm:px-4 text-center ${
         isActive ? "border-2 border-blue-500 scale-105" : "border border-gray-200"
       }`}
     >
@@ -29,8 +29,8 @@ const AlQuran = () => {
   const navigate = useNavigate();
 
   const cards = [
-    { label: "Full Quran", value: "quran", icon: "☪", path: "/essentials/full-quran", color: "text-teal-500" },
-    { label: "Translations", value: "translations", icon: "🌐", path: "/essentials/translations", color: "text-purple-500" },
+    { label: "Full Digital Quran & Audio", value: "quran", icon: "☪", path: "/essentials/full-quran", color: "text-teal-500" },
+    { label: "Quran Translations", value: "translations", icon: "🌐", path: "/essentials/translations", color: "text-purple-500" },
     { label: "Surahs", value: "surahs", icon: "📖", path: "/essentials/surahs", color: "text-indigo-500" },
     { label: "Juz", value: "juz", icon: "🕌", path: "/essentials/juz", color: "text-green-500" },
     // { label: "Topics", value: "topics", icon: "📚", path: "/essentials/al-quran", color: "text-orange-500" },
