@@ -51,27 +51,23 @@ export const DateConverter = () => {
 
 
           <div className="mb-6">
-            <label
-              htmlFor="date"
-              className="block text-lg font-medium text-gray-700 mb-2"
-            >
-              Select a Gregorian Date
-            </label>
-            <div className="relative">
-              <CiCalendar
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400"
-                aria-hidden="true"
-              />
-              <input
-                type="date"
-                id="date"
-                name="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="block w-full pl-12 pr-4 py-3 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
-            </div>
-          </div>
+  <label htmlFor="date" className="block text-lg font-medium text-gray-700 mb-2">
+    Select a Gregorian Date
+  </label>
+  <div className="relative">
+    <input
+      type="date"
+      id="date"
+      name="date"
+      value={selectedDate}
+      onChange={(e) => setSelectedDate(e.target.value)}
+      className="block w-full pl-12 pr-4 py-3 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+    />
+    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <CiCalendar className="text-gray-500" />
+    </div>
+  </div>
+</div>
 
           <button
             onClick={handleConvert}
