@@ -20,13 +20,13 @@ const variants = {
     transition: { type: "spring", stiffness: 200, damping: 20 },
   },
 };
-const handleHistory=()=>{
-  window.scrollTo(0, 0);
-}
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
+  const handleHistory=()=>{
+    window.scrollTo(0, 0);
+  }
   const handleMobileHistory = () => {
     window.scrollTo(0, 0);
     setIsMenuOpen(false);
@@ -38,7 +38,9 @@ const Navbar = () => {
         <nav className="container mx-auto px-2 py-4 flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center" style={{ marginLeft: "10px" }}>
-            <Link to="/" className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-3"
+              onClick={handleHistory}
+              >
               <img src={logo} alt="Islamic Knowledge" className="w-10 h-10" />
               <span className="text-xl font-bold tracking-wide hover:text-teal-300 transition">
                 Islamic Essentials
@@ -52,6 +54,8 @@ const Navbar = () => {
               <NavLink
                 to="/"
                 className="hover:text-teal-300 transition"
+                  onClick={handleHistory}
+                  
               >
                 Home
               </NavLink>
@@ -93,17 +97,23 @@ const Navbar = () => {
           </li>
 
             <li>
-              <NavLink to="/about-us" className="hover:text-teal-300 transition">
+              <NavLink to="/about-us" className="hover:text-teal-300 transition"
+                onClick={handleHistory}
+              >
                 About
               </NavLink>
             </li>
             <li>
-              <NavLink to="/blogs" className="hover:text-teal-300 transition">
+              <NavLink to="/blogs" className="hover:text-teal-300 transition"
+                onClick={handleHistory}
+                >
                 Blogs
               </NavLink>
             </li>
             <li>
-              <NavLink to="/contact-us" className="hover:text-teal-300 transition">
+              <NavLink to="/contact-us" className="hover:text-teal-300 transition"
+                onClick={handleHistory}
+                >
                 Contact Us
               </NavLink>
             </li>

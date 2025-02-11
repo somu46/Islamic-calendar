@@ -19,7 +19,8 @@ const posts = [
 
       <p>After testing 15+ apps, here are the 3 that became our family's Ramadan essentials...</p>
     `,
-    image: "https://images.pexels.com/photos/7640965/pexels-photo-7640965.jpeg",
+    // image: "https://images.pexels.com/photos/7640965/pexels-photo-7640965.jpeg",
+    image: "https://images.pexels.com/photos/9928237/pexels-photo-9928237.jpeg",
     metaDescription: "Real-world review of prayer time apps that helped maintain salah schedule during Ramadan - with location-based features and reliable calculations.",
     tags: ["ramadan tools", "prayer times app", "islamic mobile apps", "fajr reminder", "salah schedule"],
     category: "Daily Worship",
@@ -45,7 +46,8 @@ const posts = [
 
       <p>How AI-powered Zakat calculators helped me properly assess nisab thresholds and...</p>
     `,
-    image: "https://images.pexels.com/photos/7536954/pexels-photo-7536954.jpeg",
+    // image: "https://images.pexels.com/photos/7536954/pexels-photo-7536954.jpeg",
+    image: "https://images.pexels.com/photos/6347568/pexels-photo-6347568.jpeg",
     metaDescription: "Practical guide to accurate Zakat calculation in modern times - addressing crypto, investments, and digital tools for Islamic finance.",
     tags: ["zakat calculator", "islamic finance", "nisab calculation", "modern zakat", "charity tools"],
     category: "Islamic Finance",
