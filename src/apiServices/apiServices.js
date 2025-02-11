@@ -116,6 +116,7 @@ const getPrayerTimeOfDayByAddress = async (date = "09-01-2025", address = "Lahor
     console.error("Error fetching prayer times from API:", error.message);
     throw error; // Re-throw to handle in the component
   }
+  
 };
 
 const getPrayerTimeOfDayByLocation = async (date = "09-01-2025",latitude=31.5204,longitude=74.3587)=>{
