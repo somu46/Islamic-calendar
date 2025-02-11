@@ -24,34 +24,29 @@ const BlogPage = () => {
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   return (
-    <div className="container mx-auto px-6 py-8 mt-[5.1rem]">
-      <h1 className="text-4xl font-extrabold text-center text-gradient bg-gradient-to-r from-teal-500 to-cyan-600 mt-5 mb-8 p-5">
+    <div className="container mx-auto px-6 py-10 mt-[5.1rem]">
+      <h1 className="text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 mt-5 mb-10">
         Explore Our Blogs
       </h1>
-
-      <div>
-        <Breadcrumb pageName="Blogs" />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <div className="grid grid-cols-1 gap-6">
+      
+      <Breadcrumb pageName="Blogs" />
+      
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+        <div className="lg:col-span-1">
           <BlogList posts={posts} selectPost={selectPost} />
         </div>
-
+        
         {!isMobile && (
-          <div className="lg:col-span-3 bg-white rounded-lg p-6 sticky top-20 self-start h-fit max-h-screen overflow-y-auto">
+          <div className="lg:col-span-3 bg-white shadow-xl rounded-xl p-8 sticky top-24 h-fit min-h-screen border border-gray-200">
             {selectedPost ? (
               <BlogPost post={selectedPost} />
             ) : (
-              <div className="text-center text-gray-500">
-                <p className="text-lg font-medium">Select a blog to view details</p>
+              <div className="text-center text-gray-500 text-lg font-medium py-10">
+                Select a blog to view details
               </div>
             )}
           </div>
@@ -60,7 +55,7 @@ const BlogPage = () => {
 
       {isMobile && selectedPost && (
         <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-          <div className="max-h-[80vh] overflow-y-auto p-4 bg-white rounded-lg">
+          <div className="max-h-[80vh] overflow-y-auto p-6 bg-white rounded-xl shadow-lg">
             <BlogPost post={selectedPost} />
           </div>
         </Modal>
