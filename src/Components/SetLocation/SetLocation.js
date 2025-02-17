@@ -88,7 +88,7 @@ const SetLocation = () => {
   
   // Load selected location from sessionStorage
   useEffect(() => {
-    const storedLocation = sessionStorage.getItem("location");
+    const storedLocation = sessionStorage.getItem("locationByPlace");
     // console.log("storedLocation", storedLocation);
     if (storedLocation) setSelectedLocation(storedLocation);
   }, []);
@@ -99,7 +99,7 @@ const SetLocation = () => {
       const location = `${country}, ${city}`;
       sessionStorage.setItem("country", country);
       sessionStorage.setItem("city", city);
-      sessionStorage.setItem("location", location);
+      sessionStorage.setItem("locationByPlace", location);
       setSelectedLocation(location);
       setModalOpen(false);
       navigate("/");
@@ -111,7 +111,7 @@ const SetLocation = () => {
   const handleReset = () => {
     sessionStorage.removeItem("country");
     sessionStorage.removeItem("city");
-    sessionStorage.removeItem("location");
+    sessionStorage.removeItem("locationByPlace");
     setCountry("");
     setCity("");
     setSelectedLocation(null);

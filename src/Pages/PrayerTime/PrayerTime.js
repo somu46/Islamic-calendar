@@ -27,7 +27,7 @@ const PrayerTimes = () => {
     const loadLocation = () => {
       const latitude = sessionStorage.getItem("latitude");
       const longitude = sessionStorage.getItem("longitude");
-      const location = sessionStorage.getItem("location");
+      const location = sessionStorage.getItem("locationByPlace");
 
       if (latitude && longitude) {
         setPrayerLocation({ latitude, longitude, location: null });
