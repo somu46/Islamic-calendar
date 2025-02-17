@@ -13,11 +13,13 @@ const PrayerTimesWidget = () => {
   const today = new Date();
   const prayerDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
-  const [prayerResponse, setPrayerResponse] = useState(null);
+  const [prayerResponse, setPrayerResponse] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [locationName, setLocationName] = useState(sessionStorage.getItem("location") || "");
+  const [locationName, setLocationName] = useState(sessionStorage.getItem("locationByPlace") || "");
 
+  console.log("locationByPlace: ",locationName);
+  
   // Fetch prayer times
   useEffect(() => {
     const fetchPrayerTimes = async () => {
@@ -56,8 +58,9 @@ const PrayerTimesWidget = () => {
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
   }
+  console.log("prayerResponse", prayerResponse);
 
-  if (error || locationError || !prayerResponse) {
+  if (error  || !prayerResponse) {
     return (
       <div className="text-center mt-10 text-red-600 py-5">
         <p className="text-red-600 mb-4">{error || locationError || "Failed to load prayer times"}</p>
@@ -71,7 +74,7 @@ const PrayerTimesWidget = () => {
   }
 
   const { timings, date: prayerDateData } = prayerResponse;
-  const hijriDate = `${prayerDateData.hijri.day} ${prayerDateData.hijri.month.en}, ${prayerDateData.hijri.year}`;
+  const hijriDate = `${prayerDateData?.hijri?.day} ${prayerDateData?.hijri?.month.en}, ${prayerDateData?.hijri?.year}`;
 
   const formatTime = (time) => {
     const [hour, minute] = time.split(":").map(Number);
