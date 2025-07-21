@@ -30,7 +30,7 @@ const Quran = () => {
       const url = `https://api.alquran.cloud/v1/quran/${identifier || 'quran-uthmani'}`;
       const response = await axios.get(url, {
         cancelToken: source.token,
-        timeout: 10000,
+        timeout: 20000,
       });
 
       if (response.data.code !== 200) throw new Error("Invalid response format");

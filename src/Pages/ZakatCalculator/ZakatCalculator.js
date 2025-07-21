@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import { Helmet } from "react-helmet";
 
 function ZakatCalculator() {
   const [formData, setFormData] = useState({
@@ -76,6 +77,11 @@ function ZakatCalculator() {
 
   return (
     <>
+    <Helmet>
+      <title>Zakat Calculator - Calculate Your Zakat Obligations</title>
+      <meta name="description" content="Calculate your Zakat obligations with our comprehensive Zakat calculator. Ensure your contributions meet Islamic requirements." />
+      <link rel="canonical" href="https://islamicalendar.in/zakat-calculator" />
+    </Helmet>
       <div>
         <Breadcrumb pageName='Zakat Calculator' />
       </div>
@@ -271,7 +277,7 @@ function ZakatCalculator() {
 
               {/* SEO-rich content section */}
               <div className="mb-8 space-y-4 text-gray-700">
-          <h1 className="text-3xl font-bold text-center">Accurate Zakat Calculation for Fulfilling Your Islamic Obligations</h1>
+          <h1 className="text-3xl font-bold text-center">Best Zakat Calculator - For Fulfilling Your Islamic Obligations</h1>
           
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="mb-3">

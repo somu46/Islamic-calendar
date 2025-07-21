@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Card = ({ label, icon, onClick, isActive, color }) => {
   return (
@@ -44,6 +45,14 @@ const AlQuran = () => {
 
   return (
     <div className="mt-[1rem]">
+      <Helmet>
+        <title> Holy Quran Online : Read And Listen Quran Online in Your Lnaguage with Translation</title>
+        <meta
+          name="description"
+          content="Explore the Quran with Surahs, Juz, Translations, and Topics. Discover the beauty of the Quran."
+        />
+        <link rel="canonical" href="/essentials/al-quran" />
+      </Helmet>
       <div>
         <Breadcrumb pageName="Al-Quran" />
       </div>

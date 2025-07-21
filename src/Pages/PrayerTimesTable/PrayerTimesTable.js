@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPrayerTime } from "../../apiServices/apiServices";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import { Helmet } from "react-helmet";
 
 const PrayerTimetable = () => {
   const [view, setView] = useState("monthly");
@@ -47,6 +48,11 @@ const PrayerTimetable = () => {
 
   return (
     <>
+    <Helmet>
+      <title>{`Islamic Prayer Time Table : Todays Salah, Azan and Namaz Time Table in ${city}`}</title>   
+      <meta name="description" content="View monthly prayer times for your location." />
+      <link rel="canonical" href="/essentials/prayer-times-table" />
+    </Helmet>
       <div>
         <Breadcrumb pageName='Monthly Prayer Times Table' />
       </div>

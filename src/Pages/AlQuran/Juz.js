@@ -5,6 +5,7 @@ import { ArrowForwardIosRounded, ArrowBackIosNewRounded } from '@mui/icons-mater
 import { motion } from "framer-motion";
 import { FaArrowLeft } from "react-icons/fa";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import { Helmet } from "react-helmet";
 
 const Juz = () => {
   const navigate = useNavigate();
@@ -69,6 +70,11 @@ const Juz = () => {
 
   return (
     <div className="container mx-auto p-4 lg:p-6 bg-gradient-to-br from-emerald-50 to-white min-h-screen">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{`Juz ${currentPage} - Quran`}</title>
+        <link rel="canonical" href={`https://islamicalendar.in/quran/juz/${currentPage}`} />
+      </Helmet>
       {/* Go Back Button */}
       <motion.div
   initial={{ opacity: 0 }}

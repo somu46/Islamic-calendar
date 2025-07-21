@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaBookOpen } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 
 const SurahAyahs = () => {
   const location = useLocation();
@@ -22,6 +23,10 @@ const SurahAyahs = () => {
   if (!selectedSurah) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-emerald-50 to-white p-4">
+        <Helmet>
+          <title>Surah Ayahs</title>
+          <meta name="description" content="Please select a surah to view its ayahs." />
+        </Helmet>
         <div className="text-center space-y-6 max-w-md">
           <div className="text-red-500 text-6xl">⚠️</div>
           <h1 className="text-2xl font-semibold text-gray-800">

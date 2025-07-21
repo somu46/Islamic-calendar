@@ -7,6 +7,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import Breadcrumb from "../../../Components/Breadcrumb/Breadcrumb";
 import { FaPause, FaPlay } from "react-icons/fa";
 
+
 const FullQuran = () => {
   const navigate = useNavigate();
   const [surahList, setSurahList] = useState([]);
@@ -80,6 +81,7 @@ const FullQuran = () => {
 
     return (
       <div className="mt-3">
+        
         <audio
           ref={audioRef}
           onTimeUpdate={handleTimeUpdate}

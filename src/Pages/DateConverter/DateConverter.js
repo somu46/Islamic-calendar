@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getDateChanger } from "../../apiServices/apiServices";
 import { CiCalendar } from "react-icons/ci";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import Helmet from 'react-helmet'; // Import Helmet for SEO
 
 export const DateConverter = () => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -36,6 +37,11 @@ export const DateConverter = () => {
   return (
     <>
       <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-gray-100">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Hijri Date Converter: Convert Gregorian to Islamic Dates</title>
+          <link rel="canonical" href="https://islamicalendar.in/date-converter" />
+        </Helmet>
         <div className="absolute top-[1px] left-0 hidden sm:block">
           <Breadcrumb pageName="Date Converter: Gregorian to Hijri" />
         </div>

@@ -5,6 +5,7 @@ import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
 import bg from '../../Assets/widgetBG.png';
 import fullbg from '../../Assets/prayertimeBG1.png';
 import SetLocation from "../../Components/SetLocation/SetLocation";
+import Helmet from 'react-helmet'; // Import Helmet for SEO
 
 const PrayerTimes = () => {
   const today = new Date();
@@ -137,6 +138,11 @@ const PrayerTimes = () => {
   return (
     <>
       <div className="bg-white rounded-lg opacity-75 px-4 mb-2">
+        <Helmet>
+          <meta charSet="utf-8" />
+                <title>Islamic Prayer Time Today In {prayerResponse?.meta?.timezone} - Know About Salah(Namaz) and Azan Time Table</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
         <Breadcrumb pageName="Prayer Times" />
       </div>
       <div

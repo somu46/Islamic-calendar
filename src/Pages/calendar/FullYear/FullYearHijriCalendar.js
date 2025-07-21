@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Modal from "../../../Components/Modal/Modal";
 
-
 const FullYearHijriCalendar = ({ year }) => {
   const [calendarData, setCalendarData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,6 +67,8 @@ const FullYearHijriCalendar = ({ year }) => {
     const days = Array(firstDayOfMonth).fill(null).concat(daysInMonth);
 
     return (
+      
+      
       <div
         key={monthIndex}
         className="border rounded-lg p-1 md:p-4 shadow-md bg-transparent border-red-500"
@@ -131,9 +132,7 @@ const FullYearHijriCalendar = ({ year }) => {
   };
 
   return (
-    <div className="container mx-auto  px-1 "
-      
-    >
+    <div className="container mx-auto  px-1 ">
       
       <h2 className="text-2xl font-bold text-center text-green-700 mb-4">
         Hijri Calendar - {year}
@@ -191,6 +190,7 @@ const FullYearHijriCalendar = ({ year }) => {
         </div>
       )}
     </div>
+   
   );
 };
 

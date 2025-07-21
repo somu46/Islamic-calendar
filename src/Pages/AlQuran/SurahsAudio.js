@@ -21,7 +21,7 @@ const QuranSurah = () => {
       const source = axios.CancelToken.source();
       const timeout = setTimeout(() => {
         source.cancel("Request timed out");
-      }, 15000);
+      }, 30000);
 
       const response = await axios.get("https://api.alquran.cloud/v1/quran/ar.alafasy", {
         cancelToken: source.token

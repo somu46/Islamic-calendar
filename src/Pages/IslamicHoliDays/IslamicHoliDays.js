@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getIslamicHoliDays } from "../../apiServices/apiServices";
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb";
+import { Helmet } from "react-helmet";
 
 const IslamicHolidayPage = () => {
   const [holidays, setHolidays] = useState([]);
@@ -26,10 +27,13 @@ const IslamicHolidayPage = () => {
 
   return (
     <>
-   
+   <Helmet>
+      <title>{`Islamic Holidays list of year`}</title> 
+      <meta name="description" content="Explore important Islamic holidays and their dates in the Gregorian calendar." />
+      <link rel="canonical" href="/essentials/islamic-holidays" />
+    </Helmet>
     <div>
       <Breadcrumb pageName='Islamic Holidays' />
-    
     </div>
     <div className="min-h-screen bg-gray-100 text-gray-800 ">
      

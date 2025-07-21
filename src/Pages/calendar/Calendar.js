@@ -6,6 +6,7 @@ import Indicator from './Indicator';
 import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 import Modal from '../../Components/Modal/Modal';
 import bgimage from "../../Assets/bg1.png";
+import Helmet from 'react-helmet';
 
 const IslamicCalendar = () => {
   const [view, setView] = useState("monthly");
@@ -152,6 +153,11 @@ const IslamicCalendar = () => {
       
     }}
     >
+    <Helmet>
+                <meta charSet="utf-8" />
+                <title>Know About Islamic Holidays - Islamic Calendar 2025-2026</title>
+                <link rel="canonical" href="https://islamicalendar.in/essentials/islamic-calendar" />
+            </Helmet>
       <Breadcrumb pageName='Islamic Calendar' />
       <div className='mb-6 '>
   <div className='flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mb-5 p-2'>
