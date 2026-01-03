@@ -58,7 +58,7 @@ const PrayerTimesWidget = () => {
   if (loading) {
     return <div className="text-center mt-10">Loading prayer times...</div>;
   }
-  console.log("prayerResponse", prayerResponse);
+  // console.log("prayerResponse", prayerResponse);
 
   if (error  || !prayerResponse) {
     return (
