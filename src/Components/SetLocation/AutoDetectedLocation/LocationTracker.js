@@ -19,6 +19,7 @@ const LocationTracker = () => {
           },
           (err) => {
             setError(err.message);
+            console.log('lat :',latitude)
             console.error("Geolocation error:", err.message);
           }
         );

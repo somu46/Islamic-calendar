@@ -37,44 +37,23 @@ const QiblaDirection = () => {
   /* ================= LOCATION ================= */
 
   const fetchUserLocation = () => {
-    if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser.");
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setLatitude(latitude);
-        setLongitude(longitude);
-        const qibla = calculateQiblaDirection(latitude, longitude);
-        setDirection(qibla.toFixed(2));
-        setError(null);
-      },
-      () => {
-        setError(
-          "Couldn't access your location. Please enable location permissions."
-        );
-      }
-    );
-  };
-
-  /* ================= GYROSCOPE ================= */
-
-  const handleOrientation = (event) => {
-    let heading = null;
-
-    // iOS
-    if (event.webkitCompassHeading) {
-      heading = event.webkitCompassHeading;
-    }
-    // Android
-    else if (event.alpha !== null) {
-      heading = 360 - event.alpha;
-    }
-
-    if (heading !== null) {
-      setDeviceHeading(heading);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLatitude(latitude);
+          setLongitude(longitude);
+          const result = calculateQiblaDirection(latitude, longitude);
+          setDirection(result.toFixed(2));
+          setError(null);
+        },
+        () => {
+          setError("Couldn't access your location. Please enable location permissions in your browser settings.");
+        }
+      );
+      
+    } else {
+      setError("Your browser doesn't support location services. Please update your browser or try using a smartphone.");
     }
   };
 
