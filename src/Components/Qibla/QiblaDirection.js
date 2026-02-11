@@ -34,6 +34,14 @@ const QiblaDirection = () => {
     return (angle + 360) % 360;
   };
 
+  /* ================= DEVICE ORIENTATION ================= */
+
+  const handleOrientation = (event) => {
+    if (event.alpha !== null) {
+      setDeviceHeading(event.alpha); // update heading
+    }
+  };
+
   /* ================= LOCATION ================= */
 
   const fetchUserLocation = () => {
@@ -44,25 +52,27 @@ const QiblaDirection = () => {
           setLatitude(latitude);
           setLongitude(longitude);
           const result = calculateQiblaDirection(latitude, longitude);
-          setDirection(result.toFixed(2));
+          setDirection(result);
           setError(null);
         },
         () => {
-          setError("Couldn't access your location. Please enable location permissions in your browser settings.");
+          setError(
+            "Couldn't access your location. Please enable location permissions."
+          );
         }
       );
-      
     } else {
-      setError("Your browser doesn't support location services. Please update your browser or try using a smartphone.");
+      setError("Your browser doesn't support location services.");
     }
   };
+
+  /* ================= ENABLE GYROSCOPE ================= */
 
   const enableGyroscope = async () => {
     if (
       typeof DeviceOrientationEvent !== "undefined" &&
       typeof DeviceOrientationEvent.requestPermission === "function"
     ) {
-      // iOS permission
       try {
         const permission = await DeviceOrientationEvent.requestPermission();
         if (permission === "granted") {
@@ -75,11 +85,12 @@ const QiblaDirection = () => {
         setError("Unable to enable compass.");
       }
     } else {
-      // Android
       window.addEventListener("deviceorientation", handleOrientation);
       setGyroEnabled(true);
     }
   };
+
+  /* ================= CLEANUP ================= */
 
   useEffect(() => {
     return () => {
@@ -90,7 +101,7 @@ const QiblaDirection = () => {
   /* ================= FINAL ROTATION ================= */
 
   const finalRotation =
-    gyroEnabled && direction
+    gyroEnabled && direction !== null
       ? direction - deviceHeading
       : direction || 0;
 
@@ -133,15 +144,15 @@ const QiblaDirection = () => {
                 className="absolute w-full h-full flex items-center justify-center"
                 style={{
                   transform: `rotate(${finalRotation}deg)`,
-                  transition: "transform 0.3s ease-out",
+                  transition: "transform 0.2s linear",
                 }}
               >
-                <CgArrowLongUp className="text-teal-600 text-6xl animate-pulse" />
+                <CgArrowLongUp className="text-teal-600 text-6xl" />
               </div>
             </div>
 
             <p className="text-lg font-semibold text-teal-700">
-              Qibla Direction: {direction}°
+              Qibla Direction: {direction?.toFixed(2)}°
             </p>
 
             <p className="text-sm text-gray-600">
@@ -166,7 +177,7 @@ const QiblaDirection = () => {
         )}
 
         <p className="mt-4 text-xs text-gray-500">
-          Tip: Hold your phone flat and calibrate the compass for best accuracy.
+          Tip: Hold your phone flat and calibrate the compass.
         </p>
       </div>
 
